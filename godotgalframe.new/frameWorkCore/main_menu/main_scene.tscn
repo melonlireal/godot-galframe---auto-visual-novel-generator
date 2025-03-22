@@ -1,0 +1,327 @@
+[gd_scene load_steps=14 format=3 uid="uid://dgvwnhgxg8jhj"]
+
+[ext_resource type="Script" path="res://frameWorkCore/main_menu/main_scene.gd" id="1_ybmd4"]
+[ext_resource type="FontFile" uid="uid://byyq0wl5ikrfs" path="res://artResource/UI_gameplay/EB.ttf" id="2_oru6f"]
+[ext_resource type="VideoStream" path="res://artResource/background/G.ogv" id="3_kuqlw"]
+[ext_resource type="PackedScene" uid="uid://b2vlscrp1hnq1" path="res://frameWorkCore/settings/setting_menu.tscn" id="4_org3x"]
+[ext_resource type="Texture2D" uid="uid://du2tso4hnapof" path="res://artResource/UI_gameplay/ui_raw/loading.png" id="6_q022t"]
+[ext_resource type="Texture2D" uid="uid://c2mdpx06hxwyl" path="res://artResource/UI_gameplay/ui_raw/black.png" id="6_rjllh"]
+[ext_resource type="PackedScene" uid="uid://cfaw8fnyroa1w" path="res://frameWorkCore/load_save/save.tscn" id="6_vbmy6"]
+[ext_resource type="PackedScene" uid="uid://c3oyecnho3ar3" path="res://frameWorkCore/art/cg_display.tscn" id="8_kfrdx"]
+
+[sub_resource type="Animation" id="Animation_gd45o"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("color/loading_progress:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("color/fade_in_out:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("color/fade_in_out:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_8pp1a"]
+resource_name = "fade_in"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("color/fade_in_out:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("color/fade_in_out:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_ckbdg"]
+resource_name = "fade_out"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("color/loading_progress:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("color/fade_in_out:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("color/fade_in_out:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_6uvci"]
+resource_name = "loading"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("color/loading_progress:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 3.14159, 6.28319]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("color/loading_progress:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("color/fade_in_out:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("color/fade_in_out:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y7c3j"]
+_data = {
+"RESET": SubResource("Animation_gd45o"),
+"fade_in": SubResource("Animation_8pp1a"),
+"fade_out": SubResource("Animation_ckbdg"),
+"loading": SubResource("Animation_6uvci")
+}
+
+[node name="main_scene" type="Node2D" groups=["main"]]
+script = ExtResource("1_ybmd4")
+
+[node name="setting_menu" parent="." instance=ExtResource("4_org3x")]
+visible = false
+
+[node name="menu_UI" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="ColorRect" type="ColorRect" parent="menu_UI"]
+offset_right = 1916.0
+offset_bottom = 936.0
+color = Color(1, 1, 1, 0.341176)
+
+[node name="TextureRect" type="TextureRect" parent="menu_UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="menu_UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stream = ExtResource("3_kuqlw")
+autoplay = true
+expand = true
+loop = true
+
+[node name="UI_background" type="ColorRect" parent="menu_UI"]
+anchors_preset = -1
+anchor_top = 0.9
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 2.0
+color = Color(1, 1, 1, 0.192157)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="menu_UI"]
+anchors_preset = -1
+anchor_top = 0.9
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.16
+offset_top = -6.10352e-05
+offset_bottom = -0.160156
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 160
+alignment = 1
+
+[node name="start" type="Button" parent="menu_UI/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.917647, 0.701961, 0.0313726, 1)
+theme_override_fonts/font = ExtResource("2_oru6f")
+theme_override_font_sizes/font_size = 60
+text = "新的开始"
+flat = true
+
+[node name="load" type="Button" parent="menu_UI/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.917647, 0.701961, 0.0313726, 1)
+theme_override_fonts/font = ExtResource("2_oru6f")
+theme_override_font_sizes/font_size = 60
+text = "加载游戏"
+flat = true
+
+[node name="CG" type="Button" parent="menu_UI/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.917647, 0.701961, 0.0313726, 1)
+theme_override_fonts/font = ExtResource("2_oru6f")
+theme_override_font_sizes/font_size = 60
+text = "回想大厅"
+flat = true
+
+[node name="setting" type="Button" parent="menu_UI/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.917647, 0.701961, 0.0313726, 1)
+theme_override_fonts/font = ExtResource("2_oru6f")
+theme_override_font_sizes/font_size = 60
+text = "游戏设置"
+flat = true
+
+[node name="quit" type="Button" parent="menu_UI/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.917647, 0.701961, 0.0313726, 1)
+theme_override_fonts/font = ExtResource("2_oru6f")
+theme_override_font_sizes/font_size = 60
+text = "退出游戏"
+flat = true
+
+[node name="menuBGM" type="AudioStreamPlayer" parent="menu_UI"]
+autoplay = true
+bus = &"bgm"
+
+[node name="transition_DONTTOUCH" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true
+
+[node name="save" parent="." instance=ExtResource("6_vbmy6")]
+visible = false
+
+[node name="CG_display" parent="." instance=ExtResource("8_kfrdx")]
+visible = false
+
+[node name="color" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="ColorRect" type="ColorRect" parent="color"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+
+[node name="fade_in_out" type="Sprite2D" parent="color"]
+visible = false
+position = Vector2(958, 528.5)
+scale = Vector2(1, 1.025)
+texture = ExtResource("6_rjllh")
+
+[node name="loading_progress" type="Sprite2D" parent="color"]
+visible = false
+position = Vector2(1746, 918)
+rotation = 4.24214
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("6_q022t")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="color"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_y7c3j")
+}
+
+[connection signal="finished" from="menu_UI/VideoStreamPlayer" to="." method="_on_video_stream_player_finished"]
+[connection signal="pressed" from="menu_UI/HBoxContainer/start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="menu_UI/HBoxContainer/load" to="." method="_on_load_pressed"]
+[connection signal="pressed" from="menu_UI/HBoxContainer/CG" to="." method="_on_cg_pressed"]
+[connection signal="pressed" from="menu_UI/HBoxContainer/setting" to="." method="_on_setting_pressed"]
+[connection signal="pressed" from="menu_UI/HBoxContainer/quit" to="." method="_on_quit_pressed"]
+[connection signal="timeout" from="transition_DONTTOUCH" to="." method="_on_transition_donttouch_timeout"]
+[connection signal="timeout" from="transition_DONTTOUCH" to="." method="_on_transition_timeout"]
+[connection signal="animation_finished" from="color/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

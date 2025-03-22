@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1ykps1koxw12"]
+
+[ext_resource type="Texture2D" uid="uid://da4dpi8lcoj4r" path="res://artResource/UI_gameplay/setting_UI/save_load_box.png" id="1_ig4pd"]
+[ext_resource type="Script" path="res://frameWorkCore/load_save/load_slot.gd" id="2_5oalx"]
+
+[node name="load_save_slot" type="TextureRect"]
+custom_minimum_size = Vector2(234.5, 132)
+texture = ExtResource("1_ig4pd")
+expand_mode = 3
+script = ExtResource("2_5oalx")
+
+[node name="save_display" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.02
+anchor_top = 0.04
+anchor_right = 0.98
+anchor_bottom = 0.96
+offset_right = -0.0995178
+offset_bottom = 0.0039978
+expand_mode = 1
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_entered" from="save_display" to="." method="_on_save_display_mouse_entered"]
+[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
+[connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]

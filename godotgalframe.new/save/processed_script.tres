@@ -1,0 +1,77 @@
+[gd_resource type="Resource" script_class="ScriptTree" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://frameWorkCore/scipt_tree.gd" id="1_rlvby"]
+
+[resource]
+script = ExtResource("1_rlvby")
+all_script = {
+"Start.txt": {
+0: {
+"character": "",
+"command": [],
+"dialogue": "这是台词 "
+},
+1: {
+"character": "",
+"command": [],
+"dialogue": "台词的颜色可以变化"
+},
+2: {
+"character": "",
+"command": [],
+"dialogue": "一句话的台词甚至可以有不同颜色 "
+},
+3: {
+"character": "这是人名:",
+"command": [],
+"dialogue": "颜色变化对人名同样适用 "
+},
+4: {
+"character": "",
+"command": [],
+"dialogue": "台词在播放的途中可以变化内容，很神奇吧 "
+},
+5: {
+"character": "[color=blue]人物[/color]:",
+"command": [["character", "yuexiaIdle.png", "mid", "character", "false"]],
+"dialogue": "这是人物立绘 "
+},
+6: {
+"character": "人物:",
+"command": [["character", "yuexiaIdleHappy.png", "mid", "character", "true"]],
+"dialogue": "现在人物立绘在切换台词的时候差分变化会更流畅 "
+},
+7: {
+"character": "",
+"command": [["character", "yuexiaIdleHappy.png", "mid", "character", "true"]],
+"dialogue": "先这样吧"
+},
+"choice": ["a a.txt", "b b.txt"]
+},
+"a.txt": {
+0: {
+"character": "",
+"command": [["character", "yuexiaIdleHappy.png", "mid", "character", "true"]],
+"dialogue": "这是A"
+},
+1: {
+"character": "",
+"command": [["character", "yuexiaIdleHappy.png", "mid", "character", "true"]],
+"dialogue": ""
+}
+},
+"b.txt": {
+0: {
+"character": "",
+"command": [["character", "yuexiaIdleHappy.png", "mid", "character", "true"]],
+"dialogue": "这是B"
+},
+1: {
+"character": "",
+"command": [["character", "yuexiaIdleHappy.png", "mid", "character", "true"]],
+"dialogue": ""
+}
+}
+}
+curr_chap = "Start.txt"
+curr_line = 0

@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4rosfpbl4mod"]
+
+[ext_resource type="Script" path="res://frameWorkCore/settings/setting_button.gd" id="1_t2h24"]
+
+[node name="option" type="Button" groups=["button"]]
+z_index = 2
+z_as_relative = false
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "显示设置"
+flat = true
+script = ExtResource("1_t2h24")
+
+[node name="focus" type="ColorRect" parent="."]
+z_index = 1
+z_as_relative = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

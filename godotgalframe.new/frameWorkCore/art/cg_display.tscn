@@ -1,0 +1,108 @@
+[gd_scene load_steps=8 format=3 uid="uid://c3oyecnho3ar3"]
+
+[ext_resource type="Script" path="res://frameWorkCore/art/cg_display.gd" id="1_8fk2e"]
+[ext_resource type="Texture2D" uid="uid://cqjxirbo3b3xm" path="res://artResource/UI_gameplay/ui_raw/CG_background.png" id="1_jq7yl"]
+[ext_resource type="Texture2D" uid="uid://ctjfugi4jj0rj" path="res://artResource/UI_gameplay/ui_raw/CG_title.png" id="2_p5scf"]
+[ext_resource type="PackedScene" uid="uid://c6jiv0jcmkox4" path="res://frameWorkCore/art/cg_slot.tscn" id="3_otbiu"]
+[ext_resource type="Texture2D" uid="uid://d1ud2uwn83yl1" path="res://artResource/UI_gameplay/setting_UI/yello.png" id="4_lyuop"]
+[ext_resource type="Texture2D" uid="uid://ilmgny86rlyp" path="res://artResource/UI_gameplay/setting_UI/white.png" id="5_qfs5m"]
+[ext_resource type="FontFile" uid="uid://byyq0wl5ikrfs" path="res://artResource/UI_gameplay/EB.ttf" id="6_5vqhg"]
+
+[node name="CG_display" type="CanvasLayer" groups=["CG"]]
+script = ExtResource("1_8fk2e")
+
+[node name="main" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_jq7yl")
+
+[node name="TextureRect" type="TextureRect" parent="main"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+texture = ExtResource("2_p5scf")
+
+[node name="CenterContainer" type="CenterContainer" parent="main"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.1
+anchor_right = 0.95
+anchor_bottom = 0.9
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="GridContainer" type="GridContainer" parent="main/CenterContainer"]
+layout_mode = 2
+columns = 3
+metadata/_edit_group_ = true
+
+[node name="CG_slot" parent="main/CenterContainer/GridContainer" instance=ExtResource("3_otbiu")]
+custom_minimum_size = Vector2(576, 390)
+layout_mode = 2
+stretch_mode = 0
+
+[node name="CG_slot2" parent="main/CenterContainer/GridContainer" instance=ExtResource("3_otbiu")]
+custom_minimum_size = Vector2(576, 390)
+layout_mode = 2
+stretch_mode = 0
+
+[node name="CG_slot3" parent="main/CenterContainer/GridContainer" instance=ExtResource("3_otbiu")]
+custom_minimum_size = Vector2(576, 390)
+layout_mode = 2
+stretch_mode = 0
+
+[node name="return" type="TextureButton" parent="main"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.76
+anchor_top = 0.908
+anchor_right = 0.958
+anchor_bottom = 0.982
+offset_left = 0.799927
+offset_top = 0.359924
+offset_right = 0.639893
+offset_bottom = 0.439941
+texture_normal = ExtResource("4_lyuop")
+texture_pressed = ExtResource("5_qfs5m")
+texture_hover = ExtResource("5_qfs5m")
+metadata/_edit_group_ = true
+
+[node name="CenterContainer" type="CenterContainer" parent="main/return"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.975
+offset_right = -2.0
+
+[node name="Label" type="Label" parent="main/return/CenterContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_5vqhg")
+theme_override_font_sizes/font_size = 55
+text = "返回"
+
+[node name="present_pic" type="TextureRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 3
+
+[node name="present_vid" type="VideoStreamPlayer" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand = true
+loop = true
+
+[connection signal="pressed" from="main/return" to="." method="_on_return_pressed"]
