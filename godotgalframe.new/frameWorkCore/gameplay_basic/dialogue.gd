@@ -1,5 +1,5 @@
 extends RichTextLabel
-var play_speed = 20.0
+# var play_speed = 20.0
 @onready var initialization = true
 @export var repeat = false
 # 用来放设置里的播放演示

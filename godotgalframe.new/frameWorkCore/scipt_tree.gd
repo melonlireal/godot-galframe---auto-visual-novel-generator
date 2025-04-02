@@ -14,13 +14,13 @@ func clear_script():
 	
 	
 func add_line(character: String, dialogue: String, command: Array):
+	curr_line += 1
 	if !all_script.has(curr_chap):
 		all_script[curr_chap] = {}
 	all_script[curr_chap][curr_line] = {"character": character, 
 	"dialogue": dialogue, "command":command}
 	print("add line ", character," ",
 	 dialogue," ", command, " in chapter ", curr_chap)
-	curr_line += 1
 	
 func add_choice(choices: Array):
 	print("choice added ", choices)
@@ -40,15 +40,20 @@ func change_chapter(chapter: String):
 	curr_chap = chapter
 	curr_line = 0
 
-func get_line():
+func get_line(box: Dictionary):
+	curr_line += 1
+	print("get line ", curr_line, " from ", curr_chap, "\n")
+	print("line content is ", all_script[curr_chap][curr_line], "\n")
+	# if the line is not a standard line but a choice or the end of chapter
+	# return
 	if !all_script[curr_chap].has(curr_line):
 		if !all_script[curr_chap].has("choice"):
-			return {"exit": 1}
-		return {"choice_reach": 0}
-		#又是一个傻逼设计，但后面再说吧，这个改起来不难
-	var line_content = all_script[curr_chap][curr_line]
-	curr_line += 1
-	return line_content
+			return "exit"
+		return "choice reach"
+	box["character"] = all_script[curr_chap][curr_line]["character"]
+	box["dialogue"] = all_script[curr_chap][curr_line]["dialogue"]
+	box["command"] = all_script[curr_chap][curr_line]["command"]
+	return "all good"
 	
 func get_chapter():
 	return curr_chap

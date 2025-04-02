@@ -13,6 +13,7 @@ func load_cover(cover: String):
 	var file_at = quick_search(cover)
 	if file_at == null:
 		print("not here!")
+		# TODO fix in error overhaul
 		return
 	print(file_at)
 	$font_display.texture = ResourceLoader.load(file_at)

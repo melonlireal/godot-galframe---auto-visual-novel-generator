@@ -70,10 +70,11 @@ func helper_search_file(directory: String, files: String):
 		return null
 
 func dialogue_proof_read(chapter: Array):
-	var text;
 	var character;
 	var dialogue;
 	var command;
+	var text;
+	
 	var chap_name = chapter.pop_front()
 	var chap_dir = chapter.pop_front()
 	var file = FileAccess.open(chap_dir, FileAccess.READ)
@@ -100,13 +101,15 @@ func dialogue_proof_read(chapter: Array):
 		dialogue = dialogue.replace("\\command:", "command:")
 		command = text.substr(text.find(" command:"))
 		var command_list = process_commands(command)
-		if command_list == []:
+		if command_list == [] and dialogue != "" and character != "":
 			command_list = extend_commands()
 		# if there is no command, it means the line follows the command 
 		# from previous line, except voice and charatcer transition
 		# this allows the art/music to always be displayed when loading
 		prev_command = command_list
-		script_tree.add_line(character, dialogue, command_list)
+		if not (character == "" and dialogue == "" and command_list == []):
+			script_tree.add_line(character, dialogue, command_list)
+		# make sure complete empty line are ignored
 	script_tree.clear_save()
 	ResourceSaver.save(script_tree, "res://save/processed_script.tres")
 	return

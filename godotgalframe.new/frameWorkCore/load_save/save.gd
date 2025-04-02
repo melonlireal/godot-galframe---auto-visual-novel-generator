@@ -7,8 +7,6 @@ var save_UI = "res://artResource/UI_gameplay/setting_UI/save_background.png"
 var load_UI = "res://artResource/UI_gameplay/setting_UI/load_background.png"
 var save_load_switch = true
 # 不会一直切换背景然后尼玛卡住不动
-var line: int
-var file: String
 var temp_save = {}
 
 func _ready():

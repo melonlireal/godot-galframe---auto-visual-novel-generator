@@ -39,7 +39,7 @@ func _ready():
 	%errorlog.text = ""
 	$UI.connect("on_button",_on_button)
 	$UI.connect("out_button", _out_button)
-	proceed()
+	#proceed()
 	# 这次proceed 只会搭建背景和角色
 	set_bus()
 	load_setting()
@@ -99,12 +99,15 @@ func proceed():
 	if choice_reach:
 		return
 	clear_avatar = true
-	var text:Dictionary = script_tree.get_line()
-	if text.has("exit"):
+	# text will be mutated each time 
+	# then extract character, dialogue and command
+	var text = {};
+	var status = script_tree.get_line(text)
+	if status == "exit":
 		leave = true
 		_on_leave_pressed()
 		return
-	if text.has("choice_reach"):
+	if status == "choice reach":
 		$dialogue.visible = true
 		$UI.visible = true
 		%dialogue.visible_ratio = 1.0
@@ -150,7 +153,6 @@ func travel(location: String):
 	# 根据txt文件名找到文件路径并跳转到该文件
 	script_tree.change_chapter(location)
 	# need to update error checker, will update in error system overhaul
-	# 切掉原txt文件路径中的txt文件并搜索该txt所在的文件夹及其附属文件夹
 	for child in %choice_box.get_children():
 		%choice_box.remove_child(child)
 		%dialogue.visible_ratio = 0
@@ -226,7 +228,6 @@ func change_avatar(avatar: String, position = "mid", slot: = "character", transi
 		avatar_clear()
 		clear_avatar = false
 		return
-	var start_location = "res://artResource/character/"
 	var avatar_at = asset_map.search_path(avatar)
 	if avatar_at == null:
 		$"DO NOT TOUCH/Panel".visible = true
@@ -366,6 +367,10 @@ func _on_forward_speed_pressed():
 	speed_up = true
 	proceed()
 	
+
+# will update in future that jump get choice from dialoge tree directly
+# requires minor change in dialog tree that stores art asset status in 
+# choice key
 	
 func _on_forward_to_next_choice_pressed():
 	if choice_reach:
@@ -374,6 +379,8 @@ func _on_forward_to_next_choice_pressed():
 		proceed()
 	# 先这样, 之后改
 	
+	
+
 func _on_visible_pressed():
 	if $dialogue.visible and $UI.visible and $choice.visible:
 		$dialogue.visible = false
@@ -396,7 +403,8 @@ func load_progress(which_file: String, which_line: int):
 	music_clear("sound_effect")
 	change_avatar("clear")
 	loading = true
-	script_tree.load_progress(which_file, which_line)
+	script_tree.load_progress(which_file, which_line - 1)
+	# script tree acc give the line after its current progress
 	proceed()
 	self.get_tree().call_group("main", "game_created")
 	# 第二次告诉main游戏已经创建，这代表即将播放动画fade_out

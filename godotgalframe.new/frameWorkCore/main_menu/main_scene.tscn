@@ -322,6 +322,6 @@ libraries = {
 [connection signal="pressed" from="menu_UI/HBoxContainer/CG" to="." method="_on_cg_pressed"]
 [connection signal="pressed" from="menu_UI/HBoxContainer/setting" to="." method="_on_setting_pressed"]
 [connection signal="pressed" from="menu_UI/HBoxContainer/quit" to="." method="_on_quit_pressed"]
-[connection signal="timeout" from="transition_DONTTOUCH" to="." method="_on_transition_donttouch_timeout"]
 [connection signal="timeout" from="transition_DONTTOUCH" to="." method="_on_transition_timeout"]
+[connection signal="timeout" from="transition_DONTTOUCH" to="." method="_on_transition_donttouch_timeout"]
 [connection signal="animation_finished" from="color/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
