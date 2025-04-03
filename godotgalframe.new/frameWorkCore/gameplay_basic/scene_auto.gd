@@ -290,7 +290,12 @@ func display_CG(CG: String):
 	can_press = false
 	# pause all interaction and dislay the CG
 	change_background(CG, "false", "false")
-	
+		
+		
+		
+		
+		
+		
 		
 func _on_save_pressed():
 	var temp_screen = get_viewport().get_texture().get_image()
@@ -304,7 +309,6 @@ func _on_save_pressed():
 			canvas.visible = false
 	self.set_process(false)
 	
-	
 func _on_load_pressed():
 	get_tree().call_group("main", "display_load")
 	for canvas in self.get_children():
@@ -312,13 +316,11 @@ func _on_load_pressed():
 			canvas.visible = false
 	self.set_process(false)
 	
-	
 func _on_quicksave_pressed():
 	var progress = progress_data.new()
 	progress.which_file = script_tree.get_chapter()
 	progress.which_line = script_tree.get_line_num()
 	ResourceSaver.save(progress, "user://save/quick_save.tres")
-	
 	
 func _on_quickload_pressed():
 	var quick_save = "user://save/quick_save.tres"
@@ -328,7 +330,6 @@ func _on_quickload_pressed():
 	print(find_save)
 	self.load_progress(find_save.which_file, find_save.which_line)
 
-
 func _on_setting_pressed():
 	get_tree().call_group("main", "display_setting")
 	for canvas in self.get_children():
@@ -336,17 +337,14 @@ func _on_setting_pressed():
 			canvas.visible = false
 	self.set_process(false)
 	
-	
 func _on_review_pressed():
 	pass # Replace with function body.
 	# 还没做
-	
-	
+		
 func _on_show_tree_pressed():
 	pass # Replace with function body.
 	# 还没做
-	
-	
+		
 func _on_auto_pressed():
 	if auto_play:
 		%dialogue.on_auto = false
@@ -358,7 +356,6 @@ func _on_auto_pressed():
 	%dialogue.on_auto = true
 	proceed()
 	
-	
 func _on_forward_speed_pressed():
 	if speed_up:
 		speed_up = false
@@ -366,11 +363,9 @@ func _on_forward_speed_pressed():
 	auto_play = false
 	speed_up = true
 	proceed()
-	
-
-# will update in future that jump get choice from dialoge tree directly
-# requires minor change in dialog tree that stores art asset status in 
-# choice key
+	# will update in future that jump get choice from dialoge tree directly
+	# requires minor change in dialog tree that stores art asset status in 
+	# choice key
 	
 func _on_forward_to_next_choice_pressed():
 	if choice_reach:
@@ -379,8 +374,6 @@ func _on_forward_to_next_choice_pressed():
 		proceed()
 	# 先这样, 之后改
 	
-	
-
 func _on_visible_pressed():
 	if $dialogue.visible and $UI.visible and $choice.visible:
 		$dialogue.visible = false
@@ -419,7 +412,6 @@ func load_progress(which_file: String, which_line: int):
 func load_setting():
 	print("load setting!")
 	var save = ResourceLoader.load(save_path)
-	print(save.get_type())
 	print(save.dialogue_box_transparency)
 	$dialogue/dialogue_box.modulate.a = save.dialogue_box_transparency / 100
 	$dialogue/narration_box.modulate.a = save.dialogue_box_transparency / 100

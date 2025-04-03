@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ScriptTree" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://frameWorkCore/scipt_tree.gd" id="1_mxf3y"]
+[ext_resource type="Script" path="res://frameWorkCore/scipt_tree.gd" id="1_l1tl1"]
 
 [resource]
-script = ExtResource("1_mxf3y")
+script = ExtResource("1_l1tl1")
 all_script = {
 "Start.txt": {
 1: {

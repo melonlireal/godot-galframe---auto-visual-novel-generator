@@ -43,13 +43,13 @@ func change_chapter(chapter: String):
 func get_line(box: Dictionary):
 	curr_line += 1
 	print("get line ", curr_line, " from ", curr_chap, "\n")
-	print("line content is ", all_script[curr_chap][curr_line], "\n")
 	# if the line is not a standard line but a choice or the end of chapter
 	# return
 	if !all_script[curr_chap].has(curr_line):
 		if !all_script[curr_chap].has("choice"):
 			return "exit"
 		return "choice reach"
+	print("line content is ", all_script[curr_chap][curr_line], "\n")
 	box["character"] = all_script[curr_chap][curr_line]["character"]
 	box["dialogue"] = all_script[curr_chap][curr_line]["dialogue"]
 	box["command"] = all_script[curr_chap][curr_line]["command"]

@@ -433,8 +433,8 @@ scroll_active = false
 script = ExtResource("20_yhwg8")
 repeat = true
 narrration = true
-x = 97.0
-y = 60.0
+narration_x = 70.0
+narration_y = 62.0
 
 [node name="auto_play_example" type="TextureRect" parent="settings/display_setting"]
 custom_minimum_size = Vector2(0, 140)
@@ -467,8 +467,8 @@ script = ExtResource("20_yhwg8")
 repeat = true
 on_auto = true
 narrration = true
-x = 97.0
-y = 60.0
+narration_x = 70.0
+narration_y = 62.0
 
 [node name="volumn_setting" type="GridContainer" parent="settings"]
 visible = false

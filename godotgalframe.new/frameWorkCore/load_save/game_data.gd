@@ -1,7 +1,7 @@
 extends Resource
 class_name Gamedata
-@export var play_speed = 20
-@export var auto_play_speed = 20
+@export var play_speed = 50
+@export var auto_play_speed = 50
 @export var red = 140
 @export var green = 140
 @export var blue = 140
@@ -40,14 +40,14 @@ func reset_all():
 func reset_setting_display():
 	windows_color = Color(140.0,140.0,140.0,200)
 
-func reset_setting():
-	play_speed = 20.0
+#func reset_setting():
+	#play_speed = 50
 	
-func calc_play_speed(progress: float):
-	play_speed = (20.0 / 50) * progress
+func save_play_speed(speed: float):
+	play_speed = speed
 	
-func calc_auto_play_speed(progress: float):
-	auto_play_speed = (20.0 / 50) * progress
+func save_auto_play_speed(speed: float):
+	auto_play_speed = speed
 	
 func change_red(progress: float):
 	red = progress

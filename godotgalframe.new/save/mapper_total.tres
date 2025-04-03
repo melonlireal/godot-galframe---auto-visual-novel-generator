@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="AssetPath" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://frameWorkCore/AssetPath.gd" id="1_bt713"]
+[ext_resource type="Script" path="res://frameWorkCore/AssetPath.gd" id="1_g6kt0"]
 
 [resource]
-script = ExtResource("1_bt713")
+script = ExtResource("1_g6kt0")
 resource_dic = {
 "G.ogv": "res://artResource/background//G.ogv",
 "Start.txt": "res://dialogue//Start.txt",

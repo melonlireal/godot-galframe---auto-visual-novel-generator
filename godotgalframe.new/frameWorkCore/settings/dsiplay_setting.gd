@@ -10,8 +10,8 @@ func _ready():
 	
 func load_value():
 	var saved_data = ResourceLoader.load(setting_save)
-	var play_speed = saved_data.play_speed * (50/20)
-	var auto_play_speed = saved_data.auto_play_speed * (50/20)
+	var play_speed = saved_data.play_speed
+	var auto_play_speed = saved_data.auto_play_speed
 	%play_speed.value = play_speed
 	$play_speed/HBoxContainer/data_display_box/CenterContainer/data_display.text = str(play_speed)
 	%auto_play_speed.value = auto_play_speed
@@ -24,7 +24,8 @@ func _on_play_speed_value_changed(value):
 	if loading:
 		return
 	var saved_data = ResourceLoader.load(setting_save)
-	saved_data.calc_play_speed(value)
+	print("saving play speed", value)
+	saved_data.save_play_speed(value)
 	ResourceSaver.save(saved_data, setting_save)
 	$play_speed/HBoxContainer/data_display_box/CenterContainer/data_display.text = str(value)
 
@@ -33,7 +34,7 @@ func _on_auto_play_speed_value_changed(value):
 	if loading:
 		return
 	var saved_data = ResourceLoader.load(setting_save)
-	saved_data.calc_auto_play_speed(value)
+	saved_data.save_auto_play_speed(value)
 	ResourceSaver.save(saved_data, setting_save)
 	$auto_play_speed/HBoxContainer/data_display_box/CenterContainer/data_display.text = str(value)
 
