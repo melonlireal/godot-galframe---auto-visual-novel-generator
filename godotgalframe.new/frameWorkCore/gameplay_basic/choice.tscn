@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://frameWorkCore/gameplay_basic/choice.gd" id="3_bus57"]
 
 [node name="choice" type="TextureButton"]
+self_modulate = Color(1, 1, 1, 0.811765)
 custom_minimum_size = Vector2(1200, 120)
 texture_normal = ExtResource("1_p6mfj")
 texture_hover = ExtResource("2_d6tvi")

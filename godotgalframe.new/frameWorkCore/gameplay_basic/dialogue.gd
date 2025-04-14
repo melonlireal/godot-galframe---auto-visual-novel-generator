@@ -8,7 +8,7 @@ extends RichTextLabel
 @export var narration_x = 332.0
 @export var narration_y = 800.0
 @export var speaking_x = 332.0
-@export var speaking_y = 842.0
+@export var speaking_y = 850.0
 # 切换到旁白位置
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -32,10 +32,10 @@ func _process(delta):
 			set_process(false)
 	if on_auto:
 		self.visible_ratio += ((data.auto_play_speed * delta * play_speed_factor)
-		/self.text.length())
+		/self.get_parsed_text().length())
 	else:
 		self.visible_ratio += ((data.play_speed * delta * play_speed_factor)
-		/self.text.length())
+		/self.get_parsed_text().length())
 		
 func _start_dialogue():
 	if initialization:

@@ -22,9 +22,12 @@ func add_line(character: String, dialogue: String, command: Array):
 	print("add line ", character," ",
 	 dialogue," ", command, " in chapter ", curr_chap)
 	
-func add_choice(choices: Array):
+func add_choice(choices: Array, command: Array, text: Dictionary):
 	print("choice added ", choices)
-	all_script[curr_chap]["choice"] = choices
+	all_script[curr_chap]["choice"] = {}
+	all_script[curr_chap]["choice"]["choice"] = choices
+	all_script[curr_chap]["choice"]["command"] = command
+	all_script[curr_chap]["choice"]["text"] = text
 	
 func choice_reached():
 	#choice is after all lines of a chapter is traveled
@@ -34,6 +37,8 @@ func choice_reached():
 	return false
 	
 func get_choices():
+	if !all_script[curr_chap].has("choice"):
+		return {}
 	return all_script[curr_chap]["choice"]
 	
 func change_chapter(chapter: String):
@@ -60,6 +65,9 @@ func get_chapter():
 
 func get_line_num():
 	return curr_line
+	
+func jump_choice():
+	curr_line = -255
 	
 func load_progress(chapter: String, line: int):
 	curr_chap = chapter

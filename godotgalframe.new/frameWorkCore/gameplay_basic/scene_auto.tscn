@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bwrm0y71vp4ol"]
+[gd_scene load_steps=9 format=3 uid="uid://bwrm0y71vp4ol"]
 
 [ext_resource type="Script" path="res://frameWorkCore/gameplay_basic/scene_auto.gd" id="1_2awyf"]
 [ext_resource type="Texture2D" uid="uid://xqy3a8rw8472" path="res://artResource/UI_gameplay/narrationbox.png" id="2_0460k"]
 [ext_resource type="Texture2D" uid="uid://ck0fpeackkskw" path="res://artResource/UI_gameplay/dialoguebox.png" id="3_s4tsg"]
+[ext_resource type="FontFile" uid="uid://djaascw8mseps" path="res://artResource/UI_gameplay/honkaifont.ttf" id="4_oh8xj"]
 [ext_resource type="FontFile" uid="uid://dcrep5362jnq1" path="res://artResource/UI_gameplay/ALFYSB.otf" id="4_u0mpm"]
 [ext_resource type="Script" path="res://frameWorkCore/gameplay_basic/dialogue.gd" id="5_j30eb"]
 [ext_resource type="PackedScene" uid="uid://dnkvex8li8a4j" path="res://frameWorkCore/main_menu/main_UI.tscn" id="6_0o83t"]
@@ -10,6 +11,7 @@
 
 [node name="scene_auto" type="CanvasLayer" groups=["game_play"]]
 script = ExtResource("1_2awyf")
+metadata/_edit_vertical_guides_ = [155.0]
 
 [node name="background" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
@@ -35,93 +37,96 @@ unique_name_in_owner = true
 
 [node name="leftback" type="CenterContainer" parent="avatar"]
 anchors_preset = -1
-anchor_left = 0.15
-anchor_top = 0.15
-anchor_right = 0.5
-anchor_bottom = 1.0
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.6
+anchor_bottom = 1.75
 offset_left = 12.0
-offset_right = 62.2973
-offset_bottom = 282.0
+offset_right = -0.578613
+offset_bottom = 0.119995
 
 [node name="character" type="TextureRect" parent="avatar/leftback"]
 texture_filter = 2
-custom_minimum_size = Vector2(600, 1200)
+custom_minimum_size = Vector2(1000, 1750)
 layout_mode = 2
-expand_mode = 3
-stretch_mode = 4
+expand_mode = 1
+stretch_mode = 5
 
 [node name="left" type="CenterContainer" parent="avatar"]
 anchors_preset = -1
-anchor_left = 0.15
-anchor_top = 0.15
-anchor_right = 0.5
-anchor_bottom = 1.0
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.6
+anchor_bottom = 1.75
 offset_left = 12.0
-offset_right = -0.578674
-offset_bottom = 282.0
+offset_right = -0.578613
+offset_bottom = 0.119995
 
 [node name="character" type="TextureRect" parent="avatar/left"]
 texture_filter = 2
-custom_minimum_size = Vector2(600, 1200)
+custom_minimum_size = Vector2(1000, 1750)
 layout_mode = 2
-expand_mode = 3
-stretch_mode = 4
+expand_mode = 1
+stretch_mode = 5
+
+[node name="rightback" type="CenterContainer" parent="avatar"]
+anchors_preset = -1
+anchor_left = 0.35
+anchor_top = 0.05
+anchor_right = 0.95
+anchor_bottom = 1.75
+offset_right = 0.639771
+offset_bottom = 0.119995
+
+[node name="character" type="TextureRect" parent="avatar/rightback"]
+custom_minimum_size = Vector2(1100, 1750)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
 
 [node name="right" type="CenterContainer" parent="avatar"]
 anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.15
-anchor_right = 0.85
-anchor_bottom = 1.2
-offset_right = 0.639893
-offset_bottom = 66.0
+anchor_left = 0.35
+anchor_top = 0.05
+anchor_right = 0.95
+anchor_bottom = 1.75
+offset_right = 0.639771
+offset_bottom = 0.119995
 
 [node name="character" type="TextureRect" parent="avatar/right"]
-custom_minimum_size = Vector2(600, 1200)
+custom_minimum_size = Vector2(1100, 1750)
 layout_mode = 2
-expand_mode = 3
-stretch_mode = 4
-
-[node name="rightback" type="CenterContainer" parent="avatar"]
-offset_left = 996.0
-offset_top = 162.0
-offset_right = 1596.0
-offset_bottom = 1362.0
-
-[node name="character" type="TextureRect" parent="avatar/rightback"]
-custom_minimum_size = Vector2(600, 1200)
-layout_mode = 2
-expand_mode = 3
-stretch_mode = 4
+expand_mode = 1
+stretch_mode = 5
 
 [node name="midback" type="CenterContainer" parent="avatar"]
 anchors_preset = -1
-anchor_left = 0.3
-anchor_top = 0.15
-anchor_right = 0.701
-anchor_bottom = 1.2
+anchor_left = 0.2
+anchor_top = 0.05
+anchor_right = 0.8
+anchor_bottom = 1.7
 offset_right = -0.920044
 offset_bottom = 66.0
 
 [node name="character" type="TextureRect" parent="avatar/midback"]
-custom_minimum_size = Vector2(600, 1200)
+custom_minimum_size = Vector2(1100, 1800)
 layout_mode = 2
-expand_mode = 3
+expand_mode = 1
 stretch_mode = 5
 
 [node name="mid" type="CenterContainer" parent="avatar"]
 anchors_preset = -1
-anchor_left = 0.3
-anchor_top = 0.15
-anchor_right = 0.701
-anchor_bottom = 1.2
+anchor_left = 0.2
+anchor_top = 0.05
+anchor_right = 0.8
+anchor_bottom = 1.7
 offset_right = -0.920044
 offset_bottom = 66.0
 
 [node name="character" type="TextureRect" parent="avatar/mid"]
-custom_minimum_size = Vector2(600, 1200)
+custom_minimum_size = Vector2(1100, 1800)
 layout_mode = 2
-expand_mode = 3
+expand_mode = 1
 stretch_mode = 5
 
 [node name="dialogue" type="CanvasLayer" parent="."]
@@ -155,11 +160,11 @@ metadata/_edit_lock_ = true
 [node name="character" type="RichTextLabel" parent="dialogue"]
 unique_name_in_owner = true
 offset_left = 331.0
-offset_top = 759.0
+offset_top = 770.0
 offset_right = 762.0
-offset_bottom = 821.0
+offset_bottom = 832.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_fonts/normal_font = ExtResource("4_u0mpm")
+theme_override_fonts/normal_font = ExtResource("4_oh8xj")
 theme_override_font_sizes/normal_font_size = 40
 bbcode_enabled = true
 text = "这是一个很长的名字"
@@ -168,11 +173,11 @@ metadata/_edit_lock_ = true
 [node name="dialogue" type="RichTextLabel" parent="dialogue" groups=["dialogue"]]
 unique_name_in_owner = true
 offset_left = 332.0
-offset_top = 842.0
+offset_top = 850.0
 offset_right = 1573.0
-offset_bottom = 966.0
+offset_bottom = 974.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_fonts/normal_font = ExtResource("4_u0mpm")
+theme_override_fonts/normal_font = ExtResource("4_oh8xj")
 theme_override_font_sizes/normal_font_size = 40
 bbcode_enabled = true
 text = "一二三四五六七八九十十一十二十三十四十五十六十七十八十九二十二十一二十二二十三二十四二十五二十六二十七二十八二十九三十三十一"

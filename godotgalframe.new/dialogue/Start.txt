@@ -1,11 +1,1 @@
-：这是台词 
-：台词的颜色可以变化
-：一句话的台词甚至可以有不同颜色 
-这是人名：颜色变化对人名同样适用 
-：台词在播放的途中可以变化内容，很神奇吧 command: 
-[color=blue]人物[/color]：这是人物立绘 command: (character, yuexiaIdle.png) 
-人物：现在人物立绘在切换台词的时候差分变化会更流畅 command: (character, yuexiaIdleHappy.png, mid, character, true) (backgorund, background1.png)
-先这样吧
-choice
-a a.txt
-b b.txt
+character:all dialogue start from here

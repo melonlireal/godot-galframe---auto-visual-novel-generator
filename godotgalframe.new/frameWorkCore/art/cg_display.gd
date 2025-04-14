@@ -17,9 +17,11 @@ func _ready():
 		var temp = cg_all.get_line()
 		if temp != "":
 			# 如果有可解锁CG再解锁CG
-			var line = Array(cg_all.get_line().rsplit(" "))
+			var line = Array(temp.rsplit(" "))
 			cg_list.append(line.pop_front())
 			cg_cover_list.append(line.pop_front())
+			print((cg_list))
+			print(cg_cover_list)
 	get_cover()
 	for slot in $main/CenterContainer/GridContainer.get_children():
 		slot.connect("view", present)
@@ -39,7 +41,6 @@ func _process(_delta):
 	
 func get_cover():
 	for slot in $main/CenterContainer/GridContainer.get_children():
-		
 		if cg_cover_list.is_empty():
 			return
 		if not slot.has_cover:
@@ -68,6 +69,8 @@ func load_unlock():
 		unlock(cg)
 	
 	
+	
+	# used to present cg
 func present(CG_name: String):
 	print("presenting")
 	var file_at = quick_search(CG_name)
