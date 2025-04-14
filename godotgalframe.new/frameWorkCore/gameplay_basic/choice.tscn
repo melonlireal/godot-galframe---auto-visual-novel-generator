@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://cb46i7kfkxwf7"]
+
+[ext_resource type="Texture2D" uid="uid://dna43v46jrik3" path="res://artResource/UI_gameplay/ui_raw/choice_box.png" id="1_p6mfj"]
+[ext_resource type="Texture2D" uid="uid://u6i01s8k81af" path="res://artResource/UI_gameplay/ui_hover/choice_box_hover.png" id="2_d6tvi"]
+[ext_resource type="FontFile" uid="uid://dcrep5362jnq1" path="res://artResource/UI_gameplay/ALFYSB.otf" id="2_pg3b4"]
+[ext_resource type="Script" path="res://frameWorkCore/gameplay_basic/choice.gd" id="3_bus57"]
+
+[node name="choice" type="TextureButton"]
+self_modulate = Color(1, 1, 1, 0.811765)
+custom_minimum_size = Vector2(1200, 120)
+texture_normal = ExtResource("1_p6mfj")
+texture_hover = ExtResource("2_d6tvi")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("3_bus57")
+
+[node name="center" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 17.0
+offset_right = 1139.0
+offset_bottom = 103.0
+
+[node name="choice_text" type="Label" parent="center"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_pg3b4")
+theme_override_font_sizes/font_size = 50
+text = "这是一个非常非常非常非常非常啰嗦的选项"
+
+[node name="going_to" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 0)
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

@@ -1,0 +1,202 @@
+[gd_scene load_steps=23 format=3 uid="uid://dnkvex8li8a4j"]
+
+[ext_resource type="Script" path="res://frameWorkCore/main_menu/main_UI.gd" id="1_4xwuk"]
+[ext_resource type="Texture2D" uid="uid://sl4vw1608r8n" path="res://artResource/UI_gameplay/ui_raw/auto.png" id="1_hrq5x"]
+[ext_resource type="Texture2D" uid="uid://v4a7k4ctvy4d" path="res://artResource/UI_gameplay/info_fill.png" id="1_v5r1b"]
+[ext_resource type="Texture2D" uid="uid://kt3n8ieem5ol" path="res://artResource/UI_gameplay/ui_hover/auto_hover.png" id="2_7mrl3"]
+[ext_resource type="FontFile" uid="uid://dcrep5362jnq1" path="res://artResource/UI_gameplay/ALFYSB.otf" id="2_16gk4"]
+[ext_resource type="Texture2D" uid="uid://welyujfq2267" path="res://artResource/UI_gameplay/ui_raw/setting.png" id="2_jtpt6"]
+[ext_resource type="Texture2D" uid="uid://d35oaj7a8bgs5" path="res://artResource/UI_gameplay/ui_hover/setting_hover.png" id="3_jcku6"]
+[ext_resource type="Texture2D" uid="uid://sr4u58x1bl6t" path="res://artResource/UI_gameplay/ui_raw/story_tree.png" id="8_8ko0c"]
+[ext_resource type="Texture2D" uid="uid://dtodwm5ruysb1" path="res://artResource/UI_gameplay/ui_hover/story_tree_hover.png" id="9_4uxna"]
+[ext_resource type="Texture2D" uid="uid://dwdxjh58qw5tn" path="res://artResource/UI_gameplay/ui_raw/book.png" id="10_7nfbt"]
+[ext_resource type="Texture2D" uid="uid://bnn7bha3s7hdl" path="res://artResource/UI_gameplay/ui_hover/book_hover.png" id="11_qu41y"]
+[ext_resource type="Texture2D" uid="uid://cjdo0p5frvw54" path="res://artResource/UI_gameplay/ui_raw/forward.png" id="12_q8tr2"]
+[ext_resource type="Texture2D" uid="uid://dfdlfkxfiahk8" path="res://artResource/UI_gameplay/ui_hover/forward_hover.png" id="13_pnvnb"]
+[ext_resource type="Texture2D" uid="uid://bmy2pecw1xwva" path="res://artResource/UI_gameplay/ui_raw/forwardToNextChoice.png" id="14_jh1xk"]
+[ext_resource type="Texture2D" uid="uid://d0mi0fhawl37y" path="res://artResource/UI_gameplay/ui_hover/forwardToNextChoice_hover.png" id="15_4lyn0"]
+[ext_resource type="Texture2D" uid="uid://cvsqjlqdyyx18" path="res://artResource/UI_gameplay/ui_raw/soundOn.png" id="16_qghik"]
+[ext_resource type="Texture2D" uid="uid://gwlwucrjblw6" path="res://artResource/UI_gameplay/ui_hover/soundOn_hover.png" id="17_4h48h"]
+[ext_resource type="Texture2D" uid="uid://d06bxekkjjqh5" path="res://artResource/UI_gameplay/ui_raw/visible.png" id="18_aj6jp"]
+[ext_resource type="Texture2D" uid="uid://dn50efqxvyt8g" path="res://artResource/UI_gameplay/ui_hover/visible_hover.png" id="19_8rmnb"]
+[ext_resource type="Texture2D" uid="uid://v7jyf2n4va81" path="res://artResource/UI_gameplay/ui_raw/back.png" id="20_35vsk"]
+[ext_resource type="Texture2D" uid="uid://dov6fegc1mm3u" path="res://artResource/UI_gameplay/ui_hover/back_hover.png" id="21_447ca"]
+[ext_resource type="Texture2D" uid="uid://bhp6fyecrnt67" path="res://artResource/UI_gameplay/ui_raw/grabber.png" id="22_0i00j"]
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_4xwuk")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchor_left = 0.05
+anchor_top = 0.93
+anchor_right = 0.95
+anchor_bottom = 1.0
+offset_top = -0.00012207
+offset_right = 568.44
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.75, 0.75)
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 0
+offset_left = -128.0
+offset_top = -9.0
+offset_right = 2432.0
+offset_bottom = 101.0
+color = Color(1, 1, 1, 0.47451)
+
+[node name="VBoxContainer" type="HBoxContainer" parent="Control"]
+layout_mode = 0
+offset_right = 3139.0
+offset_bottom = 128.0
+scale = Vector2(0.7, 0.7)
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Control/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_v5r1b")
+expand_mode = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="Control/VBoxContainer/TextureRect"]
+layout_mode = 0
+offset_left = 105.0
+offset_right = 493.0
+offset_bottom = 128.0
+
+[node name="function_name" type="Label" parent="Control/VBoxContainer/TextureRect/CenterContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_16gk4")
+theme_override_font_sizes/font_size = 57
+
+[node name="save" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.917647, 0.701961, 0.0313726, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_16gk4")
+theme_override_font_sizes/font_size = 64
+text = "保存存档
+"
+flat = true
+
+[node name="load" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.917647, 0.701961, 0.0313726, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_16gk4")
+theme_override_font_sizes/font_size = 64
+text = "读取存档"
+flat = true
+
+[node name="quicksave" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.917647, 0.701961, 0.0313726, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_16gk4")
+theme_override_font_sizes/font_size = 64
+text = "快速保存"
+flat = true
+
+[node name="quickload" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.917647, 0.701961, 0.0313726, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_16gk4")
+theme_override_font_sizes/font_size = 64
+text = "快速读取"
+flat = true
+
+[node name="setting" type="TextureButton" parent="Control/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("2_jtpt6")
+texture_hover = ExtResource("3_jcku6")
+stretch_mode = 0
+
+[node name="volumn" type="TextureButton" parent="Control/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("16_qghik")
+texture_hover = ExtResource("17_4h48h")
+stretch_mode = 0
+
+[node name="show_tree" type="TextureButton" parent="Control/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("8_8ko0c")
+texture_hover = ExtResource("9_4uxna")
+stretch_mode = 0
+
+[node name="review" type="TextureButton" parent="Control/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("10_7nfbt")
+texture_hover = ExtResource("11_qu41y")
+stretch_mode = 0
+
+[node name="auto" type="TextureButton" parent="Control/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("1_hrq5x")
+texture_hover = ExtResource("2_7mrl3")
+stretch_mode = 0
+
+[node name="forward_speed" type="TextureButton" parent="Control/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("12_q8tr2")
+texture_hover = ExtResource("13_pnvnb")
+stretch_mode = 0
+
+[node name="forwardToNextChoice" type="TextureButton" parent="Control/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("14_jh1xk")
+texture_hover = ExtResource("15_4lyn0")
+stretch_mode = 0
+
+[node name="visible" type="TextureButton" parent="Control/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("18_aj6jp")
+texture_hover = ExtResource("19_8rmnb")
+stretch_mode = 0
+
+[node name="leave" type="TextureButton" parent="Control/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("20_35vsk")
+texture_hover = ExtResource("21_447ca")
+stretch_mode = 0
+
+[node name="volumn_slider" type="VSlider" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.577
+anchor_top = -2.357
+anchor_right = 0.616
+anchor_bottom = -0.155
+offset_left = 0.287476
+offset_top = -0.0380859
+offset_right = -0.905029
+offset_bottom = 0.0364838
+theme_override_icons/grabber = ExtResource("22_0i00j")
+theme_override_icons/grabber_highlight = ExtResource("22_0i00j")
+theme_override_icons/grabber_disabled = ExtResource("22_0i00j")
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[connection signal="mouse_entered" from="Control/VBoxContainer/save" to="." method="_on_save_mouse_entered"]
+[connection signal="mouse_entered" from="Control/VBoxContainer/load" to="." method="_on_load_mouse_entered"]
+[connection signal="mouse_entered" from="Control/VBoxContainer/quicksave" to="." method="_on_quicksave_mouse_entered"]
+[connection signal="mouse_entered" from="Control/VBoxContainer/quickload" to="." method="_on_quickload_mouse_entered"]
+[connection signal="mouse_entered" from="Control/VBoxContainer/setting" to="." method="_on_setting_mouse_entered"]
+[connection signal="mouse_entered" from="Control/VBoxContainer/volumn" to="." method="_on_volumn_mouse_entered"]
+[connection signal="pressed" from="Control/VBoxContainer/volumn" to="." method="_on_volumn_pressed"]
+[connection signal="mouse_entered" from="Control/VBoxContainer/show_tree" to="." method="_on_back_to_last_choice_mouse_entered"]
+[connection signal="mouse_entered" from="Control/VBoxContainer/review" to="." method="_on_back_by_one_script_mouse_entered"]
+[connection signal="mouse_entered" from="Control/VBoxContainer/auto" to="." method="_on_auto_mouse_entered"]
+[connection signal="mouse_entered" from="Control/VBoxContainer/forward_speed" to="." method="_on_forward_speed_mouse_entered"]
+[connection signal="mouse_entered" from="Control/VBoxContainer/forwardToNextChoice" to="." method="_on_forward_to_next_choice_mouse_entered"]
+[connection signal="mouse_entered" from="Control/VBoxContainer/visible" to="." method="_on_visible_mouse_entered"]
+[connection signal="mouse_entered" from="Control/VBoxContainer/leave" to="." method="_on_leave_mouse_entered"]
+[connection signal="value_changed" from="Control/volumn_slider" to="." method="_on_volumn_slider_value_changed"]
