@@ -1,0 +1,58 @@
+[gd_scene load_steps=3 format=3 uid="uid://vppy44qn11g7"]
+
+[ext_resource type="Script" uid="uid://dfmgbfahnwlar" path="res://frameWorkCore/gameplay_basic/line_review.gd" id="1_eqe81"]
+[ext_resource type="FontFile" uid="uid://djaascw8mseps" path="res://artResource/UI_gameplay/honkaifont.ttf" id="2_h08e0"]
+
+[node name="review_dialogue" type="TextureButton"]
+custom_minimum_size = Vector2(1200, 250)
+anchors_preset = -1
+anchor_right = 0.926
+anchor_bottom = 0.23
+offset_top = -2.0
+offset_right = -0.920166
+offset_bottom = -0.400009
+grow_horizontal = 2
+grow_vertical = 0
+ignore_texture_size = true
+script = ExtResource("1_eqe81")
+
+[node name="character" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.006
+anchor_top = 0.07
+anchor_right = 0.5
+anchor_bottom = 0.376
+offset_left = 0.152001
+offset_top = 0.0900011
+offset_right = 0.00012207
+offset_bottom = -0.0879974
+grow_horizontal = 2
+mouse_filter = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_h08e0")
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "这是一个很长的名字"
+scroll_active = false
+
+[node name="dialogue" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.006
+anchor_top = 0.441
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.662
+offset_top = 0.0669937
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_h08e0")
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "一二三四五六七八九十十一十二十三十四十五十六十七十八十九二十二十一二十二二十三二十四二十五二十六二十七二十八二十九三十三十一"
+scroll_active = false
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

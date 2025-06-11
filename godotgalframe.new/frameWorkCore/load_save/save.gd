@@ -40,8 +40,8 @@ func windows_display(slot: int):
 	$TextureRect/display.texture = $TextureRect/GridContainer.get_child(slot).get_image()
 	# 在大窗口上展示保存截图
 	
-func get_temp_save_data(image: Image, curr_chap: String, curr_line: int):
-	temp_save = {"image": image, "curr_chap": curr_chap, "curr_line": curr_line}
+func get_temp_save_data(image: Image, curr_chap: String, curr_line: int, vars: Variables):
+	temp_save = {"image": image, "curr_chap": curr_chap, "curr_line": curr_line, "vars": vars}
 	# 收到游戏界面截图
 
 func save_in_slot(slot: int):
@@ -56,12 +56,8 @@ func save_in_slot(slot: int):
 	progress.which_file = temp_save["curr_chap"]
 	progress.which_line = temp_save["curr_line"]
 	ResourceSaver.save(progress, "user://save/" + str(slot) + ".tres")
+	ResourceSaver.save(temp_save["vars"], "user://save/" + str(slot) + "var.tres")
 	
-#func save_progress(which_chapter: String, what_slot: int, which_line: int):
-	#var progress = progress_data.new()
-	#progress.which_file = which_chapter
-	#progress.which_line = which_line
-	#ResourceSaver.save(progress, "user://save/" + str(what_slot) + ".tres")
 
 func _on_return_pressed():
 	self.visible = false

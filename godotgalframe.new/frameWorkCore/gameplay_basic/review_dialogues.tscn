@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7urdigxq43m5"]
+
+[ext_resource type="Script" uid="uid://43lj04uagpfj" path="res://frameWorkCore/gameplay_basic/review_dialogues.gd" id="1_idpd4"]
+
+[node name="review_dialogues" type="CanvasLayer"]
+script = ExtResource("1_idpd4")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.745098)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+grow_horizontal = 2
+grow_vertical = 2
+follow_focus = true
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(1400, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+
+[node name="voice" type="AudioStreamPlayer" parent="."]

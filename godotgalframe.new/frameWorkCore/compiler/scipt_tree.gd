@@ -22,12 +22,10 @@ func add_line(character: String, dialogue: String, command: Array):
 	print("add line ", character," ",
 	 dialogue," ", command, " in chapter ", curr_chap)
 	
-func add_choice(choices: Array, command: Array, text: Dictionary):
+func add_choice(choices: Array):
 	print("choice added ", choices)
-	all_script[curr_chap]["choice"] = {}
-	all_script[curr_chap]["choice"]["choice"] = choices
-	all_script[curr_chap]["choice"]["command"] = command
-	all_script[curr_chap]["choice"]["text"] = text
+	all_script[curr_chap]["lines"] = curr_line - 1
+	all_script[curr_chap]["choice"] = choices
 	
 func choice_reached():
 	#choice is after all lines of a chapter is traveled
@@ -45,6 +43,7 @@ func change_chapter(chapter: String):
 	curr_chap = chapter
 	curr_line = 0
 
+	
 func get_line(box: Dictionary):
 	curr_line += 1
 	print("get line ", curr_line, " from ", curr_chap, "\n")
@@ -64,11 +63,29 @@ func get_chapter():
 	return curr_chap
 
 func get_line_num():
+	if not all_script[curr_chap].has(curr_line):
+		return all_script[curr_chap]["lines"] + 1
 	return curr_line
 	
 func jump_choice():
-	curr_line = -255
+	curr_line = all_script[curr_chap]["lines"]
+	return
 	
 func load_progress(chapter: String, line: int):
 	curr_chap = chapter
 	curr_line = line
+	
+	
+func add_var(name: String, variable: String):
+	all_script["variable"][name] = variable
+	
+func var_op(variable: String, operation: String, value: String):
+	var op = Callable(self, operation)
+	op.call(variable, value)
+	
+func add(variable: String, value: String):
+	if all_script["variable"].haskey(value):
+		all_script["variable"][variable] += all_script["variable"][value]
+	else:
+		all_script["variable"][variable] += int(value)
+	return

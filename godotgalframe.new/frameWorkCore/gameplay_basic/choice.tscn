@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://dna43v46jrik3" path="res://artResource/UI_gameplay/ui_raw/choice_box.png" id="1_p6mfj"]
 [ext_resource type="Texture2D" uid="uid://u6i01s8k81af" path="res://artResource/UI_gameplay/ui_hover/choice_box_hover.png" id="2_d6tvi"]
-[ext_resource type="FontFile" uid="uid://dcrep5362jnq1" path="res://artResource/UI_gameplay/ALFYSB.otf" id="2_pg3b4"]
-[ext_resource type="Script" path="res://frameWorkCore/gameplay_basic/choice.gd" id="3_bus57"]
+[ext_resource type="Script" uid="uid://bg7dqsp7ga8np" path="res://frameWorkCore/gameplay_basic/choice.gd" id="3_bus57"]
+[ext_resource type="FontFile" uid="uid://djaascw8mseps" path="res://artResource/UI_gameplay/honkaifont.ttf" id="4_2crrq"]
 
 [node name="choice" type="TextureButton"]
 self_modulate = Color(1, 1, 1, 0.811765)
@@ -24,7 +24,7 @@ offset_bottom = 103.0
 [node name="choice_text" type="Label" parent="center"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_pg3b4")
+theme_override_fonts/font = ExtResource("4_2crrq")
 theme_override_font_sizes/font_size = 50
 text = "这是一个非常非常非常非常非常啰嗦的选项"
 

@@ -2,7 +2,6 @@ extends TextureButton
 @export var cg = ""
 @export var lock = true
 @export var has_cover = false
-var start_location = "res://artResource/background/"
 signal view
 # Called when the node enters the scene tree for the first time.
 func _ready():

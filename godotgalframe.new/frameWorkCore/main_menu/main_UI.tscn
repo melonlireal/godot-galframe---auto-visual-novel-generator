@@ -1,6 +1,6 @@
 [gd_scene load_steps=23 format=3 uid="uid://dnkvex8li8a4j"]
 
-[ext_resource type="Script" path="res://frameWorkCore/main_menu/main_UI.gd" id="1_4xwuk"]
+[ext_resource type="Script" uid="uid://cw1a0c841nr0o" path="res://frameWorkCore/main_menu/main_UI.gd" id="1_4xwuk"]
 [ext_resource type="Texture2D" uid="uid://sl4vw1608r8n" path="res://artResource/UI_gameplay/ui_raw/auto.png" id="1_hrq5x"]
 [ext_resource type="Texture2D" uid="uid://v4a7k4ctvy4d" path="res://artResource/UI_gameplay/info_fill.png" id="1_v5r1b"]
 [ext_resource type="Texture2D" uid="uid://kt3n8ieem5ol" path="res://artResource/UI_gameplay/ui_hover/auto_hover.png" id="2_7mrl3"]
