@@ -12,11 +12,5 @@ it is advised to watch the given tutorial to download the version you want
 thank you for your support to the project!  
 当前正在开发的功能: <br/>
 feature under development: <br/>
-自定义计数和条件判断 <br/>
-ingame variable as condition to certain conversation/ending <br/>
 全局特效模板 <br/>
 special effect template <br/>
-台词回顾和查看选项分支树 <br/>
-dialog review and select branch <br/>
-支持小游戏 <br/>
-mini game support <br/>
