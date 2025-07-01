@@ -1,10 +1,9 @@
 extends CanvasLayer
-signal swap
-@onready var hint_save = false
 var save_path
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	load_setting()
 	%windows.disabled = true
 	%fullscreen.disabled = false
 	$options/display._on_pressed()
@@ -19,8 +18,7 @@ func set_default():
 	pass
 
 func _on_return_button_down():
-	self.visible = false
-	emit_signal("swap")
+	self.queue_free()
 
 
 func _on_display_pressed():

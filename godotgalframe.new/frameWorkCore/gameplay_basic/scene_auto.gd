@@ -12,7 +12,9 @@ extends CanvasLayer
 # 在选项出现的情况下停止 proceed继续读取txt文档
 var save_path = "user://save/save_total.tres"
 var leave = false
-# 用于暂时储存快进和自动播放的状态，以便在CG展示结束后继续
+# 用于在游戏结束后自动回到主菜单
+var UI_switched = false
+# 避免在切换UI后“点一下”的bug
 var script_tree:ScriptTree = ResourceLoader.load("res://save/processed_script.tres")
 # 文案/命令的存储
 var variables: Variables = ResourceLoader.load("res://save/variables.tres")
@@ -20,6 +22,7 @@ var variables: Variables = ResourceLoader.load("res://save/variables.tres")
 signal change_avatar
 signal change_background
 signal change_music
+signal music_clear
 signal clear_all_avatar
 signal update_art_list
 
@@ -32,6 +35,7 @@ func _ready():
 	%errorlog.text = ""
 	$UI.connect("on_button", _on_button)
 	$UI.connect("out_button", _out_button)
+	$review_dialogues.connect("close", quit_review)
 	set_bus()
 	load_setting()
 	self.get_tree().call_group("main", "game_created")
@@ -75,12 +79,6 @@ func _process(_delta):
 			proceed()
 	if Input.is_action_just_pressed("auto") and check_in_game():
 		_on_auto_pressed()
-	if Input.is_action_just_pressed("return"):
-		$review_dialogues.visible = false
-		can_press = true
-		$dialogue.visible = true
-		$UI.visible = true
-		pass
 	if auto_play and %dialogue.visible_ratio == 1.0 and start_time:
 		start_time = false
 		$auto_play_timer.start()
@@ -88,7 +86,13 @@ func _process(_delta):
 # 展示台词和角色名
 
 func check_in_game() -> bool:
-	return !$review_dialogues.visible and can_press
+	#check if the current game should be clicked to next line
+	if UI_switched:
+		# 避免在切换UI后“点一下”的bug
+		UI_switched = false
+		return false
+	return !$review_dialogues.visible and self.find_child("setting_menu") == null\
+	 and $minigame.get_children() == [] and can_press
 	
 # continue the dialogue
 func proceed():
@@ -111,6 +115,10 @@ func proceed():
 		choice_reach = true
 		choice_jump()
 		return
+	if status == "game":
+		speed_up = false
+		auto_play = false
+		$minigame.add_game(script_tree.get_game())
 	else:
 		if speed_up:
 			%dialogue.visible_ratio = 1.0
@@ -150,8 +158,7 @@ func choice_jump():
 		going_to.text = choice[1]
 		ready_option.connect("travel_to", travel)
 	if len(choice_list) == 1:
-		# if only one option and auto jump is true
-		# jump
+		# if only one option and auto jump is true， jump
 		if choice_list[0][2] == "true":
 			travel(choice_list[0][1])
 			return "fail"
@@ -219,21 +226,18 @@ func command_execute(orders: Array):
 func _on_save_pressed():
 	var temp_screen = get_viewport().get_texture().get_image()
 	#提前截图游戏画面
-	get_tree().call_group("main", "display_save")
-	get_tree().call_group("save", "get_temp_save_data", temp_screen, 
+	var save = preload("res://frameWorkCore/load_save/save_load_UI.tscn").instantiate()
+	save.display_save = true
+	save.get_temp_save_data(temp_screen, 
 		script_tree.get_chapter(), script_tree.get_line_num(), variables)
-	#先把游戏画面送过去再说，可以不存档
-	for canvas in self.get_children():
-		if canvas is CanvasLayer:
-			canvas.visible = false
-	self.set_process(false)
+	$".".add_child(save)
+	UI_switched = true
 	
 func _on_load_pressed():
-	get_tree().call_group("main", "display_load")
-	for canvas in self.get_children():
-		if canvas is CanvasLayer:
-			canvas.visible = false
-	self.set_process(false)
+	var loader = preload("res://frameWorkCore/load_save/save_load_UI.tscn").instantiate()
+	loader.display_save = false
+	$".".add_child(loader)
+	UI_switched = true
 	
 func _on_quicksave_pressed():
 	var progress = progress_data.new()
@@ -253,19 +257,23 @@ func _on_quickload_pressed():
 	self.load_progress(find_save.which_file, find_save.which_line, find_quick_save_var)
 
 func _on_setting_pressed():
-	get_tree().call_group("main", "display_setting")
-	for canvas in self.get_children():
-		if canvas is CanvasLayer:
-			canvas.visible = false
-	self.set_process(false)
+	var setting = preload("res://frameWorkCore/settings/setting_menu.tscn").instantiate()
+	$".".add_child(setting, true)
+	setting.set_owner(self)
+	UI_switched = true
 	
 func _on_review_pressed():
 	$review_dialogues.visible = true
 	$dialogue.visible = false
 	$UI.visible = false
 	pass # Replace with function body.
-	# 还没做
 		
+func quit_review():
+	$review_dialogues.visible = false
+	can_press = true
+	$dialogue.visible = true
+	$UI.visible = true
+	
 func _on_show_tree_pressed():
 	pass # Replace with function body.
 	# 还没做
@@ -293,13 +301,14 @@ func _on_forward_speed_pressed():
 func _on_forward_to_next_choice_pressed():
 	if choice_reach:
 		return
-	$music.music_clear("bgm")
-	$music.music_clear("voice")
-	$music.music_clear("sound_effect")
 	var choice_list = script_tree.get_choices()
 	if choice_list == []:
 		print("no choice found")
 		return
+	self.music_clear.emit("bgm")
+	self.music_clear.emit("voice")
+	self.music_clear.emit("sound_effect")
+	self.clear_all_avatar.emit()
 	script_tree.jump_choice()
 	proceed()
 	
@@ -330,16 +339,16 @@ func load_progress(which_file: String, which_line: int, vars: Variables):
 	print("loading progress\n")
 	print("file is ", which_file, "\n")
 	print("line is ", which_line, "\n")
-	emit_signal("music_clear", "bgm")
-	emit_signal("music_clear", "voice")
-	emit_signal("music_clear", "sound_effect")
-	emit_signal("clear_all_avatar")
+	self.music_clear.emit("bgm")
+	self.music_clear.emit("voice")
+	self.music_clear.emit("sound_effect")
+	self.clear_all_avatar.emit()
 	script_tree.load_progress(which_file, which_line - 1)
 	variables.load_var(vars.variables)
 	# script tree acc give the line after its current progress
 	proceed()
 	self.get_tree().call_group("main", "game_created")
-	# 第二次告诉main游戏已经创建，这代表即将播放动画fade_out
+	# 告诉main游戏已经创建，这代表即将播放动画fade_out
 	%dialogue.on_transition = false
 	
 func load_setting():

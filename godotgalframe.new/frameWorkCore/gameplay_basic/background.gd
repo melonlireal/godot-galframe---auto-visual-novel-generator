@@ -1,11 +1,9 @@
 extends CanvasLayer
 var asset_map:AssetPath = ResourceLoader.load("res://save/mapper_total.tres")
+var cg_header:Header = ResourceLoader.load("res://save/header.tres") 
 var videolist = []
 var on_transition = false
-var last_transition = ""
-signal proceed
-# when changing back ground will check whether last back ground command is transition
-# and execute the respected fadeout effect
+
 
 func _ready():
 	$"..".change_background.connect(change_background)
@@ -15,8 +13,13 @@ func do_transition():
 	pass
 
 func change_background(background: String, loop = "true", effect = ""):
+	if self.has_method(background):
+		var transition = Callable(self, background)
+		transition.call()
+		return
 	print("changing background\n")
 	self.get_tree().call_group("CG", "unlock", background)
+	cg_header.check_unlock(background) 
 	var background_at = asset_map.search_path(background)
 	if background_at == null:
 		self.get_tree().call_group("errorlog", "background_error", background)
@@ -36,3 +39,21 @@ func change_background(background: String, loop = "true", effect = ""):
 		videolist = []
 		$background.texture = ResourceLoader.load(background_at)
 		$viedo_background.stream = null
+
+func fadeout():
+		$"../UI".visible = false
+		$"../dialogue".visible = false
+		%dialogue.set_process(false)
+		$"..".can_press = false
+		%avatar.clear_all_avatar()
+		var transit = get_tree().create_tween().bind_node($background)
+		transit.tween_property($background, "modulate:a", 0, 0.5)
+		await transit.finished
+		$"..".proceed()
+		var transit2 = get_tree().create_tween().bind_node($background)
+		transit2.tween_property($background, "modulate:a", 1, 1)
+		await transit2.finished
+		$"../UI".visible = true
+		$"../dialogue".visible = true
+		$"..".can_press = true
+		%dialogue.set_process(true)

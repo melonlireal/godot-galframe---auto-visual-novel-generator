@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c1ykps1koxw12"]
 
 [ext_resource type="Texture2D" uid="uid://da4dpi8lcoj4r" path="res://artResource/UI_gameplay/setting_UI/save_load_box.png" id="1_ig4pd"]
-[ext_resource type="Script" uid="uid://cxd6k4vdxfgik" path="res://frameWorkCore/load_save/load_slot.gd" id="2_5oalx"]
+[ext_resource type="Script" uid="uid://cxd6k4vdxfgik" path="res://frameWorkCore/load_save/load_save_slot.gd" id="2_5oalx"]
 
 [node name="load_save_slot" type="TextureRect"]
 custom_minimum_size = Vector2(234.5, 132)

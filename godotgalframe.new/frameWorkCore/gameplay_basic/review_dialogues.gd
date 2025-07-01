@@ -10,8 +10,13 @@ var default_factor = 864
 var  curr_limit = 0
 var line = {"character":"", "dialogue":"", "voice":""}
 # Called when the node enters the scene tree for the first time.
+signal close
 
-
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("return"):
+		close.emit()
+		
+		
 func get_words(character: String, dialogue: String):
 	if character == "":
 		line["character"] = narrator
@@ -52,3 +57,7 @@ func play_voice(voice_at: String):
 	$voice.stream = ResourceLoader.load(voice_at)
 	$voice.playing = true
 	pass
+	
+
+func _on_close_pressed() -> void:
+	close.emit()

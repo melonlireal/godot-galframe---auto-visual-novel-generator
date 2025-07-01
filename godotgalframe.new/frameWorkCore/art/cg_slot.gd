@@ -22,7 +22,7 @@ func open():
 	$layer.visible = false
 
 func store_CG(CG_name: String):
-	var cg = CG_name
+	cg = CG_name
 
 func quick_search(filename: String):
 	var map = ResourceLoader.load("res://save/mapper_total.tres")

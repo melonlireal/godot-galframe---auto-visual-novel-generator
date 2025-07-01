@@ -29,7 +29,6 @@ func _process(delta):
 	# shit code fix later
 			self.visible_ratio = 1.0
 	var data = ResourceLoader.load("user://save/save_total.tres")
-	var test = self.visible_ratio
 	if self.visible_ratio == 1.0:
 		if repeat:
 			self.visible_ratio = 0.0

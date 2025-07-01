@@ -13,6 +13,7 @@ func _ready():
 	$present_pic.visible = false
 	$present_vid.visible = false
 	get_cover()
+	load_unlock()
 	for slot in $main/CenterContainer/GridContainer.get_children():
 		slot.connect("view", present)
 
@@ -43,11 +44,6 @@ func unlock(cg_name: String):
 	for slot in $main/CenterContainer/GridContainer.get_children():
 		if slot.cg == cg_name:
 			slot.open()
-			var save_file = ResourceLoader.load(save_path)
-			if cg_name not in save_file.unlocked_cg:
-				print("add new cg")
-				save_file.unlocked_cg.append(cg_name)
-				ResourceSaver.save(save_file, save_path)
 	
 	
 func load_unlock():
@@ -76,12 +72,10 @@ func present(CG_name: String):
 		$present_pic.visible = true
 		$present_pic.texture = ResourceLoader.load(file_at)
 		$main.visible = false
-	
 
 func quick_search(filename: String):
 	var map = ResourceLoader.load("res://save/mapper_total.tres")
 	return map.search_path(filename)
 		
 func _on_return_pressed():
-	self.visible = false
-	emit_signal("swap")
+	self.queue_free()

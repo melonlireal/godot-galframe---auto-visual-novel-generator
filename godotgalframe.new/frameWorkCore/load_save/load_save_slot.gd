@@ -5,7 +5,7 @@ var pic: Image
 signal ruSure # in memory of CSC108H5 2023 November 23rd incident
 # 如果要覆盖存档的话先确认一下
 signal saving
-signal loading
+#signal loading
 signal mouse_in
 
 func _ready():
@@ -13,12 +13,10 @@ func _ready():
 	if load_file in DirAccess.get_files_at("user://save/"):
 		load_pic()
 
-
-
 func display(pics: Image):
 	pics.save_png("user://"+str(self.get_index()) + ".png")
 	$save_display.texture = ImageTexture.create_from_image(pics)
-	emit_signal("mouse_in", self.get_index())
+	self.mouse_in.emit(self.get_index())
 	# 将截图保存且放置在小窗口上显示
 
 func load_pic():
@@ -31,10 +29,8 @@ func load_pic():
 func _save():
 	if $save_display.texture != null:
 		emit_signal("ruSure")
-	# 如果要覆盖存档的话先确认一下
-	# 这个功能先不做，懒
-	emit_signal("saving", self.get_index())
-	# 史山链的开启（悲）
+	# 如果要覆盖存档的话先确认一下，这个功能先不做，懒
+	self.saving.emit(self.get_index())
 	
 func _load():
 	if $save_display.texture != null:
@@ -42,7 +38,7 @@ func _load():
 		var save_path = "user://save/" + str(self.get_index()) + ".tres"
 		var vars:Variables = ResourceLoader.load("user://save/" + str(self.get_index()) + "var.tres")
 		var find_save = ResourceLoader.load(save_path)
-		self.get_tree().call_group("main", "load_game", find_save.which_file, find_save.which_line, vars)
+		$"../../..".help_load(find_save.which_file, find_save.which_line, vars)
 	
 	
 func _confirm():

@@ -13,7 +13,6 @@ config_version=5
 config/name="godotgalframelatest"
 run/main_scene="res://frameWorkCore/main_menu/main_scene.tscn"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://artResource/icons/icon.png"
 
 [display]
 

@@ -1,12 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://dgvwnhgxg8jhj"]
+[gd_scene load_steps=10 format=3 uid="uid://dgvwnhgxg8jhj"]
 
 [ext_resource type="Script" uid="uid://0a8m4i4ic6qg" path="res://frameWorkCore/main_menu/main_scene.gd" id="1_ybmd4"]
 [ext_resource type="FontFile" uid="uid://byyq0wl5ikrfs" path="res://artResource/UI_gameplay/EB.ttf" id="2_oru6f"]
-[ext_resource type="PackedScene" uid="uid://b2vlscrp1hnq1" path="res://frameWorkCore/settings/setting_menu.tscn" id="4_org3x"]
 [ext_resource type="Texture2D" uid="uid://du2tso4hnapof" path="res://artResource/UI_gameplay/ui_raw/loading.png" id="6_q022t"]
 [ext_resource type="Texture2D" uid="uid://c2mdpx06hxwyl" path="res://artResource/UI_gameplay/ui_raw/black.png" id="6_rjllh"]
-[ext_resource type="PackedScene" uid="uid://cfaw8fnyroa1w" path="res://frameWorkCore/load_save/save.tscn" id="6_vbmy6"]
-[ext_resource type="PackedScene" uid="uid://c3oyecnho3ar3" path="res://frameWorkCore/art/cg_display.tscn" id="8_kfrdx"]
 
 [sub_resource type="Animation" id="Animation_gd45o"]
 length = 0.001
@@ -179,11 +176,7 @@ _data = {
 [node name="main_scene" type="Node2D" groups=["main"]]
 script = ExtResource("1_ybmd4")
 
-[node name="setting_menu" parent="." instance=ExtResource("4_org3x")]
-visible = false
-
 [node name="menu_UI" type="CanvasLayer" parent="."]
-layer = 100
 
 [node name="ColorRect" type="ColorRect" parent="menu_UI"]
 offset_right = 1916.0
@@ -277,12 +270,6 @@ bus = &"bgm"
 wait_time = 0.05
 one_shot = true
 
-[node name="save" parent="." instance=ExtResource("6_vbmy6")]
-visible = false
-
-[node name="CG_display" parent="." instance=ExtResource("8_kfrdx")]
-visible = false
-
 [node name="color" type="CanvasLayer" parent="."]
 layer = 100
 
@@ -320,6 +307,6 @@ libraries = {
 [connection signal="pressed" from="menu_UI/HBoxContainer/CG" to="." method="_on_cg_pressed"]
 [connection signal="pressed" from="menu_UI/HBoxContainer/setting" to="." method="_on_setting_pressed"]
 [connection signal="pressed" from="menu_UI/HBoxContainer/quit" to="." method="_on_quit_pressed"]
-[connection signal="timeout" from="transition_DONTTOUCH" to="." method="_on_transition_timeout"]
 [connection signal="timeout" from="transition_DONTTOUCH" to="." method="_on_transition_donttouch_timeout"]
+[connection signal="timeout" from="transition_DONTTOUCH" to="." method="_on_transition_timeout"]
 [connection signal="animation_finished" from="color/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

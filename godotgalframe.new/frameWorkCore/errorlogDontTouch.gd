@@ -45,14 +45,14 @@ func variable_not_found(type: String):
 	$Panel.visible = true
 	%errorlog.text = "错误：未找到对应变量{0}请确保拼写正确".format({"0": type})
 	
-func cg_header_error(type: String):
-	pass
-	
-func color_header_error(type: String):
-	pass
-	
-func variable_header_error(type: String):
-	pass
-	
-func game_call_error(type: String):
-	pass
+#func cg_header_error(type: String):
+	#pass
+	#
+#func color_header_error(type: String):
+	#pass
+	#
+#func variable_header_error(type: String):
+	#pass
+	#
+#func game_call_error(type: String):
+	#pass

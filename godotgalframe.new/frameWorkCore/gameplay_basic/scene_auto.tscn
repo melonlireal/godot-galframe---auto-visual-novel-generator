@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bwrm0y71vp4ol"]
+[gd_scene load_steps=14 format=3 uid="uid://bwrm0y71vp4ol"]
 
 [ext_resource type="Script" uid="uid://8kk62ybanlp5" path="res://frameWorkCore/gameplay_basic/scene_auto.gd" id="1_2awyf"]
 [ext_resource type="Texture2D" uid="uid://xqy3a8rw8472" path="res://artResource/UI_gameplay/narrationbox.png" id="2_0460k"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://d2q1ewu5nrkgn" path="res://frameWorkCore/errorlogDontTouch.gd" id="7_kvtwn"]
 [ext_resource type="PackedScene" uid="uid://c7urdigxq43m5" path="res://frameWorkCore/gameplay_basic/review_dialogues.tscn" id="9_88744"]
 [ext_resource type="Script" uid="uid://cci7q1xdvf15f" path="res://frameWorkCore/gameplay_basic/music.gd" id="12_00gnm"]
+[ext_resource type="Script" uid="uid://84pbbv15c8ww" path="res://frameWorkCore/gameplay_basic/minigame.gd" id="13_ens8c"]
 
 [node name="scene_auto" type="CanvasLayer" groups=["game_play"]]
 script = ExtResource("1_2awyf")
@@ -20,6 +21,24 @@ metadata/_edit_vertical_guides_ = [155.0]
 [node name="background" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
 script = ExtResource("2_88744")
+
+[node name="effect_assets" type="Control" parent="background"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="background/effect_assets"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [node name="background" type="TextureRect" parent="background"]
 anchors_preset = 15
@@ -287,6 +306,9 @@ auto_clear_voice = true
 [node name="soundeffect4" type="AudioStreamPlayer" parent="music/sound_effect"]
 
 [node name="soundeffect5" type="AudioStreamPlayer" parent="music/sound_effect"]
+
+[node name="minigame" type="CanvasLayer" parent="."]
+script = ExtResource("13_ens8c")
 
 [connection signal="finished" from="background/viedo_background" to="." method="_on_viedo_background_finished"]
 [connection signal="pressed" from="UI/Control/VBoxContainer/save" to="." method="_on_save_pressed"]
