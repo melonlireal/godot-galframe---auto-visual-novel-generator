@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dbl4ovyap4ua3" path="res://artResource/UI_gameplay/ui_raw/CG_raw.png" id="1_3njts"]
 [ext_resource type="Texture2D" uid="uid://r0xgiwh8yk8q" path="res://artResource/UI_gameplay/ui_hover/CG_hover.png" id="2_otdqh"]
-[ext_resource type="Script" path="res://frameWorkCore/art/cg_slot.gd" id="3_3dvtc"]
+[ext_resource type="Script" uid="uid://dnwh2sd3tmqp" path="res://frameWorkCore/art/cg_slot.gd" id="3_3dvtc"]
 [ext_resource type="Texture2D" uid="uid://dapf0djki4qna" path="res://artResource/UI_gameplay/ui_raw/lock_raw.png" id="4_db7yd"]
 
 [node name="CG_slot" type="TextureButton"]

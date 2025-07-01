@@ -2,7 +2,6 @@ extends TextureButton
 @export var cg = ""
 @export var lock = true
 @export var has_cover = false
-var start_location = "res://artResource/background/"
 signal view
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -23,7 +22,7 @@ func open():
 	$layer.visible = false
 
 func store_CG(CG_name: String):
-	var cg = CG_name
+	cg = CG_name
 
 func quick_search(filename: String):
 	var map = ResourceLoader.load("res://save/mapper_total.tres")

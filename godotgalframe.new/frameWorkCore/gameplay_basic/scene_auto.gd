@@ -2,51 +2,40 @@ extends CanvasLayer
 @onready var choice_reach = false
 @onready var auto_play = false
 # 自动播放状态，在这个状态下点击不会触发台词展现和下一条台词的效果
-@onready var speed_up = false
+@export var speed_up = false
 # 快进状态，在这个状态下点击不会触发台词展现和下一条台词的效果
 @onready var UI_visible = true
 # 对话框隐藏的话不会继续播放
 @export var can_press = true
 # 这个不要动，是用来在加载游戏时暂停操作的
-@export var load_start = false
-# 这个可以动，但动了影响性能
-@export var auto_clear_bgm = false
-@export var auto_clear_sound_effect = false
-@export var auto_clear_voice = false
 @onready var start_time = true #确保proceed只在需要的时候开始记时
 # 在选项出现的情况下停止 proceed继续读取txt文档
-@onready var speed_start_time = true
-
-var loading = false
-var option = preload("res://frameWorkCore/gameplay_basic/choice.tscn")
 var save_path = "user://save/save_total.tres"
-var state = []
 var leave = false
-# 用于暂时储存快进和自动播放的状态，以便在CG展示结束后继续
-var bgmlist = []
-var sound_effect_list = []
-# 存储当前正在播放的bgm和音效
-var videolist = []
-# same as bgmlist and sound_effect_list
-# store currently playing video background
+# 用于在游戏结束后自动回到主菜单
+var UI_switched = false
+# 避免在切换UI后“点一下”的bug
 var script_tree:ScriptTree = ResourceLoader.load("res://save/processed_script.tres")
-var asset_map:AssetPath = ResourceLoader.load("res://save/mapper_total.tres")
-# 分别是视听素材和文案/命令的存储
-var avatar_list = []
-# stores avatar postion from curr line so when delete avatar
-# avatar from those position will not be removed
-var avatar_cleared = false
-# set true after each line cleared avatar once
-# so no need to clear avatar twice
+# 文案/命令的存储
+var variables: Variables = ResourceLoader.load("res://save/variables.tres")
+# store variables
+signal change_avatar
+signal change_background
+signal change_music
+signal music_clear
+signal clear_all_avatar
+signal update_art_list
 
 func _ready():
 	$"DO NOT TOUCH/Panel".visible = false
+	$review_dialogues.visible = false
 	%dialogue.text = ""
 	%character.text = ""
 	%dialogue.visible_ratio = 0.0
 	%errorlog.text = ""
-	$UI.connect("on_button",_on_button)
+	$UI.connect("on_button", _on_button)
 	$UI.connect("out_button", _out_button)
+	$review_dialogues.connect("close", quit_review)
 	set_bus()
 	load_setting()
 	self.get_tree().call_group("main", "game_created")
@@ -63,48 +52,50 @@ func set_bus():
 		
 
 func _process(_delta):
-	if Input.is_action_just_pressed("press") and can_press:
+	if Input.is_action_just_pressed("press") and check_in_game():
 		$dialogue.visible = true
 		$UI.visible = true
 		$choice.visible = true
-		if can_press:
-			if auto_play:
-				auto_play = false
-				return
-			if speed_up:
-				speed_up = false
-				return
-			if not UI_visible:
-				UI_visible = true
-				return
-			# 如果在自动播放状态下不能通过点击调整台词
-			# UI隐藏状态也不行
-			# 通过点击取消UI隐藏和自动播放状态
-			# 在CG展示模式下直接锁死
-			if %dialogue.visible_ratio != 1.0:
-				%dialogue.visible_ratio = 1.0
-				# 双击显示全部台词
-			else:
-				if not choice_reach:
-					%dialogue.visible_ratio = 0.0 
-				proceed()
-	if Input.is_action_just_pressed("auto"):
+		if auto_play:
+			auto_play = false
+			return
+		if speed_up:
+			speed_up = false
+			return
+		if not UI_visible:
+			UI_visible = true
+			return
+		# 如果在自动播放状态下不能通过点击调整台词
+		# UI隐藏状态也不行
+		# 通过点击取消UI隐藏和自动播放状态
+		# 在CG展示模式下直接锁死
+		if %dialogue.visible_ratio != 1.0:
+			%dialogue.visible_ratio = 1.0
+			# 双击显示全部台词
+		else:
+			# 如果当前台词已经播放完，进下一句台词
+			if not choice_reach:
+				%dialogue.visible_ratio = 0.0 
+			proceed()
+	if Input.is_action_just_pressed("auto") and check_in_game():
 		_on_auto_pressed()
-	if speed_up and speed_start_time:
-		speed_start_time = false
-		$speed_up_timer.start()
 	if auto_play and %dialogue.visible_ratio == 1.0 and start_time:
 		start_time = false
 		$auto_play_timer.start()
 		# 如果处于自动播放状态，且台词已播放至结尾。那么开始跳到下一台词的倒计时
 # 展示台词和角色名
 
+func check_in_game() -> bool:
+	#check if the current game should be clicked to next line
+	if UI_switched:
+		# 避免在切换UI后“点一下”的bug
+		UI_switched = false
+		return false
+	return !$review_dialogues.visible and self.find_child("setting_menu") == null\
+	 and $minigame.get_children() == [] and can_press
+	
 # continue the dialogue
 func proceed():
-	print("current bgm list is ", bgmlist, "\n")
-	print("current sound effect list is ", sound_effect_list,"\n")
-	avatar_cleared = false
-	# since new line appears, avatar is no longer cleared
 	if choice_reach:
 		return
 	# text will be mutated each time 
@@ -124,6 +115,10 @@ func proceed():
 		choice_reach = true
 		choice_jump()
 		return
+	if status == "game":
+		speed_up = false
+		auto_play = false
+		$minigame.add_game(script_tree.get_game())
 	else:
 		if speed_up:
 			%dialogue.visible_ratio = 1.0
@@ -142,33 +137,19 @@ func proceed():
 		command_execute(text["command"])
 		%character.text = text["character"]
 		%dialogue.text = text["dialogue"]
+		$review_dialogues.get_words(text["character"], text["dialogue"])
+		$review_dialogues.add_line()
 		print("character ", text["character"], " is speaking script: ", text["dialogue"], "\n")
 		self.get_tree().call_group("dialogue", "_start_dialogue")
 # 读取命令并执行	
 
-func choice_jump(load_to = false):
-	var choice_list = script_tree.get_choices()
-	if choice_list == {}:
+func choice_jump():
+	var choice_list = check_choice_condition(script_tree.get_choices())
+	if choice_list == []:
 		choice_reach = false
 		return "fail"
-	
-	if %dialogue.text != choice_list["text"]["dialogue"] \
-			or %character.text != choice_list["text"]["character"] or load_to:
-		print("text or charecter does not match or is loading to choice scene\n")
-		print("must be loading at a choice point \n")
-		music_clear("bgm")
-		music_clear("sound_effect")
-		change_avatar("clear")
-		var text = choice_list["text"]
-		%character.text = text["character"]
-		%dialogue.text = text["dialogue"]
-		%dialogue.visible_ratio = 1.0
-		print("character ", text["character"], 
-				" is speaking script: ", text["dialogue"], "\n")
-		self.get_tree().call_group("dialogue", "_start_dialogue")
-		# this only triggered when player load a choice scene 
-	command_execute(choice_list["command"])
-	for choice in choice_list["choice"]:
+	var option = preload("res://frameWorkCore/gameplay_basic/choice.tscn")
+	for choice in choice_list:
 		var ready_option = option.instantiate()
 		%choice_box.add_child(ready_option)
 		var choice_text = ready_option.get_node("center").get_node("choice_text")
@@ -176,11 +157,28 @@ func choice_jump(load_to = false):
 		choice_text.text = choice[0]
 		going_to.text = choice[1]
 		ready_option.connect("travel_to", travel)
+	if len(choice_list) == 1:
+		# if only one option and auto jump is true， jump
+		if choice_list[0][2] == "true":
+			travel(choice_list[0][1])
+			return "fail"
+			# shit code, only purpose is to prevent jump to choice
+			# from ending the game
 	return "suceed"
 # 读取选项并跳转
 		
+func check_choice_condition(choices: Array):
+	var new_choices = []
+	for choice in choices:
+		if len(choice) <= 3:
+			new_choices.append(choice)
+		else:
+			if variables.var_con(choice[3], choice[4], choice[5]):
+				new_choices.append(choice)
+	return new_choices
+	
 func travel(location: String):
-	# 根据txt文件名找到文件路径并跳转到该文件
+	# triggered when a choice is clicked
 	script_tree.change_chapter(location)
 	# need to update error checker, will update in error system overhaul
 	for child in %choice_box.get_children():
@@ -192,235 +190,90 @@ func travel(location: String):
 		
 # TODO O(2n) complexity, need to try to fix in future
 func command_execute(orders: Array):
-	if !avatar_cleared:
-		# this means its the first time for this line to load resource
-		# to replace art resource from prev line
-		find_art_list(orders)
-		# find art list lterate the command to find all slot that
-		# will be overwrite
-		# these slot does not need to be cleared
-		# this feature helps with avatar transition
+	self.update_art_list.emit(orders)
+	# find art list lterate the command to find all slot that will be overwrite
+	# these slot does not need to be cleared
+	# this feature helps with avatar transition and potentialy many feature
 	for order in orders:
 		var which_order = order[0]
 		print("curr order is", which_order, "\n")
 		match which_order:
 			"character":
-				change_avatar(order[1], order[2], order[3], order[4])
-				print("changing avatar\n")
+				self.change_avatar.emit(order[1], order[2], order[3], order[4])
 			"background":
-				change_background(order[1], order[2])
-				print("changing background\n")
+				self.change_background.emit(order[1], order[2])
 			"bgm", "sound_effect", "voice":
-				change_music(which_order, order[1])
-				print("changing music\n")
+				self.change_music.emit(which_order, order[1])
 			"CG":
 				auto_play = false
 				speed_up = false
-				clear_all_avatar()
+				self.clear_all_avatar.emit()
 				# since cg is displayed independently
 				# all avatar are expected to be cleared
-				# due to unknow bug its better to make speed up 
-				# and auto play false before cg display
 				# will I fix this in future? idk
-				display_CG(order[1])
+				$UI.visible = false
+				$dialogue.visible = false
+				can_press = false
+				self.change_background.emit(order[1], "false")
 				print("displaying CG\n")
+			"update":
+				variables.var_op(order[1], order[2], order[3])
 			_:
 				print("unknown commad ", which_order, "\n")
+				self.get_tree().call_group("errorlog", "unknown_command", which_order)
 	return
 		
-func find_art_list(orders: Array):
-	avatar_list = []
-	for order in orders:
-		if order[0] == "character" and order[1] != "clear":
-			avatar_list.append(str(order[2] + order[3]))
-	return
-	
-func change_avatar(avatar: String, position = "mid", slot: = "character", transition = "false"):
-	# 这个用来自动清理人物画像, 如果想做出某个台词下所有立绘消失的效果就用这个
-	if avatar == "clear":
-		print("clearing all avatar\n")
-		clear_all_avatar()
-		return
-	if not avatar_cleared:
-		avatar_clear()
-		# so each change_avatar does not repeatedly clear avatar and save time
-	var avatar_at = asset_map.search_path(avatar)
-	if avatar_at == null:
-		$"DO NOT TOUCH/Panel".visible = true
-		%errorlog.text = "错误：未找到对应角色,请检查角色图像是否位于\"character\"文件夹下
-													以及图片后缀(.jpg, .png) 是否对应"
-		print("error: unknown avatar ", avatar)
-		return
-	print(position)
-	print(slot)
-	var which_slot = %avatar.find_child(position).find_child(slot)
-	#这个会自动清除
-	if transition == "false":
-		which_slot.texture = ResourceLoader.load(avatar_at)
-	else:
-		%avatar.find_child(position + "back").find_child(slot).texture = ResourceLoader.load(avatar_at)
-		avatar_list.append(position + "back" + slot)
-		var transit = get_tree().create_tween().bind_node(which_slot)
-		transit.tween_property(which_slot, "modulate:a", 0, 0.2)
-		await transit.finished
-		which_slot.texture = ResourceLoader.load(avatar_at)
-		which_slot.modulate.a = 1
-		%avatar.find_child(position + "back").find_child(slot).texture = null
-
-func clear_all_avatar():
-	print("clear all avatar")
-	for child in %avatar.get_children():
-		for box in child.get_children():
-			if box.texture != null:
-				box.texture = null
-	# there is an existsing bug that when playing cg while fast forward
-	# the avatar will remain on the screen
-	# will I fix it? no
-	return
-				
-func avatar_clear():
-	print("avatar list is ", avatar_list, "\n")
-	for child in %avatar.get_children():
-		for box in child.get_children():
-			if box.texture != null and str(child.name)+str(box.name) not in avatar_list:
-				print(str(child.name)+str(box.name), " not in avatar list\n")
-				box.texture = null
-	return
-	
-func change_music(type: String, which: String):
-	if which == "clear":
-		music_clear(type)
-		return
-	if auto_clear_bgm:
-		music_clear("bgm")
-	if auto_clear_sound_effect:
-		music_clear("sound_effect")
-	if auto_clear_voice:
-		music_clear("voice")
-	if type == "bgm" and which in bgmlist:
-		print("music already playing!\n")
-		return
-		# 如果当前某个BGM已经在播放，则不再重复播放
-	if type == "sound_effect" and which in sound_effect_list:
-		print("sound effect already playing!\n")
-		return
-		
-	if type == "bgm":
-		print("appending bgm to list\n")
-		# 将bgm添加到播放缓存中
-		bgmlist.append(which)
-		print("new bgm list is ", bgmlist, "\n")
-	if type == "sound_effect":
-		print("appending sound effect to list\n")
-		sound_effect_list.append(which)
-		print("new sound effect list is ", sound_effect_list, "\n")
-	#if loading:
-		## 如果游戏正在加载中，不播放音乐
-		#return
-	for slot in self.find_child("music").find_child(type).get_children():
-		if slot.stream == null:
-			var music_at = asset_map.search_path(which)
-			if music_at != null:
-				slot.stream = ResourceLoader.load(music_at)
-				slot.playing = true
-			else:
-				$"DO NOT TOUCH/Panel".visible = true
-				%errorlog.text = "错误：未找到对应音频，请确保音频素材位于\"music\"文件夹下且后缀正确(.mp3, .wav)"
-			return
-	$"DO NOT TOUCH/Panel".visible = true
-	%errorlog.text = "错误：音频素材对应的音频类型槽位不足，请参考教程并复制粘贴对应音频槽位下的音乐节点"
-	
-	
-func music_clear(type: String):
-	print("music cleared")
-	if type == "bgm":
-		bgmlist = []
-	if type == "sound_effect":
-		sound_effect_list = []
-	for slot in self.find_child("music").find_child(type).get_children():
-		slot.playing = false
-		slot.stream = null
-	
-	
-func change_background(background: String, loop = "true", transition = "false"):
-	self.get_tree().call_group("CG", "unlock", background)
-	var background_at = asset_map.search_path(background)
-	if background_at == null:
-		$"DO NOT TOUCH/Panel".visible = true
-		%errorlog.text = "错误：未找到对应背景,请检查角色图像是否位于\"background\"文件夹下以及图片后缀(.jpg, .png) 是否对应.
-		以及是否提前运行过一次\"compiler\""
-		return
-	if background.substr(len(background)-4, -1) == ".ogv":
-		if background in videolist:
-			return
-		# 识别是否是ogv格式
-		videolist.append(background)
-		if loop == "false":
-			$background/viedo_background.loop = false
-		else:
-			$background/viedo_background.loop = true
-		$background/viedo_background.stream = ResourceLoader.load(background_at)
-		$background/viedo_background.play()
-	else:
-		videolist = []
-		$background/background.texture = ResourceLoader.load(background_at)
-		$background/viedo_background.stream = null
-
-func display_CG(CG: String):
-	if loading:
-		return
-	$UI.visible = false
-	$dialogue.visible = false
-	can_press = false
-	# pause all interaction and dislay the CG
-	change_background(CG, "false", "false")
-			
 func _on_save_pressed():
 	var temp_screen = get_viewport().get_texture().get_image()
 	#提前截图游戏画面
-	get_tree().call_group("main", "display_save")
-	get_tree().call_group("save", "get_temp_save_data", temp_screen, 
-		script_tree.get_chapter(), script_tree.get_line_num())
-	#先把游戏画面送过去再说，可以不存档
-	for canvas in self.get_children():
-		if canvas is CanvasLayer:
-			canvas.visible = false
-	self.set_process(false)
+	var save = preload("res://frameWorkCore/load_save/save_load_UI.tscn").instantiate()
+	save.display_save = true
+	save.get_temp_save_data(temp_screen, 
+		script_tree.get_chapter(), script_tree.get_line_num(), variables)
+	$".".add_child(save)
+	UI_switched = true
 	
 func _on_load_pressed():
-	get_tree().call_group("main", "display_load")
-	for canvas in self.get_children():
-		if canvas is CanvasLayer:
-			canvas.visible = false
-	self.set_process(false)
+	var loader = preload("res://frameWorkCore/load_save/save_load_UI.tscn").instantiate()
+	loader.display_save = false
+	$".".add_child(loader)
+	UI_switched = true
 	
 func _on_quicksave_pressed():
 	var progress = progress_data.new()
 	progress.which_file = script_tree.get_chapter()
 	progress.which_line = script_tree.get_line_num()
 	ResourceSaver.save(progress, "user://save/quick_save.tres")
+	ResourceSaver.save(variables,"user://save/quick_save_var.tres")
 	
 func _on_quickload_pressed():
-	bgmlist = []
-	sound_effect_list = []
 	var quick_save = "user://save/quick_save.tres"
+	var quick_save_var = "user://save/quick_save_var.tres"
+	var find_quick_save_var: Variables  = ResourceLoader.load(quick_save_var)
 	var find_save = ResourceLoader.load(quick_save)
 	if find_save == null:
 		return
 	print(find_save)
-	self.load_progress(find_save.which_file, find_save.which_line)
+	self.load_progress(find_save.which_file, find_save.which_line, find_quick_save_var)
 
 func _on_setting_pressed():
-	get_tree().call_group("main", "display_setting")
-	for canvas in self.get_children():
-		if canvas is CanvasLayer:
-			canvas.visible = false
-	self.set_process(false)
+	var setting = preload("res://frameWorkCore/settings/setting_menu.tscn").instantiate()
+	$".".add_child(setting, true)
+	setting.set_owner(self)
+	UI_switched = true
 	
 func _on_review_pressed():
+	$review_dialogues.visible = true
+	$dialogue.visible = false
+	$UI.visible = false
 	pass # Replace with function body.
-	# 还没做
 		
+func quit_review():
+	$review_dialogues.visible = false
+	can_press = true
+	$dialogue.visible = true
+	$UI.visible = true
+	
 func _on_show_tree_pressed():
 	pass # Replace with function body.
 	# 还没做
@@ -443,18 +296,19 @@ func _on_forward_speed_pressed():
 	auto_play = false
 	speed_up = true
 	proceed()
+	$speed_up_timer.start()
 	
 func _on_forward_to_next_choice_pressed():
 	if choice_reach:
 		return
-	# will update in future that jump get choice from dialoge tree directly
-	# requires minor change in dialog tree that stores art asset status in 
-	# choice key
-	# 先这样, 之后改 finished
 	var choice_list = script_tree.get_choices()
-	if choice_list == {}:
+	if choice_list == []:
 		print("no choice found")
 		return
+	self.music_clear.emit("bgm")
+	self.music_clear.emit("voice")
+	self.music_clear.emit("sound_effect")
+	self.clear_all_avatar.emit()
 	script_tree.jump_choice()
 	proceed()
 	
@@ -474,33 +328,33 @@ func _on_visible_pressed():
 func _on_leave_pressed():
 	get_tree().call_group("main", "back_menu")
 	
-func load_progress(which_file: String, which_line: int):
-	# WARNING 
-	# when quick load choice moment from a choice moment
-	# the progress will load the new choice moment with bug
+func load_progress(which_file: String, which_line: int, vars: Variables):
 	speed_up = false
 	auto_play = false
 	choice_reach = false
+	%dialogue.on_transition = true
 	for child in %choice_box.get_children():
 		%choice_box.remove_child(child)
 	# reset all ingame setting including removing choices
 	print("loading progress\n")
 	print("file is ", which_file, "\n")
 	print("line is ", which_line, "\n")
-	music_clear("bgm")
-	music_clear("voice")
-	music_clear("sound_effect")
-	change_avatar("clear")
-	loading = true
+	self.music_clear.emit("bgm")
+	self.music_clear.emit("voice")
+	self.music_clear.emit("sound_effect")
+	self.clear_all_avatar.emit()
 	script_tree.load_progress(which_file, which_line - 1)
+	variables.load_var(vars.variables)
 	# script tree acc give the line after its current progress
 	proceed()
 	self.get_tree().call_group("main", "game_created")
-	# 第二次告诉main游戏已经创建，这代表即将播放动画fade_out
-	loading = false
+	# 告诉main游戏已经创建，这代表即将播放动画fade_out
+	%dialogue.on_transition = false
 	
 func load_setting():
 	print("load setting!")
+	$review_dialogues.visible = false
+	# hard code shit, fix later
 	var save = ResourceLoader.load(save_path)
 	print(save.dialogue_box_transparency)
 	$dialogue/dialogue_box.modulate.a = save.dialogue_box_transparency / 100
@@ -509,25 +363,25 @@ func load_setting():
 # no need to care for the rest it is what it is
 
 func _on_button():
+	print("on button\n")
 	can_press = false
 	
 func _out_button():
 	can_press = true
-	
-func _transition_done():
-	self.get_tree().call_group("dialogue", "_start_dialogue")	
 
 func _on_auto_play_timer_timeout():
+	print("auto play timeout\n")
 	start_time = true
 	if auto_play:
 		# 倒计时结束开始展示下一条台词
 		proceed()
 
 func _on_speed_up_timer_timeout():
-	speed_start_time = true
+	print("speed up timeout\n")
 	if speed_up:
 		proceed()
-
+		$speed_up_timer.start()
+		
 func _on_viedo_background_finished():
 	if $background/viedo_background.loop:
 		# 如果处于循环状态，说明正在展示动态背景，那么不管

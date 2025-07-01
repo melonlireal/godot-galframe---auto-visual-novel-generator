@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c4rosfpbl4mod"]
 
-[ext_resource type="Script" path="res://frameWorkCore/settings/setting_button.gd" id="1_t2h24"]
+[ext_resource type="Script" uid="uid://jy8l0qapspyo" path="res://frameWorkCore/settings/setting_button.gd" id="1_t2h24"]
 
 [node name="option" type="Button" groups=["button"]]
 z_index = 2

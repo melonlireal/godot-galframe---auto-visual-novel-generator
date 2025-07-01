@@ -1,14 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://dgvwnhgxg8jhj"]
+[gd_scene load_steps=10 format=3 uid="uid://dgvwnhgxg8jhj"]
 
-[ext_resource type="Script" path="res://frameWorkCore/main_menu/main_scene.gd" id="1_ybmd4"]
+[ext_resource type="Script" uid="uid://0a8m4i4ic6qg" path="res://frameWorkCore/main_menu/main_scene.gd" id="1_ybmd4"]
 [ext_resource type="FontFile" uid="uid://byyq0wl5ikrfs" path="res://artResource/UI_gameplay/EB.ttf" id="2_oru6f"]
-[ext_resource type="VideoStream" path="res://artResource/background/G.ogv" id="3_8ddfr"]
-[ext_resource type="PackedScene" uid="uid://b2vlscrp1hnq1" path="res://frameWorkCore/settings/setting_menu.tscn" id="4_org3x"]
-[ext_resource type="AudioStream" uid="uid://daupwu5ti7rcj" path="res://music/bgm/casual1.mp3" id="5_75uqh"]
 [ext_resource type="Texture2D" uid="uid://du2tso4hnapof" path="res://artResource/UI_gameplay/ui_raw/loading.png" id="6_q022t"]
 [ext_resource type="Texture2D" uid="uid://c2mdpx06hxwyl" path="res://artResource/UI_gameplay/ui_raw/black.png" id="6_rjllh"]
-[ext_resource type="PackedScene" uid="uid://cfaw8fnyroa1w" path="res://frameWorkCore/load_save/save.tscn" id="6_vbmy6"]
-[ext_resource type="PackedScene" uid="uid://c3oyecnho3ar3" path="res://frameWorkCore/art/cg_display.tscn" id="8_kfrdx"]
 
 [sub_resource type="Animation" id="Animation_gd45o"]
 length = 0.001
@@ -172,20 +167,16 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_y7c3j"]
 _data = {
-"RESET": SubResource("Animation_gd45o"),
-"fade_in": SubResource("Animation_8pp1a"),
-"fade_out": SubResource("Animation_ckbdg"),
-"loading": SubResource("Animation_6uvci")
+&"RESET": SubResource("Animation_gd45o"),
+&"fade_in": SubResource("Animation_8pp1a"),
+&"fade_out": SubResource("Animation_ckbdg"),
+&"loading": SubResource("Animation_6uvci")
 }
 
 [node name="main_scene" type="Node2D" groups=["main"]]
 script = ExtResource("1_ybmd4")
 
-[node name="setting_menu" parent="." instance=ExtResource("4_org3x")]
-visible = false
-
 [node name="menu_UI" type="CanvasLayer" parent="."]
-layer = 100
 
 [node name="ColorRect" type="ColorRect" parent="menu_UI"]
 offset_right = 1916.0
@@ -206,7 +197,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-stream = ExtResource("3_8ddfr")
 autoplay = true
 expand = true
 loop = true
@@ -273,19 +263,12 @@ text = "退出游戏"
 flat = true
 
 [node name="menuBGM" type="AudioStreamPlayer" parent="menu_UI"]
-stream = ExtResource("5_75uqh")
 autoplay = true
 bus = &"bgm"
 
 [node name="transition_DONTTOUCH" type="Timer" parent="."]
 wait_time = 0.05
 one_shot = true
-
-[node name="save" parent="." instance=ExtResource("6_vbmy6")]
-visible = false
-
-[node name="CG_display" parent="." instance=ExtResource("8_kfrdx")]
-visible = false
 
 [node name="color" type="CanvasLayer" parent="."]
 layer = 100
@@ -315,7 +298,7 @@ texture = ExtResource("6_q022t")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="color"]
 root_node = NodePath("../..")
 libraries = {
-"": SubResource("AnimationLibrary_y7c3j")
+&"": SubResource("AnimationLibrary_y7c3j")
 }
 
 [connection signal="finished" from="menu_UI/VideoStreamPlayer" to="." method="_on_video_stream_player_finished"]

@@ -1,28 +1,19 @@
 extends CanvasLayer
 signal swap
-var cg = "res://artResource/background/cg.txt"
-var cg_all = FileAccess.open(cg, FileAccess.READ)
+var cg_header = "res://save/header.tres"
+var cg_all:Header = ResourceLoader.load(cg_header)
 # 查看CG中所有需要载入的CG
 var save_path = "user://save/save_total.tres"
-var start_location = "res://artResource/background/"
-var cg_list = []
-var cg_cover_list = []
+var cg_list = cg_all.get_cg()
+var cg_cover_list = cg_all.get_cg_cover()
 # Called when the node enters the scene tree for the first time.
 
 
 func _ready():
 	$present_pic.visible = false
 	$present_vid.visible = false
-	while not cg_all.eof_reached():
-		var temp = cg_all.get_line()
-		if temp != "":
-			# 如果有可解锁CG再解锁CG
-			var line = Array(temp.rsplit(" "))
-			cg_list.append(line.pop_front())
-			cg_cover_list.append(line.pop_front())
-			print((cg_list))
-			print(cg_cover_list)
 	get_cover()
+	load_unlock()
 	for slot in $main/CenterContainer/GridContainer.get_children():
 		slot.connect("view", present)
 
@@ -31,7 +22,7 @@ func _ready():
 
 
 func _process(_delta):
-	if Input.is_action_just_pressed("return") and ($present_pic.visible or $present_vid.visible):
+	if (Input.is_action_just_pressed("return") or Input.is_action_just_pressed("press")) and ($present_pic.visible or $present_vid.visible):
 		$present_pic.texture = null
 		$present_vid.stream = null
 		$main.visible = true
@@ -53,11 +44,6 @@ func unlock(cg_name: String):
 	for slot in $main/CenterContainer/GridContainer.get_children():
 		if slot.cg == cg_name:
 			slot.open()
-			var save_file = ResourceLoader.load(save_path)
-			if cg_name not in save_file.unlocked_cg:
-				print("add new cg")
-				save_file.unlocked_cg.append(cg_name)
-				ResourceSaver.save(save_file, save_path)
 	
 	
 func load_unlock():
@@ -67,8 +53,6 @@ func load_unlock():
 	print(saved_data.unlocked_cg)
 	for cg in saved_data.unlocked_cg:
 		unlock(cg)
-	
-	
 	
 	# used to present cg
 func present(CG_name: String):
@@ -88,12 +72,10 @@ func present(CG_name: String):
 		$present_pic.visible = true
 		$present_pic.texture = ResourceLoader.load(file_at)
 		$main.visible = false
-	
 
 func quick_search(filename: String):
 	var map = ResourceLoader.load("res://save/mapper_total.tres")
 	return map.search_path(filename)
 		
 func _on_return_pressed():
-	self.visible = false
-	emit_signal("swap")
+	self.queue_free()

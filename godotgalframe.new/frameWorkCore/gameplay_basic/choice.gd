@@ -5,4 +5,5 @@ signal travel_to(loaction: String)
 func _ready():
 	pass # Replace with function body.
 func _on_pressed():
+	print("pressed")
 	emit_signal("travel_to", $going_to.text)

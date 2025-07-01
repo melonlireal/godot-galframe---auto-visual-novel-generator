@@ -1,6 +1,7 @@
 extends RichTextLabel
 @export var play_speed_factor = 20.0/50.0
-@onready var initialization = true
+@export var on_transition = true
+# used to block dialogue from playing when setting up 
 @export var repeat = false
 # 用来放设置里的播放演示
 @export var on_auto = false
@@ -13,17 +14,20 @@ extends RichTextLabel
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if repeat:
-		initialization = false
+		on_transition = false
 		_start_dialogue()
 	else:
 		self.set_process(false)
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+		
 func _process(delta):
 	if narrration:
 		self.set_position(Vector2(narration_x, narration_y))
 	elif not narrration:
 		self.set_position(Vector2(speaking_x, speaking_y))
-		
+	if "speed_up" in $"../..":
+		if $"../..".speed_up:
+	# shit code fix later
+			self.visible_ratio = 1.0
 	var data = ResourceLoader.load("user://save/save_total.tres")
 	if self.visible_ratio == 1.0:
 		if repeat:
@@ -38,7 +42,14 @@ func _process(delta):
 		/self.get_parsed_text().length())
 		
 func _start_dialogue():
-	if initialization:
-		initialization = false
+	if on_transition:
+		on_transition = false
 		return
+	self.visible_ratio = 0.0
 	self.set_process(true)
+
+func start_transition():
+	on_transition = true
+	
+func transition_done():
+	_start_dialogue()

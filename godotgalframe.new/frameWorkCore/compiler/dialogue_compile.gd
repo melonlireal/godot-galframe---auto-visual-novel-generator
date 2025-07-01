@@ -1,58 +1,26 @@
 extends Node
 var save_path = "res://save/"
-var save_file = "mapper_total.tres"
-var scripts = "processed_script.tres"
-var res_background = "res://artResource/background/"
-var res_character = "res://artResource/character/"
-var res_music = "res://music/"
+var scripts_file = "processed_script.tres"
+var head_file = "header.tres"
 var res_dialogue = "res://dialogue/"
 var dialogue_start = "res://dialogue/Start.txt"
 var prev_command = []
 var prev_text = {}
 var dialogue_list = []
-@export var character_based_color = false
+var processed_dialogue = []
+
 # Called when the node enters the scene tree for the first time.
-# TODO
-# refactor dialogue_proof_read such that it proofs reads chapters in the same order
-# as actual game play
-# for example, when start has 2 choices a, b where a link to c and b links to d
-# it will first proofread a , then c, then b, then d
-# i.e dfs
-# this will assure correct commands are extended
-# I think to todo is completed
 
-func _ready():
-	if not DirAccess.dir_exists_absolute(save_path):
-		DirAccess.make_dir_absolute(save_path)
-	var compile_data = AssetPath.new()
+func compile_dialogues():
 	var script_tree = ScriptTree.new()
-	ResourceSaver.save(compile_data, save_path + save_file)
-	ResourceSaver.save(script_tree, save_path + scripts)
+	ResourceSaver.save(script_tree, save_path + scripts_file)
 	# 先创建对应的保存文件
-	find_all_file(res_background)
-	find_all_file(res_character)
-	find_all_file(res_music)
-	# compile所有的美术和音乐素材
-	find_all_file(res_dialogue) # idk if this is useful anymore
 	dialogue_list = find_all_dialogue(res_dialogue)
-	print(dialogue_list)
-	dialogue_proof_read(["Start.txt", "res://dialogue/Start.txt"])
+	dialogue_proof_read(["Start.txt", dialogue_start])
 	# compile 文案
-	print("COMPILE COMPLETE")
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-
-func find_all_file(dir: String):
-	# find all file and location under the respected folder
-	# and save them in mapper_total
-	var files = DirAccess.open(dir)
-	for file in files.get_files():
-		var location = helper_search_file(dir, file)
-		var mapper = ResourceLoader.load("res://save/mapper_total.tres")
-		mapper.add_path(file, location)
-		print("mapped ", file, " to location ", location)
-		ResourceSaver.save(mapper, "res://save/mapper_total.tres")
-	for directories in files.get_directories():
-		find_all_file(dir + "/" + directories)
+	var scripts: ScriptTree = ResourceLoader.load(save_path + scripts_file)
+	scripts.clear_save()
+	ResourceSaver.save(scripts, save_path + scripts_file)
 
 func find_all_dialogue(dir: String):
 	# find all txt file and their respected link
@@ -60,27 +28,13 @@ func find_all_dialogue(dir: String):
 	var all_dialogue = []
 	var files = DirAccess.open(dir)
 	for file in files.get_files():
-		var location = helper_search_file(dir, file)
+		var location = $"..".helper_search_file(dir, file)
 		all_dialogue.append([file, location])
 		print("find dialogue ", file, " at location ", location)
 	for directories in files.get_directories():
 		all_dialogue += find_all_dialogue(dir + "/" + directories)
 	return all_dialogue
 	
-func helper_search_file(directory: String, files: String):
-	# recursion helper
-	# 智力巅峰, 然而崩了一次，BUG还复现不出来。
-	var direction = DirAccess.open(directory)
-	if files not in direction.get_files() and direction.get_directories().is_empty():
-		return null
-	if files in DirAccess.open(directory).get_files():
-		return directory + "/" + files
-	else:
-		for path in DirAccess.open(directory).get_directories():
-			if helper_search_file(directory +"/" + path+ "/", files) != null:
-				return helper_search_file(directory +"/" + path, files)
-		return null
-
 func helper_find_chapter_from_choice(which_chap: String):
 	# a helper function that returns the respected txt path based on
 	# chapter name
@@ -89,27 +43,43 @@ func helper_find_chapter_from_choice(which_chap: String):
 			return chapters
 
 func dialogue_proof_read(chapter: Array):
-	var character;
-	var dialogue;
-	var command;
-	var text;
-	
+	var character
+	var dialogue
+	var command
+	var text
 	var chap_name = chapter[0]
 	var chap_dir = chapter[1]
 	var file = FileAccess.open(chap_dir, FileAccess.READ)
-	var script_tree = ResourceLoader.load("res://save/processed_script.tres")
+	var script_tree: ScriptTree = ResourceLoader.load(save_path + scripts_file)
 	script_tree.change_chapter(chap_name)
 	while !file.eof_reached():
 		text = file.get_line()
+		while text == "":
+			if file.eof_reached():
+				script_tree.clear_save()
+				ResourceSaver.save(script_tree, save_path + scripts_file)
+				return
+			text = file.get_line()
+		# incase a blank line is left, once a blank line is detected
+		# skip until a none blank line is reached
 		if text == "choice":
 			var choices = get_choice(file)
-			script_tree.add_choice(choices, prev_command, prev_text)
+			script_tree.add_choice(choices)
 			# the art and text at choice block MUST be from previous line
 			file.close()
-			ResourceSaver.save(script_tree, "res://save/processed_script.tres")
+			processed_dialogue.append(chap_name)
+			ResourceSaver.save(script_tree, save_path + scripts_file)
 			for choice in choices:
-				dialogue_proof_read(helper_find_chapter_from_choice(choice[1]))
+				if choice[1] not in processed_dialogue:
+					dialogue_proof_read(helper_find_chapter_from_choice(choice[1]))
 			return
+		if text == "game":
+			var game = file.get_line()
+			if game != "":
+				game = Array(game.rsplit(" "))
+				script_tree.add_game(game[0])
+				dialogue_proof_read(helper_find_chapter_from_choice(game[1]))
+				
 		text = text.replace("：", ":")
 		character = text.substr(0, text.find(":") + 1)
 		# this includes the ":"
@@ -122,31 +92,25 @@ func dialogue_proof_read(chapter: Array):
 		else:
 			dialogue = text.substr(text.find(":") + 1, text.find(" command:"))
 			#根据是否有command隔离开dialogue和角色
-		dialogue = dialogue.replace("\\command:", "command:")
-		command = text.substr(text.find(" command:"))
-		var command_list = process_commands(command)
-		if command_list == []:
-			print("since current command is empty, commands have been extended!\n")
-			command_list = extend_commands()
-		# if there is no command, it means the line follows the command 
-		# from previous line, except voice and charatcer transition
-		# this allows the art/music to always be displayed when loading
-		extend_music(command_list)
-		print("after extend music ", command_list, "\n")
-		extend_background(command_list)
-		print("after extend background ", command_list, "\n")
-		prev_command = command_list
 		character = character.substr(0, len(character) - 1)
 		# remove the ":"
+		dialogue = dialogue.replace("\\command:", "command:")
+		command = text.substr(text.find(" command:"))
+		if $"..".auto_color and character != "":
+			var header:Header = ResourceLoader.load(save_path + head_file)
+			dialogue = header.process_color(character, "dialogue", dialogue)
+			character = header.process_color(character, "character", character)
+		elif $"..".auto_color and character == "":
+			var header:Header = ResourceLoader.load(save_path + head_file)
+			dialogue = header.process_color("nar", "dialogue", dialogue)
+			# this colours the narrator
+		var command_list = process_commands(command)
 		prev_text = {"character": character, "dialogue": dialogue}
-		if not (character == "" and dialogue == "" and command_list == []):
-			script_tree.add_line(character, dialogue, command_list)
+		script_tree.add_line(character, dialogue, command_list)
 		# make sure complete empty line are ignored
-	script_tree.clear_save()
-	ResourceSaver.save(script_tree, "res://save/processed_script.tres")
+	ResourceSaver.save(script_tree, save_path + scripts_file)
 	return
 	
-
 func process_commands(commands: String):
 	#return the list of commands
 	var format = RegEx.new()
@@ -156,7 +120,19 @@ func process_commands(commands: String):
 		var temp = order.get_string().substr(1).left(-1)
 		order_list.append(Array(temp.replace(" ", "").rsplit(",")))
 	print("processed commands are", order_list, "\n")
-	return help_fix_commands(order_list)
+	var fixed_commands = help_fix_commands(order_list)
+	if fixed_commands == []:
+		print("since current command is empty, commands have been extended!\n")
+		fixed_commands = extend_commands()
+		# if there is no command, it means the line follows the command 
+		# from previous line, except voice and charatcer transition
+		# this allows the art/music to always be displayed when loading
+	extend_music(fixed_commands)
+	print("after extend music ", fixed_commands, "\n")
+	extend_background(fixed_commands)
+	print("after extend background ", fixed_commands, "\n")
+	prev_command = fixed_commands
+	return fixed_commands
 
 func help_fix_commands(order_list: Array):
 	#pre process the commands into the format that can be used by 
@@ -191,9 +167,7 @@ func help_fix_commands(order_list: Array):
 				else:
 					temp = [order[0], order[1], "true", "false"]
 					fixed_commands.append(temp)
-			"bgm", "sound_effect", "voice":
-				fixed_commands.append(order)
-			"CG":
+			_:
 				fixed_commands.append(order)
 	print("fixed commands are: ", fixed_commands, "\n")
 	return fixed_commands
@@ -203,7 +177,7 @@ func extend_commands():
 	# when load it loads all the art and music resource
 	var extended = []
 	for command in prev_command:
-		if command[0] != "voice" and command[1] != "clear":
+		if command[0] != "voice" and command[0] != "update" and command[1] != "clear":
 			extended.append(command)
 	return extended
 
@@ -232,9 +206,10 @@ func get_choice(file: FileAccess):
 	while not file.eof_reached():
 		var line = file.get_line()
 		if line != "":
-			var choice_text = line.substr(0, line.rfind(" "))
-			var going_to= line.substr(line.rfind(" ") + 1)
-			choice_list.append([choice_text, going_to])
+			line = Array(line.rsplit(" "))
+			if len(line) == 2:
+				line.append("false")
+			choice_list.append(line)
 		# 将所有的选项都放进一个列表里
 	return choice_list
 		
