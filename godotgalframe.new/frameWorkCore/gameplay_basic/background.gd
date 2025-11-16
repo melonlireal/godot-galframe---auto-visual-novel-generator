@@ -39,21 +39,50 @@ func change_background(background: String, loop = "true", effect = ""):
 		videolist = []
 		$background.texture = ResourceLoader.load(background_at)
 		$viedo_background.stream = null
-
+# the following functions are for transitions
+# WARNING a new background command must be placed after a transition command
+#
 func fadeout():
 		$"../UI".visible = false
 		$"../dialogue".visible = false
 		%dialogue.set_process(false)
 		$"..".can_press = false
 		%avatar.clear_all_avatar()
-		var transit = get_tree().create_tween().bind_node($background)
-		transit.tween_property($background, "modulate:a", 0, 0.5)
+		%avatar.visible = false;
+		$"../effects/effect_assets/black".visible = true
+		$"..".speed_up = false
+		var transit = get_tree().create_tween().bind_node($"../effects/effect_assets/black")
+		transit.tween_property($"../effects/effect_assets/black", "color:a", 1, 0.5)
 		await transit.finished
+		%avatar.visible = true
 		$"..".proceed()
-		var transit2 = get_tree().create_tween().bind_node($background)
-		transit2.tween_property($background, "modulate:a", 1, 1)
+		var transit2 = get_tree().create_tween().bind_node($"../effects/effect_assets/black")
+		transit2.tween_property($"../effects/effect_assets/black", "color:a", 0, 1)
 		await transit2.finished
 		$"../UI".visible = true
 		$"../dialogue".visible = true
 		$"..".can_press = true
 		%dialogue.set_process(true)
+		$"../effects/effect_assets/black".visible = false
+
+func flash():
+		print("flash")
+		$"../UI".visible = false
+		$"../dialogue".visible = false
+		%dialogue.set_process(false)
+		$"..".can_press = false
+		%avatar.clear_all_avatar()
+		$"../effects/effect_assets/white".visible = true
+		$"..".speed_up = false
+		var transit = get_tree().create_tween().bind_node($"../effects/effect_assets/white")
+		transit.tween_property($"../effects/effect_assets/white", "color:a", 1, 0.5)
+		await transit.finished
+		$"..".proceed()
+		var transit2 = get_tree().create_tween().bind_node($"../effects/effect_assets/white")
+		transit2.tween_property($"../effects/effect_assets/white", "color:a", 0, 0.5)
+		await transit2.finished
+		$"../UI".visible = true
+		$"../dialogue".visible = true
+		$"..".can_press = true
+		%dialogue.set_process(true)
+		$"../effects/effect_assets/white".visible = false

@@ -1,7 +1,6 @@
 extends CanvasLayer
 
-@export var dialogues = []
-@export var limit = 50
+@export var limit = 30
 @export var narrator = "[color=434444]旁白[/color]"
 var default_factor = 864
 # this is the current difference between the max value to scroll and the 
@@ -16,7 +15,6 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("return"):
 		close.emit()
 		
-		
 func get_words(character: String, dialogue: String):
 	if character == "":
 		line["character"] = narrator
@@ -29,8 +27,6 @@ func get_voice(voice: String):
 	# this is because voice and dialogue gets processed seperately in initial design
 	
 func add_line():
-	#print(line,"\n")
-	#print("curr maxval is ", $ScrollContainer.get_v_scroll_bar().max_value, "\n")
 	if line["character"] == narrator and line["dialogue"] == "" and line["voice"] == "":
 		return
 	curr_limit += 1
@@ -43,21 +39,20 @@ func add_line():
 	script.voice = line["voice"]
 	script.connect("play_voice", play_voice)
 	$ScrollContainer/VBoxContainer.add_child(script)
-	dialogues.append(script)
 	line = {"character":"", "dialogue":"", "voice":""}
-	var maxval = $ScrollContainer.get_v_scroll_bar().max_value
-	#print("new maxval is ", $ScrollContainer.get_v_scroll_bar().max_value, "\n")
-	$ScrollContainer.scroll_vertical = maxval - default_factor
-	pass
+
 	
 func pop_line():
-	dialogues.pop_front()
+	$ScrollContainer/VBoxContainer.get_child(0).queue_free()
 	
 func play_voice(voice_at: String):
 	$voice.stream = ResourceLoader.load(voice_at)
 	$voice.playing = true
 	pass
 	
+func jump_to_buttom():
+	await get_tree().process_frame
+	$ScrollContainer.scroll_vertical = $ScrollContainer.get_v_scroll_bar().max_value
 
 func _on_close_pressed() -> void:
 	close.emit()

@@ -31,12 +31,17 @@ func add_game(game: String):
 	all_script[curr_chap]["lines"] = curr_line - 1
 	all_script[curr_chap]["game"] = game
 	
-func choice_reached():
-	#choice is after all lines of a chapter is traveled
-	#which means the line number is not in the chapter
-	if !all_script[curr_chap].has(curr_line):
-		return true
-	return false
+#func choice_reached():
+	##choice is after all lines of a chapter is traveled
+	##which means the line number is not in the chapter
+	#if !all_script[curr_chap].has(curr_line):
+		#return true
+	#return false
+	
+func has_nextchap():
+	if !all_script[curr_chap].has("choice") and !all_script[curr_chap].has("game"):
+		return false
+	return true
 	
 func get_choices():
 	if !all_script[curr_chap].has("choice"):

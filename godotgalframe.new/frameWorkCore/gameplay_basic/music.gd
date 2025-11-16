@@ -14,7 +14,18 @@ func _ready():
 #TODO implement a feature that allows user to choose whether only
 # clear bgm/sound_effect/music when there is a new one
 # or always clear it each line
+func next_line():
+	if auto_clear_bgm:
+		music_clear("bgm")
+	if auto_clear_sound_effect:
+		music_clear("sound_effect")
+	if auto_clear_voice:
+		music_clear("voice")
+		
 func change_music(type: String, which: String):
+	if which == "clear":
+		music_clear(type)
+		return
 	if type == "bgm" and which in bgmlist:
 		print("music already playing!\n")
 		return
@@ -23,15 +34,6 @@ func change_music(type: String, which: String):
 		print("sound effect already playing!\n")
 		return
 	print("changing music\n")
-	if which == "clear":
-		music_clear(type)
-		return
-	if auto_clear_bgm:
-		music_clear("bgm")
-	if auto_clear_sound_effect:
-		music_clear("sound_effect")
-	if auto_clear_voice:
-		music_clear("voice")
 		
 	if type == "bgm":
 		print("appending bgm to list\n")

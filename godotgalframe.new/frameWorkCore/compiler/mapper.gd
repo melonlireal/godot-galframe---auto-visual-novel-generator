@@ -14,6 +14,7 @@ func _ready():
 	$dialogue_compile.compile_dialogues()
 	print("COMPILE COMPLETE")
 	
+	
 func helper_search_file(directory: String, files: String):
 	# recursion helper
 	# 智力巅峰, 然而崩了一次，BUG还复现不出来。

@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="Header" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://frameWorkCore/compiler/header.gd" id="1_t2w8p"]
+
+[resource]
+script = ExtResource("1_t2w8p")
+cg_list = ["catear.jpg", "firefly.png"]
+cg_cover_list = ["catearfront.jpg", "fireflyfront.png"]
+colour_list = {
+"nar": {
+"character": "434444",
+"dialogue": "434444"
+},
+"斯芬克斯": {
+"character": "787878",
+"dialogue": "434444"
+},
+"玟翎": {
+"character": "787878",
+"dialogue": "434444"
+},
+"老龟": {
+"character": "787878",
+"dialogue": "434444"
+},
+"舰长": {
+"character": "787878",
+"dialogue": "434444"
+},
+"西琳": {
+"character": "8e00c0",
+"dialogue": "8e00c0"
+},
+"陌生的声音": {
+"character": "787878",
+"dialogue": "434444"
+}
+}

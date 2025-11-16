@@ -1,6 +1,6 @@
 extends CanvasLayer
 @onready var choice_reach = false
-@onready var auto_play = false
+@export var auto_play = false
 # 自动播放状态，在这个状态下点击不会触发台词展现和下一条台词的效果
 @export var speed_up = false
 # 快进状态，在这个状态下点击不会触发台词展现和下一条台词的效果
@@ -38,6 +38,13 @@ func _ready():
 	$review_dialogues.connect("close", quit_review)
 	set_bus()
 	load_setting()
+	
+	#add setting and dialogue review once to load values
+	#this is a temporary solution
+	var setting = preload("res://frameWorkCore/settings/setting_menu.tscn").instantiate()
+	$".".add_child(setting, true)
+	setting.queue_free()
+	
 	self.get_tree().call_group("main", "game_created")
 	# 告诉main游戏已经创建完毕
 	
@@ -49,7 +56,6 @@ func set_bus():
 		voice.set_bus("voice")
 	for sfx in self.find_child("music").find_child("sound_effect").get_children():
 		sfx.set_bus("sound_effect")
-		
 
 func _process(_delta):
 	if Input.is_action_just_pressed("press") and check_in_game():
@@ -115,6 +121,7 @@ func proceed():
 		choice_reach = true
 		choice_jump()
 		return
+	$music.next_line()
 	if status == "game":
 		speed_up = false
 		auto_play = false
@@ -264,6 +271,7 @@ func _on_setting_pressed():
 	
 func _on_review_pressed():
 	$review_dialogues.visible = true
+	$review_dialogues.jump_to_buttom()
 	$dialogue.visible = false
 	$UI.visible = false
 	pass # Replace with function body.
@@ -301,8 +309,7 @@ func _on_forward_speed_pressed():
 func _on_forward_to_next_choice_pressed():
 	if choice_reach:
 		return
-	var choice_list = script_tree.get_choices()
-	if choice_list == []:
+	if !script_tree.has_nextchap():
 		print("no choice found")
 		return
 	self.music_clear.emit("bgm")

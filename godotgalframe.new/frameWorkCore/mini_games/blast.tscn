@@ -1,0 +1,75 @@
+[gd_scene load_steps=9 format=3 uid="uid://dppfua7olfukw"]
+
+[ext_resource type="Script" uid="uid://b7k3yavly6gh8" path="res://frameWorkCore/mini_games/blast.gd" id="1_ejald"]
+[ext_resource type="Texture2D" uid="uid://d3iman4jk7hjn" path="res://artResource/gameAssets/rune1.png" id="2_a6rrn"]
+[ext_resource type="Texture2D" uid="uid://b73jci5qcu7e4" path="res://artResource/gameAssets/rune2w.png" id="3_mrih0"]
+[ext_resource type="Texture2D" uid="uid://bv5o00fur08sy" path="res://artResource/gameAssets/rune2.png" id="3_p38rb"]
+[ext_resource type="Texture2D" uid="uid://cryt4oo2kmwlh" path="res://artResource/gameAssets/rune3.png" id="4_bjhit"]
+[ext_resource type="Texture2D" uid="uid://d448wl5qakhf" path="res://artResource/gameAssets/rune1w.png" id="5_kpfga"]
+[ext_resource type="Texture2D" uid="uid://dk5bwjwvf85jh" path="res://artResource/gameAssets/rune3w.png" id="7_mbe08"]
+[ext_resource type="VideoStream" path="res://artResource/background/QTE.ogv" id="8_kpfga"]
+
+[node name="blast" type="Node2D"]
+script = ExtResource("1_ejald")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stream = ExtResource("8_kpfga")
+autoplay = true
+expand = true
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.2
+anchor_right = 0.9
+anchor_bottom = 0.8
+offset_left = 2.79999
+offset_top = 2.48
+offset_right = 1.07996
+offset_bottom = 1.67999
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 100
+metadata/_edit_lock_ = true
+
+[node name="rune2" type="TextureButton" parent="CanvasLayer/CenterContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture_normal = ExtResource("3_p38rb")
+texture_disabled = ExtResource("3_mrih0")
+stretch_mode = 0
+metadata/_edit_lock_ = true
+
+[node name="rune1" type="TextureButton" parent="CanvasLayer/CenterContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture_normal = ExtResource("2_a6rrn")
+texture_disabled = ExtResource("5_kpfga")
+stretch_mode = 0
+metadata/_edit_lock_ = true
+
+[node name="rune3" type="TextureButton" parent="CanvasLayer/CenterContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture_normal = ExtResource("4_bjhit")
+texture_disabled = ExtResource("7_mbe08")
+stretch_mode = 0
+metadata/_edit_lock_ = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[connection signal="pressed" from="CanvasLayer/CenterContainer/HBoxContainer/rune2" to="." method="_on_rune_2_pressed"]
+[connection signal="pressed" from="CanvasLayer/CenterContainer/HBoxContainer/rune1" to="." method="_on_rune_1_pressed"]
+[connection signal="pressed" from="CanvasLayer/CenterContainer/HBoxContainer/rune3" to="." method="_on_rune_3_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

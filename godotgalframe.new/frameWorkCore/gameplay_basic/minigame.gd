@@ -7,9 +7,6 @@ func add_game(game_name: String):
 	var path = "res://frameWorkCore/mini_games/" + game_name + ".tscn"
 	var game = load(path)
 	var loaded_game = game.instantiate()
-	$"../music".music_clear("bgm")
-	$"../music".music_clear("sound_effect")
-	$"../music".music_clear("voice")
 	%avatar.clear_all_avatar()
 	$"../dialogue".visible = false
 	$"../UI".visible = false

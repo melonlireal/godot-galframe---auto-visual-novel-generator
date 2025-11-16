@@ -22,24 +22,6 @@ metadata/_edit_vertical_guides_ = [155.0]
 unique_name_in_owner = true
 script = ExtResource("2_88744")
 
-[node name="effect_assets" type="Control" parent="background"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="ColorRect" type="ColorRect" parent="background/effect_assets"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
-
 [node name="background" type="TextureRect" parent="background"]
 anchors_preset = 15
 anchor_right = 1.0
@@ -211,6 +193,38 @@ autowrap_mode = 1
 script = ExtResource("5_j30eb")
 metadata/_edit_lock_ = true
 
+[node name="effects" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+
+[node name="effect_assets" type="Control" parent="effects"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="black" type="ColorRect" parent="effects/effect_assets"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+
+[node name="white" type="ColorRect" parent="effects/effect_assets"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
 [node name="UI" parent="." instance=ExtResource("6_0o83t")]
 
 [node name="ColorRect" parent="UI/Control" index="0"]
@@ -233,10 +247,8 @@ vertical = true
 metadata/_edit_lock_ = true
 
 [node name="review_dialogues" parent="." instance=ExtResource("9_88744")]
-visible = false
 
 [node name="DO NOT TOUCH" type="CanvasLayer" parent="." groups=["errorlog"]]
-visible = false
 script = ExtResource("7_kvtwn")
 
 [node name="Panel" type="ColorRect" parent="DO NOT TOUCH"]

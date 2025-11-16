@@ -20,6 +20,11 @@ func _ready():
 		var default_setting = Gamedata.new()
 		print("initial play speed is ", default_setting.play_speed, "\n")
 		ResourceSaver.save(default_setting, save_path + save_name)
+	#add setting and dialogue review once to load values
+	#this is a temporary solution
+	var setting = preload("res://frameWorkCore/settings/setting_menu.tscn").instantiate()
+	$".".add_child(setting, true)
+	setting.queue_free()
 	
 		
 # 接受主界面UI和游戏界面UI输入

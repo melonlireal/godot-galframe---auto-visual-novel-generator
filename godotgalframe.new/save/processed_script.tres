@@ -1,0 +1,2488 @@
+[gd_resource type="Resource" script_class="ScriptTree" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://frameWorkCore/compiler/scipt_tree.gd" id="1_avy3a"]
+
+[resource]
+script = ExtResource("1_avy3a")
+all_script = {
+"Start.txt": {
+1: {
+"character": "",
+"command": [["background", "indoor6.png", "true", "false"], ["bgm", "casual7.mp3"], ["sound_effect", "knock1.mp3"]],
+"dialogue": "[color=434444]咚咚咚，舰长敲开了西琳的房门。房里拉着窗帘，被子杂乱地扔在床上，显然西琳还没睡醒。 [/color]"
+},
+2: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "xilinidleshengqi.png", "mid", "character", "true"], ["voice", "1.mp3"], ["sound_effect", "open.mp3"], ["bgm", "casual7.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=8e00c0]谁啊，一大早的... [/color]"
+},
+3: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "xilinidleshengqi.png", "mid", "character", "true"], ["sound_effect", "open.mp3"], ["bgm", "casual7.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=434444]早呀，西琳。[/color]"
+},
+4: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "xilinidleweixiao.png", "mid", "character", "true"], ["voice", "2.mp3"], ["bgm", "casual7.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=8e00c0]啊，是舰长。有什么事情要拜托魔法少女西琳吗？ [/color]"
+},
+5: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "xilinidleweixiao.png", "mid", "character", "true"], ["bgm", "casual7.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=434444]是这样的，我也想在正面战场上帮到你们，所以想找你学一些基础魔法  你方便吗？[/color]"
+},
+6: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "xilinidlewuyu.png", "mid", "character", "true"], ["voice", "3.mp3"], ["bgm", "casual7.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=8e00c0]嗯...魔法是我们世界泡独有的，还从来没有传授给外来者的先例...  [/color]"
+},
+7: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "xilinidlewuyu.png", "mid", "character", "true"], ["bgm", "casual7.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=434444]不方便也没事...[/color]"
+},
+8: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "xilinidlezhayan.png", "mid", "character", "true"], ["voice", "4.mp3"], ["bgm", "casual7.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=8e00c0]...但如果舰长求我，我也不是不能教你一下。 [/color]"
+},
+9: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "xilinidlezhayan.png", "mid", "character", "true"], ["bgm", "casual7.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=434444]拜托啦，西琳老师！[/color]"
+},
+10: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "xilinidlewuyu.png", "mid", "character", "true"], ["voice", "patch1.mp3"], ["bgm", "casual7.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=8e00c0]西琳...老师？  [/color]"
+},
+11: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "xilinidlejidongng.png", "mid", "character", "true"], ["voice", "patch2.mp3"], ["bgm", "casual7.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=8e00c0]嗯，很好听的称呼，舰长你很上道嘛！ [/color]"
+},
+12: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "xilinidleweixiao.png", "mid", "character", "true"], ["voice", "6.mp3"], ["bgm", "casual7.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=8e00c0]那就从明目术开始吧。 [/color]"
+},
+13: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "xilinidleweixiao.png", "mid", "character", "true"], ["bgm", "casual7.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=434444]明目术？[/color]"
+},
+14: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "7.mp3"], ["bgm", "casual7.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=8e00c0]明目术是最基础的魔法之一，效果顾名思义是提升视力。容易上手，又不容易出意外，很适合初学者。 [/color]"
+},
+15: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "casual7.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=434444]原来如此，谢谢西琳老师！[/color]"
+},
+16: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "8.mp3"], ["bgm", "casual7.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=8e00c0]咳咳，请舰长同学稍等片刻，西琳老师要准备些教具。我们去舰桥准备上课。 [/color]"
+},
+17: {
+"character": "",
+"command": [["background", "fadeout", "true", "false"], ["bgm", "casual7.mp3"]],
+"dialogue": "[color=434444][/color]"
+},
+18: {
+"character": "",
+"command": [["background", "bridgeday.png", "true", "false"], ["bgm", "casual7.mp3"]],
+"dialogue": "[color=434444] 舰桥上的阳光暖暖地拥抱着二人，这似乎是个用功的好时候。  [/color]"
+},
+19: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "xilinidle.png", "mid", "character", "true"], ["voice", "9.mp3"], ["bgm", "casual7.mp3"], ["background", "bridgeday.png", "true", "false"]],
+"dialogue": "[color=8e00c0]好，休伯利安第一堂魔法少女，不对，魔法少年速成课正式开始！上课！ [/color]"
+},
+20: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "xilinidle.png", "mid", "character", "true"], ["bgm", "casual7.mp3"], ["background", "bridgeday.png", "true", "false"]],
+"dialogue": "[color=434444]起立，老～师～好～[/color]"
+},
+21: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "10.mp3"], ["bgm", "casual7.mp3"], ["background", "bridgeday.png", "true", "false"]],
+"dialogue": "[color=8e00c0]舰长同学好，舰长同学请坐。 [/color]"
+},
+22: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "xilinidlkeai.png", "mid", "character", "true"], ["voice", "11.mp3"], ["bgm", "casual7.mp3"], ["background", "bridgeday.png", "true", "false"]],
+"dialogue": "[color=8e00c0](当老师是这样的感受吗？好棒啊，嘿嘿。) [/color]"
+},
+23: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "xilinidle.png", "mid", "character", "true"], ["voice", "12.mp3"], ["bgm", "casual7.mp3"], ["background", "bridgeday.png", "true", "false"]],
+"dialogue": "[color=8e00c0]咳咳，我们开始上课。翻开课本，打开第十二页。 [/color]"
+},
+24: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "13.mp3"], ["bgm", "casual7.mp3"], ["background", "bridgeday.png", "true", "false"]],
+"dialogue": "[color=8e00c0]我们从明目术的原理开始... [/color]"
+},
+25: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "casual7.mp3"], ["background", "bridgeday.png", "true", "false"]],
+"dialogue": "[color=434444]死去的回忆突然开始攻击我。[/color]"
+},
+26: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "xilinshousishengqi.png", "mid", "character", "true"], ["voice", "14.mp3"], ["bgm", "casual7.mp3"], ["background", "bridgeday.png", "true", "false"]],
+"dialogue": "[color=8e00c0]舰长同学，不要走神，认真听讲！施术错误会出事的！ [/color]"
+},
+27: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "xilinshousishengqi.png", "mid", "character", "true"], ["bgm", "casual7.mp3"], ["background", "bridgeday.png", "true", "false"]],
+"dialogue": "[color=434444]好的，西琳老师。[/color]"
+},
+28: {
+"character": "",
+"command": [["character", "xilinshousishengqi.png", "mid", "character", "true"], ["bgm", "casual7.mp3"], ["background", "bridgeday.png", "true", "false"]],
+"dialogue": "[color=434444]三十分钟后[/color]"
+},
+29: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "xilinidleweixiao.png", "mid", "character", "true"], ["voice", "patch8.wav"], ["bgm", "casual7.mp3"], ["background", "bridgeday.png", "true", "false"]],
+"dialogue": "[color=8e00c0]好，舰长同学，明目术的原理和使用方法你记住了吗？ [/color]"
+},
+30: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "xilinidleweixiao.png", "mid", "character", "true"], ["bgm", "casual7.mp3"], ["background", "bridgeday.png", "true", "false"]],
+"dialogue": "[color=434444]记住啦！真是神奇的魔法。[/color]"
+},
+31: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "xilinidleweixiao.png", "mid", "character", "true"], ["bgm", "casual7.mp3"], ["background", "bridgeday.png", "true", "false"]],
+"dialogue": "[color=434444](反正最后都要套公式概念什么的不重要啦)[/color]"
+},
+32: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "16.mp3"], ["bgm", "casual7.mp3"], ["background", "bridgeday.png", "true", "false"]],
+"dialogue": "[color=8e00c0]那当然！这可是学园长塞西莉亚大人的改良版，比原版可靠多了。 [/color]"
+},
+33: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "17.mp3"], ["bgm", "casual7.mp3"], ["background", "bridgeday.png", "true", "false"]],
+"dialogue": "[color=8e00c0]据小道消息说，学园长的灵感来自女儿的猫... [/color]"
+},
+34: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "18.mp3"], ["bgm", "casual7.mp3"], ["background", "bridgeday.png", "true", "false"]],
+"dialogue": "[color=8e00c0]...也有野史说它改良自邪恶异教徒的禁术，但我觉得是无稽之谈。 [/color]"
+},
+35: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "casual7.mp3"], ["background", "bridgeday.png", "true", "false"]],
+"dialogue": "[color=434444]那不会有危险吧？[/color]"
+},
+36: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "xilinshousanshengqi.png", "mid", "character", "true"], ["voice", "patch9.wav"], ["bgm", "casual7.mp3"], ["background", "bridgeday.png", "true", "false"]],
+"dialogue": "[color=8e00c0]你，你不相信我？ [/color]"
+},
+37: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "xilinshousanshengqi.png", "mid", "character", "true"], ["bgm", "casual7.mp3"], ["background", "bridgeday.png", "true", "false"]],
+"dialogue": "[color=434444]不是不是，西琳你听我解释...[/color]"
+},
+38: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "xilindaxingxingshengqi.png", "mid", "character", "true"], ["voice", "19.mp3"], ["bgm", "casual7.mp3"], ["background", "bridgeday.png", "true", "false"]],
+"dialogue": "[color=8e00c0]哼，让你试试就知道了。接招！ [/color]"
+},
+39: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "20.mp3"], ["bgm", "casual7.mp3"], ["background", "bridgeday.png", "true", "false"]],
+"dialogue": "[color=8e00c0]众神之父啊，赐予你猫的视野，使你的眼睛重获新生！明目术！ [/color]"
+},
+40: {
+"character": "",
+"command": [["background", "flash", "true", "false"], ["bgm", "casual7.mp3"]],
+"dialogue": ""
+},
+41: {
+"character": "",
+"command": [["background", "bridgeday.png", "true", "false"], ["sound_effect", "spell.mp3"], ["bgm", "casual7.mp3"]],
+"dialogue": "[color=434444] 随着一阵白光，我的眼前恍惚了一阵  [/color]"
+},
+42: {
+"character": "[color=787878]舰长[/color]",
+"command": [["background", "bridgeday.png", "true", "false"], ["sound_effect", "spell.mp3"], ["bgm", "casual7.mp3"]],
+"dialogue": "[color=434444]阿嚏！[/color]"
+},
+43: {
+"character": "[color=787878]舰长[/color]",
+"command": [["background", "bridgeday.png", "true", "false"], ["sound_effect", "spell.mp3"], ["bgm", "casual7.mp3"]],
+"dialogue": "[color=434444]诶，眼睛，忽然就清亮起来了！感觉重获新生啊，西琳老师，你真厉害！[/color]"
+},
+44: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "xilinidlkeai.png", "mid", "character", "true"], ["voice", "21.mp3"], ["bgm", "casual7.mp3"], ["background", "bridgeday.png", "true", "false"]],
+"dialogue": "[color=8e00c0]哼哼，我可是最厉害的魔法少女，这点小事手到擒来。 [/color]"
+},
+45: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "xilinidleweixiao.png", "mid", "character", "true"], ["voice", "22.mp3"], ["bgm", "casual7.mp3"], ["background", "bridgeday.png", "true", "false"]],
+"dialogue": "[color=8e00c0]咒语记住了吧？现在你也照样对我用一遍。 [/color]"
+},
+46: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "xilinidleweixiao.png", "mid", "character", "true"], ["bgm", "casual7.mp3"], ["background", "bridgeday.png", "true", "false"]],
+"dialogue": "[color=434444]好的！大概记住了，我试试看...[/color]"
+},
+47: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "xilinidleweixiao.png", "mid", "character", "true"], ["bgm", "casual7.mp3"], ["background", "bridgeday.png", "true", "false"]],
+"dialogue": "[color=434444](虽然刚刚打了个喷嚏脑子有点宕机，但应该是这么说吧。)[/color]"
+},
+48: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "xilinidleweixiao.png", "mid", "character", "true"], ["bgm", "casual7.mp3"], ["background", "bridgeday.png", "true", "false"]],
+"dialogue": "[color=434444]众神之父啊，赐予你猫的视野，使你的眼神重获新生！明目术！[/color]"
+},
+49: {
+"character": "",
+"command": [["background", "flash", "true", "false"], ["bgm", "casual7.mp3"]],
+"dialogue": ""
+},
+50: {
+"character": "",
+"command": [["background", "bridgeday.png", "true", "false"], ["sound_effect", "spell.mp3"], ["bgm", "casual7.mp3"]],
+"dialogue": "[color=434444] 一阵比之前还要强力的白光再次罩住了整个房间。一时间，我竟直不起腰来  [/color]"
+},
+51: {
+"character": "[color=787878]舰长[/color]",
+"command": [["background", "bridgeday.png", "true", "false"], ["sound_effect", "spell.mp3"], ["bgm", "casual7.mp3"]],
+"dialogue": "[color=434444]好...好强的魔力[/color]"
+},
+52: {
+"character": "",
+"command": [["background", "bridgeday.png", "true", "false"], ["sound_effect", "spell.mp3"], ["bgm", "casual7.mp3"]],
+"dialogue": "[color=434444]舰长，西琳，你没事吧？[/color]"
+},
+53: {
+"character": "",
+"command": [["background", "bridgeday.png", "true", "false"], ["sound_effect", "spell.mp3"], ["bgm", "casual7.mp3"]],
+"dialogue": "[color=434444]随着魔力散去，我再次看到站在眼前的西琳[/color]"
+},
+54: {
+"character": "",
+"command": [["background", "bridgeday.png", "true", "false"], ["sound_effect", "spell.mp3"], ["bgm", "casual7.mp3"]],
+"dialogue": "[color=434444]只是...好像有一种…违和感[/color]"
+},
+55: {
+"character": "[color=787878]舰长[/color]",
+"command": [["background", "bridgeday.png", "true", "false"], ["sound_effect", "spell.mp3"], ["bgm", "casual7.mp3"]],
+"dialogue": "[color=434444]西琳，是明目术的原因吗，怎么感觉你的样子怪怪的…[/color]"
+},
+56: {
+"character": "[color=787878]舰长[/color]",
+"command": [["background", "bridgeday.png", "true", "false"], ["sound_effect", "spell.mp3"], ["bgm", "casual7.mp3"]],
+"dialogue": "[color=434444]欸？[/color]"
+},
+57: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinidleweixiao.png", "mid", "character", "true"], ["bgm", "clear"], ["voice", "patch3.mp3"], ["background", "bridgeday.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵？  [/color]"
+},
+58: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "catxilinidleweixiao.png", "mid", "character", "true"], ["background", "bridgeday.png", "true", "false"]],
+"dialogue": "[color=434444]... [/color]"
+},
+59: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinidleweixiao.png", "mid", "character", "true"], ["background", "bridgeday.png", "true", "false"]],
+"dialogue": "[color=8e00c0]... [/color]"
+},
+60: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinshousishengqi.png", "mid", "character", "true"], ["bgm", "happy2.mp3"], ["voice", "patch4.mp3"], ["background", "bridgeday.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵喵，喵？喵喵喵！  [/color]"
+},
+61: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "catxilinshousishengqi.png", "mid", "character", "true"], ["bgm", "happy2.mp3"], ["background", "bridgeday.png", "true", "false"]],
+"dialogue": "[color=434444]西琳，我好像听不懂—[/color]"
+},
+62: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "25.mp3"], ["bgm", "happy2.mp3"], ["background", "bridgeday.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵喵喵喵！喵喵！喵喵喵！ [/color]"
+},
+63: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "happy2.mp3"], ["background", "bridgeday.png", "true", "false"]],
+"dialogue": "[color=434444]为什么会有猫耳？而且你这么说我也听不懂啊，西琳，你能比划一下吗？[/color]"
+},
+64: {
+"character": "",
+"command": [["bgm", "happy2.mp3"], ["background", "bridgeday.png", "true", "false"]],
+"dialogue": "[color=434444]少女的声音凭空出现在耳畔，渐渐清晰。那好像是西琳的声音？[/color]"
+},
+65: {
+"character": "",
+"command": [["bgm", "happy2.mp3"], ["background", "bridgeday.png", "true", "false"]],
+"dialogue": "[color=434444]只是...它怎么会从身体内部传来？[/color]"
+},
+66: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "clear", "mid", "character", "false"], ["background", "catear.jpg", "true", "false"], ["voice", "26.mp3"], ["bgm", "happy2.mp3"]],
+"dialogue": "[color=8e00c0]喵喵喵，喵喵，喵喵！(舰长你这大笨蛋！我说的咒语是眼睛，不是眼神啊！这下好了，我的身体出问题了！) [/color]"
+},
+67: {
+"character": "[color=787878]舰长[/color]",
+"command": [["background", "catear.jpg", "true", "false"], ["bgm", "happy2.mp3"]],
+"dialogue": "[color=434444]啊哈哈...难道说猫耳和喵喵叫就是咒语出错的代价吗？ [/color]"
+},
+68: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "27.mp3"], ["bgm", "happy2.mp3"], ["background", "catear.jpg", "true", "false"]],
+"dialogue": "[color=8e00c0]喵喵，喵喵！哈！(我变猫娘啦！都你害的啦，拜托！) [/color]"
+},
+69: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "happy2.mp3"], ["background", "catear.jpg", "true", "false"]],
+"dialogue": "[color=434444]对不起西琳老师，我太笨了...[/color]"
+},
+70: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "28.mp3"], ["bgm", "happy2.mp3"], ["background", "catear.jpg", "true", "false"]],
+"dialogue": "[color=8e00c0]喵喵喵，喵喵。(还好刚刚对你施术让我们建立了某种连接，我可以用它传音。) [/color]"
+},
+71: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "happy2.mp3"], ["background", "catear.jpg", "true", "false"]],
+"dialogue": "[color=434444]也就是说我现在能听到西琳的心声了？—[/color]"
+},
+72: {
+"character": "",
+"command": [["sound_effect", "slap.wav"], ["bgm", "happy2.mp3"], ["background", "catear.jpg", "true", "false"]],
+"dialogue": "[color=434444]一道影子飞快的从我脸上飞过，留下了几道浅浅的指甲印。 [/color]"
+},
+73: {
+"character": "[color=787878]舰长[/color]",
+"command": [["sound_effect", "slap.wav"], ["bgm", "happy2.mp3"], ["background", "catear.jpg", "true", "false"]],
+"dialogue": "[color=434444]哎呦好疼...[/color]"
+},
+74: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "29.mp3"], ["bgm", "happy2.mp3"], ["background", "catear.jpg", "true", "false"]],
+"dialogue": "[color=8e00c0]哈！(你脑子里在想什么啊！看我恢复原状了怎么收拾你！)   [/color]"
+},
+75: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "happy2.mp3"], ["background", "catear.jpg", "true", "false"]],
+"dialogue": "[color=434444]对不起西琳老师，我不是故意对您犯错的...[/color]"
+},
+76: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "patch10.wav"], ["bgm", "happy2.mp3"], ["background", "catear.jpg", "true", "false"]],
+"dialogue": "[color=8e00c0]喵喵喵，喵喵喵。喵！(先解除明目术再教训你。明目术，解！) [/color]"
+},
+77: {
+"character": "",
+"command": [["bgm", "happy2.mp3"], ["background", "catear.jpg", "true", "false"]],
+"dialogue": "[color=434444]...........[/color]"
+},
+78: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "happy2.mp3"], ["background", "catear.jpg", "true", "false"]],
+"dialogue": "[color=434444]西琳老师，西琳老师？[/color]"
+},
+79: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "30.mp3"], ["bgm", "happy2.mp3"], ["background", "catear.jpg", "true", "false"]],
+"dialogue": "[color=8e00c0]喵喵？(怎么回事，我的法力都没了？) [/color]"
+},
+80: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "31.mp3"], ["bgm", "happy2.mp3"], ["background", "catear.jpg", "true", "false"]],
+"dialogue": "[color=8e00c0]哈！(不对，它们都跑到你身上了！) [/color]"
+},
+81: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "happy2.mp3"], ["background", "catear.jpg", "true", "false"]],
+"dialogue": "[color=434444]啊？怎会如此？[/color]"
+},
+82: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "32.mp3"], ["bgm", "happy2.mp3"], ["background", "catear.jpg", "true", "false"]],
+"dialogue": "[color=8e00c0]喵喵，喵喵。(你按照我刚才念的解除术咒语再来一遍。) [/color]"
+},
+83: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "happy2.mp3"], ["background", "catear.jpg", "true", "false"]],
+"dialogue": "[color=434444]哦哦好的。明目术，解！[/color]"
+},
+84: {
+"character": "",
+"command": [["bgm", "happy2.mp3"], ["background", "catear.jpg", "true", "false"]],
+"dialogue": "[color=434444]什么事情都没有发生[/color]"
+},
+85: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "happy2.mp3"], ["background", "catear.jpg", "true", "false"]],
+"dialogue": "[color=434444]刚刚才说过的咒语，我应该没有记错啊[/color]"
+},
+86: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "33.mp3"], ["bgm", "happy2.mp3"], ["background", "catear.jpg", "true", "false"]],
+"dialogue": "[color=8e00c0]喵，喵...(不，我感受到了术式正常发动的波动) [/color]"
+},
+87: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "34.mp3"], ["bgm", "happy2.mp3"], ["background", "catear.jpg", "true", "false"]],
+"dialogue": "[color=8e00c0](可是它为什么不奏效呢，这下麻烦了) [/color]"
+},
+88: {
+"character": "",
+"command": [["bgm", "happy2.mp3"], ["background", "catear.jpg", "true", "false"]],
+"dialogue": "[color=434444]就这样，休伯利安上平凡的一天又一次被打乱了[/color]"
+},
+89: {
+"character": "",
+"command": [["CG", "introv.ogv"], ["bgm", "clear"], ["bgm", "introa.wav"]],
+"dialogue": "[color=434444][/color]"
+},
+90: {
+"character": "",
+"command": [["background", "indoor6.png", "true", "false"], ["bgm", "clear"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]在花费了一个上午的时间后，猫耳仍然固执的长在西琳的头上  [/color]"
+},
+91: {
+"character": "",
+"command": [["background", "indoor6.png", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]西琳默默地拉上窗帘，带上房门，而后瘫倒在床上。[/color]"
+},
+92: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinidleshangxin.png", "mid", "character", "true"], ["voice", "35.mp3"], ["bgm", "lesscasual13.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=8e00c0]呜呜，呜呜...(口不能言，法力全失……) [/color]"
+},
+93: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "36.mp3"], ["bgm", "lesscasual13.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=8e00c0]最简单的法术都教成这幅样子，怎么对得起老师和前辈的教导，怎么配自称魔法少女……) [/color]"
+},
+94: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "lesscasual13.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=434444]对不起，西琳老师。[/color]"
+},
+95: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "37.mp3"], ["bgm", "lesscasual13.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=8e00c0]呜呜，喵，喵...(对不起有什么用，我已经变成这样了……) [/color]"
+},
+96: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "lesscasual13.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=434444]我知道苍白的道歉于事无补。所以，我会对你负起责任。[/color]"
+},
+97: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "38.mp3"], ["bgm", "lesscasual13.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=8e00c0]呜？喵？(怎，怎么负责？) [/color]"
+},
+98: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "lesscasual13.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=434444]找到解咒的办法，把声音和法力都还给你。[/color]"
+},
+99: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "39.mp3"], ["bgm", "lesscasual13.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵，喵。(那肯定要找，但我想缓一缓。) [/color]"
+},
+100: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "lesscasual13.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=434444]嗯，无论多久我都陪你。[/color]"
+},
+101: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "40.mp3"], ["bgm", "lesscasual13.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=8e00c0]...喵喵。(还是算了。咱们太久不露面，大家会起疑心的。不能让大家发现。) [/color]"
+},
+102: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "lesscasual13.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=434444]那我们去哪个世界泡里看看？又能掩人耳目，又能找找解咒的办法。[/color]"
+},
+103: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "41.mp3"], ["bgm", "lesscasual13.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵。(那就这样吧。) [/color]"
+},
+104: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "lesscasual13.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=434444]回你的世界泡怎么样？明目术来自那里，那里多半有解除术的线索。[/color]"
+},
+105: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "42.mp3"], ["bgm", "lesscasual13.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵喵，喵。(学园里确实有很多相关资料。但我没脸见老师和前辈们...) [/color]"
+},
+106: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "lesscasual13.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=434444]没事的，我会向她们解释，都是我太笨才把你害成这样。[/color]"
+},
+107: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "lesscasual13.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=434444]我会告诉她们，现在的西琳是一位强大的魔法少女，也是一个可爱的小女孩。[/color]"
+},
+108: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "lesscasual13.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=434444]虽然总是不太坦率，但她其实很关心大家，也很关心我，我都明白。[/color]"
+},
+109: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "lesscasual13.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=434444]她是我非常重要的伙伴，认识她是我这辈子最大的幸运之一。[/color]"
+},
+110: {
+"character": "",
+"command": [["character", "clear", "mid", "character", "false"], ["bgm", "lesscasual13.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=434444] 西琳扭过身子埋起脸，把表情掩盖了起来。 [/color]"
+},
+111: {
+"character": "",
+"command": [["bgm", "lesscasual13.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=434444]等等...为什么还有一条直直的尾巴？[/color]"
+},
+112: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "43.mp3"], ["bgm", "lesscasual13.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵，喵。(别说了，好肉麻。你去收拾一下吧，记得带上门。) [/color]"
+},
+113: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "lesscasual13.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=434444]好的。那我们半个小时后在映射装置碰头？[/color]"
+},
+114: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "44.mp3"], ["bgm", "lesscasual13.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵。(嗯，麻利点。) [/color]"
+},
+115: {
+"character": "",
+"command": [["bgm", "lesscasual13.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=434444]我轻轻地带上门，隐隐能从门背后听到西琳的声音，但不太清楚。[/color]"
+},
+116: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "lesscasual13.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=434444]（难道传音会受到距离和障碍的影响？）[/color]"
+},
+117: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "lesscasual13.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=434444](但这个时候还是不要研究这种事情好了,先去舰桥吧)[/color]"
+},
+118: {
+"character": "",
+"command": [["bgm", "lesscasual13.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=434444]随着门外的脚步声渐渐远去，西琳也从床上爬起来做行动前的准备[/color]"
+},
+119: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinidleblush.png", "mid", "character", "true"], ["voice", "45.mp3"], ["bgm", "lesscasual13.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=8e00c0](...有没有人对你说过，像你这样的笨蛋还挺讨人喜欢的？) [/color]"
+},
+120: {
+"character": "",
+"command": [["background", "fadeout", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444][/color]"
+},
+121: {
+"character": "",
+"command": [["background", "streetday7.png", "true", "false"], ["bgm", "clear"], ["bgm", "lesscasual19.mp3"]],
+"dialogue": "[color=434444]半小时后，弦月新城。  [/color]"
+},
+122: {
+"character": "[color=787878]舰长[/color]",
+"command": [["background", "streetday7.png", "true", "false"], ["bgm", "lesscasual19.mp3"]],
+"dialogue": "[color=434444]接下来先去找谁呢？说起来，为什么街上的魔法少女这么少？[/color]"
+},
+123: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinidleganga.png", "mid", "character", "true"], ["voice", "46.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "streetday7.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵，喵喵！(当然是去图书馆啊，笨蛋！天才魔法少女的学生，怎么连初级咒语都能念错？让她们知道了，我的面子往哪里搁？) [/color]"
+},
+124: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinidleweixiao.png", "mid", "character", "true"], ["voice", "47.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "streetday7.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵，喵...(至于你后面的问题...奇迹之石被毁后，魔法浓度就在逐步降低，魔法少女自然也就越来越少。)  [/color]"
+},
+125: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "48.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "streetday7.png", "true", "false"]],
+"dialogue": "[color=8e00c0](也许几十年后，魔法少女就该成为历史了。) [/color]"
+},
+126: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "lesscasual19.mp3"], ["background", "streetday7.png", "true", "false"]],
+"dialogue": "[color=434444]那你的前辈们呢？她们不是只剩下灵魂了吗？而且，你不去找她们吗？[/color]"
+},
+127: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "49.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "streetday7.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵，喵。(她们没事的，魔力消退到无法维持灵魂需要很久，那时她们估计早就安息了。) [/color]"
+},
+128: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinidleweixiao.png", "mid", "character", "true"], ["voice", "50.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "streetday7.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵喵。(但是，即使这个世界的以太奇点消失，它的特殊性也不会变。只要还有一个灵魂存活，它的魔力就不会彻底消失。)   [/color]"
+},
+129: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinidlezhayan.png", "mid", "character", "true"], ["voice", "51.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "streetday7.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵，喵喵！(毕竟，魔法少女的世界怎么会有悲剧存在，一切的悲痛最后都只会化为更灿烂的黎明！所以，没关系的。)   [/color]"
+},
+130: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "52.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "streetday7.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵，喵呜...(话说回来，就算我想找她们，也不知道她们还在不在那里，毕竟时间过去那么久了。)  [/color]"
+},
+131: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinshousishengqi.png", "mid", "character", "true"], ["voice", "53.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "streetday7.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵！(而且，现在我成了这幅样子，特丽丽肯定会把我当成猫一样戏耍！)  [/color]"
+},
+132: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "catxilinshousishengqi.png", "mid", "character", "true"], ["bgm", "lesscasual19.mp3"], ["background", "streetday7.png", "true", "false"]],
+"dialogue": "[color=434444]哈哈哈哈，原来如此。那我们去图书馆—哎呦疼疼...[/color]"
+},
+133: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "54.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "streetday7.png", "true", "false"]],
+"dialogue": "[color=8e00c0]哈！(让你笑我！你也不想想这是谁导致的啊喂!)  [/color]"
+},
+134: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "lesscasual19.mp3"], ["background", "streetday7.png", "true", "false"]],
+"dialogue": "[color=434444]对不起西琳，我不是想笑你，只是想象了一下特丽丽逗猫的样子，然后就没忍住。[/color]"
+},
+135: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "55.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "streetday7.png", "true", "false"]],
+"dialogue": "[color=8e00c0]哈！(那不还是在笑我吗！) [/color]"
+},
+136: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "lesscasual19.mp3"], ["background", "streetday7.png", "true", "false"]],
+"dialogue": "[color=434444]那我不笑了...哎呦手好疼，现在还红着。[/color]"
+},
+137: {
+"character": "",
+"command": [["character", "clear", "mid", "character", "true"], ["bgm", "lesscasual19.mp3"], ["background", "streetday7.png", "true", "false"]],
+"dialogue": "[color=434444]我刚抽出手想看看伤势，却被西琳一把夺回。她就这样一直牵着我的手，一路无话。 [/color]"
+},
+138: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "lesscasual19.mp3"], ["background", "streetday7.png", "true", "false"]],
+"dialogue": "[color=434444](西琳变成猫娘后，挠人也像猫一样疼了吗？)[/color]"
+},
+139: {
+"character": "",
+"command": [["background", "fadeout", "true", "false"], ["bgm", "lesscasual19.mp3"]],
+"dialogue": "[color=434444][/color]"
+},
+140: {
+"character": "",
+"command": [["background", "streetnight4.png", "true", "false"], ["bgm", "lesscasual19.mp3"]],
+"dialogue": "[color=434444]一座巨大的石质建筑静静屹立。围墙斑斑驳驳长满藤蔓 [/color]"
+},
+141: {
+"character": "",
+"command": [["background", "streetnight4.png", "true", "false"], ["bgm", "lesscasual19.mp3"]],
+"dialogue": "[color=434444]内里不见人烟，只有些许飞鸟掠过。[/color]"
+},
+142: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinidle.png", "mid", "character", "true"], ["voice", "56.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "streetnight4.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵。(到了。)  [/color]"
+},
+143: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "catxilinidle.png", "mid", "character", "true"], ["bgm", "lesscasual19.mp3"], ["background", "streetnight4.png", "true", "false"]],
+"dialogue": "[color=434444]好大的图书馆啊。[/color]"
+},
+144: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinidleweixiao.png", "mid", "character", "true"], ["voice", "57.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "streetnight4.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵。(当然大了，这可是我们当初的秘密基地啊。)   [/color]"
+},
+145: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "patch5.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "streetnight4.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵，喵喵。(想当初为了毕业考试，我和特丽丽可是在这里准备了好久。) [/color]"
+},
+146: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "patch6.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "streetnight4.png", "true", "false"]],
+"dialogue": "[color=8e00c0](那时候我害怕自己不够出色、拖前辈们后腿，在这里挑灯夜读，所有书都快翻烂了……还好，特丽丽每晚都陪在我身边。)  [/color]"
+},
+147: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinidleshangxin.png", "mid", "character", "true"], ["voice", "59.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "streetnight4.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵，喵...(前辈们牺牲后，特丽丽一直在找解决方法，我却一直在这里逃避。)  [/color]"
+},
+148: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "60.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "streetnight4.png", "true", "false"]],
+"dialogue": "[color=8e00c0](在这里，我就会想起前辈们的音容笑貌，还有那个晃着耳朵傻笑的笨蛋，好像一切都回到了从前...) [/color]"
+},
+149: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinidleweixiao.png", "mid", "character", "true"], ["voice", "61.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "streetnight4.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵喵，喵，(直到你们和特丽丽一起拯救了我，把我从黑暗的深处拉了出来。)  [/color]"
+},
+150: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "62.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "streetnight4.png", "true", "false"]],
+"dialogue": "[color=8e00c0](我很庆幸能过上现在的生活，所以我一直很感谢大家，尤其是你，舰长。)  [/color]"
+},
+151: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "lesscasual19.mp3"], ["background", "streetnight4.png", "true", "false"]],
+"dialogue": "[color=434444]没想到西琳也会这么坦诚呢。[/color]"
+},
+152: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "lesscasual19.mp3"], ["background", "streetnight4.png", "true", "false"]],
+"dialogue": "[color=434444]其实我觉得，最值得感谢的是西琳自己哦。如果你没有和自己和解，我们再怎么帮忙也无济于事呀。[/color]"
+},
+153: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "lesscasual19.mp3"], ["background", "streetnight4.png", "true", "false"]],
+"dialogue": "[color=434444]而且，奇迹的魔法少女本身就和奇迹一样了不起啊。[/color]"
+},
+154: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinshousishengqi.png", "mid", "character", "true"], ["voice", "63.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "streetnight4.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵？喵呜！喵喵。(你在说什么？我怎么就不坦诚了！快走快走，去翻资料。)   [/color]"
+},
+155: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "catxilinshousishengqi.png", "mid", "character", "true"], ["bgm", "lesscasual19.mp3"], ["background", "streetnight4.png", "true", "false"]],
+"dialogue": "[color=434444]等等我啊——[/color]"
+},
+156: {
+"character": "",
+"command": [["character", "clear", "mid", "character", "false"], ["background", "libarary.png", "true", "false"], ["bgm", "lesscasual19.mp3"]],
+"dialogue": "[color=434444]二人在许多高大的书架中穿梭翻阅着，就这样渡过了今天的上午 [/color]"
+},
+157: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinidlejidong.png", "mid", "character", "true"], ["voice", "64.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "libarary.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵！(舰长快过来！我找到了！)  [/color]"
+},
+158: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "catxilinidlejidong.png", "mid", "character", "true"], ["bgm", "lesscasual19.mp3"], ["background", "libarary.png", "true", "false"]],
+"dialogue": "[color=434444]好耶，终于找到了！...诶？[/color]"
+},
+159: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "catxilinidlejidong.png", "mid", "character", "true"], ["bgm", "lesscasual19.mp3"], ["background", "libarary.png", "true", "false"]],
+"dialogue": "[color=434444](这魔法书上面为什么还有签名啊？等等，塞，西，莉，亚。)[/color]"
+},
+160: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "65.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "libarary.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵喵。(这是当年学园义卖的特典，整个弦月新城也不过区区500本。)  [/color]"
+},
+161: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "66.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "libarary.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵，喵呜？(比起正常版，它们的内容似乎经过了一些增删，要看看吗？) [/color]"
+},
+162: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "lesscasual19.mp3"], ["background", "libarary.png", "true", "false"]],
+"dialogue": "[color=434444]我看看。呃，全是专业术语看不懂啊...[/color]"
+},
+163: {
+"character": "",
+"command": [["bgm", "lesscasual19.mp3"], ["background", "libarary.png", "true", "false"]],
+"dialogue": "[color=434444]西琳噗嗤一笑，顺手接过魔法书。[/color]"
+},
+164: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "67.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "libarary.png", "true", "false"]],
+"dialogue": "[color=8e00c0](明目术，明目术……啊，找到了！)  [/color]"
+},
+165: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "68.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "libarary.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵，喵...喵呜！(前面省略，就是这里，怎么解除明目术，解除方法是...是...) [/color]"
+},
+166: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinidleweixiao.png", "mid", "character", "true"], ["voice", "69.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "libarary.png", "true", "false"]],
+"dialogue": "[color=8e00c0](略！)   [/color]"
+},
+167: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "catxilinidleweixiao.png", "mid", "character", "true"], ["bgm", "lesscasual19.mp3"], ["background", "libarary.png", "true", "false"]],
+"dialogue": "[color=434444]略？！[/color]"
+},
+168: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "catxilinidleweixiao.png", "mid", "character", "true"], ["bgm", "lesscasual19.mp3"], ["background", "libarary.png", "true", "false"]],
+"dialogue": "[color=434444]为什么魔法书会有和高数教材一样的设定啊喂！[/color]"
+},
+169: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinidleganga.png", "mid", "character", "true"], ["voice", "70.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "libarary.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵呜...(已经，不用再努力了...)   [/color]"
+},
+170: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "clear", "mid", "character", "false"], ["bgm", "lesscasual19.mp3"], ["background", "libarary.png", "true", "false"]],
+"dialogue": "[color=434444]西琳，振作一点啊！ [/color]"
+},
+171: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "lesscasual19.mp3"], ["background", "libarary.png", "true", "false"]],
+"dialogue": "[color=434444]这只是个初级魔法，一定会有解除方法的！[/color]"
+},
+172: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "lesscasual19.mp3"], ["background", "libarary.png", "true", "false"]],
+"dialogue": "[color=434444]实在不行，我们还可以去找这个术式的创造者！[/color]"
+},
+173: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "lesscasual19.mp3"], ["background", "libarary.png", "true", "false"]],
+"dialogue": "[color=434444]或者去找学园长，办法总比困难多...[/color]"
+},
+174: {
+"character": "",
+"command": [["bgm", "lesscasual19.mp3"], ["background", "libarary.png", "true", "false"]],
+"dialogue": "[color=434444]灌了两个半小时鸡汤后，西琳终于振作了起来。[/color]"
+},
+175: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinshousishengqi.png", "mid", "character", "true"], ["voice", "71.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "libarary.png", "true", "false"]],
+"dialogue": "[color=8e00c0]哈！喵呜。(好啦好啦烦死了！笨蛋舰长，整天就知道讲大道理，我又不是不明白。)  [/color]"
+},
+176: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "catxilinshousishengqi.png", "mid", "character", "true"], ["bgm", "lesscasual19.mp3"], ["background", "libarary.png", "true", "false"]],
+"dialogue": "[color=434444]诶嘿，你知道的，我嘴很笨不会哄人，只要你能振作起来就好。[/color]"
+},
+177: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinidleweixiao.png", "mid", "character", "true"], ["voice", "72.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "libarary.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵喵，喵喵...(我再看看明目术的历史，也许能找到些线索...) [/color]"
+},
+178: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "73.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "libarary.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵！喵喵，喵喵。(找到了！这里提到，明目术发掘自一座荒废古堡，虽然没有具体位置，但我可以从照片和描述进行推理。) [/color]"
+},
+179: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "lesscasual19.mp3"], ["background", "libarary.png", "true", "false"]],
+"dialogue": "[color=434444]西琳好厉害！[/color]"
+},
+180: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinidlezhayan.png", "mid", "character", "true"], ["voice", "74.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "libarary.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵~喵喵喵，喵喵喵。(哼哼，小菜一碟。照片和描述可以反映出当地的魔法生物种群，稍加推理就可以知道大概位置，找一找就好了。)   [/color]"
+},
+181: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "75.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "libarary.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵呜！(事不宜迟，我们马上出发！) [/color]"
+},
+182: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "lesscasual19.mp3"], ["background", "libarary.png", "true", "false"]],
+"dialogue": "[color=434444]好的西琳老师！没问题西琳老师！[/color]"
+},
+183: {
+"character": "",
+"command": [["background", "fadeout", "true", "false"], ["bgm", "lesscasual19.mp3"]],
+"dialogue": "[color=434444][/color]"
+},
+184: {
+"character": "",
+"command": [["background", "ruin4.png", "true", "false"], ["bgm", "lesscasual19.mp3"]],
+"dialogue": "[color=434444]如西琳所说，凭借照片上的特征找出所在地并不困难 [/color]"
+},
+185: {
+"character": "",
+"command": [["background", "ruin4.png", "true", "false"], ["bgm", "lesscasual19.mp3"]],
+"dialogue": "[color=434444]这地方阴森破败，似乎已经荒废了很久，却又能隐约感到魔力波动。[/color]"
+},
+186: {
+"character": "",
+"command": [["background", "ruin4.png", "true", "false"], ["bgm", "lesscasual19.mp3"]],
+"dialogue": "[color=434444]大门后传来簌簌响动，也不知那是恶魔的咆哮、宝藏的盛邀，还是亡魂的絮语。[/color]"
+},
+187: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "76.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "ruin4.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵呜，喵呜呜...(舰...舰长，你...还在我旁边吗？) [/color]"
+},
+188: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "lesscasual19.mp3"], ["background", "ruin4.png", "true", "false"]],
+"dialogue": "[color=434444]放轻松，西琳。我一直都在你旁边，不用害怕。[/color]"
+},
+189: {
+"character": "",
+"command": [["bgm", "lesscasual19.mp3"], ["background", "ruin4.png", "true", "false"]],
+"dialogue": "[color=434444]窸窸窣窣，窸窸窣窣。[/color]"
+},
+190: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "77.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "ruin4.png", "true", "false"]],
+"dialogue": "[color=8e00c0]哈！(鬼啊！)  [/color]"
+},
+191: {
+"character": "",
+"command": [["bgm", "lesscasual19.mp3"], ["background", "ruin4.png", "true", "false"]],
+"dialogue": "[color=434444]我举着火把挪过去，只见一只屁股发光的甲虫。[/color]"
+},
+192: {
+"character": "[color=787878]舰长[/color]",
+"command": [["background", "firefly.png", "true", "false"], ["bgm", "lesscasual19.mp3"]],
+"dialogue": "[color=434444]放轻松，西琳，这不过是一只屁股发光的虫子。 [/color]"
+},
+193: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "78.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "firefly.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵？喵！(嗯？亮甲虫，它为什么会在这里！)  [/color]"
+},
+194: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "lesscasual19.mp3"], ["background", "firefly.png", "true", "false"]],
+"dialogue": "[color=434444]怎么了，西琳，它很危险吗？[/color]"
+},
+195: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "79.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "firefly.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵，喵喵？(它并不危险，只是会在魔力富集的土壤中活跃。它的出现意味着什么？)  [/color]"
+},
+196: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "80.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "firefly.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵喵，喵喵...(继续前进吧，舰长。魔法少女可不能临阵脱逃啊！)  [/color]"
+},
+197: {
+"character": "",
+"command": [["bgm", "lesscasual19.mp3"], ["background", "firefly.png", "true", "false"]],
+"dialogue": "[color=434444]西琳正要离开，一阵吹动火焰的冷风却又把她吓回来了。[/color]"
+},
+198: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "81.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "firefly.png", "true", "false"]],
+"dialogue": "[color=8e00c0]哈！喵喵喵！(啊！舰，舰长，果然还是你在前面吧！)  [/color]"
+},
+199: {
+"character": "",
+"command": [["bgm", "lesscasual19.mp3"], ["background", "firefly.png", "true", "false"]],
+"dialogue": "[color=434444]我微微一笑，揉揉西琳的脑袋，再一次牵起她的手。[/color]"
+},
+200: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "lesscasual19.mp3"], ["background", "firefly.png", "true", "false"]],
+"dialogue": "[color=434444]走吧，西琳，不是你说的吗？魔法少女，可不会临阵脱逃啊。[/color]"
+},
+201: {
+"character": "",
+"command": [["background", "indoor3.png", "true", "false"], ["bgm", "lesscasual19.mp3"]],
+"dialogue": "[color=434444]在确认没有魔物后我们决定分头搜索，但收获寥寥。 [/color]"
+},
+202: {
+"character": "[color=787878]舰长[/color]",
+"command": [["background", "indoor3.png", "true", "false"], ["bgm", "lesscasual19.mp3"]],
+"dialogue": "[color=434444]西琳，你有发现吗？我只找到一些怪石和一张读不懂的卷轴。[/color]"
+},
+203: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinidleweixiao.png", "mid", "character", "true"], ["voice", "82.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "indoor3.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵喵，喵喵。(我也只找到一些盘根树的根和黑土...让我看看你找到的东西吧。)   [/color]"
+},
+204: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinshousijidong.png", "mid", "character", "true"], ["voice", "83.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "indoor3.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵！喵喵！(石心！钢炎石！都是金色传说级的材料啊。)  [/color]"
+},
+205: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "84.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "indoor3.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵喵！(这卷轴是，明目术解除剂的制作方法！) [/color]"
+},
+206: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "lesscasual19.mp3"], ["background", "indoor3.png", "true", "false"]],
+"dialogue": "[color=434444]什么，这么简单就到手了吗！[/color]"
+},
+207: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "85.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "indoor3.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵，喵呜？(我也不知道，上面是这么写的……要试试吗？) [/color]"
+},
+208: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "lesscasual19.mp3"], ["background", "indoor3.png", "true", "false"]],
+"dialogue": "[color=434444]不急，我总觉得还有地方没探查到。[/color]"
+},
+209: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinidleweixiao.png", "mid", "character", "true"], ["voice", "86.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "indoor3.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵喵，喵喵喵。(我也这么觉得。这座古堡明显有强大的魔力波动，里面的陈设却普通之极，和寻常麻瓜的住所别无二致，这不科学。)  [/color]"
+},
+210: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "catxilinidleweixiao.png", "mid", "character", "true"], ["bgm", "lesscasual19.mp3"], ["background", "indoor3.png", "true", "false"]],
+"dialogue": "[color=434444]我记得你提过这里的土壤富含魔力，你说源头会不会就是这座古堡？[/color]"
+},
+211: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "87.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "indoor3.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵喵。(很有可能，古堡的魔力影响土壤是一个很合理的解释。) [/color]"
+},
+212: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "88.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "indoor3.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵，喵……(比起土壤，这里的大气中魔力浓度低得多，难道魔力源自地下……) [/color]"
+},
+213: {
+"character": "",
+"command": [["bgm", "lesscasual19.mp3"], ["background", "indoor3.png", "true", "false"]],
+"dialogue": "[color=434444]二人结伴回到古堡一层大厅后，壁炉轰隆隆地挪开，露出一条深不见底的通路。[/color]"
+},
+214: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "lesscasual19.mp3"], ["background", "indoor3.png", "true", "false"]],
+"dialogue": "[color=434444]原来如此，古堡地下另有洞天，只是需要两个人一起打开。[/color]"
+},
+215: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinidleweixiao.png", "mid", "character", "true"], ["voice", "89.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "indoor3.png", "true", "false"]],
+"dialogue": "[color=8e00c0]哈！哈！(别，别瞎想！也许只是我们找到了什么物件，它才会打开……)  [/color]"
+},
+216: {
+"character": "",
+"command": [["character", "catxilinidleweixiao.png", "mid", "character", "true"], ["bgm", "lesscasual19.mp3"], ["background", "indoor3.png", "true", "false"]],
+"dialogue": "[color=434444]我受过专业的训练，非常努力地忍住了笑。[/color]"
+},
+217: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinidlewuyu.png", "mid", "character", "true"], ["voice", "90.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "indoor3.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵，喵喵。(咳咳，舰长，这地下室看上去凶险重重，我教你一点最基本的战力提升手段吧。) [/color]"
+},
+218: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "catxilinidlewuyu.png", "mid", "character", "true"], ["bgm", "lesscasual19.mp3"], ["background", "indoor3.png", "true", "false"]],
+"dialogue": "[color=434444]现在临时抱佛脚来得及吗？[/color]"
+},
+219: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "91.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "indoor3.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵~喵！(临阵磨枪不快也亮！有比没有强。)  [/color]"
+},
+220: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinidleweixiao.png", "mid", "character", "true"], ["voice", "92.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "indoor3.png", "true", "false"]],
+"dialogue": "[color=8e00c0]这是最基本的攻击式魔法，魔法飞弹  [/color]"
+},
+221: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "93.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "indoor3.png", "true", "false"]],
+"dialogue": "[color=8e00c0]和吟唱式魔法不同。施法者需要对着要攻击的方向画出符文 [/color]"
+},
+222: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["background", "demo1.png", "true", "false"], ["character", "catxilinidleweixiao.png", "left", "character", "true"], ["voice", "94.mp3"], ["bgm", "lesscasual19.mp3"]],
+"dialogue": "[color=8e00c0]先这样   [/color]"
+},
+223: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["background", "demo2.png", "true", "false"], ["voice", "95.mp3"], ["bgm", "lesscasual19.mp3"]],
+"dialogue": "[color=8e00c0]再这样   [/color]"
+},
+224: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["background", "demo3.png", "true", "false"], ["voice", "96.mp3"], ["bgm", "lesscasual19.mp3"]],
+"dialogue": "[color=8e00c0]最后再这样   [/color]"
+},
+225: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["background", "indoor3.png", "true", "false"], ["voice", "97.mp3"], ["bgm", "lesscasual19.mp3"]],
+"dialogue": "[color=8e00c0]然后就能把飞弹扔出去啦   [/color]"
+},
+226: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "98.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "indoor3.png", "true", "false"]],
+"dialogue": "[color=8e00c0]记住了吗，这次可不准敷衍人哦 [/color]"
+},
+"choice": [["记住了", "get.txt", "false"], ["没记住", "magic.txt", "false"]],
+"lines": 225
+},
+"fail.txt": {
+1: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["background", "rock2.png", "true", "false"], ["voice", "105.mp3"], ["bgm", "tense6.mp3"]],
+"dialogue": "[color=8e00c0] 喵！！！(别打了快跑啊！) [/color]"
+},
+2: {
+"character": "",
+"command": [["background", "indoor3.png", "true", "false"], ["bgm", "clear"], ["bgm", "happy2.mp3"], ["sound_effect", "clear"]],
+"dialogue": "[color=434444]一人一猫娘转头就跑，总算在被滚石压到前逃回了地下室门口 [/color]"
+},
+3: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinshousishengqi.png", "mid", "character", "true"], ["voice", "107.mp3"], ["bgm", "happy2.mp3"], ["background", "indoor3.png", "true", "false"]],
+"dialogue": "[color=8e00c0]哈！(舰——长，你真的是我带过最差的一届里最差的一个学生！) [/color]"
+},
+4: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "catxilinshousishengqi.png", "mid", "character", "true"], ["bgm", "happy2.mp3"], ["background", "indoor3.png", "true", "false"]],
+"dialogue": "[color=434444]对不起对不起，现在下去应该没有危险了吧[/color]"
+},
+5: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "108.mp3"], ["bgm", "happy2.mp3"], ["background", "indoor3.png", "true", "false"]],
+"dialogue": "[color=8e00c0](想得美，刚才逃跑的时候，我在滚石上感到了魔力波动) [/color]"
+},
+6: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "109.mp3"], ["bgm", "happy2.mp3"], ["background", "indoor3.png", "true", "false"]],
+"dialogue": "[color=8e00c0](应该是召唤类魔法，得击败召唤源才行) [/color]"
+},
+7: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["bgm", "happy2.mp3"], ["background", "indoor3.png", "true", "false"]],
+"dialogue": "[color=8e00c0](我再重复一遍怎么施法吧)[/color]"
+},
+8: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["background", "demo1.png", "true", "false"], ["character", "clear", "mid", "character", "false"], ["bgm", "happy2.mp3"]],
+"dialogue": "[color=8e00c0]先这样   [/color]"
+},
+9: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["background", "demo2.png", "true", "false"], ["bgm", "happy2.mp3"]],
+"dialogue": "[color=8e00c0]再这样   [/color]"
+},
+10: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["background", "demo3.png", "true", "false"], ["bgm", "happy2.mp3"]],
+"dialogue": "[color=8e00c0]最后再这样   [/color]"
+},
+11: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["background", "indoor3.png", "true", "false"], ["bgm", "happy2.mp3"]],
+"dialogue": "[color=8e00c0]然后就能把飞弹扔出去啦   [/color]"
+},
+12: {
+"character": "",
+"command": [["background", "rock.png", "true", "false"], ["bgm", "clear"], ["bgm", "tense6.mp3"]],
+"dialogue": "[color=434444]再次进入地下室，滚石果然如预料中出现  [/color]"
+},
+13: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "110.mp3"], ["bgm", "tense6.mp3"], ["background", "rock.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵！（好！这次可不许失败了）  [/color]"
+},
+"game": "blast",
+"lines": 12
+},
+"get.txt": {
+1: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinidleweixiao.png", "mid", "character", "true"], ["voice", "99.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "indoor3.png", "true", "false"]],
+"dialogue": "[color=8e00c0]好，我们下去吧   [/color]"
+},
+2: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "catxilinidleweixiao.png", "mid", "character", "true"], ["bgm", "lesscasual19.mp3"], ["background", "indoor3.png", "true", "false"]],
+"dialogue": "[color=434444]这里阴森森的，倒是很符合刻板印象……[/color]"
+},
+3: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "100.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "indoor3.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵。(这里有淡淡的魔法波动，似乎不是敌人。) [/color]"
+},
+4: {
+"character": "",
+"command": [["character", "clear", "mid", "character", "false"], ["bgm", "lesscasual19.mp3"], ["background", "indoor3.png", "true", "false"]],
+"dialogue": "[color=434444]通道引向一扇紧闭的石门，一座雕塑镇守于侧。 [/color]"
+},
+5: {
+"character": "",
+"command": [["bgm", "lesscasual19.mp3"], ["background", "indoor3.png", "true", "false"]],
+"dialogue": "[color=434444]那雕塑狮身人面，肋生双翅，看来便是这里的镇守者了[/color]"
+},
+6: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "lesscasual19.mp3"], ["background", "indoor3.png", "true", "false"]],
+"dialogue": "[color=434444]您好，我们是……见习魔法少女，为求得明目术的解除咒语而来。[/color]"
+},
+7: {
+"character": "雕塑",
+"command": [["bgm", "lesscasual19.mp3"], ["background", "indoor3.png", "true", "false"]],
+"dialogue": "……吾名为斯芬克斯。欲求奥秘，须解谜题。"
+},
+8: {
+"character": "[color=787878]斯芬克斯[/color]",
+"command": [["bgm", "lesscasual19.mp3"], ["background", "indoor3.png", "true", "false"]],
+"dialogue": "[color=434444]有这一物，无相无形，却叫人痴醉；[/color]"
+},
+9: {
+"character": "[color=787878]斯芬克斯[/color]",
+"command": [["bgm", "lesscasual19.mp3"], ["background", "indoor3.png", "true", "false"]],
+"dialogue": "[color=434444]有人恨之如仇雠，有人渴之若甘醴。有人取之易于探囊，有人逐之难过摘星。此为何物？[/color]"
+},
+10: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "lesscasual19.mp3"], ["background", "indoor3.png", "true", "false"]],
+"dialogue": "[color=434444]……自由？[/color]"
+},
+11: {
+"character": "[color=787878]斯芬克斯[/color]",
+"command": [["bgm", "lesscasual19.mp3"], ["background", "indoor3.png", "true", "false"]],
+"dialogue": "[color=434444]不然。生而自由者，往往不知其可贵。自由于他们，与阳光雨露并无差别，皆是理所当然，不足求之。[/color]"
+},
+12: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "lesscasual19.mp3"], ["background", "indoor3.png", "true", "false"]],
+"dialogue": "[color=434444]希望？[/color]"
+},
+13: {
+"character": "[color=787878]斯芬克斯[/color]",
+"command": [["bgm", "lesscasual19.mp3"], ["background", "indoor3.png", "true", "false"]],
+"dialogue": "[color=434444]不然。这世上亦有许多人安于现状，不做指望，亦不求改变。这谜底说来有趣，它正好夺人自由、又予人希望。再好好想想罢。[/color]"
+},
+14: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinidleblush.png", "mid", "character", "true"], ["voice", "101.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "indoor3.png", "true", "false"]],
+"dialogue": "[color=8e00c0]……喵呜。  [/color]"
+},
+15: {
+"character": "[color=787878]斯芬克斯[/color]",
+"command": [["character", "catxilinidleblush.png", "mid", "character", "true"], ["bgm", "lesscasual19.mp3"], ["background", "indoor3.png", "true", "false"]],
+"dialogue": "[color=434444]然也。二位请进罢，只是路上有些许机关，虽不甚凶险，仍要当心。[/color]"
+},
+16: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "catxilinidleblush.png", "mid", "character", "true"], ["bgm", "lesscasual19.mp3"], ["background", "indoor3.png", "true", "false"]],
+"dialogue": "[color=434444]谢谢。(谜底居然会是“爱情”？我怎么没想到呢。西琳怎么脸这么红……)[/color]"
+},
+17: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinidleblush2.png", "mid", "character", "true"], ["voice", "102.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "indoor3.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵！(吵死了，笨蛋！)   [/color]"
+},
+18: {
+"character": "",
+"command": [["character", "catxilinidleblush2.png", "mid", "character", "true"], ["bgm", "lesscasual19.mp3"], ["background", "indoor3.png", "true", "false"]],
+"dialogue": "[color=434444]密道很是曲折，时上时下。[/color]"
+},
+19: {
+"character": "[color=787878]舰长[/color]",
+"command": [["sound_effect", "rock.mp3"], ["bgm", "lesscasual19.mp3"], ["background", "indoor3.png", "true", "false"]],
+"dialogue": "[color=434444]等等，那是什么动静— [/color]"
+},
+20: {
+"character": "",
+"command": [["background", "rock.png", "true", "false"], ["character", "clear", "mid", "character", "false"], ["bgm", "clear"], ["bgm", "tense6.mp3"]],
+"dialogue": "[color=434444]十分甚至九分大的滚石出现了! [/color]"
+},
+21: {
+"character": "[color=787878]舰长[/color]",
+"command": [["background", "rock.png", "true", "false"], ["bgm", "tense6.mp3"]],
+"dialogue": "[color=434444]啊呀，骇死我了！[/color]"
+},
+22: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinshouershengqi.png", "mid", "character", "true"], ["voice", "103.mp3"], ["bgm", "tense6.mp3"], ["background", "rock.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵，喵喵。(冷静！冷静！。我刚刚教你的魔力放出技巧正好可以派上用场。)   [/color]"
+},
+23: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "104.mp3"], ["bgm", "tense6.mp3"], ["background", "rock.png", "true", "false"]],
+"dialogue": "[color=8e00c0](快用飞弹把石头炸开！)  [/color]"
+},
+"game": "blast",
+"lines": 22
+},
+"life.txt": {
+1: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["bgm", "clear"], ["bgm", "lesscasual1.mp3"], ["voice", "123.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=8e00c0]喵！(等一下！) [/color]"
+},
+2: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "124.mp3"], ["bgm", "lesscasual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=8e00c0](我不想恢复原样了,就这样吧) [/color]"
+},
+3: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "125.mp3"], ["bgm", "lesscasual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=8e00c0](舰长你也不用交易了，我们走) [/color]"
+},
+4: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "lesscasual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]没事的西琳，我相信—[/color]"
+},
+5: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinshousishengqi.png", "mid", "character", "true"], ["voice", "126.mp3"], ["bgm", "lesscasual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=8e00c0](尊重我的意愿啊大笨蛋！)  [/color]"
+},
+6: {
+"character": "[color=787878]玟翎[/color]",
+"command": [["character", "catxilinshousishengqi.png", "mid", "character", "true"], ["bgm", "lesscasual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]还真是为他考虑呢[/color]"
+},
+7: {
+"character": "[color=787878]玟翎[/color]",
+"command": [["character", "catxilinshousishengqi.png", "mid", "character", "true"], ["bgm", "lesscasual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]只不过，交易人并不是你[/color]"
+},
+8: {
+"character": "[color=787878]玟翎[/color]",
+"command": [["character", "catxilinshousishengqi.png", "mid", "character", "true"], ["bgm", "lesscasual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]交易达成，那么从现在开始—[/color]"
+},
+9: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "127.mp3"], ["bgm", "lesscasual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=8e00c0]哈！(不行！)  [/color]"
+},
+10: {
+"character": "[color=787878]玟翎[/color]",
+"command": [["character", "clear", "mid", "character", "false"], ["bgm", "clear"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]你浪费了二十分钟的时间  [/color]"
+},
+11: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "casual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]？ [/color]"
+},
+12: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinidleweixiao.png", "mid", "character", "true"], ["voice", "128.mp3"], ["bgm", "casual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=8e00c0]喵喵喵？(喵？)  [/color]"
+},
+13: {
+"character": "[color=787878]玟翎[/color]",
+"command": [["character", "catxilinidleweixiao.png", "mid", "character", "true"], ["bgm", "casual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]只要“付出”时间就算交易吧？[/color]"
+},
+14: {
+"character": "[color=787878]玟翎[/color]",
+"command": [["character", "catxilinidleweixiao.png", "mid", "character", "true"], ["bgm", "casual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]难道，你想让我施展什么禁术，把你变成一具干尸？然后自己回归青春？[/color]"
+},
+15: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "catxilinidleweixiao.png", "mid", "character", "true"], ["bgm", "casual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444](西琳，石像鬼还有青春模式吗？)[/color]"
+},
+16: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinidleganga.png", "mid", "character", "true"], ["voice", "129.mp3"], ["bgm", "casual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=8e00c0](笨蛋舰长快丢掉你的想法然后谢谢人家！)  [/color]"
+},
+17: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "catxilinidleganga.png", "mid", "character", "true"], ["bgm", "casual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]哦哦！谢谢前辈！[/color]"
+},
+18: {
+"character": "[color=787878]玟翎[/color]",
+"command": [["character", "clear", "mid", "character", "false"], ["bgm", "casual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]交易乃是本分，无需感谢 [/color]"
+},
+19: {
+"character": "[color=787878]玟翎[/color]",
+"command": [["bgm", "casual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444](不过，这家伙散发出来的生命能量，怎么会这么强？)[/color]"
+},
+20: {
+"character": "[color=787878]玟翎[/color]",
+"command": [["bgm", "casual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444](但确实对魔法和自身一窍不通。算了，就这样吧)[/color]"
+},
+"choice": [["a", "trust.txt", "true"]],
+"lines": 19
+},
+"magic.txt": {
+1: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["bgm", "lesscasual19.mp3"], ["background", "indoor3.png", "true", "false"]],
+"dialogue": "[color=8e00c0]真拿你没办法，我再重复一次吧 [/color]"
+},
+2: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["background", "demo1.png", "true", "false"], ["bgm", "lesscasual19.mp3"]],
+"dialogue": "[color=8e00c0]先这样   [/color]"
+},
+3: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["background", "demo2.png", "true", "false"], ["bgm", "lesscasual19.mp3"]],
+"dialogue": "[color=8e00c0]再这样   [/color]"
+},
+4: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["background", "demo3.png", "true", "false"], ["bgm", "lesscasual19.mp3"]],
+"dialogue": "[color=8e00c0]最后再这样   [/color]"
+},
+5: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["background", "indoor3.png", "true", "false"], ["bgm", "lesscasual19.mp3"]],
+"dialogue": "[color=8e00c0]然后就能把飞弹扔出去啦   [/color]"
+},
+6: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["background", "indoor3.png", "true", "false"], ["bgm", "lesscasual19.mp3"]],
+"dialogue": "[color=8e00c0]记住了吗，这次可不准敷衍人哦[/color]"
+},
+"choice": [["记住了", "get.txt", "false"], ["没记住", "magic.txt", "false"]],
+"lines": 5
+},
+"normal.txt": {
+1: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["background", "indoor6.png", "true", "false"], ["voice", "149.mp3"], ["character", "xilinidlewuyu.png", "mid", "character", "true"], ["bgm", "happy3.mp3"]],
+"dialogue": "[color=8e00c0]舰长同学，集中精神。   [/color]"
+},
+2: {
+"character": "[color=787878]舰长[/color]",
+"command": [["background", "indoor6.png", "true", "false"], ["character", "xilinidlewuyu.png", "mid", "character", "true"], ["bgm", "happy3.mp3"]],
+"dialogue": "[color=434444]西琳老师，这个魔力流动好难控制...[/color]"
+},
+3: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "150.mp3"], ["bgm", "happy3.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=8e00c0]感受能量流动，别被它带着跑。 [/color]"
+},
+4: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "happy3.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=434444]说得容易...啊！又乱了！[/color]"
+},
+5: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "151.mp3"], ["character", "xilinidleshengqi.png", "mid", "character", "true"], ["bgm", "happy3.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=8e00c0]刚恢复就学高阶强化术？你以为你是谁？ [/color]"
+},
+6: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "xilinidleshengqi.png", "mid", "character", "true"], ["bgm", "happy3.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=434444]想早点帮上忙嘛...不想拖后腿...[/color]"
+},
+7: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "152.mp3"], ["character", "xilinidle.png", "mid", "character", "true"], ["bgm", "happy3.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=8e00c0]哼。基础最重要，先练感知。 [/color]"
+},
+8: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "xilinidle.png", "mid", "character", "true"], ["bgm", "happy3.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=434444]是...西琳老师...[/color]"
+},
+9: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "153.mp3"], ["bgm", "happy3.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=8e00c0]...休息五分钟。  [/color]"
+},
+10: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "happy3.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=434444]真的？谢谢老师！[/color]"
+},
+11: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "154.mp3"], ["bgm", "happy3.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=8e00c0]笨蛋舰长。  [/color]"
+},
+12: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "happy3.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=434444]嗯？[/color]"
+},
+13: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "155.mp3"], ["character", "xilinblush.png", "mid", "character", "true"], ["bgm", "happy3.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=8e00c0]...谢谢。为了帮我恢复...  [/color]"
+},
+14: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "xilinblush.png", "mid", "character", "true"], ["bgm", "happy3.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=434444]因为西琳老师很重要啊。 [/color]"
+},
+15: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "patch7.mp3"], ["bgm", "happy3.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=8e00c0]！！！  [/color]"
+},
+16: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "157.mp3"], ["character", "xilinblush2.png", "mid", "character", "true"], ["bgm", "happy3.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=8e00c0]谁要当你老师啊！继续练习！再失败就跑十圈！  [/color]"
+},
+17: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "xilinblush2.png", "mid", "character", "true"], ["bgm", "happy3.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=434444]不要啊西琳老师——！[/color]"
+},
+18: {
+"character": "",
+"command": [["character", "xilinblush2.png", "mid", "character", "true"], ["bgm", "happy3.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=434444]少女元气十足的训斥声和某人的哀嚎求饶声交织在一起，[/color]"
+},
+19: {
+"character": "",
+"command": [["character", "xilinblush2.png", "mid", "character", "true"], ["bgm", "happy3.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=434444]而这，就是两人的日常……一个，会持续很久，很久的日常。[/color]"
+}
+},
+"skip.txt": {
+1: {
+"character": "",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]来到古堡最深处的房间，刚刚推门进去，就有一阵陌生的声音传来。[/color]"
+},
+2: {
+"character": "[color=787878]陌生的声音[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]是谁？居然来到了这里，那只乌龟没有拦下你吗？[/color]"
+},
+3: {
+"character": "",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]声音从头顶传来，二人抬头，只见一只石像鬼静静倒悬在天花板上。[/color]"
+},
+4: {
+"character": "[color=787878]舰长[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]您好！指引我们前来的正是欧里庇得斯前辈。我的同伴因为塑灵术长出了猫耳，希望前辈可以帮助我们解除它。[/color]"
+},
+5: {
+"character": "[color=787878]陌生的声音[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]这样啊，唤我玟翎就好。我现在饥肠辘辘，恐怕爱莫能助呀。[/color]"
+},
+6: {
+"character": "[color=787878]舰长[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]您看这两样可还合您的胃口？[/color]"
+},
+7: {
+"character": "",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]玟翎大吼一声扑向舰长，日的一声将两块石头打成糊糊，心满意足地吃了一大碗。[/color]"
+},
+8: {
+"character": "[color=787878]玟翎[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]非常的新鲜，非常的美味。年轻人，你愿意用什么交换解除塑灵术的方法？财宝，生命，还是智慧？[/color]"
+},
+9: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinshousishengqi.png", "mid", "character", "true"], ["voice", "121.mp3"], ["bgm", "lesscasual13.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=8e00c0]喵?!(等一下，明明已经献上贡品了。这跟说好的可不一样！) [/color]"
+},
+10: {
+"character": "[color=787878]玟翎[/color]",
+"command": [["character", "catxilinshousishengqi.png", "mid", "character", "true"], ["bgm", "lesscasual13.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]刚才的见面礼只是和你交易的入场券[/color]"
+},
+11: {
+"character": "[color=787878]玟翎[/color]",
+"command": [["character", "catxilinshousishengqi.png", "mid", "character", "true"], ["bgm", "lesscasual13.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]要解除这种强大的魔法，哪有这么便宜的代价[/color]"
+},
+12: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "patch11.wav"], ["bgm", "lesscasual13.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=8e00c0]哈！ [/color]"
+},
+13: {
+"character": "[color=787878]玟翎[/color]",
+"command": [["bgm", "lesscasual13.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]吵闹也没用，年轻人，想好了吗[/color]"
+},
+14: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "lesscasual13.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]如果能让她恢复原样，我愿意...[/color]"
+},
+"choice": [["献出财宝", "treasure.txt", "false"], ["献出生命", "life.txt", "false"], ["献出智慧", "wisdom.txt", "false"]],
+"lines": 13
+},
+"success.txt": {
+1: {
+"character": "",
+"command": [["background", "ramp.png", "true", "false"], ["sound_effect", "clear"], ["sound_effect", "blast.mp3"], ["bgm", "tense6.mp3"]],
+"dialogue": "[color=434444]滚石应声炸裂，露出后面扳动机关的骷髅。它呆站在路中间，没有让开的意思。  [/color]"
+},
+2: {
+"character": "[color=787878]舰长[/color]",
+"command": [["background", "ramp.png", "true", "false"], ["sound_effect", "blast.mp3"], ["bgm", "tense6.mp3"]],
+"dialogue": "[color=434444]西琳，怎么办？再用飞弹打它吗？[/color]"
+},
+3: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinshouershengqi.png", "mid", "character", "true"], ["voice", "111.mp3"], ["bgm", "tense6.mp3"], ["background", "ramp.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵，喵。(不行，有一股魔法力量维持它的行动，直接轰击它恐怕会引发大爆炸。) [/color]"
+},
+4: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "catxilinshouershengqi.png", "mid", "character", "true"], ["bgm", "tense6.mp3"], ["background", "ramp.png", "true", "false"]],
+"dialogue": "[color=434444]那怎么办？[/color]"
+},
+5: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "112.mp3"], ["bgm", "tense6.mp3"], ["background", "ramp.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵。(别急，它暂时没有行动的意思，凑近看看。) [/color]"
+},
+6: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "tense6.mp3"], ["background", "ramp.png", "true", "false"]],
+"dialogue": "[color=434444]好的。(看样子可能要和它近身格斗，先用魔力强化四肢稍作准备。)[/color]"
+},
+7: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "114.mp3"], ["bgm", "tense6.mp3"], ["background", "ramp.png", "true", "false"]],
+"dialogue": "[color=8e00c0]喵。(看来这力量被它的胸骨困住了。舰长，试试揭开它。)  [/color]"
+},
+8: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "tense6.mp3"], ["background", "ramp.png", "true", "false"]],
+"dialogue": "[color=434444]喝！[/color]"
+},
+9: {
+"character": "",
+"command": [["character", "clear", "mid", "character", "false"], ["bgm", "tense6.mp3"], ["background", "ramp.png", "true", "false"]],
+"dialogue": "[color=434444]这骷髅似乎也受到了魔力强化，还好来自西琳的法力更胜一筹。 [/color]"
+},
+10: {
+"character": "",
+"command": [["bgm", "tense6.mp3"], ["background", "ramp.png", "true", "false"]],
+"dialogue": "[color=434444]胸骨应声被揭开，里面蕴藏的魔法能量逸散飞出[/color]"
+},
+11: {
+"character": "",
+"command": [["bgm", "tense6.mp3"], ["background", "ramp.png", "true", "false"]],
+"dialogue": "[color=434444]高大的骷髅轰然倒地。露出了被守护的木门。[/color]"
+},
+12: {
+"character": "",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "clear"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]骷髅身后又是扇木门，两人进去，发现门后蹲着一只老龟。四周布满书架，还有些许法阵的遗迹。 [/color]"
+},
+13: {
+"character": "",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]看来这里就是古堡地下部分的核心，也就是魔力的源头了。[/color]"
+},
+14: {
+"character": "[color=787878]舰长[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444](竟能让周遭的土壤魔力充盈如斯，很难想象这些法阵当年火力全开的盛景...)[/color]"
+},
+15: {
+"character": "[color=787878]老龟[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]你们好，年轻人。我是欧里庇得斯，原先是古堡的守护者，也是伟大魔法师莫里斯的仆从，现在不过是一介蹉跎时光的老者罢了。[/color]"
+},
+16: {
+"character": "[color=787878]舰长[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]你好，老先生。我们是见习魔法少—男？为寻求明目术的解除咒语而来。[/color]"
+},
+17: {
+"character": "[color=787878]老龟[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]这很简单，你们登上阁楼找到魔法管理局派驻此地的守卫就好。[/color]"
+},
+18: {
+"character": "[color=787878]舰长[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]多谢老先生。[/color]"
+},
+"choice": [["直接上楼", "skip.txt", "false"], ["询问过往", "yap.txt", "false"]],
+"lines": 17
+},
+"treasure.txt": {
+1: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["bgm", "clear"], ["bgm", "lesscasual1.mp3"], ["voice", "123.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=8e00c0]喵！(等一下！) [/color]"
+},
+2: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "124.mp3"], ["bgm", "lesscasual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=8e00c0](我不想恢复原样了,就这样吧) [/color]"
+},
+3: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "125.mp3"], ["bgm", "lesscasual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=8e00c0](舰长你也不用交易了，我们走) [/color]"
+},
+4: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "lesscasual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]没事的西琳，我相信—[/color]"
+},
+5: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinshousishengqi.png", "mid", "character", "true"], ["voice", "126.mp3"], ["bgm", "lesscasual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=8e00c0](尊重我的意愿啊大笨蛋！)  [/color]"
+},
+6: {
+"character": "[color=787878]玟翎[/color]",
+"command": [["character", "catxilinshousishengqi.png", "mid", "character", "true"], ["bgm", "lesscasual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]还真是为他考虑呢[/color]"
+},
+7: {
+"character": "[color=787878]玟翎[/color]",
+"command": [["character", "catxilinshousishengqi.png", "mid", "character", "true"], ["bgm", "lesscasual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]只不过，交易人并不是你[/color]"
+},
+8: {
+"character": "[color=787878]玟翎[/color]",
+"command": [["character", "catxilinshousishengqi.png", "mid", "character", "true"], ["bgm", "lesscasual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]交易达成，那么从现在开始—[/color]"
+},
+9: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "127.mp3"], ["bgm", "lesscasual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=8e00c0]哈！(不行！)  [/color]"
+},
+10: {
+"character": "[color=787878]玟翎[/color]",
+"command": [["character", "clear", "mid", "character", "false"], ["bgm", "clear"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]你的弦月币，都归我了  [/color]"
+},
+11: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "casual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]？ [/color]"
+},
+12: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinidleweixiao.png", "mid", "character", "true"], ["voice", "128.mp3"], ["bgm", "casual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=8e00c0]喵喵喵？(喵？)  [/color]"
+},
+13: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "catxilinidleweixiao.png", "mid", "character", "true"], ["bgm", "casual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]那个，弦月币是啥？[/color]"
+},
+14: {
+"character": "[color=787878]玟翎[/color]",
+"command": [["character", "catxilinidleweixiao.png", "mid", "character", "true"], ["bgm", "casual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]在以魔法著称的弦月新城，只要有足够的弦月币就可以买到一切[/color]"
+},
+15: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "catxilinidleweixiao.png", "mid", "character", "true"], ["bgm", "casual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]哦哦[/color]"
+},
+16: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "catxilinidleweixiao.png", "mid", "character", "true"], ["bgm", "casual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]但是，我好像.....一分都没有[/color]"
+},
+17: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "catxilinidleweixiao.png", "mid", "character", "true"], ["bgm", "casual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]啊，我船上金币倒是不少。用那个来交易—[/color]"
+},
+18: {
+"character": "[color=787878]玟翎[/color]",
+"command": [["update", "captain_local_wealth", "assign", "0"], ["bgm", "casual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]代码是这么写的。你的弦月币都归我了，交易达成 [/color]"
+},
+19: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinidlewuyu.png", "mid", "character", "true"], ["voice", "132.mp3"], ["bgm", "casual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=8e00c0]谢..谢谢了 [/color]"
+},
+"choice": [["a", "trust.txt", "true"]],
+"lines": 18
+},
+"trust.txt": {
+1: {
+"character": "",
+"command": [["bgm", "clear"], ["bgm", "happy3.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]伴随着魔法契约在他们之间形成，我和西琳相视一笑。 [/color]"
+},
+2: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinidleweixiao.png", "mid", "character", "true"], ["voice", "137.mp3"], ["bgm", "happy3.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=8e00c0]喵，喵喵？(舰长，刚才你说愿意相信什么？)   [/color]"
+},
+3: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "catxilinidleweixiao.png", "mid", "character", "true"], ["bgm", "happy3.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]这个……我……欸嘿[/color]"
+},
+4: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinshousishengqi.png", "mid", "character", "true"], ["voice", "138.mp3"], ["bgm", "happy3.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=8e00c0]喵，喵喵。（你就不想想，万一！万一你真的要付出你讲的代价。）  [/color]"
+},
+5: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "139.mp3"], ["bgm", "happy3.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=8e00c0]喵？（你肯付出这些代价的原因是什么？） [/color]"
+},
+6: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "happy3.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]因为我相信你啊[/color]"
+},
+7: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinidleblush2.png", "mid", "character", "true"], ["bgm", "happy3.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=8e00c0] !!!    [/color]"
+},
+8: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "catxilinidleblush2.png", "mid", "character", "true"], ["bgm", "happy3.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]即使我真的失去那些东西，财宝也好，智慧也好，知识也好，都无足挂齿。[/color]"
+},
+9: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "catxilinidleblush2.png", "mid", "character", "true"], ["bgm", "happy3.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]即便是那样的我，你和船上的大家也会想办法恢复或是照顾我。[/color]"
+},
+10: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "catxilinidleblush2.png", "mid", "character", "true"], ["bgm", "happy3.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]你想想，我要是真的付出了那些代价……你会放弃我吗？一来二去，你更加离不开我了，我们就再也分不开啦。[/color]"
+},
+11: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinshousishengqi.png", "mid", "character", "true"], ["bgm", "happy3.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=8e00c0]哈！   [/color]"
+},
+12: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "catxilinshousishengqi.png", "mid", "character", "true"], ["bgm", "happy3.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]然后，是玟翎前辈。[/color]"
+},
+13: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "catxilinshousishengqi.png", "mid", "character", "true"], ["bgm", "happy3.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]我相信，她绝不会对我下毒手。[/color]"
+},
+14: {
+"character": "[color=787878]玟翎[/color]",
+"command": [["character", "catxilinshousishengqi.png", "mid", "character", "true"], ["bgm", "happy3.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]哦？你怎么肯定的？[/color]"
+},
+15: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "catxilinshousishengqi.png", "mid", "character", "true"], ["bgm", "happy3.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]我想……因为您在乎的，只是被自己守望百年的莫里斯前辈，还有已经说不出口的爱情。[/color]"
+},
+16: {
+"character": "[color=787878]玟翎[/color]",
+"command": [["character", "catxilinshousishengqi.png", "mid", "character", "true"], ["bgm", "happy3.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]一点不假。像我们这样的苦命鸳鸯，还是少些好哟。[/color]"
+},
+17: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinidleblush.png", "mid", "character", "true"], ["voice", "140.mp3"], ["bgm", "happy3.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=8e00c0]喵！（鸳鸯什么的！） [/color]"
+},
+18: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "catxilinidleblush.png", "mid", "character", "true"], ["bgm", "happy3.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]最后，是我自己。[/color]"
+},
+19: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "catxilinidleblush.png", "mid", "character", "true"], ["bgm", "happy3.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]我相信，自己能走到今天，凭的不是财宝、生命和智慧，而是我自己。[/color]"
+},
+20: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "catxilinidleblush.png", "mid", "character", "true"], ["bgm", "happy3.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]无论付出多少代价，我都要拼尽一切可能，去带回自己重要的人。所以，当有机会做出选择的时候，我只有一个想法，那就是……[/color]"
+},
+21: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "catxilinidleblush.png", "mid", "character", "true"], ["bgm", "happy3.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]不要为自己的选择后悔。[/color]"
+},
+22: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinidleblush.png", "mid", "character", "true"], ["bgm", "happy3.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=8e00c0]......[/color]"
+},
+23: {
+"character": "",
+"command": [["character", "clear", "mid", "character", "false"], ["bgm", "happy3.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]玟翎像是陷入了什么回忆，过一会才回过神来。 [/color]"
+},
+24: {
+"character": "[color=787878]玟翎[/color]",
+"command": [["bgm", "happy3.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]咳咳，好啦，既然交易已经达成。明目术就由我解除吧。[/color]"
+},
+25: {
+"character": "",
+"command": [["bgm", "happy3.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]魔力从玟翎的指尖蔓延开来化作一道繁复的魔法阵，魔法的光辉逐渐牵引着西琳小小的身躯。[/color]"
+},
+26: {
+"character": "",
+"command": [["bgm", "happy3.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]伴随着光辉，西琳的身躯在空中不断放大。[/color]"
+},
+27: {
+"character": "",
+"command": [["bgm", "happy3.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]光芒消散，一个小小的身躯撞进舰长的怀里。[/color]"
+},
+28: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "happy3.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]西琳？你没事吧，有没有哪里不舒—[/color]"
+},
+29: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "xilinidleweixiao.png", "mid", "character", "false"], ["voice", "141.mp3"], ["bgm", "happy3.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=8e00c0]笨蛋舰长，该回去了。 [/color]"
+},
+30: {
+"character": "",
+"command": [["background", "fadeout", "true", "false"], ["bgm", "happy3.mp3"]],
+"dialogue": "[color=434444][/color]"
+},
+"choice": [["a", "two.txt", "true", "yap", "equal", "0"], ["b", "normal.txt", "true", "yap", "equal", "1"]],
+"lines": 29
+},
+"two.txt": {
+1: {
+"character": "**",
+"command": [["background", "indoor6.png", "true", "false"], ["voice", "145.mp3"], ["bgm", "happy3.mp3"]],
+"dialogue": "“舰长，快过来给我开门！”  "
+},
+2: {
+"character": "",
+"command": [["background", "indoor6.png", "true", "false"], ["bgm", "happy3.mp3"]],
+"dialogue": "[color=434444]一阵非常清脆悦耳的少女音在舰长房间外响起，音调活泼，甚至带着点撒娇的意味。[/color]"
+},
+3: {
+"character": "",
+"command": [["background", "indoor6.png", "true", "false"], ["bgm", "happy3.mp3"]],
+"dialogue": "[color=434444]但是显然，这份声音格外的陌生。[/color]"
+},
+4: {
+"character": "[color=787878]舰长[/color]",
+"command": [["background", "indoor6.png", "true", "false"], ["bgm", "happy3.mp3"]],
+"dialogue": "[color=434444]“啊？谁啊？” [/color]"
+},
+5: {
+"character": "[color=787878]舰长[/color]",
+"command": [["background", "indoor6.png", "true", "false"], ["bgm", "happy3.mp3"]],
+"dialogue": "[color=434444](这个声音...有点陌生又有点熟悉？难道...) [/color]"
+},
+6: {
+"character": "",
+"command": [["character", "xilinidleweixiao.png", "mid", "character", "true"], ["bgm", "happy3.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=434444]门外站着的是熟悉的西琳。少女亭亭玉立，标志性的紫色长发柔顺地披在肩后，身上穿着整洁的魔法少女制服，脸上带着一丝狡黠的笑容。 [/color]"
+},
+7: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "xilinidleweixiao.png", "mid", "character", "true"], ["bgm", "happy3.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=434444]原来是西琳啊，这次是...元气少女音？[/color]"
+},
+8: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "146.mp3"], ["bgm", "happy3.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=8e00c0]没办法啦，笨蛋舰长！ [/color]"
+},
+9: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "147.mp3"], ["character", "xilinidlezhayan.png", "mid", "character", "true"], ["bgm", "happy3.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=8e00c0]你别说，这魔力振动还挺好玩的，音色随便变换哦♪~ [/color]"
+},
+10: {
+"character": "[color=787878]舰长[/color]",
+"command": [["character", "xilinidlezhayan.png", "mid", "character", "true"], ["bgm", "happy3.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=434444]啊哈哈...西琳老师，你开心就好。[/color]"
+},
+11: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "148.mp3"], ["bgm", "happy3.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=8e00c0]少废话！我饿了！快给我做饭！我要吃你上次做的那种甜甜的布丁！ [/color]"
+},
+12: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "happy3.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=434444]是是是，西琳大小姐，遵命。”[/color]"
+},
+13: {
+"character": "",
+"command": [["bgm", "happy3.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=434444]我笑着应道，转身走向厨房。[/color]"
+},
+14: {
+"character": "",
+"command": [["bgm", "happy3.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=434444]身后，西琳蹦蹦跳跳地跟了上来，身边飘荡着【要双份糖！】【舰长最好了！(*^▽^*)】的魔力字符[/color]"
+},
+15: {
+"character": "",
+"command": [["bgm", "happy3.mp3"], ["background", "indoor6.png", "true", "false"]],
+"dialogue": "[color=434444]仿佛一场无声却无比欢快的魔法烟火，点亮了这小小的房间。[/color]"
+}
+},
+"wisdom.txt": {
+1: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["bgm", "clear"], ["bgm", "lesscasual1.mp3"], ["voice", "123.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=8e00c0]喵！(等一下！) [/color]"
+},
+2: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "124.mp3"], ["bgm", "lesscasual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=8e00c0](我不想恢复原样了,就这样吧) [/color]"
+},
+3: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "125.mp3"], ["bgm", "lesscasual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=8e00c0](舰长你也不用交易了，我们走) [/color]"
+},
+4: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "lesscasual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]没事的西琳，我相信—[/color]"
+},
+5: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinshousishengqi.png", "mid", "character", "true"], ["voice", "126.mp3"], ["bgm", "lesscasual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=8e00c0](尊重我的意愿啊大笨蛋！)  [/color]"
+},
+6: {
+"character": "[color=787878]玟翎[/color]",
+"command": [["character", "catxilinshousishengqi.png", "mid", "character", "true"], ["bgm", "lesscasual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]还真是为他考虑呢[/color]"
+},
+7: {
+"character": "[color=787878]玟翎[/color]",
+"command": [["character", "catxilinshousishengqi.png", "mid", "character", "true"], ["bgm", "lesscasual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]只不过，交易人并不是你[/color]"
+},
+8: {
+"character": "[color=787878]玟翎[/color]",
+"command": [["character", "catxilinshousishengqi.png", "mid", "character", "true"], ["bgm", "lesscasual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]交易达成，那么从现在开始—[/color]"
+},
+9: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "127.mp3"], ["bgm", "lesscasual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=8e00c0]哈！(不行！)  [/color]"
+},
+10: {
+"character": "[color=787878]玟翎[/color]",
+"command": [["character", "clear", "mid", "character", "false"], ["bgm", "clear"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]失去你所有的魔法知识吧！  [/color]"
+},
+11: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "casual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]？ [/color]"
+},
+12: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinidleweixiao.png", "mid", "character", "true"], ["voice", "128.mp3"], ["bgm", "casual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=8e00c0]喵喵喵？(喵？)  [/color]"
+},
+13: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "134.mp3"], ["bgm", "casual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=8e00c0]喵，喵喵(请等一下，魔法确实是人类智慧的结晶，但是—) [/color]"
+},
+14: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["character", "catxilinshousishengqi.png", "mid", "character", "true"], ["voice", "135.mp3"], ["bgm", "casual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=8e00c0]喵！(这家伙完全没有学会任何魔法啊！)   [/color]"
+},
+15: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "136.mp3"], ["bgm", "casual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=8e00c0](正好算交易取消，舰长我们赶紧走吧，我没事的) [/color]"
+},
+16: {
+"character": "[color=787878]玟翎[/color]",
+"command": [["update", "captain_magic_skill", "assign", "0"], ["bgm", "casual1.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]代码是这么写的。你的魔法知识都归我了，交易达成 [/color]"
+},
+"choice": [["a", "trust.txt", "true"]],
+"lines": 15
+},
+"yap.txt": {
+1: {
+"character": "[color=787878]舰长[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]不过，您刚才提到一位伟大魔法师，为什么外界从没有他的名号流传？[/color]"
+},
+2: {
+"character": "[color=787878]老龟[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]呵呵。那也是很多很多年前的事情了，我的主人终生居于古堡之中潜心魔术，与外界几乎从无往来，所以没有记载。[/color]"
+},
+3: {
+"character": "[color=787878]老龟[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]我的主人莫里斯是位天外来客。他的爱人身中诅咒长眠不醒[/color]"
+},
+4: {
+"character": "[color=787878]老龟[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]故而他游历诸国想要习得解除之法，却一无所获，直到来到这里发现此处的大量魔法典籍，便决定定居在此研究。[/color]"
+},
+5: {
+"character": "[color=787878]老龟[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]他建造了这座古堡，又创造出我，分我些许魔力命我保护这里，以便他闭关时不受打扰。[/color]"
+},
+6: {
+"character": "[color=787878]老龟[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]事情如果这样发展下去，或许他有一天能得偿所愿吧，可惜……[/color]"
+},
+7: {
+"character": "",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]舰长西琳一言不发，静静听着。[/color]"
+},
+8: {
+"character": "[color=787878]老龟[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]我那主人翻遍诸般典籍，甚至连毁天灭地的大法术也找到几个，就是没有解除诅咒的办法。[/color]"
+},
+9: {
+"character": "[color=787878]老龟[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]他一日日地越发焦虑，直至癫狂，最后变得愤世嫉俗，怨天尤人。[/color]"
+},
+10: {
+"character": "[color=787878]老龟[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]他开始从附近村镇抓来少年少女，准备试验塑灵术。[/color]"
+},
+11: {
+"character": "[color=787878]舰长[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]塑灵术？听上去和操控灵魂有关……[/color]"
+},
+12: {
+"character": "[color=787878]老龟[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]是的，塑灵术是主人自己研究的一门可以编辑灵魂的法术，运用得法甚至可以将人类变为崩坏兽。[/color]"
+},
+13: {
+"character": "[color=787878]老龟[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]他先用少年少女们做实验，试图让他们长出猫耳狗尾，大获成功。[/color]"
+},
+14: {
+"character": "[color=787878]舰长[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444](看来这就是明目术的源头了……)[/color]"
+},
+15: {
+"character": "[color=787878]老龟[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]主人欣喜若狂，准备利用它制造出一批崩坏兽军团，强迫魔法管理局为他研究解除诅咒的方法。[/color]"
+},
+16: {
+"character": "[color=787878]老龟[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]然而他的研究还没完成，魔法管理局就循着少年少女们的踪迹追到了这里。[/color]"
+},
+17: {
+"character": "[color=787878]老龟[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]主人情急之下强行施术，试图将堡内所有人变为崩坏兽[/color]"
+},
+18: {
+"character": "[color=787878]老龟[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]但是这门法术并不成熟，他每造出一个崩坏兽灵魂都要消耗大量法力，气急败坏之下他竟透支生命，最后暴毙在此。[/color]"
+},
+19: {
+"character": "[color=787878]舰长[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]令人感慨……[/color]"
+},
+20: {
+"character": "[color=787878]老龟[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]当时我试图阻止他，却被强大的魔力波动逼得近不了身。[/color]"
+},
+21: {
+"character": "[color=787878]老龟[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]他死后，被拟造的所有灵魂都烟消云散，孩子们恢复了正常[/color]"
+},
+22: {
+"character": "[color=787878]老龟[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]闯进来的魔法师们看到这幅样子都很惊奇，还是我一五一十向他们解释清楚来龙去脉。[/color]"
+},
+23: {
+"character": "[color=787878]老龟[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]当然，其中也包括塑灵术研究的一小部分。[/color]"
+},
+24: {
+"character": "[color=787878]老龟[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]为了避免混乱，我谎称绝大部分实验都失败了，只有一例为盲童拟造猫眼的实验获得成功。[/color]"
+},
+25: {
+"character": "[color=787878]老龟[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]这份实验资料让他们欣喜若狂，高兴之下也没细究我是否撒谎。[/color]"
+},
+26: {
+"character": "[color=787878]老龟[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]他们回去后再做研究，便有了你们熟悉的明目术。[/color]"
+},
+27: {
+"character": "[color=787878]舰长[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]原来如此……[/color]"
+},
+28: {
+"character": "[color=787878]老龟[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]我送走他们后，发现主人藏于古堡中的棺椁竟然有些动静，打开之后发现里面竟然是已经苏醒的女主人。[/color]"
+},
+29: {
+"character": "舰长&西琳",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "啊？&喵？"
+},
+30: {
+"character": "[color=787878]老龟[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]女主人同为魔法大家，她得知前因后果后稍加思考，终于得知了事情的全部经过。[/color]"
+},
+31: {
+"character": "[color=787878]老龟[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]原来那诅咒是另一位爱慕主人的女魔法师所下，她苦恋主人而不得，便以主人对女主人的爱慕为引下咒，将它化作绑缚灵魂的锁链[/color]"
+},
+32: {
+"character": "[color=787878]老龟[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]只要主人爱着女主人一天，女主人便不能苏醒。反之，只要主人对女主人的爱慕消失，女主人自然也就醒了。[/color]"
+},
+33: {
+"character": "二人",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "哦……"
+},
+34: {
+"character": "[color=787878]老龟[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]主人自然也有所察觉，他在斗法后击败了那位魔法师并严刑逼供，却在盛怒下将她拷打至死[/color]"
+},
+35: {
+"character": "[color=787878]老龟[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]从此失去了唯一的线索来源，只能如大海捞针般苦苦寻找解咒之法……[/color]"
+},
+36: {
+"character": "[color=787878]舰长[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444](或许那位魔法师是绝望之下自己求死的。心爱之人如此痛恨自己，使出如此狠毒手段也夺不回他的心，这种滋味真是难受得紧啊)[/color]"
+},
+37: {
+"character": "[color=787878]老龟[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]女主人参研塑灵术手记后发现，其实它与解咒之法已相差不远[/color]"
+},
+38: {
+"character": "[color=787878]老龟[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]只要将它施予锁链之上解开锁链，自然可以解咒。[/color]"
+},
+39: {
+"character": "[color=787878]老龟[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]塑灵术和那咒语其实非常相似。实际上，咒语可被视作塑灵术的一种变体。[/color]"
+},
+40: {
+"character": "[color=787878]老龟[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]主人想求救醒女主人的良药，却找到了当年残害他们的快刀。[/color]"
+},
+41: {
+"character": "[color=787878]老龟[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]这快刀原来可以当做治疗女主人的手术刀，被愤怒冲昏头脑的主人却把它当做了屠刀，最终用它结束了自己的生命。[/color]"
+},
+42: {
+"character": "",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]二人一龟一时默然。[/color]"
+},
+43: {
+"character": "[color=787878]舰长[/color]",
+"command": [["background", "indoor1.PNG", "true", "false"], ["bgm", "lesscasual13.mp3"]],
+"dialogue": "[color=434444]那么您让我们上楼寻找解除咒语，就是要我们向您的女主人求教了？[/color]"
+},
+44: {
+"character": "[color=787878]老龟[/color]",
+"command": [["character", "clear", "mid", "character", "false"], ["update", "yap", "add", "1"], ["bgm", "lesscasual13.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]呵呵，的确如此。上去前要做好心理准备，她如今的样子也许会吓到你们。 [/color]"
+},
+45: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "lesscasual13.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]怎么？[/color]"
+},
+46: {
+"character": "[color=787878]老龟[/color]",
+"command": [["bgm", "lesscasual13.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]如今她放弃了人身，化作一只石像鬼模样。[/color]"
+},
+47: {
+"character": "二人",
+"command": [["bgm", "lesscasual13.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "啊？"
+},
+48: {
+"character": "[color=787878]老龟[/color]",
+"command": [["bgm", "lesscasual13.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]女主人得知全部事情后，焚毁了全部塑灵术手记，决心永世封印这不祥的法术。[/color]"
+},
+49: {
+"character": "[color=787878]老龟[/color]",
+"command": [["bgm", "lesscasual13.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]在那之前，她用塑灵术将自己变为石像鬼，这样就能拥有山岩一般漫长的寿命，而且只要吃点石头就能活下去。[/color]"
+},
+50: {
+"character": "[color=787878]老龟[/color]",
+"command": [["bgm", "lesscasual13.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]她希望用这样的方式永远守护自己的伴侣，还有他的安宁。[/color]"
+},
+51: {
+"character": "[color=787878]老龟[/color]",
+"command": [["bgm", "lesscasual13.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]之前离开的那批魔法师偶有人三三两两地前来窥探主人的秘密，都被女主人变成了猫猫狗狗放归山林。[/color]"
+},
+52: {
+"character": "[color=787878]老龟[/color]",
+"command": [["bgm", "lesscasual13.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]那批魔法师全部老死后，来这里的就只有误入的路人了。[/color]"
+},
+53: {
+"character": "[color=787878]老龟[/color]",
+"command": [["bgm", "lesscasual13.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]这时女主人就会诈称自己是魔法管理局派驻这里的守卫，或欺骗或施术，让他们一一离开。[/color]"
+},
+54: {
+"character": "[color=787878]老龟[/color]",
+"command": [["bgm", "lesscasual13.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]道路变迁后，此地已有近百年无人到来，女主人便在阁楼里绝食闭关。[/color]"
+},
+55: {
+"character": "[color=787878]老龟[/color]",
+"command": [["bgm", "lesscasual13.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]她说，主人当年的苦楚她万难偿还，只能以这种方式稍加体会，我怎么劝她都不听。[/color]"
+},
+56: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "lesscasual13.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]她这样不会把身体饿出问题吧？[/color]"
+},
+57: {
+"character": "[color=787878]老龟[/color]",
+"command": [["bgm", "lesscasual13.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]不会，女主人拟造的石像之躯足够强韧，可以依靠古堡中流转的魔力维持基本的神智与交流。[/color]"
+},
+58: {
+"character": "[color=787878]老龟[/color]",
+"command": [["bgm", "lesscasual13.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]只是如果要行走、施术，就不得不补充些能源了。[/color]"
+},
+59: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "lesscasual13.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]您看这可以吗？(提交石心和钢炎石)[/color]"
+},
+60: {
+"character": "[color=787878]老龟[/color]",
+"command": [["bgm", "lesscasual13.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]这些都是女主人爱吃的传世名菜呀。[/color]"
+},
+61: {
+"character": "[color=787878]老龟[/color]",
+"command": [["bgm", "lesscasual13.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]放心吧，她闻到菜香，又感受到你们身上的塑灵术波动，一定会回应你们的。等她吃完，你们就能得到答案了。[/color]"
+},
+62: {
+"character": "二人",
+"command": [["bgm", "lesscasual13.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "多谢赐教！&喵！"
+},
+63: {
+"character": "[color=787878]老龟[/color]",
+"command": [["bgm", "lesscasual13.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]没事。我跟随女主人多年，和她一样，最喜欢你们这样的有情之人。[/color]"
+},
+64: {
+"character": "[color=787878]老龟[/color]",
+"command": [["bgm", "lesscasual13.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]主人的悲剧已经无法挽回，如今能多救一对，也算是为他积点功德吧。女主人看到你们，也许会想起以前的青春岁月呢。[/color]"
+},
+65: {
+"character": "",
+"command": [["bgm", "lesscasual13.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]二人侧过头去，西琳小脸一红。[/color]"
+},
+66: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": [["voice", "120.mp3"], ["bgm", "lesscasual13.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=8e00c0]……喵。(好啦舰长，我们快去见那位老前辈寻求解除术吧。) [/color]"
+},
+67: {
+"character": "[color=787878]舰长[/color]",
+"command": [["bgm", "lesscasual13.mp3"], ["background", "indoor1.PNG", "true", "false"]],
+"dialogue": "[color=434444]嗯。[/color]"
+},
+"choice": [["back", "skip.txt", "true"]],
+"lines": 66
+}
+}
+curr_chap = "Start.txt"
+curr_line = 0

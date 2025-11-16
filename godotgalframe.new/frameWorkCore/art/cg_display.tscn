@@ -51,11 +51,6 @@ custom_minimum_size = Vector2(576, 390)
 layout_mode = 2
 stretch_mode = 0
 
-[node name="CG_slot3" parent="main/CenterContainer/GridContainer" instance=ExtResource("3_otbiu")]
-custom_minimum_size = Vector2(576, 390)
-layout_mode = 2
-stretch_mode = 0
-
 [node name="return" type="TextureButton" parent="main"]
 layout_mode = 1
 anchors_preset = -1

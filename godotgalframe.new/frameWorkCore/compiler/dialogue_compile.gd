@@ -4,6 +4,7 @@ var scripts_file = "processed_script.tres"
 var head_file = "header.tres"
 var res_dialogue = "res://dialogue/"
 var dialogue_start = "res://dialogue/Start.txt"
+var curr_dialogue
 var prev_command = []
 var prev_text = {}
 var dialogue_list = []
@@ -43,9 +44,13 @@ func helper_find_chapter_from_choice(which_chap: String):
 			return chapters
 
 func dialogue_proof_read(chapter: Array):
+	# holy fuck this code is shit
+	# this is one of the uglyest function I have ever written
+	curr_dialogue = chapter
 	var character
 	var dialogue
 	var command
+	var temp_command
 	var text
 	var chap_name = chapter[0]
 	var chap_dir = chapter[1]
@@ -55,13 +60,16 @@ func dialogue_proof_read(chapter: Array):
 	while !file.eof_reached():
 		text = file.get_line()
 		while text == "":
+		# incase a blank line is left, once a blank line is detected
+		# skip until a none blank line is reached
 			if file.eof_reached():
 				script_tree.clear_save()
 				ResourceSaver.save(script_tree, save_path + scripts_file)
 				return
 			text = file.get_line()
-		# incase a blank line is left, once a blank line is detected
-		# skip until a none blank line is reached
+		#TODO join choice and game into sth else
+		# so the code isn't this massive piece of shit
+		# and can be easily extended
 		if text == "choice":
 			var choices = get_choice(file)
 			script_tree.add_choice(choices)
@@ -69,17 +77,25 @@ func dialogue_proof_read(chapter: Array):
 			file.close()
 			processed_dialogue.append(chap_name)
 			ResourceSaver.save(script_tree, save_path + scripts_file)
+			temp_command = prev_command
 			for choice in choices:
+				prev_command = temp_command
 				if choice[1] not in processed_dialogue:
 					dialogue_proof_read(helper_find_chapter_from_choice(choice[1]))
 			return
 		if text == "game":
 			var game = file.get_line()
+			file.close()
+			processed_dialogue.append(chap_name)
 			if game != "":
 				game = Array(game.rsplit(" "))
 				script_tree.add_game(game[0])
-				dialogue_proof_read(helper_find_chapter_from_choice(game[1]))
-				
+				temp_command = prev_command
+				for i in range(1, len(game)):
+					prev_command = temp_command
+					if game[i] not in processed_dialogue:
+						dialogue_proof_read(helper_find_chapter_from_choice(game[i]))
+			return
 		text = text.replace("：", ":")
 		character = text.substr(0, text.find(":") + 1)
 		# this includes the ":"
@@ -103,7 +119,7 @@ func dialogue_proof_read(chapter: Array):
 		elif $"..".auto_color and character == "":
 			var header:Header = ResourceLoader.load(save_path + head_file)
 			dialogue = header.process_color("nar", "dialogue", dialogue)
-			# this colours the narrator
+			# this colours the narrator which does not have a character name
 		var command_list = process_commands(command)
 		prev_text = {"character": character, "dialogue": dialogue}
 		script_tree.add_line(character, dialogue, command_list)
@@ -177,10 +193,14 @@ func extend_commands():
 	# when load it loads all the art and music resource
 	var extended = []
 	for command in prev_command:
-		if command[0] != "voice" and command[0] != "update" and command[1] != "clear":
+		if extendable(command):
 			extended.append(command)
 	return extended
 
+func extendable(command: Array):
+	return command[0] != "voice" and command[0] != "update" \
+	and command[1] != "clear"
+	
 func extend_background(order_list: Array):
 	for command in order_list:
 		if command[0] == "background" or command[0] == "CG":

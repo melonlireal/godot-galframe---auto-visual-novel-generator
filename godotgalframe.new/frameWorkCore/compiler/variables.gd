@@ -34,6 +34,14 @@ func rand(variable: String, value: String):
 	variables[variable] = random.randi_range(0, int(value))
 	print("randomize variable {0} to {1}\n".format({"0":variable, "1": variables[variable]}))
 	
+func assign(variable: String, value: String):
+	if variables.has(value):
+		variables[variable] = variables[value]
+		print("assign value in {0} to variable {1}\n".format({"0":variables[value], "1": variable}))
+	else:
+		variables[variable] = int(value)
+	return
+	
 func var_con(variable: String, operation: String, value: String):
 	var op = Callable(self, operation)
 	return op.call(variable, value)

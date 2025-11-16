@@ -31,11 +31,16 @@ func change_avatar(avatar: String, position = "mid", slot: = "character", transi
 		return
 	print(position)
 	print(slot)
-	var which_slot = %avatar.find_child(position).find_child(slot)
+	var which_slot:TextureRect = %avatar.find_child(position).find_child(slot)
 	#这个会自动清除
+	if which_slot.texture != null and which_slot.texture.resource_path.get_file() == avatar:
+		# if its the same avatar, do nothing
+		return
 	if transition == "false" or $"..".speed_up:
 		which_slot.texture = ResourceLoader.load(avatar_at)
 	else:
+		#WARNING
+		#this STUPID PIECE OF SHIT will NOT work when the avatar size is too big
 		%avatar.find_child(position + "back").find_child(slot).texture = ResourceLoader.load(avatar_at)
 		avatar_list.append(position + "back" + slot)
 		var transit = get_tree().create_tween().bind_node(which_slot)
@@ -52,12 +57,10 @@ func clear_all_avatar():
 		for box in child.get_children():
 			if box.texture != null:
 				box.texture = null
-	# there is an existsing bug that when playing cg while fast forward
-	# the avatar will remain on the screen
-	# will I fix it? no
 	return
 				
 func avatar_clear():
+	# clear all avatar that are not going to be "replaced" by next line of commands
 	print("avatar list is ", avatar_list, "\n")
 	for child in %avatar.get_children():
 		for box in child.get_children():
