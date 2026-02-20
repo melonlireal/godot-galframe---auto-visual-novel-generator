@@ -14,14 +14,12 @@ The framework already includes several common visual novel systems, including:
 - Fast-forward
 - Save and load
 - Cg gallary
+- Minigame
+- Review dialogue
 
 ## Download
 
 Download the project directly from the source code in this repository.
-
-## Version Guidance
-
-A tutorial is planned to help users choose the correct version for their needs. This documentation is still in progress.
 
 ## In Development
 
@@ -32,11 +30,7 @@ A tutorial is planned to help users choose the correct version for their needs. 
 
 ## Notes
 
-Some parts of the codebase are still being refactored and may not yet reflect final architecture or style.
-
-## Support
-
-Thank you for your interest and support.
+Some parts of the codebase are still being refactored and may not yet reflect final architecture or style. Thank you for your interest and support.
 
 ## Star History
 
