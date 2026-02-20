@@ -1,10 +1,12 @@
 extends Node
 var save_path = "res://save/"
-@export var auto_color = false
-# auto assign BBcode around respected character's
-# name and script so no need to manually color each line
+@export var auto_color_text = false
+# this change setting that auto assign BBcode around respected character's
+# name and dialogue so no need to manually color each line
 @export var narrator_color = "434444"
 # to adjust the color of narrator
+
+
 
 func _ready():
 	if not DirAccess.dir_exists_absolute(save_path):

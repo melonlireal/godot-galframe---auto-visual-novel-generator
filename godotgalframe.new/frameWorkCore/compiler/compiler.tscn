@@ -1,13 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://dnik78jetiirv"]
+[gd_scene load_steps=6 format=3 uid="uid://dnik78jetiirv"]
 
 [ext_resource type="Script" uid="uid://bieokddk5aiv5" path="res://frameWorkCore/compiler/mapper.gd" id="1_vymcs"]
 [ext_resource type="Script" uid="uid://bw52yl12eb564" path="res://frameWorkCore/compiler/asset_compile.gd" id="2_v71ac"]
 [ext_resource type="Script" uid="uid://byb8idxoswt4e" path="res://frameWorkCore/compiler/dialogue_compile.gd" id="3_g7ou4"]
 [ext_resource type="Script" uid="uid://dvtnlyrv6h4qb" path="res://frameWorkCore/compiler/header_compile.gd" id="4_pg34a"]
+[ext_resource type="Script" uid="uid://p3u4dneuyvic" path="res://frameWorkCore/compiler/gameplay_setting_compile.gd" id="5_g7ou4"]
 
 [node name="compiler" type="Node"]
 script = ExtResource("1_vymcs")
-auto_color = true
+auto_color_text = true
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchors_preset = 15
@@ -31,3 +32,7 @@ script = ExtResource("2_v71ac")
 
 [node name="dialogue_compile" type="Node" parent="."]
 script = ExtResource("3_g7ou4")
+
+[node name="gameplay_setting_compile" type="Node" parent="."]
+script = ExtResource("5_g7ou4")
+auto_clear_voice = true

@@ -1,5 +1,4 @@
 extends CanvasLayer
-signal swap
 var cg_header = "res://save/header.tres"
 var cg_all:Header = ResourceLoader.load(cg_header)
 # 查看CG中所有需要载入的CG

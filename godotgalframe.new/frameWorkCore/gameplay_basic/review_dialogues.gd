@@ -1,7 +1,8 @@
 extends CanvasLayer
+var gameplay_setting:= ResourceLoader.load("res://save/internal_setting.tres")
+var limit = gameplay_setting.get_setting("limit")
+var narrator = gameplay_setting.get_setting("narrator")
 
-@export var limit = 30
-@export var narrator = "[color=434444]旁白[/color]"
 var default_factor = 864
 # this is the current difference between the max value to scroll and the 
 # max value of v scroll bar
@@ -11,8 +12,8 @@ var line = {"character":"", "dialogue":"", "voice":""}
 # Called when the node enters the scene tree for the first time.
 signal close
 
-func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("return"):
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("return"):
 		close.emit()
 		
 func get_words(character: String, dialogue: String):

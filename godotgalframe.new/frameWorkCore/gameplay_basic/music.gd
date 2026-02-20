@@ -1,15 +1,12 @@
 extends Node
 var bgmlist = []
 var sound_effect_list = []
+var gameplay_setting:GameplaySetting = ResourceLoader.load("res://save/internal_setting.tres")
 var asset_map:AssetPath = ResourceLoader.load("res://save/mapper_total.tres")
-@export var auto_clear_bgm = false
-@export var auto_clear_sound_effect = false
-@export var auto_clear_voice = false
+@export var auto_clear_bgm = gameplay_setting.get_setting("auto_clear_bgm")
+@export var auto_clear_sound_effect = gameplay_setting.get_setting("auto_clear_sound_effect")
+@export var auto_clear_voice = gameplay_setting.get_setting("auto_clear_voice")
 
-func _ready():
-	$"..".connect("change_music", change_music)
-	$"..".connect("music_clear", music_clear)
-	pass
 	
 #TODO implement a feature that allows user to choose whether only
 # clear bgm/sound_effect/music when there is a new one
@@ -46,6 +43,11 @@ func change_music(type: String, which: String):
 		print("new sound effect list is ", sound_effect_list, "\n")
 	if type == "voice":
 		$"../review_dialogues".get_voice(which)
+		# TODO SHIT CODE FIX ASAP
+		var voice_at = asset_map.search_path(which) 
+		var voice:AudioStream = ResourceLoader.load(voice_at)
+		var voice_duration = voice.get_length()
+		%dialogue.voicing_time = voice_duration
 	for slot in self.find_child(type).get_children():
 		if slot.stream == null:
 			var music_at = asset_map.search_path(which)

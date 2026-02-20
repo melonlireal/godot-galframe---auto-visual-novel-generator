@@ -3,11 +3,10 @@ var avatar_cleared = false
 var avatar_list = []
 var asset_map:AssetPath = ResourceLoader.load("res://save/mapper_total.tres")
 
-func _ready():
-	$"..".update_art_list.connect(update_art_list)
-	$"..".change_avatar.connect(change_avatar)
-	$"..".clear_all_avatar.connect(clear_all_avatar)
-	pass
+#func _ready():
+	#$"..".update_art_list.connect(update_art_list)
+	#$"..".clear_all_avatar.connect(clear_all_avatar)
+	#pass
 	
 func update_art_list(orders: Array):
 	avatar_list = []
@@ -43,6 +42,7 @@ func change_avatar(avatar: String, position = "mid", slot: = "character", transi
 		#this STUPID PIECE OF SHIT will NOT work when the avatar size is too big
 		%avatar.find_child(position + "back").find_child(slot).texture = ResourceLoader.load(avatar_at)
 		avatar_list.append(position + "back" + slot)
+		# place the new avatar "behind" the current avatar
 		var transit = get_tree().create_tween().bind_node(which_slot)
 		transit.tween_property(which_slot, "modulate:a", 0, 0.2)
 		await transit.finished

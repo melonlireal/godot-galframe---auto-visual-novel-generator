@@ -112,11 +112,11 @@ func dialogue_proof_read(chapter: Array):
 		# remove the ":"
 		dialogue = dialogue.replace("\\command:", "command:")
 		command = text.substr(text.find(" command:"))
-		if $"..".auto_color and character != "":
+		if $"..".auto_color_text and character != "":
 			var header:Header = ResourceLoader.load(save_path + head_file)
 			dialogue = header.process_color(character, "dialogue", dialogue)
 			character = header.process_color(character, "character", character)
-		elif $"..".auto_color and character == "":
+		elif $"..".auto_color_text and character == "":
 			var header:Header = ResourceLoader.load(save_path + head_file)
 			dialogue = header.process_color("nar", "dialogue", dialogue)
 			# this colours the narrator which does not have a character name
@@ -184,6 +184,8 @@ func help_fix_commands(order_list: Array):
 					temp = [order[0], order[1], "true", "false"]
 					fixed_commands.append(temp)
 			_:
+				# background and character has flexible length
+				# others dont
 				fixed_commands.append(order)
 	print("fixed commands are: ", fixed_commands, "\n")
 	return fixed_commands

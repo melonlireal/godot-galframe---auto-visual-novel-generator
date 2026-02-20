@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://bwrm0y71vp4ol"]
+[gd_scene load_steps=15 format=3 uid="uid://bwrm0y71vp4ol"]
 
 [ext_resource type="Script" uid="uid://8kk62ybanlp5" path="res://frameWorkCore/gameplay_basic/scene_auto.gd" id="1_2awyf"]
 [ext_resource type="Texture2D" uid="uid://xqy3a8rw8472" path="res://artResource/UI_gameplay/narrationbox.png" id="2_0460k"]
 [ext_resource type="Script" uid="uid://br7abfh42k0op" path="res://frameWorkCore/gameplay_basic/background.gd" id="2_88744"]
 [ext_resource type="Script" uid="uid://b0ltmjjvv2owj" path="res://frameWorkCore/gameplay_basic/avatar.gd" id="3_ens8c"]
 [ext_resource type="Texture2D" uid="uid://ck0fpeackkskw" path="res://artResource/UI_gameplay/dialoguebox.png" id="3_s4tsg"]
+[ext_resource type="Script" uid="uid://bqbravily6x14" path="res://frameWorkCore/gameplay_basic/chubby_play.gd" id="3_ufw8m"]
 [ext_resource type="FontFile" uid="uid://djaascw8mseps" path="res://artResource/UI_gameplay/honkaifont.ttf" id="4_oh8xj"]
 [ext_resource type="FontFile" uid="uid://dcrep5362jnq1" path="res://artResource/UI_gameplay/ALFYSB.otf" id="4_u0mpm"]
 [ext_resource type="Script" uid="uid://t0iofthpusr5" path="res://frameWorkCore/gameplay_basic/dialogue.gd" id="5_j30eb"]
@@ -37,6 +38,29 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 expand = true
+
+[node name="chubby_play" type="CanvasLayer" parent="."]
+script = ExtResource("3_ufw8m")
+
+[node name="back" type="TextureRect" parent="chubby_play"]
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.1
+anchor_right = 0.8
+anchor_bottom = 0.65
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 2
+
+[node name="front" type="TextureRect" parent="chubby_play"]
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.1
+anchor_right = 0.8
+anchor_bottom = 0.65
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 2
 
 [node name="avatar" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
@@ -247,8 +271,10 @@ vertical = true
 metadata/_edit_lock_ = true
 
 [node name="review_dialogues" parent="." instance=ExtResource("9_88744")]
+visible = false
 
 [node name="DO NOT TOUCH" type="CanvasLayer" parent="." groups=["errorlog"]]
+visible = false
 script = ExtResource("7_kvtwn")
 
 [node name="Panel" type="ColorRect" parent="DO NOT TOUCH"]
@@ -272,7 +298,6 @@ autowrap_mode = 1
 clip_text = true
 
 [node name="auto_play_timer" type="Timer" parent="."]
-wait_time = 2.0
 one_shot = true
 
 [node name="speed_up_timer" type="Timer" parent="."]
@@ -284,6 +309,7 @@ wait_time = 5.0
 one_shot = true
 
 [node name="music" type="Node" parent="."]
+unique_name_in_owner = true
 script = ExtResource("12_00gnm")
 auto_clear_voice = true
 

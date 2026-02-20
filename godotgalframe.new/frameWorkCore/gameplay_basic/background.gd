@@ -5,14 +5,11 @@ var videolist = []
 var on_transition = false
 
 
-func _ready():
-	$"..".change_background.connect(change_background)
-	pass
 
 func do_transition():
 	pass
 
-func change_background(background: String, loop = "true", effect = ""):
+func change_background(background: String, loop = "true", _effect = ""):
 	if self.has_method(background):
 		var transition = Callable(self, background)
 		transition.call()
@@ -39,7 +36,9 @@ func change_background(background: String, loop = "true", effect = ""):
 		videolist = []
 		$background.texture = ResourceLoader.load(background_at)
 		$viedo_background.stream = null
-# the following functions are for transitions
+
+
+# the following functions are hard coded transitions
 # WARNING a new background command must be placed after a transition command
 #
 func fadeout():

@@ -1,0 +1,4 @@
+yap 0
+captain_magic_skill -1
+captain_local_wealth 0
+captain_life_energy 1000000000000000000000000000
