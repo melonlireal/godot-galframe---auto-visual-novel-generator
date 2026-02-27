@@ -1,7 +1,7 @@
 extends CanvasLayer
-var gameplay_setting:= ResourceLoader.load("res://save/internal_setting.tres")
-var limit = gameplay_setting.get_setting("limit")
-var narrator = gameplay_setting.get_setting("narrator")
+
+var limit = GlobalResources.gameplay_setting.get_setting("limit")
+var narrator = GlobalResources.gameplay_setting.get_setting("narrator")
 
 var default_factor = 864
 # this is the current difference between the max value to scroll and the 

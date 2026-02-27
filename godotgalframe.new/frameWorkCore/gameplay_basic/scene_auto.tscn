@@ -297,7 +297,6 @@ one_shot = true
 [node name="music" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("12_00gnm")
-auto_clear_voice = true
 
 [node name="bgm" type="Node" parent="music"]
 
@@ -333,6 +332,8 @@ auto_clear_voice = true
 
 [node name="minigame" type="CanvasLayer" parent="."]
 script = ExtResource("13_ens8c")
+
+[node name="addons" type="Node2D" parent="."]
 
 [connection signal="finished" from="background/viedo_background" to="." method="_on_viedo_background_finished"]
 [connection signal="pressed" from="UI/Control/VBoxContainer/save" to="." method="_on_save_pressed"]

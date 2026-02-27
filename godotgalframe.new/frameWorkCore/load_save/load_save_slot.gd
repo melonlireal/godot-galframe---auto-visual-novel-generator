@@ -36,9 +36,8 @@ func _load():
 	if $save_display.texture != null:
 		# 只有在有存档的状态下才会加载
 		var save_path = "user://save/" + str(self.get_index()) + ".tres"
-		var vars:Variables = ResourceLoader.load("user://save/" + str(self.get_index()) + "var.tres")
 		var find_save = ResourceLoader.load(save_path)
-		$"../../..".help_load(find_save.which_file, find_save.which_line, vars)
+		$"../../..".help_load(find_save)
 	
 	
 func _confirm():

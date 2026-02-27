@@ -1,4 +1,5 @@
 extends CanvasLayer
+class_name SceneAuto
 @onready var choice_reach = false
 
 @export var auto_play = false
@@ -30,13 +31,15 @@ var UI_switched = false
 var script_tree:ScriptTree = ResourceLoader.load("res://save/processed_script.tres")
 # where dialogue and command are stored
 
-var variables: Variables = ResourceLoader.load("res://save/variables.tres")
-# where variable are stored
+# store inital variable to temporary variables used for this game
+var variables: Variables = Variables.new()
+
 
 
 
 
 func _ready():
+	variables.set_all_var(GlobalResources.variables.get_all_var())
 	$"DO NOT TOUCH/Panel".visible = false
 	$review_dialogues.visible = false
 	%dialogue.text = ""
@@ -48,7 +51,6 @@ func _ready():
 	$review_dialogues.connect("close", quit_review)
 	set_bus()
 	load_setting()
-	
 	var setting = preload("res://frameWorkCore/settings/setting_menu.tscn").instantiate()
 	$".".add_child(setting, true)
 	setting.queue_free()
@@ -79,6 +81,7 @@ func _process(_delta):
 
 
 func _input(event: InputEvent) -> void:
+	var status = check_in_game()
 	if event.is_action_pressed("press") and check_in_game():
 		# press advance dialogue to next line or stop the current state
 		$dialogue.visible = true
@@ -112,8 +115,17 @@ func check_in_game() -> bool:
 		# prevent the bug of "extra click" after switching UI
 		UI_switched = false
 		return false
-	return !$review_dialogues.visible and self.find_child("setting_menu") == null\
-	 and $minigame.get_children() == [] and can_press
+	if $review_dialogues.visible:
+		return false
+	if  self.find_child("save_load") != null:
+		return false
+	if self.find_child("setting_menu") != null:
+		return false
+	if $minigame.get_children() != []:
+		return false
+	if  $minigame.get_children() != []:
+		return false
+	return can_press
 
 
 func proceed():
@@ -287,7 +299,7 @@ func command_execute(orders: Array):
 	return
 
 
-func load_progress(which_file: String, which_line: int, vars: Variables):
+func load_progress(data: ProgressData):
 	# load game progress into the game
 	speed_up = false
 	auto_play = false
@@ -297,15 +309,15 @@ func load_progress(which_file: String, which_line: int, vars: Variables):
 		%choice_box.remove_child(child)
 	# reset all ingame setting including removing choices
 	print("loading progress\n")
-	print("file is ", which_file, "\n")
-	print("line is ", which_line, "\n")
+	print("file is ", data.which_file, "\n")
+	print("line is ", data.which_line, "\n")
 	%music.music_clear("bgm")
 	%music.music_clear("voice")
 	%music.music_clear("sound_effect")
 	%avatar.clear_all_avatar()
 	$chubby_play.reset_chubby()
-	script_tree.load_progress(which_file, which_line - 1)
-	variables.load_var(vars.variables)
+	script_tree.load_progress(data.which_file, data.which_line - 1)
+	variables.set_all_var(data.variables)
 	# script tree acc give the line after its current progress
 	proceed()
 	self.get_tree().call_group("main", "game_created")
@@ -329,44 +341,43 @@ func load_setting():
 func _on_save_pressed():
 	var temp_screen = get_viewport().get_texture().get_image()
 	# take a screenshot of current scene
-	var save = preload("res://frameWorkCore/load_save/save_load_UI.tscn").instantiate()
-	save.display_save = true
-	save.get_temp_save_data(temp_screen, 
-		script_tree.get_chapter(), script_tree.get_line_num(), variables)
-	$".".add_child(save)
+	var saver:SaveLoad = preload("res://frameWorkCore/load_save/save_load_UI.tscn").instantiate()
+	saver.display_save = true
+	saver.get_temp_save_data(temp_screen, script_tree.get_chapter(), script_tree.get_line_num(), variables)
+	self.add_child(saver)
+	saver.set_owner(self)
 	UI_switched = true
 
 
 func _on_load_pressed():
 	var loader = preload("res://frameWorkCore/load_save/save_load_UI.tscn").instantiate()
 	loader.display_save = false
-	$".".add_child(loader)
+	self.add_child(loader)
+	loader.set_owner(self)
 	UI_switched = true
 
 
 func _on_quicksave_pressed():
 	# TODO, maybe make first save slot for quick save only?
-	var progress = progress_data.new()
+	var progress:ProgressData = ProgressData.new()
 	progress.which_file = script_tree.get_chapter()
 	progress.which_line = script_tree.get_line_num()
+	progress.variables = variables.get_all_var()
 	ResourceSaver.save(progress, "user://save/quick_save.tres")
-	ResourceSaver.save(variables,"user://save/quick_save_var.tres")
 
 
 func _on_quickload_pressed():
 	var quick_save = "user://save/quick_save.tres"
-	var quick_save_var = "user://save/quick_save_var.tres"
-	var find_quick_save_var: Variables  = ResourceLoader.load(quick_save_var)
-	var find_save = ResourceLoader.load(quick_save)
+	var find_save:ProgressData = ResourceLoader.load(quick_save)
 	if find_save == null:
 		return
 	print(find_save)
-	self.load_progress(find_save.which_file, find_save.which_line, find_quick_save_var)
+	self.load_progress(find_save)
 
 
 func _on_setting_pressed():
 	var setting = preload("res://frameWorkCore/settings/setting_menu.tscn").instantiate()
-	$".".add_child(setting, true)
+	self.add_child(setting, true)
 	setting.set_owner(self)
 	UI_switched = true
 	return

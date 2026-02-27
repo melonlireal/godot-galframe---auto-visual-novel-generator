@@ -4,12 +4,11 @@ var save_path = "user://save/"
 var global_progress_save_name = "global_game_progress_save.tres"
 var setting_save_name = "player_setting_save.tres"
 #var game_exists = false
-var which_files = "Start.txt"
-var which_lines = 1
-var which_var = ResourceLoader.load("res://save/variables.tres")
+var progress:ProgressData = ProgressData.new()
 # 这两个变量用来保证scene_auto 一定会收到加载的指令
 
 func _ready():
+	progress.variables = GlobalResources.variables.get_all_var()
 	print("main scene log start\n")
 	# when start game, create default setting if no setting file exists
 	if not DirAccess.dir_exists_absolute(save_path):
@@ -34,8 +33,6 @@ func _ready():
 # hopefully I think the same after a year
 
 func _on_start_pressed():
-	which_files = "Start.txt"
-	which_lines = 1
 	$color/AnimationPlayer.play("fade_in")
 	# when start game screen will fade and load game before fading out
 	$color/ColorRect.mouse_filter = 0
@@ -75,13 +72,11 @@ func _on_animation_player_animation_finished(anim_name):
 		$color/AnimationPlayer.play("loading")
 		# when completely fade in make menu invisible and play loading animation
 		if not self.find_child("scene_auto", true, false):
-			var scene = scene_auto.instantiate()
+			var scene:SceneAuto = scene_auto.instantiate()
 			scene.set_process(false)
 			# 如果是在已经有游戏的情况下加载，不在创建游戏
 			add_child(scene)
-		print(which_files)
-		print(which_lines)
-		self.get_tree().call_group("game_play", "load_progress", which_files, which_lines, which_var)
+		self.get_tree().call_group("game_play", "load_progress", progress)
 	if anim_name == "loading":
 		print("loading")
 
@@ -92,18 +87,16 @@ func back_menu():
 	$menu_UI.visible = true
 	$color/AnimationPlayer.play("fade_out")
 
-func load_game(which_file: String, which_line: int, vars: Variables):
+func load_game(game_progress: ProgressData):
 	print("loading")
 	if self.find_child("scene_auto", true, false):
 		# 在正在游玩的状态下读档时， 切换读取菜单至游戏且加载游戏进度
 		$color/ColorRect.mouse_filter = 0
 		$color/AnimationPlayer.play("fade_in")
-		self.get_tree().call_group("game_play", "load_progress", which_file, which_line, vars)
+		self.get_tree().call_group("game_play", "load_progress", game_progress)
 	else:
 		_on_start_pressed()
-		which_files = which_file
-		which_lines = which_line
-		which_var = vars
+		progress = game_progress
 
 func _on_transition_donttouch_timeout():
 	self.find_child("scene_auto", true, false).set_process(true)

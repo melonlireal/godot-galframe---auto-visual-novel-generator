@@ -1,10 +1,13 @@
 extends CanvasLayer
+class_name SaveLoad
+
 @export var display_save = true
 # 创建时根据这个切换贴图和效果
 var save_UI = "res://artResource/UI_gameplay/setting_UI/save_background.png"
 var load_UI = "res://artResource/UI_gameplay/setting_UI/load_background.png"
 
 var temp_save = {}
+
 
 func _ready():
 	if display_save:
@@ -41,14 +44,14 @@ func save_in_slot(slot: int):
 	# 把槽位数据传过去，待会跟着行数和章节名传回来
 	# 我知道这很抽象， 但怎么优化我不道啊
 	# 我是傻逼⬆byd就不能一起传吗
-	var progress = progress_data.new()
+	var progress:ProgressData = ProgressData.new()
 	progress.which_file = temp_save["curr_chap"]
 	progress.which_line = temp_save["curr_line"]
+	progress.variables = temp_save["vars"].get_all_var()
 	ResourceSaver.save(progress, "user://save/" + str(slot) + ".tres")
-	ResourceSaver.save(temp_save["vars"], "user://save/" + str(slot) + "var.tres")
 	
-func help_load(which_file: String, which_line: int, vars: Variables):
-	self.get_tree().call_group("main", "load_game", which_file, which_line, vars)
+func help_load(progress: ProgressData):
+	self.get_tree().call_group("main", "load_game", progress)
 	self.queue_free()
 	
 func _on_return_pressed():

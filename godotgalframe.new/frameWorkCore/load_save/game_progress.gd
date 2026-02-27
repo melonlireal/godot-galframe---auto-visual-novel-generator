@@ -1,5 +1,5 @@
 extends Resource
-class_name progress_data
+class_name ProgressData
 @export var which_file = "Start.txt"
-@export var which_line = 0
+@export var which_line = 1
 @export var variables = {}

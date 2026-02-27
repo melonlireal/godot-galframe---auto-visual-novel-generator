@@ -2,11 +2,20 @@ extends Resource
 class_name Variables
 @export var variables = {}
 
-func load_var(vars: Dictionary):
-	variables = vars
+func get_all_var():
+	return variables
+	
+func set_all_var(new_variables: Dictionary):
+	variables = new_variables
+	
+func get_var_val(name: String):
+	return variables[name]
 
 func new_var(name: String, variable: String):
 	variables[name] = int(variable)
+
+func has_var(name: String):
+	return name in variables
 	
 func var_op(variable: String, operation: String, value: String):
 	var op = Callable(self, operation)

@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://ilmgny86rlyp" path="res://artResource/UI_gameplay/setting_UI/white.png" id="5_322al"]
 [ext_resource type="FontFile" uid="uid://byyq0wl5ikrfs" path="res://artResource/UI_gameplay/EB.ttf" id="6_munpa"]
 
-[node name="save" type="CanvasLayer" groups=["save"]]
+[node name="save_load" type="CanvasLayer" groups=["save"]]
 script = ExtResource("1_4t6ql")
 
 [node name="TextureRect" type="TextureRect" parent="."]
