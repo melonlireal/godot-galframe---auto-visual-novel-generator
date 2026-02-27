@@ -1,6 +1,5 @@
 extends GridContainer
 
-var setting_save = "user://save/save_total.tres"
 var loading
 # Called when the node enters the scene tree for the first time.
 
@@ -9,7 +8,7 @@ func _ready():
 	loading = true
 	
 func load_value():
-	var saved_data = ResourceLoader.load(setting_save)
+	var saved_data = ResourceLoader.load(GlobalResources.setting_save_path)
 	var play_speed = saved_data.play_speed
 	var auto_play_speed = saved_data.auto_play_speed
 	%play_speed.value = play_speed
@@ -23,28 +22,28 @@ func load_value():
 func _on_play_speed_value_changed(value):
 	if loading:
 		return
-	var saved_data = ResourceLoader.load(setting_save)
+	var saved_data = ResourceLoader.load(GlobalResources.setting_save_path)
 	print("saving play speed", value)
 	saved_data.save_play_speed(value)
-	ResourceSaver.save(saved_data, setting_save)
+	ResourceSaver.save(saved_data, GlobalResources.setting_save_path)
 	$play_speed/HBoxContainer/data_display_box/CenterContainer/data_display.text = str(value)
 
 
 func _on_auto_play_speed_value_changed(value):
 	if loading:
 		return
-	var saved_data = ResourceLoader.load(setting_save)
+	var saved_data = ResourceLoader.load(GlobalResources.setting_save_path)
 	saved_data.save_auto_play_speed(value)
-	ResourceSaver.save(saved_data, setting_save)
+	ResourceSaver.save(saved_data, GlobalResources.setting_save_path)
 	$auto_play_speed/HBoxContainer/data_display_box/CenterContainer/data_display.text = str(value)
 
 
 func _on_transparency_value_changed(value):
 	if loading:
 		return
-	var saved_data = ResourceLoader.load(setting_save)
+	var saved_data = ResourceLoader.load(GlobalResources.setting_save_path)
 	saved_data.dialogue_box_transparency = value
-	ResourceSaver.save(saved_data, setting_save)
+	ResourceSaver.save(saved_data, GlobalResources.setting_save_path)
 	$transparency/HBoxContainer/data_display_box/CenterContainer/data_display.text = str(value)
 	$play_example/TextureRect.modulate.a = value/100
 	$auto_play_example/TextureRect.modulate.a = value/100

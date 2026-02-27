@@ -1,7 +1,5 @@
 extends Resource
-class_name Gamedata
-# this is the save data for game settings that 
-# can be changed by player
+class_name PlayerSetting
 @export var play_speed = 50
 @export var auto_play_speed = 50
 @export var red = 140
@@ -14,15 +12,7 @@ class_name Gamedata
 @export var voice_volumn = 1.0
 @export var sfx_volumn = 1.0
 @export var dialogue_box_transparency = 100.0
-@export var unlocked_cg = []
-
-@export var saved_game = {"quick_save": null, "0": null, "1": null, "2": null, "3": null, 
-"4": null, "5":null, "6":null, "7":null, "8": null, "9": null, "10": null, "11": null, "12": null, 
-"13":null, "14":null, "15":null, "16":null, "17":null, "18":null, "19":null}
-# saved_game 可能用不上 先留着
-	
-# WARNING ALL CODES HERE ARE SHIT
-
+# Called when the node enters the scene tree for the first time.
 func reset_all():
 	play_speed = 20
 	auto_play_speed = 20
@@ -36,14 +26,10 @@ func reset_all():
 	voice_volumn = 1.0
 	sfx_volumn = 1.0
 	dialogue_box_transparency = 100.0
-	unlocked_cg = []
 	
 	
 func reset_setting_display():
 	windows_color = Color(140.0,140.0,140.0,200)
-
-#func reset_setting():
-	#play_speed = 50
 	
 func save_play_speed(speed: float):
 	play_speed = speed
@@ -79,8 +65,3 @@ func print_all():
 	print(voice_volumn)
 	print(sfx_volumn)
 	print(dialogue_box_transparency)
-	print(unlocked_cg)
-
-	
-	
-	

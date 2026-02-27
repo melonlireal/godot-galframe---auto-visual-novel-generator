@@ -1,7 +1,6 @@
 extends Node
 var save_path = "res://save/"
 var scripts_file = "processed_script.tres"
-var head_file = "header.tres"
 var res_dialogue = "res://dialogue/"
 var dialogue_start = "res://dialogue/Start.txt"
 var curr_dialogue
@@ -113,12 +112,10 @@ func dialogue_proof_read(chapter: Array):
 		dialogue = dialogue.replace("\\command:", "command:")
 		command = text.substr(text.find(" command:"))
 		if $"..".auto_color_text and character != "":
-			var header:Header = ResourceLoader.load(save_path + head_file)
-			dialogue = header.process_color(character, "dialogue", dialogue)
-			character = header.process_color(character, "character", character)
+			dialogue = GlobalResources.color_all.process_color(character, "dialogue", dialogue)
+			character =  GlobalResources.color_all.process_color(character, "character", character)
 		elif $"..".auto_color_text and character == "":
-			var header:Header = ResourceLoader.load(save_path + head_file)
-			dialogue = header.process_color("nar", "dialogue", dialogue)
+			dialogue =  GlobalResources.color_all.process_color("nar", "dialogue", dialogue)
 			# this colours the narrator which does not have a character name
 		var command_list = process_commands(command)
 		prev_text = {"character": character, "dialogue": dialogue}

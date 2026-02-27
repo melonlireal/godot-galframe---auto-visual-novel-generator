@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://pgyucp4tuj4t"]
+
+[ext_resource type="Script" uid="uid://b765or20vfnkd" path="res://frameWorkCore/gameplay_basic/character_slot.gd" id="1_xtmag"]
+
+[node name="leftback" type="CenterContainer"]
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.6
+anchor_bottom = 1.75
+offset_left = 12.0
+offset_right = -0.578613
+offset_bottom = 0.119995
+script = ExtResource("1_xtmag")
+
+[node name="character" type="TextureRect" parent="."]
+texture_filter = 2
+custom_minimum_size = Vector2(1000, 1750)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5

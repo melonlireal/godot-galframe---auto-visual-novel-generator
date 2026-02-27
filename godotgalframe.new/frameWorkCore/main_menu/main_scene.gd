@@ -1,8 +1,8 @@
 extends Node2D
 var scene_auto = preload("res://frameWorkCore/gameplay_basic/scene_auto.tscn")
-var save = Gamedata.new()
 var save_path = "user://save/"
-var save_name = "save_total.tres"
+var global_progress_save_name = "global_game_progress_save.tres"
+var setting_save_name = "player_setting_save.tres"
 #var game_exists = false
 var which_files = "Start.txt"
 var which_lines = 1
@@ -14,12 +14,14 @@ func _ready():
 	# when start game, create default setting if no setting file exists
 	if not DirAccess.dir_exists_absolute(save_path):
 		DirAccess.make_dir_absolute(save_path)
-	if save_name in DirAccess.get_files_at(save_path):
-		save = ResourceLoader.load(save_path + save_name)
-	elif save_name not in DirAccess.get_files_at(save_path):
-		var default_setting = Gamedata.new()
-		print("initial play speed is ", default_setting.play_speed, "\n")
-		ResourceSaver.save(default_setting, save_path + save_name)
+	if global_progress_save_name in DirAccess.get_files_at(save_path)\
+		and setting_save_name in DirAccess.get_files_at(save_path):
+		pass
+	else:
+		var default_player_setting = PlayerSetting.new()
+		var default_progress = GlobalGameProgress.new()
+		ResourceSaver.save(default_player_setting, save_path + setting_save_name)
+		ResourceSaver.save(default_progress, save_path + global_progress_save_name)
 	#add setting and dialogue review once to load values
 	#this is a temporary solution
 	var setting = preload("res://frameWorkCore/settings/setting_menu.tscn").instantiate()

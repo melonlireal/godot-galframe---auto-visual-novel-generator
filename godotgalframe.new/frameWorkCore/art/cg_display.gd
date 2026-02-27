@@ -1,10 +1,7 @@
 extends CanvasLayer
-var cg_header = "res://save/header.tres"
-var cg_all:Header = ResourceLoader.load(cg_header)
 # 查看CG中所有需要载入的CG
-var save_path = "user://save/save_total.tres"
-var cg_list = cg_all.get_cg()
-var cg_cover_list = cg_all.get_cg_cover()
+var cg_list = GlobalResources.cg_all.get_cg()
+var cg_cover_list = GlobalResources.cg_all.get_cg_cover()
 # Called when the node enters the scene tree for the first time.
 
 
@@ -30,7 +27,7 @@ func _process(_delta):
 	
 	
 func get_cover():
-	for slot in $main/CenterContainer/GridContainer.get_children():
+	for slot:CGSlot in $main/CenterContainer/GridContainer.get_children():
 		if cg_cover_list.is_empty():
 			return
 		if not slot.has_cover:
@@ -40,7 +37,7 @@ func get_cover():
 	
 	
 func unlock(cg_name: String):
-	for slot in $main/CenterContainer/GridContainer.get_children():
+	for slot:CGSlot in $main/CenterContainer/GridContainer.get_children():
 		if slot.cg == cg_name:
 			slot.open()
 	
@@ -48,15 +45,14 @@ func unlock(cg_name: String):
 func load_unlock():
 	# 从存档中解锁CG
 	print("unlocking cg")
-	var saved_data = ResourceLoader.load(save_path)
-	print(saved_data.unlocked_cg)
+	var saved_data:GlobalGameProgress = ResourceLoader.load(GlobalResources.global_progress_path)
 	for cg in saved_data.unlocked_cg:
 		unlock(cg)
 	
 	# used to present cg
 func present(CG_name: String):
 	print("presenting")
-	var file_at = quick_search(CG_name)
+	var file_at = GlobalResources.asset_map.search_path(CG_name)
 	if file_at == null:
 		print("not here!")
 		return
@@ -72,9 +68,6 @@ func present(CG_name: String):
 		$present_pic.texture = ResourceLoader.load(file_at)
 		$main.visible = false
 
-func quick_search(filename: String):
-	var map = ResourceLoader.load("res://save/mapper_total.tres")
-	return map.search_path(filename)
 		
 func _on_return_pressed():
 	self.queue_free()

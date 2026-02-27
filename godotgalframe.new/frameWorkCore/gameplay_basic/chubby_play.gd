@@ -1,10 +1,6 @@
 extends CanvasLayer
 
-var asset_map:AssetPath = ResourceLoader.load("res://save/mapper_total.tres")
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	
-	pass # Replace with function body.
 
 func reset_chubby():
 	$back.texture = null
@@ -22,7 +18,7 @@ func swap(next_slide: String):
 		await transit_back.finished
 		$back.texture = null
 		return
-	var next_slide_at = asset_map.search_path(next_slide)
+	var next_slide_at = GlobalResources.asset_map.search_path(next_slide)
 	if next_slide_at == null:
 		self.get_tree().call_group("errorlog", "background_error", next_slide)
 		return

@@ -2,7 +2,6 @@ extends CanvasLayer
 signal on_button
 signal out_button
 var play_speed = 0.1
-var setting_save = "user://save/save_total.tres"
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	%function_name.text = ""
@@ -10,7 +9,7 @@ func _ready():
 		nodes.mouse_exited.connect(_mouse_leave)
 	$Control/volumn_slider.visible = false
 	$Control/volumn_slider.editable = false
-	var saved_data = ResourceLoader.load(setting_save)
+	var saved_data = ResourceLoader.load(GlobalResources.setting_save_path)
 	$Control/volumn_slider.value = saved_data.total_volumn
 		
 func _mouse_leave():
@@ -86,8 +85,8 @@ func _on_volumn_pressed():
 
 
 func _on_volumn_slider_value_changed(value):
-	var saved_data = ResourceLoader.load(setting_save)
+	var saved_data = ResourceLoader.load(GlobalResources.setting_save_path)
 	saved_data.voice_volumn = value
 	var bus = AudioServer.get_bus_index("Master")
 	AudioServer.set_bus_volume_db(bus, linear_to_db(value))
-	ResourceSaver.save(saved_data, setting_save)
+	ResourceSaver.save(saved_data, GlobalResources.setting_save_path)

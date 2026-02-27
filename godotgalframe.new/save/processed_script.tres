@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ScriptTree" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://frameWorkCore/compiler/scipt_tree.gd" id="1_avy3a"]
+
+[resource]
+script = ExtResource("1_avy3a")
+all_script = {
+"Start.txt": {
+1: {
+"character": "character",
+"command": [],
+"dialogue": " this is a script"
+}
+}
+}

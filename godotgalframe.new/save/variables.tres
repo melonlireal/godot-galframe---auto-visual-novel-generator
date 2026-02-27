@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Variables" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://frameWorkCore/compiler/variables.gd" id="1_ay0hx"]
+
+[resource]
+script = ExtResource("1_ay0hx")
+variables = {
+"captain_life_energy": 9223372036854775807,
+"captain_local_wealth": 0,
+"captain_magic_skill": -1,
+"yap": 0
+}

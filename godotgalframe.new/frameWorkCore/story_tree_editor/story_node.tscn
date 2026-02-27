@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://ckv62xwdnyi0f"]
+
+[ext_resource type="Script" uid="uid://bevcvrpemp4b" path="res://frameWorkCore/story_tree_editor/story_node.gd" id="1_b878p"]
+
+[node name="story_node" type="PanelContainer"]
+anchors_preset = -1
+anchor_right = 0.049000002
+anchor_bottom = 0.037
+offset_right = -29.080002
+offset_bottom = 0.040000916
+script = ExtResource("1_b878p")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+text = "chap name"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -320,8 +320,7 @@ func load_setting():
 	print("load setting!")
 	$review_dialogues.visible = false
 	# hard code shit, fix later
-	var save = ResourceLoader.load(save_path)
-	print(save.dialogue_box_transparency)
+	var save = ResourceLoader.load(GlobalResources.setting_save_path)
 	$dialogue/dialogue_box.modulate.a = save.dialogue_box_transparency / 100
 	$dialogue/narration_box.modulate.a = save.dialogue_box_transparency / 100
 	$UI/Control/ColorRect.color = save.windows_color	

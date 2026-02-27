@@ -1,7 +1,6 @@
 extends CanvasLayer
 var avatar_cleared = false
 var avatar_list = []
-var asset_map:AssetPath = ResourceLoader.load("res://save/mapper_total.tres")
 
 #func _ready():
 	#$"..".update_art_list.connect(update_art_list)
@@ -23,7 +22,7 @@ func change_avatar(avatar: String, position = "mid", slot: = "character", transi
 		return
 	# 这个用来自动清理人物画像, 如果想做出某个台词下所有立绘消失的效果就用这个
 	avatar_clear()
-	var avatar_at = asset_map.search_path(avatar)
+	var avatar_at = GlobalResources.asset_map.search_path(avatar)
 	if avatar_at == null:
 		self.get_tree().call_group("errorlog", "character_error", avatar)
 		print("error: unknown avatar ", avatar)
@@ -68,3 +67,7 @@ func avatar_clear():
 				print(str(child.name)+str(box.name), " not in avatar list\n")
 				box.texture = null
 	return
+
+
+func animations(which_pos):
+	pass

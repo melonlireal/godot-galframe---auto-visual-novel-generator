@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cv77b20o3nfts"]
+
+[ext_resource type="Script" uid="uid://bcdctdro1huqq" path="res://frameWorkCore/story_tree_editor/choice_pointer.gd" id="1_8yps1"]
+
+[sub_resource type="Curve2D" id="Curve2D_nung1"]
+
+[node name="choice_pointer" type="Path2D"]
+curve = SubResource("Curve2D_nung1")
+script = ExtResource("1_8yps1")
+
+[node name="Line2D" type="Line2D" parent="."]

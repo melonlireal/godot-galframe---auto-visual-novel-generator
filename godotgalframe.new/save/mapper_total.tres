@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="AssetPath" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://frameWorkCore/compiler/AssetPath.gd" id="1_hokb5"]
+
+[resource]
+script = ExtResource("1_hokb5")
+resource_dic = {
+"35 .mp3.import": "res://music//voice/35 .mp3.import",
+"occupy.txt": "res://music//voice/occupy.txt"
+}

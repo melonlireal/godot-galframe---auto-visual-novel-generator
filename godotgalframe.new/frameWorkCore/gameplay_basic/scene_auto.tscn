@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bwrm0y71vp4ol"]
+[gd_scene load_steps=16 format=3 uid="uid://bwrm0y71vp4ol"]
 
 [ext_resource type="Script" uid="uid://8kk62ybanlp5" path="res://frameWorkCore/gameplay_basic/scene_auto.gd" id="1_2awyf"]
 [ext_resource type="Texture2D" uid="uid://xqy3a8rw8472" path="res://artResource/UI_gameplay/narrationbox.png" id="2_0460k"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://bqbravily6x14" path="res://frameWorkCore/gameplay_basic/chubby_play.gd" id="3_ufw8m"]
 [ext_resource type="FontFile" uid="uid://djaascw8mseps" path="res://artResource/UI_gameplay/honkaifont.ttf" id="4_oh8xj"]
 [ext_resource type="FontFile" uid="uid://dcrep5362jnq1" path="res://artResource/UI_gameplay/ALFYSB.otf" id="4_u0mpm"]
+[ext_resource type="PackedScene" uid="uid://pgyucp4tuj4t" path="res://frameWorkCore/gameplay_basic/character_slot.tscn" id="5_00gnm"]
 [ext_resource type="Script" uid="uid://t0iofthpusr5" path="res://frameWorkCore/gameplay_basic/dialogue.gd" id="5_j30eb"]
 [ext_resource type="PackedScene" uid="uid://dnkvex8li8a4j" path="res://frameWorkCore/main_menu/main_UI.tscn" id="6_0o83t"]
 [ext_resource type="Script" uid="uid://d2q1ewu5nrkgn" path="res://frameWorkCore/errorlogDontTouch.gd" id="7_kvtwn"]
@@ -66,22 +67,7 @@ expand_mode = 2
 unique_name_in_owner = true
 script = ExtResource("3_ens8c")
 
-[node name="leftback" type="CenterContainer" parent="avatar"]
-anchors_preset = -1
-anchor_left = 0.05
-anchor_top = 0.05
-anchor_right = 0.6
-anchor_bottom = 1.75
-offset_left = 12.0
-offset_right = -0.578613
-offset_bottom = 0.119995
-
-[node name="character" type="TextureRect" parent="avatar/leftback"]
-texture_filter = 2
-custom_minimum_size = Vector2(1000, 1750)
-layout_mode = 2
-expand_mode = 1
-stretch_mode = 5
+[node name="leftback" parent="avatar" instance=ExtResource("5_00gnm")]
 
 [node name="left" type="CenterContainer" parent="avatar"]
 anchors_preset = -1

@@ -1,4 +1,5 @@
 extends TextureButton
+class_name CGSlot
 @export var cg = ""
 @export var lock = true
 @export var has_cover = false
@@ -9,7 +10,7 @@ func _ready():
 
 
 func load_cover(cover: String):
-	var file_at = quick_search(cover)
+	var file_at = GlobalResources.asset_map.search_path(cover)
 	if file_at == null:
 		print("not here!")
 		# TODO fix in error overhaul
@@ -23,11 +24,6 @@ func open():
 
 func store_CG(CG_name: String):
 	cg = CG_name
-
-func quick_search(filename: String):
-	var map = ResourceLoader.load("res://save/mapper_total.tres")
-	return map.search_path(filename)
-
 
 func _on_pressed():
 	if has_cover and not lock:

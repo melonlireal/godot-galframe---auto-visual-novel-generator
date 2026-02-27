@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="GameplaySetting" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://frameWorkCore/compiler/gameplay_setting.gd" id="1_ouily"]
+
+[resource]
+script = ExtResource("1_ouily")
+setting_list = {
+"auto_clear_bgm": false,
+"auto_clear_sound_effect": false,
+"auto_clear_voice": true,
+"limit": 30,
+"narrator": "[color=434444]旁白[/color]"
+}

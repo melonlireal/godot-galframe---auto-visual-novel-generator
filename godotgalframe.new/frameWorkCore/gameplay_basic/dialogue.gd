@@ -37,7 +37,7 @@ func _process(delta):
 		if $"../..".speed_up:
 	# TODO shit code fix later
 			self.visible_ratio = 1.0
-	var data = ResourceLoader.load("user://save/save_total.tres")
+	var data = ResourceLoader.load(GlobalResources.setting_save_path)
 	if self.visible_ratio == 1.0:
 		if repeat:
 			self.visible_ratio = 0.0
@@ -48,9 +48,6 @@ func _process(delta):
 		/self.get_parsed_text().length())
 		var frame_per_second = 1.0/delta
 		var expected_time = (1.0/progress_per_frame)/frame_per_second
-		#print("frame per second is", frame_per_second, "\n")
-		#print("expected time is ", expected_time, "\n")
-		#print("voicing time is ", voicing_time, "\n")
 		if voicing_time - expected_time > 0: 
 			#if it takes more time to play voice then time to display entire dialogue
 			$"../../auto_play_timer".wait_time = autoplay_pause_time + voicing_time - expected_time

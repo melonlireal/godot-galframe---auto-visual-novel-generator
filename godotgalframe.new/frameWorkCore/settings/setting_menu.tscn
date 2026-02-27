@@ -453,7 +453,7 @@ texture = ExtResource("18_1qsv6")
 expand_mode = 1
 
 [node name="Label" type="RichTextLabel" parent="settings/display_setting/auto_play_example"]
-layout_mode = 2
+layout_mode = 0
 offset_left = 70.0
 offset_top = 62.0
 offset_right = 630.0

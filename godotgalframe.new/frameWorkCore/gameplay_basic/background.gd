@@ -1,6 +1,6 @@
 extends CanvasLayer
 var asset_map:AssetPath = ResourceLoader.load("res://save/mapper_total.tres")
-var cg_header:Header = ResourceLoader.load("res://save/header.tres") 
+var cg_header:CGS = ResourceLoader.load("res://save/cg.tres") 
 var videolist = []
 var on_transition = false
 
@@ -85,3 +85,6 @@ func flash():
 		$"..".can_press = true
 		%dialogue.set_process(true)
 		$"../effects/effect_assets/white".visible = false
+
+func shake():
+	pass
