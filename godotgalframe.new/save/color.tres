@@ -5,6 +5,10 @@
 [resource]
 script = ExtResource("1_h8lwr")
 colour_list = {
+"": {
+"character": "434444",
+"dialogue": "434444"
+},
 "nar": {
 "character": "434444",
 "dialogue": "434444"

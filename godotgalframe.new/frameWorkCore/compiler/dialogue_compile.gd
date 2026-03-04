@@ -3,9 +3,7 @@ var save_path = "res://save/"
 var scripts_file = "processed_script.tres"
 var res_dialogue = "res://dialogue/"
 var dialogue_start = "res://dialogue/Start.txt"
-var curr_dialogue
 var prev_command = []
-var prev_text = {}
 var dialogue_list = []
 var processed_dialogue = []
 
@@ -16,8 +14,8 @@ func compile_dialogues():
 	ResourceSaver.save(script_tree, save_path + scripts_file)
 	# 先创建对应的保存文件
 	dialogue_list = find_all_dialogue(res_dialogue)
+	# compile dialogues
 	dialogue_proof_read(["Start.txt", dialogue_start])
-	# compile 文案
 	var scripts: ScriptTree = ResourceLoader.load(save_path + scripts_file)
 	scripts.clear_save()
 	ResourceSaver.save(scripts, save_path + scripts_file)
@@ -45,19 +43,14 @@ func helper_find_chapter_from_choice(which_chap: String):
 func dialogue_proof_read(chapter: Array):
 	# holy fuck this code is shit
 	# this is one of the uglyest function I have ever written
-	curr_dialogue = chapter
-	var character
-	var dialogue
-	var command
 	var temp_command
-	var text
 	var chap_name = chapter[0]
 	var chap_dir = chapter[1]
 	var file = FileAccess.open(chap_dir, FileAccess.READ)
 	var script_tree: ScriptTree = ResourceLoader.load(save_path + scripts_file)
 	script_tree.change_chapter(chap_name)
 	while !file.eof_reached():
-		text = file.get_line()
+		var text = file.get_line()
 		while text == "":
 		# incase a blank line is left, once a blank line is detected
 		# skip until a none blank line is reached
@@ -66,9 +59,6 @@ func dialogue_proof_read(chapter: Array):
 				ResourceSaver.save(script_tree, save_path + scripts_file)
 				return
 			text = file.get_line()
-		#TODO join choice and game into sth else
-		# so the code isn't this massive piece of shit
-		# and can be easily extended
 		if text == "choice":
 			var choices = get_choice(file)
 			script_tree.add_choice(choices)
@@ -82,7 +72,7 @@ func dialogue_proof_read(chapter: Array):
 				if choice[1] not in processed_dialogue:
 					dialogue_proof_read(helper_find_chapter_from_choice(choice[1]))
 			return
-		if text == "game":
+		elif text == "game":
 			var game = file.get_line()
 			file.close()
 			processed_dialogue.append(chap_name)
@@ -96,12 +86,13 @@ func dialogue_proof_read(chapter: Array):
 						dialogue_proof_read(helper_find_chapter_from_choice(game[i]))
 			return
 		text = text.replace("：", ":")
-		character = text.substr(0, text.find(":") + 1)
+		var character = text.substr(0, text.find(":") + 1)
 		# this includes the ":"
 		if character == " command:" or character == ":":
 			character = ""
 			#清理特殊字符command和隔开角色和台词的：
 			#同时考虑到该行没有人物或对话的情况
+		var dialogue
 		if text.find(" command:") != -1:
 			dialogue = text.substr(text.find(":") + 1, text.find(" command:") - text.find(":"))
 		else:
@@ -110,15 +101,12 @@ func dialogue_proof_read(chapter: Array):
 		character = character.substr(0, len(character) - 1)
 		# remove the ":"
 		dialogue = dialogue.replace("\\command:", "command:")
-		command = text.substr(text.find(" command:"))
-		if $"..".auto_color_text and character != "":
+		var command = text.substr(text.find(" command:"))
+		if $"..".auto_color_text:
 			dialogue = GlobalResources.color_all.process_color(character, "dialogue", dialogue)
 			character =  GlobalResources.color_all.process_color(character, "character", character)
-		elif $"..".auto_color_text and character == "":
-			dialogue =  GlobalResources.color_all.process_color("nar", "dialogue", dialogue)
-			# this colours the narrator which does not have a character name
+			# colours dialogue and character (including narrator)
 		var command_list = process_commands(command)
-		prev_text = {"character": character, "dialogue": dialogue}
 		script_tree.add_line(character, dialogue, command_list)
 		# make sure complete empty line are ignored
 	ResourceSaver.save(script_tree, save_path + scripts_file)
@@ -153,38 +141,10 @@ func help_fix_commands(order_list: Array):
 	#get the same effect
 	var fixed_commands = []
 	for order in order_list:
-		var temp = []
-		var which_order = order[0]
+		if order[0] == "background" and order.size() < 3:
+			order.append("true")
+		fixed_commands.append(order)
 		print("current order is ", order, "\n")
-		match which_order:
-			"character":
-				if order.size() == 5:
-					# complete command
-					fixed_commands.append(order)
-				elif order.size() == 4:
-					# did not include transition
-					temp = [order[0], order[1], order[2], order[3], "false"]
-					fixed_commands.append(temp)
-				elif order.size() == 3:
-					temp = [order[0], order[1], order[2], "character", "false"]
-					fixed_commands.append(temp)
-				else:
-					temp = [order[0], order[1], "mid", "character", "false"]
-					fixed_commands.append(temp)
-			"background":
-				if order.size() == 4:
-					fixed_commands.append(order)
-				elif order.size() == 3:
-					temp = [order[0], order[1], order[2], "false"]
-					fixed_commands.append(temp)
-				else:
-					temp = [order[0], order[1], "true", "false"]
-					fixed_commands.append(temp)
-			_:
-				# background and character has flexible length
-				# others dont
-				fixed_commands.append(order)
-	print("fixed commands are: ", fixed_commands, "\n")
 	return fixed_commands
 
 func extend_commands():

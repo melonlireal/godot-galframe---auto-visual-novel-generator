@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://pgyucp4tuj4t"]
 
 [ext_resource type="Script" uid="uid://b765or20vfnkd" path="res://frameWorkCore/gameplay_basic/character_slot.gd" id="1_xtmag"]
-[ext_resource type="Texture2D" uid="uid://bn84mvaqbrw7e" path="res://artResource/character/test.png" id="2_rweqb"]
+[ext_resource type="Texture2D" uid="uid://xgfprdv5iqjg" path="res://artResource/character/catxilinidle.png" id="2_rweqb"]
 
 [node name="character_slot" type="Control"]
 layout_mode = 3

@@ -45,7 +45,7 @@ func find_colour(color: FileAccess):
 				colors.add_colour(line[0], line[1])
 			elif len(line) == 3:
 				colors.add_colour(line[0], line[1], line[2])
-	colors.add_colour("nar",$"..".narrator_color,$"..".narrator_color)
+	colors.add_colour("",$"..".narrator_color,$"..".narrator_color)
 	ResourceSaver.save(colors, save_path + color_save)
 	return
 	

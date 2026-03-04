@@ -9,7 +9,7 @@ var on_transition = false
 func do_transition():
 	pass
 
-func change_background(background: String, loop = "true", _effect = ""):
+func change_background(background: String, loop = "true"):
 	if self.has_method(background):
 		var transition = Callable(self, background)
 		transition.call()

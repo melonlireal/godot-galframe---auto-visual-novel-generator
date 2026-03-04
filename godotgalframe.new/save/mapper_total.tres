@@ -6,5 +6,15 @@
 script = ExtResource("1_hokb5")
 resource_dic = {
 "35 .mp3.import": "res://music//voice/35 .mp3.import",
-"occupy.txt": "res://music//voice/occupy.txt"
+"catxilinidle.png": "res://artResource/character//catxilinidle.png",
+"catxilinidle.png.import": "res://artResource/character//catxilinidle.png.import",
+"catxilinidleblush.png": "res://artResource/character//catxilinidleblush.png",
+"catxilinidleblush.png.import": "res://artResource/character//catxilinidleblush.png.import",
+"occupy.txt": "res://music//voice/occupy.txt",
+"test.png": "res://artResource/character//test.png",
+"test.png.import": "res://artResource/character//test.png.import",
+"test1.png": "res://artResource/character//test1.png",
+"test1.png.import": "res://artResource/character//test1.png.import",
+"test2.png": "res://artResource/character//test2.png",
+"test2.png.import": "res://artResource/character//test2.png.import"
 }
