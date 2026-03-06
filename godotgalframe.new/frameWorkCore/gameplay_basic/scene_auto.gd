@@ -268,7 +268,7 @@ func command_execute(orders: Array):
 		print("curr order is", which_order, "\n")
 		match which_order:
 			"character":
-				%avatar.change_avatar(order[1], order[2], order[3], order[4])
+				%avatar.change_avatar(order[1])
 			"background":
 				%background.change_background(order[1], order[2])
 			"bgm", "sound_effect", "voice":

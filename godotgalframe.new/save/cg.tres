@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_25url")
-cg_list = ["catear.jpg", "firefly.png", "catear.jpg", "firefly.png", "catear.jpg", "firefly.png", "catear.jpg", "firefly.png", "catear.jpg", "firefly.png"]
-cg_cover_list = ["catearfront.jpg", "fireflyfront.png", "catearfront.jpg", "fireflyfront.png", "catearfront.jpg", "fireflyfront.png", "catearfront.jpg", "fireflyfront.png", "catearfront.jpg", "fireflyfront.png"]
+cg_list = ["catear.jpg", "firefly.png", "catear.jpg", "firefly.png", "catear.jpg", "firefly.png", "catear.jpg", "firefly.png", "catear.jpg", "firefly.png", "catear.jpg", "firefly.png", "catear.jpg", "firefly.png", "catear.jpg", "firefly.png"]
+cg_cover_list = ["catearfront.jpg", "fireflyfront.png", "catearfront.jpg", "fireflyfront.png", "catearfront.jpg", "fireflyfront.png", "catearfront.jpg", "fireflyfront.png", "catearfront.jpg", "fireflyfront.png", "catearfront.jpg", "fireflyfront.png", "catearfront.jpg", "fireflyfront.png", "catearfront.jpg", "fireflyfront.png"]

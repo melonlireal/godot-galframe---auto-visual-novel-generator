@@ -1,1 +1,2 @@
-character: this is a script
+character: this is a script command: (character, catxilinidle.png)
+character: this is a script command: (character, catxilinidleganga.png)

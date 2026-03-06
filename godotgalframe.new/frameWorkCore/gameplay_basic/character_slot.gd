@@ -1,15 +1,12 @@
 extends Control
 class_name CharacterSlot
-# a character slot is in charge of storing character avatar in its desginated 
+# a character slot is in charge of storing character avatar in its designated 
 # location and apply character effect when called.
 
 @onready var character: TextureRect = $slot/character
 @onready var character_back: TextureRect = $slot/character_back
-var slot_tween:Tween
+var tween_list = []
 
-# Called when the node enters the scene tree for the first time.
-func _process(delta: float) -> void:
-	print(character.modulate.a)
 
 func change_avatar(avatar: String):
 	var avatar_at = GlobalResources.asset_map.search_path(avatar)
@@ -19,25 +16,36 @@ func change_avatar(avatar: String):
 		return
 	character.texture = ResourceLoader.load(avatar_at)
 
-func end_tween():
-	if slot_tween != null:
-		slot_tween.custom_step(9999)
-		slot_tween.kill()
-		
-func play_character_effects(args):
-	if slot_tween:
-		end_tween()
-	slot_tween = create_tween()
-	for arg in args:
-		if len(arg) == 1:
-			slot_tween.set_parallel(false)
+
+func play_character_effects(steps):
+	for tween:Tween in tween_list:
+		tween.custom_step(9999)
+		tween.kill()
+	await _run_steps(steps)
+
+
+func _run_steps(steps):
+	for step in steps:
+		# sequential step
+		if step.size() == 1:
+			await _run_action(step[0])
+		# parallel step
 		else:
-			# enable parallel when multiple animation will execute at same time
-			slot_tween.set_parallel(true) 
-		for actions in arg: 
-			var op = Callable(self, actions[0])
-			op.call(slot_tween, actions.slice(1))
-		
+			for action in step:
+				call_deferred("_run_action", action)
+			# wait one frame so they start together
+			await get_tree().process_frame
+
+
+func _run_action(action):
+	var method = action[0]
+	var args = action.slice(1)
+	var tween = create_tween()
+	tween_list.append(tween)
+	var op = Callable(self, method)
+	await op.call(tween, args)
+	
+	
 func shake(tween:Tween, args: Array = []):
 	var time = 0.2
 	if len(args) > 0:
@@ -49,8 +57,11 @@ func shake(tween:Tween, args: Array = []):
 	tween.tween_property(self, "offset_left", offset_default, time/4)
 	tween.tween_property(self, "offset_left", offset_default - 100, time/4)
 	tween.tween_property(self, "offset_left", offset_default, time/4)
+	await tween.finished
+	
 	
 func jump(tween:Tween, args: Array = []):
+	print("jump is played")
 	var time = 0.2
 	if len(args) > 0:
 		time = args[0]
@@ -59,15 +70,19 @@ func jump(tween:Tween, args: Array = []):
 	var offset_default = offset_top
 	tween.tween_property(self, "offset_top", offset_default - 200, time/2)
 	tween.tween_property(self, "offset_top", offset_default, time/2)
-
+	await tween.finished
+	
+	
 func wait(tween:Tween, args: Array = []):
 	var time = 1.0
 	if len(args) > 0:
 		time = args[0]
 	tween.tween_interval(time)
-
+	await tween.finished
+	
+	
 func transit(tween: Tween, args: Array):
-	character_back.modulate.a = 1
+	character.modulate.a = 1
 	var avatar_at = GlobalResources.asset_map.search_path(args[0])
 	character_back.texture = ResourceLoader.load(avatar_at)
 	tween.tween_property(character, "modulate:a", 0, 0.2)
@@ -76,12 +91,31 @@ func transit(tween: Tween, args: Array):
 		character.modulate.a = 1
 		character_back.texture = null
 	)
+	await tween.finished
 
-func dissapper(tween: Tween, args: Array):
+
+func dissappear(tween: Tween, args: Array):
 	var time = 0.5
 	if len(args) > 0:
 		time = args[0]
 	tween.tween_property(character, "modulate:a", 0, time)
+	await tween.finished
+	character.texture = null
+	character.modulate.a = 1
+
+func appear(tween:Tween, args: Array):
+	character.modulate.a = 1
+	var avatar_at = GlobalResources.asset_map.search_path(args[0])
+	character.texture = ResourceLoader.load(avatar_at)
+	tween.tween_property(character, "modulate:a", 1, 0.2)
+	await tween.finished
 
 func _on_button_pressed() -> void:
-	play_character_effects([[["transit", "test1.png"]], [["transit", "test2.png"]]])
+	print("pressed")
+	play_character_effects([
+		[["transit", "catxilinidleblush.png"], ["jump", 0.2]],
+		[["wait", 1.0]],
+		[["transit", "catxilinidleganga.png"]],
+		[["wait", 1.0]],
+		[["dissappear"]]
+		])

@@ -10,6 +10,8 @@ resource_dic = {
 "catxilinidle.png.import": "res://artResource/character//catxilinidle.png.import",
 "catxilinidleblush.png": "res://artResource/character//catxilinidleblush.png",
 "catxilinidleblush.png.import": "res://artResource/character//catxilinidleblush.png.import",
+"catxilinidleganga.png": "res://artResource/character//catxilinidleganga.png",
+"catxilinidleganga.png.import": "res://artResource/character//catxilinidleganga.png.import",
 "occupy.txt": "res://music//voice/occupy.txt",
 "test.png": "res://artResource/character//test.png",
 "test.png.import": "res://artResource/character//test.png.import",

@@ -35,14 +35,10 @@ expand_mode = 1
 stretch_mode = 5
 metadata/_edit_lock_ = true
 
-[node name="Button" type="Button" parent="."]
+[node name="Button" type="Button" parent="slot"]
 custom_minimum_size = Vector2(200, 200)
-layout_mode = 0
-offset_left = 387.0
-offset_top = 77.0
-offset_right = 587.0
-offset_bottom = 277.0
+layout_mode = 2
 text = "TEST
 "
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="slot/Button" to="." method="_on_button_pressed"]

@@ -8,8 +8,13 @@ all_script = {
 "Start.txt": {
 1: {
 "character": "character",
-"command": [],
-"dialogue": " this is a script"
+"command": [["character", "catxilinidle.png"]],
+"dialogue": " this is a script "
+},
+2: {
+"character": "character",
+"command": [["character", "catxilinidleganga.png"]],
+"dialogue": " this is a script "
 }
 }
 }

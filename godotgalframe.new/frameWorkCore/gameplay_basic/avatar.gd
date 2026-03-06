@@ -11,10 +11,10 @@ func update_art_list(orders: Array):
 	avatar_list = []
 	for order in orders:
 		if order[0] == "character" and order[1] != "clear":
-			avatar_list.append(str(order[2] + order[3]))
+			avatar_list.append(str(order[0]))
 	return
 	
-func change_avatar(avatar: String, position = "mid", slot: = "character", transition = "false"):
+func change_avatar(avatar: String, position = "mid", slot: = "character", transition = "true"):
 	print("changing avatar\n")
 	if avatar == "clear":
 		print("clearing all avatar\n")
@@ -43,7 +43,7 @@ func change_avatar(avatar: String, position = "mid", slot: = "character", transi
 		avatar_list.append(position + "back" + slot)
 		# place the new avatar "behind" the current avatar
 		var transit = get_tree().create_tween().bind_node(which_slot)
-		transit.tween_property(which_slot, "modulate:a", 0, 0.2)
+		transit.tween_property(which_slot, "modulate:a", 0, 10)
 		await transit.finished
 		which_slot.texture = ResourceLoader.load(avatar_at)
 		which_slot.modulate.a = 1
