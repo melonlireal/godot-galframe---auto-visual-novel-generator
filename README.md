@@ -4,7 +4,7 @@ Godot GalFrame is a Godot-based framework for building visual novels (galgames) 
 
 ## Project Status
 
-This project is currently in active development and is not yet feature-complete.
+This project is currently in active development and is not yet feature-complete. Please visit Wiki for tutorials
 
 ## Included Features
 
