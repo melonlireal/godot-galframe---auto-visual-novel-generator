@@ -141,8 +141,8 @@ func proceed():
 		# if exit, exit
 		return
 	if status == "choice reach":
-		$dialogue.visible = true
-		$UI.visible = true
+		$dialogue.show()
+		$UI.show()
 		%dialogue.visible_ratio = 1.0
 		choice_reach = true
 		choice_jump()
@@ -169,29 +169,23 @@ func proceed():
 		# creator may want to switch dialogue box style when its narration
 		# instead of character speaking
 		# this check by whether character has a name or not
-		$dialogue/dialogue_box.visible = false
-		$dialogue/narration_box.visible = true
+		$dialogue/dialogue_box.hide()
+		$dialogue/narration_box.show()
 		%dialogue.narrration = true
 	else:
-		$dialogue/dialogue_box.visible = true
-		$dialogue/narration_box.visible = false
+		$dialogue/dialogue_box.hide()
+		$dialogue/narration_box.show()
 		%dialogue.narrration = false
-
 	command_execute(text["command"]) 
 	# execute the command with dialogue
-	
 	%character.text = text["character"]
 	%dialogue.text = text["dialogue"]
 	#change text on dialogue box to respected character and dialogue
-	
 	$review_dialogues.get_words(text["character"], text["dialogue"])
 	$review_dialogues.add_line()
 	# add character and dialogue into review_dialogue
-	
 	print("character ", text["character"], " is speaking script: ", text["dialogue"], "\n")
-	#self.get_tree().call_group("dialogue", "_start_dialogue")
-	# start playing dialogue
-	%dialogue._start_dialogue() #TODO why dont I just do this?
+	%dialogue._start_dialogue()
 
 
 func choice_jump():
@@ -210,7 +204,6 @@ func choice_jump():
 		# instantiate and add all choices in choice list to game
 		var ready_option = option.instantiate()
 		%choice_box.add_child(ready_option)
-		
 		# TODO, these feels like shit code
 		var choice_text = ready_option.get_node("center").get_node("choice_text")
 		var going_to = ready_option.get_node("going_to")
@@ -256,23 +249,22 @@ func travel(location: String):
 	# reset dialogue and start line
 
 
-func command_execute(orders: Array):
+func command_execute(orders: Dictionary):
 	# TODO O(2n) complexity, need to try to fix in future
-	%avatar.update_art_list(orders)
 	# iterate the command to find all avatar slot that will be overwrite
 	# these slot does not need to be cleared
 	# this feature helps with avatar transition and potentialy many feature
+	%avatar.update_art_list(orders.get("character", []))
+	
+	%avatar.change_avatars(orders.get("character", []))
+	%background.change_backgrounds(orders.get("background", []))
+	%music.change_bgm(orders.get("bgm", []))
+	%music.change_sound_effect(orders.get("sound_effect"), [])
+	%music.change_voice(orders.get("voice", []))
 	for order in orders:
 		# iterate through orders and execure respective command
 		var which_order = order[0]
-		print("curr order is", which_order, "\n")
 		match which_order:
-			"character":
-				%avatar.change_avatar(order[1])
-			"background":
-				%background.change_background(order[1], order[2])
-			"bgm", "sound_effect", "voice":
-				$music.change_music(which_order, order[1])
 			"CG":
 				# since cg is displayed full screen
 				# all avatar are expected to be cleared

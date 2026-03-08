@@ -1,2 +1,6 @@
 character: this is a script command: (character, catxilinidle.png)
-character: this is a script command: (character, catxilinidleganga.png)
+character: this is a script command: (character, catxilinidleganga.png, left) (effect, mid, (jump), (transit, catxilinildeblush.png)) (effect, mid, (wait, 1)) (effect, mid, (shake))
+:咚咚咚，舰长敲开了西琳的房门。房里拉着窗帘，被子杂乱地扔在床上，显然西琳还没睡醒。 command: (background, indoor6.png) (bgm, casual7.mp3) (sound_effect, knock1.mp3)
+西琳：谁啊，一大早的... command: (character, xilinidleshengqi.png, mid)  (voice, 1.mp3) (sound_effect, open.mp3)
+舰长：早呀，西琳。
+西琳：啊，是舰长。有什么事情要拜托魔法少女西琳吗？ command: (character, xilinidleweixiao.png, mid)  (voice, 2.mp3)

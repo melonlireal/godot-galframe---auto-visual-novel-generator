@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_ay0hx")
 variables = {
-"captain_life_energy": 9223372036854775807,
+"captain_life_energy": 10000000000000,
 "captain_local_wealth": 0,
 "captain_magic_skill": -1,
 "yap": 0

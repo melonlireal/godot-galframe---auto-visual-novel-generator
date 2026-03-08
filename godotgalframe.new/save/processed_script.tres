@@ -8,13 +8,57 @@ all_script = {
 "Start.txt": {
 1: {
 "character": "character",
-"command": [["character", "catxilinidle.png"]],
+"command": {
+"character": [["catxilinidle.png"]]
+},
 "dialogue": " this is a script "
 },
 2: {
 "character": "character",
-"command": [["character", "catxilinidleganga.png"]],
+"command": {
+"character": [["catxilinidleganga.png", "left"]],
+"effect": [["mid", ["jump"], ["transit", "catxilinildeblush.png"]], ["mid", ["wait", "1"]], ["mid", ["shake"]]]
+},
 "dialogue": " this is a script "
+},
+3: {
+"character": "[color=434444][/color]",
+"command": {
+"background": [["background", "indoor6.png", "true"]],
+"bgm": [["casual7.mp3"]],
+"sound_effect": [["knock1.mp3"]]
+},
+"dialogue": "[color=434444]咚咚咚，舰长敲开了西琳的房门。房里拉着窗帘，被子杂乱地扔在床上，显然西琳还没睡醒。 [/color]"
+},
+4: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": {
+"background": [["background", "indoor6.png", "true"]],
+"bgm": [["casual7.mp3"]],
+"character": [["xilinidleshengqi.png", "mid"]],
+"sound_effect": [["open.mp3"]],
+"voice": [["1.mp3"]]
+},
+"dialogue": "[color=8e00c0]谁啊，一大早的... [/color]"
+},
+5: {
+"character": "[color=787878]舰长[/color]",
+"command": {
+"background": [["background", "indoor6.png", "true"]],
+"bgm": [["casual7.mp3"]],
+"character": [["xilinidleshengqi.png", "mid"]]
+},
+"dialogue": "[color=434444]早呀，西琳。[/color]"
+},
+6: {
+"character": "[color=8e00c0]西琳[/color]",
+"command": {
+"background": [["background", "indoor6.png", "true"]],
+"bgm": [["casual7.mp3"]],
+"character": [["xilinidleweixiao.png", "mid"]],
+"voice": [["2.mp3"]]
+},
+"dialogue": "[color=8e00c0]啊，是舰长。有什么事情要拜托魔法少女西琳吗？ [/color]"
 }
 }
 }

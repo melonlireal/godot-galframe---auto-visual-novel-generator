@@ -15,6 +15,11 @@ func change_avatar(avatar: String):
 		print("error: unknown avatar ", avatar)
 		return
 	character.texture = ResourceLoader.load(avatar_at)
+	
+func clear_avatar():
+	character.texture = null
+	character_back.texture = null
+
 
 
 func play_character_effects(steps):
