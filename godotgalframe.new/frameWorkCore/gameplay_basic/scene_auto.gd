@@ -81,7 +81,6 @@ func _process(_delta):
 
 
 func _input(event: InputEvent) -> void:
-	var status = check_in_game()
 	if event.is_action_pressed("press") and check_in_game():
 		# press advance dialogue to next line or stop the current state
 		$dialogue.visible = true
@@ -257,37 +256,22 @@ func command_execute(orders: Dictionary):
 	%avatar.update_art_list(orders.get("character", []))
 	
 	%avatar.change_avatars(orders.get("character", []))
+	%avatar.execute_avatar_effects(orders.get("effect", []))
 	%background.change_backgrounds(orders.get("background", []))
 	%music.change_bgm(orders.get("bgm", []))
-	%music.change_sound_effect(orders.get("sound_effect"), [])
+	%music.change_sound_effect(orders.get("sound_effect", []))
 	%music.change_voice(orders.get("voice", []))
-	for order in orders:
-		# iterate through orders and execure respective command
-		var which_order = order[0]
-		match which_order:
-			"CG":
-				# since cg is displayed full screen
-				# all avatar are expected to be cleared
-				# it should also make all UI invisible 
-				# and visible after finishing displaying
-				auto_play = false
-				speed_up = false
-				%avatar.clear_all_avatar()
-				$UI.visible = false
-				$dialogue.visible = false
-				can_press = false
-				%background.change_background(order[1], "false")
-				print("displaying CG\n")
-			"update":
-				# update variable creater implemented
-				variables.var_op(order[1], order[2], order[3])
-			"chubby":
-				# start a chubby play
-				$chubby_play.swap(order[1])
-			_:
-				# currentlu, unknown command will trigger an error
-				print("unknown commad ", which_order, "\n")
-				self.get_tree().call_group("errorlog", "unknown_command", which_order)
+	variables.perform_var_ops(orders.get("update", []))
+	#TODO add func for chubby
+	if orders.has("CG"):
+		auto_play = false
+		speed_up = false
+		%avatar.clear_all_avatar()
+		$UI.visible = false
+		$dialogue.visible = false
+		can_press = false
+		%background.change_background(orders["CG"][0][0], "false")
+		print("displaying CG\n")
 	return
 
 

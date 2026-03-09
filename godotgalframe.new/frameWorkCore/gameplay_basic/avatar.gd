@@ -9,9 +9,12 @@ func update_art_list(orders: Array):
 			avatar_list.append(str(order[1]))
 	return
 	
-func execute_avatar_effect(slot, effects):
-	var which_slot:CharacterSlot = self.find_child(slot)
-	which_slot.play_character_effects(effects)
+func execute_avatar_effects(effect_commands: Array):
+	for effect_command:Array in effect_commands:
+		var slot = effect_command[0]
+		var effects = effect_command.slice(1)
+		var which_slot:CharacterSlot = self.find_child(slot)
+		which_slot.play_character_effects(effects)
 	pass
 	
 func change_avatars(avatar_commands: Array):

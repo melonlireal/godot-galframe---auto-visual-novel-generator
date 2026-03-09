@@ -6,17 +6,29 @@
 script = ExtResource("1_hokb5")
 resource_dic = {
 "35 .mp3.import": "res://music//voice/35 .mp3.import",
+"casual7.mp3": "res://music//soundeffect/casual7.mp3",
+"casual7.mp3.import": "res://music//soundeffect/casual7.mp3.import",
 "catxilinidle.png": "res://artResource/character//catxilinidle.png",
 "catxilinidle.png.import": "res://artResource/character//catxilinidle.png.import",
 "catxilinidleblush.png": "res://artResource/character//catxilinidleblush.png",
 "catxilinidleblush.png.import": "res://artResource/character//catxilinidleblush.png.import",
 "catxilinidleganga.png": "res://artResource/character//catxilinidleganga.png",
 "catxilinidleganga.png.import": "res://artResource/character//catxilinidleganga.png.import",
+"indoor6.png": "res://artResource/background//indoor6.png",
+"indoor6.png.import": "res://artResource/background//indoor6.png.import",
+"knock1.mp3": "res://music//soundeffect/knock1.mp3",
+"knock1.mp3.import": "res://music//soundeffect/knock1.mp3.import",
 "occupy.txt": "res://music//voice/occupy.txt",
+"open.mp3": "res://music//soundeffect/open.mp3",
+"open.mp3.import": "res://music//soundeffect/open.mp3.import",
 "test.png": "res://artResource/character//test.png",
 "test.png.import": "res://artResource/character//test.png.import",
 "test1.png": "res://artResource/character//test1.png",
 "test1.png.import": "res://artResource/character//test1.png.import",
 "test2.png": "res://artResource/character//test2.png",
-"test2.png.import": "res://artResource/character//test2.png.import"
+"test2.png.import": "res://artResource/character//test2.png.import",
+"xilinidleshengqi.png": "res://artResource/character//xilinidleshengqi.png",
+"xilinidleshengqi.png.import": "res://artResource/character//xilinidleshengqi.png.import",
+"xilinidleweixiao.png": "res://artResource/character//xilinidleweixiao.png",
+"xilinidleweixiao.png.import": "res://artResource/character//xilinidleweixiao.png.import"
 }

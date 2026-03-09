@@ -9,22 +9,21 @@ all_script = {
 1: {
 "character": "character",
 "command": {
-"character": [["catxilinidle.png"]]
+"character": [["catxilinidle.png", "mid"]]
 },
 "dialogue": " this is a script "
 },
 2: {
 "character": "character",
 "command": {
-"character": [["catxilinidleganga.png", "left"]],
-"effect": [["mid", ["jump"], ["transit", "catxilinildeblush.png"]], ["mid", ["wait", "1"]], ["mid", ["shake"]]]
+"effect": [["mid", [["jump"], ["transit", "catxilinidleblush.png"]], [["wait", "1"]], [["shake"]]]]
 },
 "dialogue": " this is a script "
 },
 3: {
 "character": "[color=434444][/color]",
 "command": {
-"background": [["background", "indoor6.png", "true"]],
+"background": [["indoor6.png", "true"]],
 "bgm": [["casual7.mp3"]],
 "sound_effect": [["knock1.mp3"]]
 },
@@ -33,18 +32,17 @@ all_script = {
 4: {
 "character": "[color=8e00c0]西琳[/color]",
 "command": {
-"background": [["background", "indoor6.png", "true"]],
+"background": [["indoor6.png", "true"]],
 "bgm": [["casual7.mp3"]],
 "character": [["xilinidleshengqi.png", "mid"]],
-"sound_effect": [["open.mp3"]],
-"voice": [["1.mp3"]]
+"sound_effect": [["open.mp3"]]
 },
 "dialogue": "[color=8e00c0]谁啊，一大早的... [/color]"
 },
 5: {
 "character": "[color=787878]舰长[/color]",
 "command": {
-"background": [["background", "indoor6.png", "true"]],
+"background": [["indoor6.png", "true"]],
 "bgm": [["casual7.mp3"]],
 "character": [["xilinidleshengqi.png", "mid"]]
 },
@@ -53,12 +51,21 @@ all_script = {
 6: {
 "character": "[color=8e00c0]西琳[/color]",
 "command": {
-"background": [["background", "indoor6.png", "true"]],
+"background": [["indoor6.png", "true"]],
 "bgm": [["casual7.mp3"]],
-"character": [["xilinidleweixiao.png", "mid"]],
-"voice": [["2.mp3"]]
+"effect": [["mid", [["transit", "xilinidleweixiao.png"]]]]
 },
 "dialogue": "[color=8e00c0]啊，是舰长。有什么事情要拜托魔法少女西琳吗？ [/color]"
+},
+7: {
+"character": "test",
+"command": {
+"background": [["indoor6.png", "true"]],
+"bgm": [["casual7.mp3"]],
+"character": [["clear", "mid"]],
+"update": [["yap", "add", "1"]]
+},
+"dialogue": " testing stuff "
 }
 }
 }

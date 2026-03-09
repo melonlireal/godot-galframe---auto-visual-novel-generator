@@ -13,15 +13,15 @@ func change_backgrounds(backgrounds: Array):
 	if backgrounds == []:
 		return
 	else:
-		var background = backgrounds[0]
+		var background:Array = backgrounds[0]
 		var background_name = background[0]
 		var loop = background[1]
 		var background_at = asset_map.search_path(background_name)
 		if background_at == null:
 			self.get_tree().call_group("errorlog", "background_error", background_name)
 			return
-		if background.substr(len(background)-4, -1) == ".ogv":
-			if background in videolist:
+		if background_name.substr(len(background)-4, -1) == ".ogv":
+			if background_name in videolist:
 				return
 			# 识别是否是ogv格式
 			videolist.append(background_name)

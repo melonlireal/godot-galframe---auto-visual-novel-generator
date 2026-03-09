@@ -47,6 +47,9 @@ func change_voice(voice_commands: Array):
 			music_clear("voice")
 			return
 		var voice_at = GlobalResources.asset_map.search_path(which_voice) 
+		if not voice_at:
+			self.get_tree().call_group("errorlog", "music_error", which_voice)
+			return
 		var voice:AudioStream = ResourceLoader.load(voice_at)
 		var voice_duration = voice.get_length()
 		%dialogue.voicing_time = voice_duration

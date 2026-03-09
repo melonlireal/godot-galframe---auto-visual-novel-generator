@@ -54,7 +54,7 @@ func _run_action(action):
 func shake(tween:Tween, args: Array = []):
 	var time = 0.2
 	if len(args) > 0:
-		time = args[0]
+		time = int(args[0])
 	tween.set_trans(Tween.TRANS_SINE)
 	tween.set_ease(Tween.EASE_IN_OUT)
 	var offset_default = offset_left
@@ -69,7 +69,7 @@ func jump(tween:Tween, args: Array = []):
 	print("jump is played")
 	var time = 0.2
 	if len(args) > 0:
-		time = args[0]
+		time = int(args[0])
 	tween.set_trans(Tween.TRANS_SINE)
 	tween.set_ease(Tween.EASE_IN_OUT)
 	var offset_default = offset_top
@@ -81,7 +81,7 @@ func jump(tween:Tween, args: Array = []):
 func wait(tween:Tween, args: Array = []):
 	var time = 1.0
 	if len(args) > 0:
-		time = args[0]
+		time = int(args[0])
 	tween.tween_interval(time)
 	await tween.finished
 	
@@ -89,6 +89,9 @@ func wait(tween:Tween, args: Array = []):
 func transit(tween: Tween, args: Array):
 	character.modulate.a = 1
 	var avatar_at = GlobalResources.asset_map.search_path(args[0])
+	if not avatar_at:
+		self.get_tree().call_group("errorlog", "character_error", args[0])
+		return
 	character_back.texture = ResourceLoader.load(avatar_at)
 	tween.tween_property(character, "modulate:a", 0, 0.2)
 	tween.tween_callback(func():
@@ -102,7 +105,7 @@ func transit(tween: Tween, args: Array):
 func dissappear(tween: Tween, args: Array):
 	var time = 0.5
 	if len(args) > 0:
-		time = args[0]
+		time = int(args[0])
 	tween.tween_property(character, "modulate:a", 0, time)
 	await tween.finished
 	character.texture = null
@@ -115,12 +118,12 @@ func appear(tween:Tween, args: Array):
 	tween.tween_property(character, "modulate:a", 1, 0.2)
 	await tween.finished
 
-func _on_button_pressed() -> void:
-	print("pressed")
-	play_character_effects([
-		[["transit", "catxilinidleblush.png"], ["jump", 0.2]],
-		[["wait", 1.0]],
-		[["transit", "catxilinidleganga.png"]],
-		[["wait", 1.0]],
-		[["dissappear"]]
-		])
+#func _on_button_pressed() -> void:
+	#print("pressed")
+	#play_character_effects([
+		#[["transit", "catxilinidleblush.png"], ["jump", 0.2]],
+		#[["wait", 1.0]],
+		#[["transit", "catxilinidleganga.png"]],
+		#[["wait", 1.0]],
+		#[["dissappear"]]
+		#])

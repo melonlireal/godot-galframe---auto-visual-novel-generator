@@ -127,6 +127,7 @@ func process_commands(commands: String):
 		## this allows the art/music to always be displayed when loading
 	extend_music(fixed_commands)
 	extend_background(fixed_commands)
+	extend_effects(fixed_commands)
 	prev_command = fixed_commands
 	return fixed_commands
 
@@ -167,12 +168,13 @@ func help_fix_commands(order_list: Array):
 		if not fixed_commands.has(order_type):
 			fixed_commands[order_type] = []
 		match order_type:				
+			"character":
+				if order.size() < 3:
+					order.append("mid")
 			"background":
 				if order.size() < 3:
 					order.append("true")
-				fixed_commands[order_type].append(order)
-			_:
-				fixed_commands[order_type].append(order.slice(1))
+		fixed_commands[order_type].append(order.slice(1))
 		print("current order is ", order, "\n")
 	return fixed_commands
 
@@ -196,6 +198,22 @@ func extend_music(order_list: Dictionary):
 	if order_list.has("bgm") or not prev_command.has("bgm"):
 		return
 	order_list["bgm"] = prev_command["bgm"]
+	return
+
+func extend_effects(order_list: Dictionary):
+	if not order_list.has("effect"):
+		return
+	var effects = order_list["effect"]
+	var grouped = {}
+	for effect in effects:
+		var pos = effect[0]
+		if not grouped.has(pos):
+			grouped[pos] = [pos]
+		grouped[pos].append(effect.slice(1))
+	var final_effects = []
+	for pos in grouped:
+		final_effects.append(grouped[pos])
+	order_list["effect"] = final_effects
 	return
 
 #return the list of choices and respected new chapter	
