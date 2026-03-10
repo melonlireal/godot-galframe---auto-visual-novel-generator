@@ -3,7 +3,8 @@ var save_path = "res://save/"
 var scripts_file = "processed_script.tres"
 var res_dialogue = "res://dialogue/"
 var dialogue_start = "res://dialogue/Start.txt"
-var prev_command = []
+var prev_command = {}
+# dialogue_list is a list instead of dictionary to prevent overide duplicate files.
 var dialogue_list = []
 var processed_dialogue = []
 
@@ -17,7 +18,7 @@ func compile_dialogues():
 	# compile dialogues
 	dialogue_proof_read(["Start.txt", dialogue_start])
 	var scripts: ScriptTree = ResourceLoader.load(save_path + scripts_file)
-	scripts.clear_save()
+	scripts.set_starting_point() # reset the starting point 
 	ResourceSaver.save(scripts, save_path + scripts_file)
 
 func find_all_dialogue(dir: String):
@@ -41,8 +42,6 @@ func helper_find_chapter_from_choice(which_chap: String):
 			return chapters
 
 func dialogue_proof_read(chapter: Array):
-	# holy fuck this code is shit
-	# this is one of the uglyest function I have ever written
 	var temp_command
 	var chap_name = chapter[0]
 	var chap_dir = chapter[1]
@@ -55,7 +54,7 @@ func dialogue_proof_read(chapter: Array):
 		# incase a blank line is left, once a blank line is detected
 		# skip until a none blank line is reached
 			if file.eof_reached():
-				script_tree.clear_save()
+				script_tree.set_starting_point()
 				ResourceSaver.save(script_tree, save_path + scripts_file)
 				return
 			text = file.get_line()
@@ -101,11 +100,13 @@ func dialogue_proof_read(chapter: Array):
 		character = character.substr(0, len(character) - 1)
 		# remove the ":"
 		dialogue = dialogue.replace("\\command:", "command:")
-		var command = text.substr(text.find(" command:"))
 		if $"..".auto_color_text:
 			dialogue = GlobalResources.color_all.process_color(character, "dialogue", dialogue)
 			character =  GlobalResources.color_all.process_color(character, "character", character)
 			# colours dialogue and character (including narrator)
+		var command = text.substr(text.find(" command:"))
+		if command.begins_with(" command:"):
+			command = command.substr(len(" command:"))
 		var command_list = process_commands(command)
 		script_tree.add_line(character, dialogue, command_list)
 		# make sure complete empty line are ignored
@@ -114,81 +115,124 @@ func dialogue_proof_read(chapter: Array):
 	
 func process_commands(commands: String):
 	#return the list of commands
-	var format = RegEx.new()
-	format.compile("[(][^)]*[)]")
-	var order_list = []
-	for order in format.search_all(commands):
-		var temp = order.get_string().substr(1).left(-1)
-		order_list.append(Array(temp.replace(" ", "").rsplit(",")))
+	print(commands)
+	var order_list = help_parse_nested_commands(commands)
 	print("processed commands are", order_list, "\n")
 	var fixed_commands = help_fix_commands(order_list)
-	if fixed_commands == []:
-		print("since current command is empty, commands have been extended!\n")
-		fixed_commands = extend_commands()
-		# if there is no command, it means the line follows the command 
-		# from previous line, except voice and charatcer transition
-		# this allows the art/music to always be displayed when loading
-	extend_music(fixed_commands)
-	print("after extend music ", fixed_commands, "\n")
-	extend_background(fixed_commands)
-	print("after extend background ", fixed_commands, "\n")
-	prev_command = fixed_commands
+	extend_from_prev_command(fixed_commands)
+	prev_command = set_prev_command(fixed_commands)
 	return fixed_commands
+
+func help_parse_nested_commands(text: String):
+	var result = []
+	var token = ""
+	var stack = [result]
+	for c in text:
+		match c:
+			"(":
+				var new_list = []
+				stack[-1].append(new_list)
+				stack.append(new_list)
+				token = ""
+			")":
+				if token.strip_edges() != "":
+					stack[-1].append(token.strip_edges())
+				token = ""
+				stack.pop_back()
+			",":
+				if token.strip_edges() != "":
+					stack[-1].append(token.strip_edges())
+				token = ""
+			_:
+				token += c
+	if token.strip_edges() != "":
+		stack[0].append(token.strip_edges())
+
+	return result
 
 func help_fix_commands(order_list: Array):
 	#pre process the commands into the format that can be used by 
 	#internal code. Allows user to type less complex command and
 	#get the same effect
-	var fixed_commands = []
+	var fixed_commands = {}
 	for order in order_list:
-		if order[0] == "background" and order.size() < 3:
-			order.append("true")
-		fixed_commands.append(order)
+		var order_type = order[0]
+		if not fixed_commands.has(order_type):
+			fixed_commands[order_type] = []
+		match order_type:				
+			"character":
+				if order.size() < 3:
+					order.append("mid")
+			"background":
+				if order.size() < 3:
+					order.append("true")
+		fixed_commands[order_type].append(order.slice(1))
 		print("current order is ", order, "\n")
 	return fixed_commands
-
-func extend_commands():
-	# make current empty command prev command so 
-	# when load it loads all the art and music resource
-	var extended = []
-	for command in prev_command:
-		if extendable(command):
-			extended.append(command)
-	return extended
-
-func extendable(command: Array):
-	return command[0] != "voice" and command[0] != "update" \
-	and command[1] != "clear"
 	
-func extend_background(order_list: Array):
-	for command in order_list:
-		if command[0] == "background" or command[0] == "CG":
-			return
-	for command in prev_command:
-		if command[0] == "background":
-			order_list.append(command)
+func extend_from_prev_command(order_list: Dictionary):
+	if not order_list.has("background") and prev_command.has("background"):
+		order_list["background"] = prev_command["background"]
+		
+	if not order_list.has("bgm") and prev_command.has("bgm"):
+		order_list["bgm"] = prev_command["bgm"]
+		
+	if not order_list.has("character") and prev_command.has("character"):
+		order_list["character"] = prev_command["character"]
+		
+	if order_list.has("effect"):
+		var effects = order_list["effect"]
+		var grouped = {}
+		for effect in effects:
+			var pos = effect[0]
+			if not grouped.has(pos):
+				grouped[pos] = [pos]
+			grouped[pos].append(effect.slice(1))
+		var final_effects = []
+		for pos in grouped:
+			final_effects.append(grouped[pos])
+		order_list["effect"] = final_effects
 	return
+		
+func set_prev_command(command: Dictionary):
+	var new_prev = command.duplicate(true)
+	if new_prev.has("effect"):
+		for effect_group in new_prev["effect"]:
+			var pos = effect_group[0]
+			for step_group in effect_group.slice(1):
+				for step in step_group:
+					if step[0] == "transit":
+						var sprite = step[1]
+						if not new_prev.has("character"):
+							new_prev["character"] = []
+						var updated = false
+						for character in new_prev["character"]:
+							if character[1] == pos:
+								character[0] = sprite
+								updated = true
+						if not updated:
+							new_prev["character"].append([sprite, pos])
+	return new_prev
 	
-func extend_music(order_list: Array):
-	for command in order_list:
-		# first confirm there isn't a change in music
-		if command[0] == "bgm":
-			return
-	for command in prev_command:
-		if command[0] == "bgm" and command[1] != "clear":
-			order_list.append(command)
-	return
-
 #return the list of choices and respected new chapter	
 func get_choice(file: FileAccess):
 	var choice_list = []
+	var regex = RegEx.new()
+	regex.compile("^\\((.*?)\\)\\s*(.*)$")
 	while not file.eof_reached():
 		var line = file.get_line()
-		if line != "":
-			line = Array(line.rsplit(" "))
-			if len(line) == 2:
-				line.append("false")
-			choice_list.append(line)
-		# 将所有的选项都放进一个列表里
+		if line == "":
+			continue
+		var match = regex.search(line)
+		if match:
+			var description = match.get_string(1)
+			var rest = match.get_string(2)
+			var tokens = [description]
+			if rest != "":
+				tokens += Array(rest.split(" ", false))
+			if tokens.size() == 2:
+				tokens.append("false")
+			choice_list.append(tokens)
+	# 将所有的选项都放进一个列表里
 	return choice_list
 		
