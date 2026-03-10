@@ -7,6 +7,10 @@ func reset_chubby():
 	$front.texture = null
 	$back.modulate.a = 1.0
 	$front.modulate.a = 0.0
+	
+func process_chubby_commands(chubby_commands:Array):
+	for chubby_command in chubby_commands:
+		swap(chubby_command[0])
 
 func swap(next_slide: String):
 	var transit_front = get_tree().create_tween().bind_node($front)

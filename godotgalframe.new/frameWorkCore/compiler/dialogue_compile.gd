@@ -119,16 +119,8 @@ func process_commands(commands: String):
 	var order_list = help_parse_nested_commands(commands)
 	print("processed commands are", order_list, "\n")
 	var fixed_commands = help_fix_commands(order_list)
-	if fixed_commands == {}:
-		print("since current command is empty, commands have been extended!\n")
-		fixed_commands = extend_commands()
-		## if there is no command, it means the line follows the command 
-		## from previous line, except voice and charatcer transition
-		## this allows the art/music to always be displayed when loading
-	extend_music(fixed_commands)
-	extend_background(fixed_commands)
-	extend_effects(fixed_commands)
-	prev_command = fixed_commands
+	extend_from_prev_command(fixed_commands)
+	prev_command = set_prev_command(fixed_commands)
 	return fixed_commands
 
 func help_parse_nested_commands(text: String):
@@ -177,55 +169,70 @@ func help_fix_commands(order_list: Array):
 		fixed_commands[order_type].append(order.slice(1))
 		print("current order is ", order, "\n")
 	return fixed_commands
-
-func extend_commands():
-	# make current empty command prev command so 
-	# when load it loads all the art and music resource
-	# TODO, currently inherits clear command
-	var extended = prev_command.duplicate(true)
-	extended.erase("voice")
-	extended.erase("update")
-	extended.erase("sound_effect")
-	return extended
 	
-func extend_background(order_list: Dictionary):
-	if order_list.has("background") or not prev_command.has("background"):
-		return
-	order_list["background"] = prev_command["background"]
+func extend_from_prev_command(order_list: Dictionary):
+	if not order_list.has("background") and prev_command.has("background"):
+		order_list["background"] = prev_command["background"]
+		
+	if not order_list.has("bgm") and prev_command.has("bgm"):
+		order_list["bgm"] = prev_command["bgm"]
+		
+	if not order_list.has("character") and prev_command.has("character"):
+		order_list["character"] = prev_command["character"]
+		
+	if order_list.has("effect"):
+		var effects = order_list["effect"]
+		var grouped = {}
+		for effect in effects:
+			var pos = effect[0]
+			if not grouped.has(pos):
+				grouped[pos] = [pos]
+			grouped[pos].append(effect.slice(1))
+		var final_effects = []
+		for pos in grouped:
+			final_effects.append(grouped[pos])
+		order_list["effect"] = final_effects
 	return
+		
+func set_prev_command(command: Dictionary):
+	var new_prev = command.duplicate(true)
+	if new_prev.has("effect"):
+		for effect_group in new_prev["effect"]:
+			var pos = effect_group[0]
+			for step_group in effect_group.slice(1):
+				for step in step_group:
+					if step[0] == "transit":
+						var sprite = step[1]
+						if not new_prev.has("character"):
+							new_prev["character"] = []
+						var updated = false
+						for character in new_prev["character"]:
+							if character[1] == pos:
+								character[0] = sprite
+								updated = true
+						if not updated:
+							new_prev["character"].append([sprite, pos])
+	return new_prev
 	
-func extend_music(order_list: Dictionary):
-	if order_list.has("bgm") or not prev_command.has("bgm"):
-		return
-	order_list["bgm"] = prev_command["bgm"]
-	return
-
-func extend_effects(order_list: Dictionary):
-	if not order_list.has("effect"):
-		return
-	var effects = order_list["effect"]
-	var grouped = {}
-	for effect in effects:
-		var pos = effect[0]
-		if not grouped.has(pos):
-			grouped[pos] = [pos]
-		grouped[pos].append(effect.slice(1))
-	var final_effects = []
-	for pos in grouped:
-		final_effects.append(grouped[pos])
-	order_list["effect"] = final_effects
-	return
-
 #return the list of choices and respected new chapter	
 func get_choice(file: FileAccess):
 	var choice_list = []
+	var regex = RegEx.new()
+	regex.compile("^\\((.*?)\\)\\s*(.*)$")
 	while not file.eof_reached():
 		var line = file.get_line()
-		if line != "":
-			line = Array(line.rsplit(" "))
-			if len(line) == 2:
-				line.append("false")
-			choice_list.append(line)
-		# 将所有的选项都放进一个列表里
+		if line == "":
+			continue
+		var match = regex.search(line)
+		if match:
+			var description = match.get_string(1)
+			var rest = match.get_string(2)
+			var tokens = [description]
+			if rest != "":
+				tokens += Array(rest.split(" ", false))
+			if tokens.size() == 2:
+				tokens.append("false")
+			choice_list.append(tokens)
+	# 将所有的选项都放进一个列表里
 	return choice_list
 		

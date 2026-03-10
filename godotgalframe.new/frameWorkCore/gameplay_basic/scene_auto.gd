@@ -258,6 +258,7 @@ func command_execute(orders: Dictionary):
 	%avatar.change_avatars(orders.get("character", []))
 	%avatar.execute_avatar_effects(orders.get("effect", []))
 	%background.change_backgrounds(orders.get("background", []))
+	$chubby_play.process_chubby_commands(orders.get("chubby", []))
 	%music.change_bgm(orders.get("bgm", []))
 	%music.change_sound_effect(orders.get("sound_effect", []))
 	%music.change_voice(orders.get("voice", []))
