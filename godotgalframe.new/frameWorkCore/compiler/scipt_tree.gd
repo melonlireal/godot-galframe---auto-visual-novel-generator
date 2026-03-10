@@ -5,7 +5,7 @@ class_name ScriptTree
 @export var curr_chap = "Start.txt"
 @export var curr_line = 0
 
-func clear_save():
+func set_starting_point():
 	curr_chap = "Start.txt"
 	curr_line = 0
 
@@ -13,7 +13,7 @@ func clear_script():
 	all_script = {}
 	
 	
-func add_line(character: String, dialogue: String, command: Array):
+func add_line(character: String, dialogue: String, command: Dictionary):
 	curr_line += 1
 	if !all_script.has(curr_chap):
 		all_script[curr_chap] = {}

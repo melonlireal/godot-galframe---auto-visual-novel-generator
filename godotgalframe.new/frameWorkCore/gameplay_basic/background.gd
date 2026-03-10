@@ -8,6 +8,35 @@ var on_transition = false
 
 func do_transition():
 	pass
+	
+func change_backgrounds(backgrounds: Array):
+	if backgrounds == []:
+		return
+	else:
+		var background:Array = backgrounds[0]
+		var background_name = background[0]
+		var loop = background[1]
+		var background_at = asset_map.search_path(background_name)
+		if background_at == null:
+			self.get_tree().call_group("errorlog", "background_error", background_name)
+			return
+		if background_name.substr(len(background)-4, -1) == ".ogv":
+			if background_name in videolist:
+				return
+			# 识别是否是ogv格式
+			videolist.append(background_name)
+			if loop == "false":
+				$viedo_background.loop = false
+			else:
+				$viedo_background.loop = true
+			$viedo_background.stream = ResourceLoader.load(background_at)
+			$viedo_background.play()
+		else:
+			videolist = []
+			$background.texture = ResourceLoader.load(background_at)
+			$viedo_background.stream = null
+		
+	pass
 
 func change_background(background: String, loop = "true"):
 	if self.has_method(background):

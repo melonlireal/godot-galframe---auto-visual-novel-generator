@@ -17,6 +17,10 @@ func new_var(name: String, variable: String):
 func has_var(name: String):
 	return name in variables
 	
+func perform_var_ops(operations: Array):
+	for operation in operations:
+		var_op(operation[0], operation[1], operation[2])
+		
 func var_op(variable: String, operation: String, value: String):
 	var op = Callable(self, operation)
 	op.call(variable, value)

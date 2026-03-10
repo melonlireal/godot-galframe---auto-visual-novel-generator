@@ -17,35 +17,46 @@ func next_line():
 	if auto_clear_voice:
 		music_clear("voice")
 		
-func change_music(type: String, which: String):
-	if which == "clear":
-		music_clear(type)
-		return
-	if type == "bgm" and which in bgmlist:
-		print("music already playing!\n")
-		return
-		# 如果当前某个BGM已经在播放，则不再重复播放
-	if type == "sound_effect" and which in sound_effect_list:
-		print("sound effect already playing!\n")
-		return
-	print("changing music\n")
 		
-	if type == "bgm":
-		print("appending bgm to list\n")
-		# 将bgm添加到播放缓存中
-		bgmlist.append(which)
-		print("new bgm list is ", bgmlist, "\n")
-	if type == "sound_effect":
-		print("appending sound effect to list\n")
-		sound_effect_list.append(which)
-		print("new sound effect list is ", sound_effect_list, "\n")
-	if type == "voice":
-		$"../review_dialogues".get_voice(which)
-		# TODO SHIT CODE FIX ASAP
-		var voice_at = GlobalResources.asset_map.search_path(which) 
+func change_bgm(bgm_commands: Array):
+	for bgm_command in bgm_commands:
+		var which_bgm = bgm_command[0]
+		if which_bgm == "clear":
+			music_clear("bgm")
+			return
+		if which_bgm in bgmlist:
+			print("music already playing!\n")
+			return
+		bgmlist.append(which_bgm)
+		add_music_to_slot("bgm", which_bgm)
+	
+	
+func change_sound_effect(sound_effect_commands: Array):
+	for sound_effect_command in sound_effect_commands:
+		var which_sound_effect = sound_effect_command[0]
+		if which_sound_effect == "clear":
+			music_clear("sound_effect")
+			return
+		add_music_to_slot("sound_effect", which_sound_effect)
+	
+	
+func change_voice(voice_commands: Array):
+	for voice_command in voice_commands:
+		var which_voice = voice_command[0]
+		if which_voice == "clear":
+			music_clear("voice")
+			return
+		var voice_at = GlobalResources.asset_map.search_path(which_voice) 
+		if not voice_at:
+			self.get_tree().call_group("errorlog", "music_error", which_voice)
+			return
 		var voice:AudioStream = ResourceLoader.load(voice_at)
 		var voice_duration = voice.get_length()
 		%dialogue.voicing_time = voice_duration
+		add_music_to_slot("voice", which_voice)
+	
+	
+func add_music_to_slot(type: String, which: String):
 	for slot in self.find_child(type).get_children():
 		if slot.stream == null:
 			var music_at = GlobalResources.asset_map.search_path(which)
@@ -57,7 +68,7 @@ func change_music(type: String, which: String):
 			return
 	self.get_tree().call_group("errorlog", "music_error", which)
 	
-	
+
 func music_clear(type: String):
 	print("music cleared")
 	if type == "bgm":

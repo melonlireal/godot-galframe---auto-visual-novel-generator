@@ -81,7 +81,6 @@ func _process(_delta):
 
 
 func _input(event: InputEvent) -> void:
-	var status = check_in_game()
 	if event.is_action_pressed("press") and check_in_game():
 		# press advance dialogue to next line or stop the current state
 		$dialogue.visible = true
@@ -141,8 +140,8 @@ func proceed():
 		# if exit, exit
 		return
 	if status == "choice reach":
-		$dialogue.visible = true
-		$UI.visible = true
+		$dialogue.show()
+		$UI.show()
 		%dialogue.visible_ratio = 1.0
 		choice_reach = true
 		choice_jump()
@@ -169,29 +168,23 @@ func proceed():
 		# creator may want to switch dialogue box style when its narration
 		# instead of character speaking
 		# this check by whether character has a name or not
-		$dialogue/dialogue_box.visible = false
-		$dialogue/narration_box.visible = true
+		$dialogue/dialogue_box.hide()
+		$dialogue/narration_box.show()
 		%dialogue.narrration = true
 	else:
-		$dialogue/dialogue_box.visible = true
-		$dialogue/narration_box.visible = false
+		$dialogue/dialogue_box.hide()
+		$dialogue/narration_box.show()
 		%dialogue.narrration = false
-
 	command_execute(text["command"]) 
 	# execute the command with dialogue
-	
 	%character.text = text["character"]
 	%dialogue.text = text["dialogue"]
 	#change text on dialogue box to respected character and dialogue
-	
 	$review_dialogues.get_words(text["character"], text["dialogue"])
 	$review_dialogues.add_line()
 	# add character and dialogue into review_dialogue
-	
 	print("character ", text["character"], " is speaking script: ", text["dialogue"], "\n")
-	#self.get_tree().call_group("dialogue", "_start_dialogue")
-	# start playing dialogue
-	%dialogue._start_dialogue() #TODO why dont I just do this?
+	%dialogue._start_dialogue()
 
 
 func choice_jump():
@@ -210,7 +203,6 @@ func choice_jump():
 		# instantiate and add all choices in choice list to game
 		var ready_option = option.instantiate()
 		%choice_box.add_child(ready_option)
-		
 		# TODO, these feels like shit code
 		var choice_text = ready_option.get_node("center").get_node("choice_text")
 		var going_to = ready_option.get_node("going_to")
@@ -256,46 +248,31 @@ func travel(location: String):
 	# reset dialogue and start line
 
 
-func command_execute(orders: Array):
+func command_execute(orders: Dictionary):
 	# TODO O(2n) complexity, need to try to fix in future
-	%avatar.update_art_list(orders)
 	# iterate the command to find all avatar slot that will be overwrite
 	# these slot does not need to be cleared
 	# this feature helps with avatar transition and potentialy many feature
-	for order in orders:
-		# iterate through orders and execure respective command
-		var which_order = order[0]
-		print("curr order is", which_order, "\n")
-		match which_order:
-			"character":
-				%avatar.change_avatar(order[1])
-			"background":
-				%background.change_background(order[1], order[2])
-			"bgm", "sound_effect", "voice":
-				$music.change_music(which_order, order[1])
-			"CG":
-				# since cg is displayed full screen
-				# all avatar are expected to be cleared
-				# it should also make all UI invisible 
-				# and visible after finishing displaying
-				auto_play = false
-				speed_up = false
-				%avatar.clear_all_avatar()
-				$UI.visible = false
-				$dialogue.visible = false
-				can_press = false
-				%background.change_background(order[1], "false")
-				print("displaying CG\n")
-			"update":
-				# update variable creater implemented
-				variables.var_op(order[1], order[2], order[3])
-			"chubby":
-				# start a chubby play
-				$chubby_play.swap(order[1])
-			_:
-				# currentlu, unknown command will trigger an error
-				print("unknown commad ", which_order, "\n")
-				self.get_tree().call_group("errorlog", "unknown_command", which_order)
+	%avatar.update_art_list(orders.get("character", []))
+	
+	%avatar.change_avatars(orders.get("character", []))
+	%avatar.execute_avatar_effects(orders.get("effect", []))
+	%background.change_backgrounds(orders.get("background", []))
+	$chubby_play.process_chubby_commands(orders.get("chubby", []))
+	%music.change_bgm(orders.get("bgm", []))
+	%music.change_sound_effect(orders.get("sound_effect", []))
+	%music.change_voice(orders.get("voice", []))
+	variables.perform_var_ops(orders.get("update", []))
+	#TODO add func for chubby
+	if orders.has("CG"):
+		auto_play = false
+		speed_up = false
+		%avatar.clear_all_avatar()
+		$UI.visible = false
+		$dialogue.visible = false
+		can_press = false
+		%background.change_background(orders["CG"][0][0], "false")
+		print("displaying CG\n")
 	return
 
 
