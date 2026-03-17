@@ -23,6 +23,9 @@ class_name SceneAuto
 # 确保proceed只在需要的时候开始记时
 # 在选项出现的情况下停止 proceed继续读取txt文档
 
+@onready var narration_box: TextureRect = $dialogue/narration_box
+@onready var dialogue_box: TextureRect = $dialogue/dialogue_box
+
 var save_path = "user://save/save_total.tres"
 var UI_switched = false
 # prevent the bug of "extra click" after switching UI
@@ -39,7 +42,8 @@ var variables: Variables = Variables.new()
 
 
 func _ready():
-	variables.set_all_var(GlobalResources.variables.get_all_var())
+	var saved_variables:Variables = ResourceLoader.load(GlobalResources.variables_path)
+	variables.set_all_var(saved_variables.get_all_var())
 	$"DO NOT TOUCH/Panel".visible = false
 	$review_dialogues.visible = false
 	%dialogue.text = ""
@@ -168,13 +172,9 @@ func proceed():
 		# creator may want to switch dialogue box style when its narration
 		# instead of character speaking
 		# this check by whether character has a name or not
-		$dialogue/dialogue_box.hide()
-		$dialogue/narration_box.show()
-		%dialogue.narrration = true
+		%dialogue.on_narration()
 	else:
-		$dialogue/dialogue_box.hide()
-		$dialogue/narration_box.show()
-		%dialogue.narrration = false
+		%dialogue.on_dialogue()
 	command_execute(text["command"]) 
 	# execute the command with dialogue
 	%character.text = text["character"]
@@ -361,18 +361,18 @@ func _on_setting_pressed():
 
 
 func _on_review_pressed():
-	$review_dialogues.visible = true
 	$review_dialogues.jump_to_buttom()
-	$dialogue.visible = false
-	$UI.visible = false
+	$review_dialogues.show()
+	$dialogue.hide()
+	$UI.hide()
 	return
 
 
 func quit_review():
-	$review_dialogues.visible = false
+	$review_dialogues.hide()
 	can_press = true
-	$dialogue.visible = true
-	$UI.visible = true
+	$dialogue.show()
+	$UI.show()
 
 
 func _on_show_tree_pressed():
@@ -418,9 +418,9 @@ func _on_forward_to_next_choice_pressed():
 
 func _on_visible_pressed():
 	if $dialogue.visible and $UI.visible and $choice.visible:
-		$dialogue.visible = false
-		$UI.visible = false
-		$choice.visible = false
+		$dialogue.hide()
+		$UI.hide()
+		$choice.hide()
 		UI_visible = false
 		auto_play = false
 
@@ -461,7 +461,7 @@ func _on_viedo_background_finished():
 		# only dynamic bacnground will loop, we dont care in this case
 		return
 	# otherwise it means cg has ended and its time for next line
-	$UI.visible = true
-	$dialogue.visible = true
+	$UI.show()
+	$dialogue.show()
 	can_press = true
 	proceed()

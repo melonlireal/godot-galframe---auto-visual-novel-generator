@@ -101,8 +101,10 @@ func dialogue_proof_read(chapter: Array):
 		# remove the ":"
 		dialogue = dialogue.replace("\\command:", "command:")
 		if $"..".auto_color_text:
-			dialogue = GlobalResources.color_all.process_color(character, "dialogue", dialogue)
-			character =  GlobalResources.color_all.process_color(character, "character", character)
+			var text_colors:Colors = ResourceLoader.load(GlobalResources.color_all_path)
+			dialogue = text_colors.process_color(character, "dialogue", dialogue)
+			if character != "":
+				character =  text_colors.process_color(character, "character", character)
 			# colours dialogue and character (including narrator)
 		var command = text.substr(text.find(" command:"))
 		if command.begins_with(" command:"):

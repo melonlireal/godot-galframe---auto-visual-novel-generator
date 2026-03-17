@@ -10,7 +10,8 @@ func _ready():
 
 
 func load_cover(cover: String):
-	var file_at = GlobalResources.asset_map.search_path(cover)
+	var asset_path_finder:AssetPath = ResourceLoader.load(GlobalResources.asset_map_path)
+	var file_at = asset_path_finder.search_path(cover)
 	if file_at == null:
 		print("not here!")
 		# TODO fix in error overhaul

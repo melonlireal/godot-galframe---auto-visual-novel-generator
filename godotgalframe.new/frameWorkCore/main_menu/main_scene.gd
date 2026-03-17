@@ -8,7 +8,8 @@ var progress:ProgressData = ProgressData.new()
 # 这两个变量用来保证scene_auto 一定会收到加载的指令
 
 func _ready():
-	progress.variables = GlobalResources.variables.get_all_var()
+	var saved_variables: Variables = ResourceLoader.load(GlobalResources.variables_path)
+	progress.variables = saved_variables.get_all_var()
 	print("main scene log start\n")
 	# when start game, create default setting if no setting file exists
 	if not DirAccess.dir_exists_absolute(save_path):

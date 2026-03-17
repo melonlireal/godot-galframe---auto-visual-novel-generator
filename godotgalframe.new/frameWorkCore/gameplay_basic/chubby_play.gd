@@ -22,7 +22,8 @@ func swap(next_slide: String):
 		await transit_back.finished
 		$back.texture = null
 		return
-	var next_slide_at = GlobalResources.asset_map.search_path(next_slide)
+	var asset_path_finder:AssetPath = ResourceLoader.load(GlobalResources.asset_map_path)
+	var next_slide_at = asset_path_finder.search_path(next_slide)
 	if next_slide_at == null:
 		self.get_tree().call_group("errorlog", "background_error", next_slide)
 		return

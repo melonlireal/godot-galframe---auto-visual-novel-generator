@@ -1,9 +1,10 @@
 extends Node
 var bgmlist = []
 var sound_effect_list = []
-var auto_clear_bgm = GlobalResources.gameplay_setting.get_setting("auto_clear_bgm")
-var auto_clear_sound_effect = GlobalResources.gameplay_setting.get_setting("auto_clear_sound_effect")
-var auto_clear_voice = GlobalResources.gameplay_setting.get_setting("auto_clear_voice")
+var gameplay_setting = ResourceLoader.load(GlobalResources.gameplay_setting_path)
+var auto_clear_bgm = gameplay_setting.get_setting("auto_clear_bgm")
+var auto_clear_sound_effect = gameplay_setting.get_setting("auto_clear_sound_effect")
+var auto_clear_voice = gameplay_setting.get_setting("auto_clear_voice")
 
 	
 #TODO implement a feature that allows user to choose whether only
@@ -46,7 +47,8 @@ func change_voice(voice_commands: Array):
 		if which_voice == "clear":
 			music_clear("voice")
 			return
-		var voice_at = GlobalResources.asset_map.search_path(which_voice) 
+		var asset_path_finder:AssetPath = ResourceLoader.load(GlobalResources.asset_map_path)
+		var voice_at = asset_path_finder.search_path(which_voice) 
 		if not voice_at:
 			self.get_tree().call_group("errorlog", "music_error", which_voice)
 			return
@@ -59,7 +61,8 @@ func change_voice(voice_commands: Array):
 func add_music_to_slot(type: String, which: String):
 	for slot in self.find_child(type).get_children():
 		if slot.stream == null:
-			var music_at = GlobalResources.asset_map.search_path(which)
+			var asset_path_finder:AssetPath = ResourceLoader.load(GlobalResources.asset_map_path)
+			var music_at = asset_path_finder.search_path(which)
 			if music_at != null:
 				slot.stream = ResourceLoader.load(music_at)
 				slot.playing = true

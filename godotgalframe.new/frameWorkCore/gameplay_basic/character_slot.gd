@@ -9,7 +9,8 @@ var tween_list = []
 
 
 func change_avatar(avatar: String):
-	var avatar_at = GlobalResources.asset_map.search_path(avatar)
+	var asset_path_finder:AssetPath = ResourceLoader.load(GlobalResources.asset_map_path)
+	var avatar_at = asset_path_finder.search_path(avatar)
 	if avatar_at == null:
 		self.get_tree().call_group("errorlog", "character_error", avatar)
 		print("error: unknown avatar ", avatar)
@@ -88,7 +89,8 @@ func wait(tween:Tween, args: Array = []):
 	
 func transit(tween: Tween, args: Array):
 	character.modulate.a = 1
-	var avatar_at = GlobalResources.asset_map.search_path(args[0])
+	var asset_path_finder:AssetPath = ResourceLoader.load(GlobalResources.asset_map_path)
+	var avatar_at = asset_path_finder.search_path(args[0])
 	if not avatar_at:
 		self.get_tree().call_group("errorlog", "character_error", args[0])
 		return
@@ -112,8 +114,9 @@ func dissappear(tween: Tween, args: Array):
 	character.modulate.a = 1
 
 func appear(tween:Tween, args: Array):
-	character.modulate.a = 1
-	var avatar_at = GlobalResources.asset_map.search_path(args[0])
+	character.modulate.a = 0
+	var asset_path_finder:AssetPath = ResourceLoader.load(GlobalResources.asset_map_path)
+	var avatar_at = asset_path_finder.search_path(args[0])
 	character.texture = ResourceLoader.load(avatar_at)
 	tween.tween_property(character, "modulate:a", 1, 0.2)
 	await tween.finished

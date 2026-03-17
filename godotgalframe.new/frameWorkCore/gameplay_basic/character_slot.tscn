@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://pgyucp4tuj4t"]
+[gd_scene load_steps=2 format=3 uid="uid://pgyucp4tuj4t"]
 
 [ext_resource type="Script" uid="uid://b765or20vfnkd" path="res://frameWorkCore/gameplay_basic/character_slot.gd" id="1_xtmag"]
-[ext_resource type="Texture2D" uid="uid://xgfprdv5iqjg" path="res://artResource/character/catxilinidle.png" id="2_rweqb"]
 
 [node name="character_slot" type="Control"]
 layout_mode = 3
@@ -30,7 +29,6 @@ metadata/_edit_lock_ = true
 texture_filter = 2
 custom_minimum_size = Vector2(1000, 1750)
 layout_mode = 2
-texture = ExtResource("2_rweqb")
 expand_mode = 1
 stretch_mode = 5
 metadata/_edit_lock_ = true

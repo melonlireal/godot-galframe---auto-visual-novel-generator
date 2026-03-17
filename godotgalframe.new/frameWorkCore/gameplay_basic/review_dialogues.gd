@@ -1,12 +1,8 @@
 extends CanvasLayer
+var gameplay_setting = ResourceLoader.load(GlobalResources.gameplay_setting_path)
+var limit = gameplay_setting.get_setting("limit")
+var narrator = gameplay_setting.get_setting("narrator")
 
-var limit = GlobalResources.gameplay_setting.get_setting("limit")
-var narrator = GlobalResources.gameplay_setting.get_setting("narrator")
-
-var default_factor = 864
-# this is the current difference between the max value to scroll and the 
-# max value of v scroll bar
-# subtract this when assigning container to bottom
 var  curr_limit = 0
 var line = {"character":"", "dialogue":"", "voice":""}
 # Called when the node enters the scene tree for the first time.
@@ -54,6 +50,7 @@ func play_voice(voice_at: String):
 func jump_to_buttom():
 	await get_tree().process_frame
 	$ScrollContainer.scroll_vertical = $ScrollContainer.get_v_scroll_bar().max_value
+	
 
 func _on_close_pressed() -> void:
 	close.emit()

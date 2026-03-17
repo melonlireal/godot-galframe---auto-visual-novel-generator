@@ -1,7 +1,8 @@
 extends CanvasLayer
 # 查看CG中所有需要载入的CG
-var cg_list = GlobalResources.cg_all.get_cg()
-var cg_cover_list = GlobalResources.cg_all.get_cg_cover()
+var cg_all:CGS = ResourceLoader.load(GlobalResources.cg_all_path)
+var cg_list = cg_all.get_cg()
+var cg_cover_list = cg_all.get_cg_cover()
 # Called when the node enters the scene tree for the first time.
 
 
@@ -52,7 +53,8 @@ func load_unlock():
 	# used to present cg
 func present(CG_name: String):
 	print("presenting")
-	var file_at = GlobalResources.asset_map.search_path(CG_name)
+	var asset_path_finder:AssetPath = ResourceLoader.load(GlobalResources.asset_map_path)
+	var file_at = asset_path_finder.search_path(CG_name)
 	if file_at == null:
 		print("not here!")
 		return
