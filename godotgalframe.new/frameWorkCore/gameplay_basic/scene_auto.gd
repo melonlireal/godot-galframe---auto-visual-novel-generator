@@ -53,6 +53,8 @@ func _ready():
 	$UI.connect("on_button", _on_button)
 	$UI.connect("out_button", _out_button)
 	$review_dialogues.connect("close", quit_review)
+	$story_tree.connect("close", quit_story_tree)
+	$story_tree.connect("load_chap", load_chapter)
 	set_bus()
 	load_setting()
 	var setting = preload("res://frameWorkCore/settings/setting_menu.tscn").instantiate()
@@ -119,6 +121,8 @@ func check_in_game() -> bool:
 		UI_switched = false
 		return false
 	if $review_dialogues.visible:
+		return false
+	if $story_tree.visible:
 		return false
 	if  self.find_child("save_load") != null:
 		return false
@@ -275,6 +279,16 @@ func command_execute(orders: Dictionary):
 		print("displaying CG\n")
 	return
 
+func load_chapter(chapter_name: String, variable_of_chap: Dictionary):
+	$story_tree.hide()
+	var chap:ProgressData = ProgressData.new()
+	chap.which_file = chapter_name
+	var saved_variables:Variables = ResourceLoader.load(GlobalResources.variables_path)
+	chap.variables = saved_variables.get_all_var()
+	for key in variable_of_chap.keys():
+		chap.variables[key] = variable_of_chap[key]
+	load_progress(chap)
+	pass
 
 func load_progress(data: ProgressData):
 	# load game progress into the game
@@ -297,6 +311,8 @@ func load_progress(data: ProgressData):
 	variables.set_all_var(data.variables)
 	# script tree acc give the line after its current progress
 	proceed()
+	$UI.show()
+	$dialogue.show()
 	self.get_tree().call_group("main", "game_created")
 	# tell main game has been created and play animation fade_out
 	# TODO change that part to tween
@@ -374,11 +390,17 @@ func quit_review():
 	$dialogue.show()
 	$UI.show()
 
-
 func _on_show_tree_pressed():
-	pass # Replace with function body.
-	# 还没做
+	$story_tree.show()
+	$dialogue.hide()
+	$UI.hide()
+	return
 
+func quit_story_tree():
+	$story_tree.hide()
+	can_press = true
+	$dialogue.show()
+	$UI.show()
 
 func _on_auto_pressed():
 	if auto_play:

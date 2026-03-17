@@ -9,3 +9,4 @@ curve = SubResource("Curve2D_nung1")
 script = ExtResource("1_8yps1")
 
 [node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(1, -4)

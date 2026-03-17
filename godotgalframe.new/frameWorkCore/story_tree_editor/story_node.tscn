@@ -1,17 +1,33 @@
-[gd_scene load_steps=2 format=3 uid="uid://ckv62xwdnyi0f"]
+[gd_scene load_steps=5 format=3 uid="uid://ckv62xwdnyi0f"]
 
+[ext_resource type="Texture2D" uid="uid://cj068ahfrq0v2" path="res://artResource/UI_gameplay/ui_raw/story_tree_panel.png" id="1_4c4f4"]
 [ext_resource type="Script" uid="uid://bevcvrpemp4b" path="res://frameWorkCore/story_tree_editor/story_node.gd" id="1_b878p"]
+[ext_resource type="Texture2D" uid="uid://b7ryxkr8fwi8o" path="res://artResource/UI_gameplay/ui_hover/story_tree_panel_hover.png" id="2_oha46"]
+[ext_resource type="FontFile" uid="uid://djaascw8mseps" path="res://artResource/UI_gameplay/honkaifont.ttf" id="4_oha46"]
 
-[node name="story_node" type="PanelContainer"]
+[node name="story_node" type="TextureButton"]
 anchors_preset = -1
-anchor_right = 0.049000002
-anchor_bottom = 0.037
-offset_right = -29.080002
-offset_bottom = 0.040000916
+anchor_right = 0.104
+anchor_bottom = 0.093
+offset_right = 0.31999207
+offset_bottom = -0.44000244
+texture_normal = ExtResource("1_4c4f4")
+texture_hover = ExtResource("2_oha46")
 script = ExtResource("1_b878p")
 
-[node name="Button" type="Button" parent="."]
-layout_mode = 2
-text = "chap name"
+[node name="displayed_section_name" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("4_oha46")
+theme_override_font_sizes/normal_font_size = 20
+text = "section name here"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]

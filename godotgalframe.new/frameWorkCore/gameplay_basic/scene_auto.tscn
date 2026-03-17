@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bwrm0y71vp4ol"]
+[gd_scene load_steps=17 format=3 uid="uid://bwrm0y71vp4ol"]
 
 [ext_resource type="Script" uid="uid://8kk62ybanlp5" path="res://frameWorkCore/gameplay_basic/scene_auto.gd" id="1_2awyf"]
 [ext_resource type="Texture2D" uid="uid://xqy3a8rw8472" path="res://artResource/UI_gameplay/narrationbox.png" id="2_0460k"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://d2q1ewu5nrkgn" path="res://frameWorkCore/errorlogDontTouch.gd" id="7_kvtwn"]
 [ext_resource type="PackedScene" uid="uid://c7urdigxq43m5" path="res://frameWorkCore/gameplay_basic/review_dialogues.tscn" id="9_88744"]
 [ext_resource type="Script" uid="uid://cci7q1xdvf15f" path="res://frameWorkCore/gameplay_basic/music.gd" id="12_00gnm"]
+[ext_resource type="PackedScene" uid="uid://7wwctswnkwqj" path="res://frameWorkCore/story_tree_editor/story_tree.tscn" id="12_ob1rn"]
 [ext_resource type="Script" uid="uid://84pbbv15c8ww" path="res://frameWorkCore/gameplay_basic/minigame.gd" id="13_ens8c"]
 
 [node name="scene_auto" type="CanvasLayer" groups=["game_play"]]
@@ -191,6 +192,9 @@ vertical = true
 metadata/_edit_lock_ = true
 
 [node name="review_dialogues" parent="." instance=ExtResource("9_88744")]
+visible = false
+
+[node name="story_tree" parent="." instance=ExtResource("12_ob1rn")]
 visible = false
 
 [node name="DO NOT TOUCH" type="CanvasLayer" parent="." groups=["errorlog"]]

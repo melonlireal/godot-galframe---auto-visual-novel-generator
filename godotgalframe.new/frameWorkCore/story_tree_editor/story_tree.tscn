@@ -1,3 +1,61 @@
-[gd_scene format=3 uid="uid://7wwctswnkwqj"]
+[gd_scene load_steps=4 format=3 uid="uid://7wwctswnkwqj"]
+
+[ext_resource type="Script" uid="uid://bx5t4e4vqytgu" path="res://frameWorkCore/story_tree_editor/story_tree.gd" id="1_4w7uq"]
+[ext_resource type="PackedScene" uid="uid://ckv62xwdnyi0f" path="res://frameWorkCore/story_tree_editor/story_node.tscn" id="2_1oiti"]
+[ext_resource type="Texture2D" uid="uid://ugo3pjkduqnm" path="res://artResource/UI_gameplay/ui_raw/close.png" id="3_vmav4"]
 
 [node name="story_tree" type="CanvasLayer"]
+script = ExtResource("1_4w7uq")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.745098)
+
+[node name="story_node" parent="." instance=ExtResource("2_1oiti")]
+offset_left = 652.0
+offset_top = 288.0
+offset_right = 652.32
+offset_bottom = 287.56
+travel_chap = "theater.txt"
+
+[node name="story_node2" parent="." instance=ExtResource("2_1oiti")]
+offset_left = 491.0
+offset_top = 446.0
+offset_right = 491.32
+offset_bottom = 445.56
+travel_chap = "end.txt"
+
+[node name="story_node3" parent="." instance=ExtResource("2_1oiti")]
+offset_left = 322.0
+offset_top = 292.0
+offset_right = 322.32
+offset_bottom = 291.56
+travel_chap = "dining.txt"
+
+[node name="story_node4" parent="." instance=ExtResource("2_1oiti")]
+offset_left = 493.0
+offset_top = 129.0
+offset_right = 493.32
+offset_bottom = 128.56
+travel_chap = "choice1.1.txt"
+
+[node name="close" type="TextureButton" parent="."]
+anchors_preset = -1
+anchor_left = 0.936
+anchor_top = 0.022
+anchor_right = 0.989
+anchor_bottom = 0.107
+offset_left = -0.120117
+offset_top = 0.239998
+offset_right = -0.880005
+offset_bottom = 0.439995
+grow_horizontal = 0
+texture_normal = ExtResource("3_vmav4")
+ignore_texture_size = true
+stretch_mode = 5
+
+[connection signal="pressed" from="close" to="." method="_on_close_pressed"]
