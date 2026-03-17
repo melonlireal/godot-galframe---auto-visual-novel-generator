@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://7wwctswnkwqj"]
+[gd_scene load_steps=5 format=3 uid="uid://7wwctswnkwqj"]
 
 [ext_resource type="Script" uid="uid://bx5t4e4vqytgu" path="res://frameWorkCore/story_tree_editor/story_tree.gd" id="1_4w7uq"]
 [ext_resource type="PackedScene" uid="uid://ckv62xwdnyi0f" path="res://frameWorkCore/story_tree_editor/story_node.tscn" id="2_1oiti"]
 [ext_resource type="Texture2D" uid="uid://ugo3pjkduqnm" path="res://artResource/UI_gameplay/ui_raw/close.png" id="3_vmav4"]
+[ext_resource type="PackedScene" uid="uid://cv77b20o3nfts" path="res://frameWorkCore/story_tree_editor/choice_pointer.tscn" id="4_mvw6d"]
 
 [node name="story_tree" type="CanvasLayer"]
 script = ExtResource("1_4w7uq")
@@ -15,32 +16,32 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0.745098)
 
-[node name="story_node" parent="." instance=ExtResource("2_1oiti")]
-offset_left = 652.0
-offset_top = 288.0
-offset_right = 652.32
-offset_bottom = 287.56
-travel_chap = "theater.txt"
-
 [node name="story_node2" parent="." instance=ExtResource("2_1oiti")]
-offset_left = 491.0
-offset_top = 446.0
-offset_right = 491.32
-offset_bottom = 445.56
+offset_left = 597.0
+offset_top = 486.0
+offset_right = 597.32
+offset_bottom = 485.56
 travel_chap = "end.txt"
 
+[node name="story_node" parent="." instance=ExtResource("2_1oiti")]
+offset_left = 690.0
+offset_top = 263.0
+offset_right = 690.32
+offset_bottom = 262.56
+travel_chap = "theater.txt"
+
 [node name="story_node3" parent="." instance=ExtResource("2_1oiti")]
-offset_left = 322.0
-offset_top = 292.0
-offset_right = 322.32
-offset_bottom = 291.56
+offset_left = 274.0
+offset_top = 266.0
+offset_right = 274.32
+offset_bottom = 265.56
 travel_chap = "dining.txt"
 
 [node name="story_node4" parent="." instance=ExtResource("2_1oiti")]
-offset_left = 493.0
-offset_top = 129.0
-offset_right = 493.32
-offset_bottom = 128.56
+offset_left = 450.0
+offset_top = 64.0
+offset_right = 450.32
+offset_bottom = 63.559998
 travel_chap = "choice1.1.txt"
 
 [node name="close" type="TextureButton" parent="."]
@@ -57,5 +58,10 @@ grow_horizontal = 0
 texture_normal = ExtResource("3_vmav4")
 ignore_texture_size = true
 stretch_mode = 5
+
+[node name="choice_pointer2" parent="." node_paths=PackedStringArray("start_box", "end_box") instance=ExtResource("4_mvw6d")]
+position = Vector2(432, 459)
+start_box = NodePath("../story_node3")
+end_box = NodePath("../story_node2")
 
 [connection signal="pressed" from="close" to="." method="_on_close_pressed"]

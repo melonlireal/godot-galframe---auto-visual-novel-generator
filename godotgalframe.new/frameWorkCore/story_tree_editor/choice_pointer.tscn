@@ -1,12 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://cv77b20o3nfts"]
+[gd_scene load_steps=4 format=3 uid="uid://cv77b20o3nfts"]
 
 [ext_resource type="Script" uid="uid://bcdctdro1huqq" path="res://frameWorkCore/story_tree_editor/choice_pointer.gd" id="1_8yps1"]
+[ext_resource type="Texture2D" uid="uid://di6db15uiywvn" path="res://artResource/UI_gameplay/ui_raw/story_tree_line.png" id="2_1eyiw"]
+[ext_resource type="Texture2D" uid="uid://bnq2cb0f0fves" path="res://artResource/UI_gameplay/ui_raw/arrow.png" id="2_75u1o"]
 
-[sub_resource type="Curve2D" id="Curve2D_nung1"]
-
-[node name="choice_pointer" type="Path2D"]
-curve = SubResource("Curve2D_nung1")
+[node name="choice_pointer" type="Node2D"]
 script = ExtResource("1_8yps1")
 
 [node name="Line2D" type="Line2D" parent="."]
-points = PackedVector2Array(1, -4)
+points = PackedVector2Array(600, 600)
+width = 5.0
+texture = ExtResource("2_1eyiw")
+texture_mode = 1
+end_cap_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_75u1o")
