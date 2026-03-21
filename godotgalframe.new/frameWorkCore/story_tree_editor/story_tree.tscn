@@ -16,52 +16,105 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0.745098)
 
-[node name="story_node2" parent="." instance=ExtResource("2_1oiti")]
-offset_left = 597.0
-offset_top = 486.0
-offset_right = 597.32
-offset_bottom = 485.56
-travel_chap = "end.txt"
+[node name="internal_UI_DONTTOUCH" type="Control" parent="."]
+layout_mode = 3
+anchor_left = 0.92
+anchor_top = 0.005
+anchor_right = 0.995
+anchor_bottom = 0.125
+offset_left = 0.079833984
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="story_node" parent="." instance=ExtResource("2_1oiti")]
-offset_left = 690.0
-offset_top = 263.0
-offset_right = 690.32
-offset_bottom = 262.56
-travel_chap = "theater.txt"
-
-[node name="story_node3" parent="." instance=ExtResource("2_1oiti")]
-offset_left = 274.0
-offset_top = 266.0
-offset_right = 274.32
-offset_bottom = 265.56
-travel_chap = "dining.txt"
-
-[node name="story_node4" parent="." instance=ExtResource("2_1oiti")]
-offset_left = 450.0
-offset_top = 64.0
-offset_right = 450.32
-offset_bottom = 63.559998
-travel_chap = "choice1.1.txt"
-
-[node name="close" type="TextureButton" parent="."]
-anchors_preset = -1
-anchor_left = 0.936
-anchor_top = 0.022
-anchor_right = 0.989
-anchor_bottom = 0.107
-offset_left = -0.120117
-offset_top = 0.239998
-offset_right = -0.880005
-offset_bottom = 0.439995
-grow_horizontal = 0
+[node name="close" type="TextureButton" parent="internal_UI_DONTTOUCH"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture_normal = ExtResource("3_vmav4")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="choice_pointer2" parent="." node_paths=PackedStringArray("start_box", "end_box") instance=ExtResource("4_mvw6d")]
-position = Vector2(432, 459)
-start_box = NodePath("../story_node3")
-end_box = NodePath("../story_node2")
+[node name="开始" parent="." instance=ExtResource("2_1oiti")]
+offset_left = 539.0
+offset_top = 120.0
+offset_right = 539.32
+offset_bottom = 119.56
+section_name = "开始"
+unlock_chap = "Start.txt"
+travel_chap = "Start.txt"
+locked = false
 
-[connection signal="pressed" from="close" to="." method="_on_close_pressed"]
+[node name="选项1" parent="." instance=ExtResource("2_1oiti")]
+offset_left = 65.0
+offset_top = 376.0
+offset_right = 65.31998
+offset_bottom = 376.52
+section_name = "选项1"
+unlock_chap = "choice1.1.txt"
+travel_chap = "choice1.1.txt"
+locked = false
+
+[node name="选项2" parent="." instance=ExtResource("2_1oiti")]
+offset_left = 471.0
+offset_top = 445.0
+offset_right = 471.31998
+offset_bottom = 445.52
+section_name = "是对我很重要的人"
+unlock_chap = "choice1.2.txt"
+travel_chap = "choice1.2.txt"
+locked = false
+
+[node name="选项3" parent="." instance=ExtResource("2_1oiti")]
+offset_left = 1060.0
+offset_top = 387.0
+offset_right = 1060.32
+offset_bottom = 387.52
+section_name = "别玩了，丽塔"
+unlock_chap = "choice1.3.txt"
+travel_chap = "choice1.3.txt"
+locked = false
+
+[node name="结束" parent="." instance=ExtResource("2_1oiti")]
+offset_left = 542.0
+offset_top = 704.0
+offset_right = 542.31995
+offset_bottom = 704.52
+section_name = "神秘的线索"
+unlock_chap = "theater.txt"
+travel_chap = "theater.txt"
+locked = false
+
+[node name="choice_pointer" parent="." node_paths=PackedStringArray("start_box", "end_box") instance=ExtResource("4_mvw6d")]
+position = Vector2(393, 564)
+start_box = NodePath("../开始")
+end_box = NodePath("../选项1")
+
+[node name="choice_pointer2" parent="." node_paths=PackedStringArray("start_box", "end_box") instance=ExtResource("4_mvw6d")]
+position = Vector2(1041, 740)
+start_box = NodePath("../开始")
+end_box = NodePath("../选项2")
+
+[node name="choice_pointer3" parent="." node_paths=PackedStringArray("start_box", "end_box") instance=ExtResource("4_mvw6d")]
+position = Vector2(350, 644)
+start_box = NodePath("../开始")
+end_box = NodePath("../选项3")
+
+[node name="choice_pointer4" parent="." node_paths=PackedStringArray("start_box", "end_box") instance=ExtResource("4_mvw6d")]
+position = Vector2(242, 656)
+start_box = NodePath("../选项1")
+end_box = NodePath("../结束")
+
+[node name="choice_pointer5" parent="." node_paths=PackedStringArray("start_box", "end_box") instance=ExtResource("4_mvw6d")]
+position = Vector2(429, 634)
+start_box = NodePath("../选项2")
+end_box = NodePath("../结束")
+
+[node name="choice_pointer6" parent="." node_paths=PackedStringArray("start_box", "end_box") instance=ExtResource("4_mvw6d")]
+position = Vector2(636, 638)
+start_box = NodePath("../选项3")
+end_box = NodePath("../结束")
+
+[connection signal="pressed" from="internal_UI_DONTTOUCH/close" to="." method="_on_close_pressed"]

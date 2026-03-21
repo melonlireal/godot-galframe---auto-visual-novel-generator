@@ -23,6 +23,17 @@ func _process(_delta):
 	# update once assigned start and end
 	if start_box and end_box:
 		update_arrow()
+	else:
+		pass
+		
+func choice_pointer_unlock():
+	if not (start_box and end_box):
+		queue_free()
+	if start_box.locked or end_box.locked:
+		self.hide()
+	else:
+		self.show()
+		
 
 func update_arrow():
 	var arrowhead_half_height = (head.texture.get_size().y * head.scale.y) / 2

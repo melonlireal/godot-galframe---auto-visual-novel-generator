@@ -83,6 +83,7 @@ anchor_right = 0.9
 [node name="dialogue" type="CanvasLayer" parent="."]
 
 [node name="narration_box" type="TextureRect" parent="dialogue"]
+modulate = Color(1, 1, 1, 0.78431374)
 anchors_preset = -1
 anchor_left = 0.1
 anchor_right = 0.9
@@ -96,6 +97,7 @@ expand_mode = 3
 metadata/_edit_lock_ = true
 
 [node name="dialogue_box" type="TextureRect" parent="dialogue"]
+modulate = Color(1, 1, 1, 0.78431374)
 anchors_preset = -1
 anchor_left = 0.1
 anchor_right = 0.9

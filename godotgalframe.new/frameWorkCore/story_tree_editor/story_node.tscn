@@ -1,18 +1,18 @@
 [gd_scene load_steps=5 format=3 uid="uid://ckv62xwdnyi0f"]
 
-[ext_resource type="Texture2D" uid="uid://cj068ahfrq0v2" path="res://artResource/UI_gameplay/ui_raw/story_tree_panel.png" id="1_4c4f4"]
 [ext_resource type="Script" uid="uid://bevcvrpemp4b" path="res://frameWorkCore/story_tree_editor/story_node.gd" id="1_b878p"]
-[ext_resource type="Texture2D" uid="uid://b7ryxkr8fwi8o" path="res://artResource/UI_gameplay/ui_hover/story_tree_panel_hover.png" id="2_oha46"]
+[ext_resource type="Texture2D" uid="uid://wuryx2ipl57v" path="res://artResource/UI_gameplay/ui_raw/story_tree_node_raw.png" id="1_oha46"]
+[ext_resource type="Texture2D" uid="uid://bb2wc4s1r75fl" path="res://artResource/UI_gameplay/ui_hover/story_tree_node_hover.png" id="2_sno7r"]
 [ext_resource type="FontFile" uid="uid://djaascw8mseps" path="res://artResource/UI_gameplay/honkaifont.ttf" id="4_oha46"]
 
 [node name="story_node" type="TextureButton"]
 anchors_preset = -1
-anchor_right = 0.104
-anchor_bottom = 0.093
-offset_right = 0.31999207
-offset_bottom = -0.44000244
-texture_normal = ExtResource("1_4c4f4")
-texture_hover = ExtResource("2_oha46")
+anchor_right = 0.14600001
+anchor_bottom = 0.081
+offset_right = -0.32003784
+offset_bottom = 0.51999664
+texture_normal = ExtResource("1_oha46")
+texture_hover = ExtResource("2_sno7r")
 script = ExtResource("1_b878p")
 
 [node name="displayed_section_name" type="RichTextLabel" parent="."]
@@ -29,5 +29,6 @@ theme_override_font_sizes/normal_font_size = 20
 text = "section name here"
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_lock_ = true
 
 [connection signal="pressed" from="." to="." method="_on_pressed"]

@@ -18,17 +18,22 @@ var script_tree:ScriptTree = ResourceLoader.load("res://save/processed_script.tr
 @onready var displayed_section_name: RichTextLabel = $displayed_section_name
 
 signal load_chapter
-var locked = false
+@export var locked = true
 # you do not need to edit any code here
 # Called when the node enters the scene tree for the first time.
 
 func _ready() -> void:
-	displayed_section_name.text = section_name_locked
+	if locked:
+		displayed_section_name.text = section_name_locked
+		self.hide()
+	else:
+		displayed_section_name.text = section_name
 
-func unlock():
-	displayed_section_name.text = section_name
-	locked = false
-	pass
+func story_node_unlock(chapter_name: String):
+	if unlock_chap == chapter_name:
+		self.show()
+		displayed_section_name.text = section_name
+		locked = false
 
 
 func _on_pressed() -> void:
