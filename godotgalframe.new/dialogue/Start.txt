@@ -1,1 +1,10 @@
-
+Hi! welcome to demo for godot galframe!
+godot galframe is a visual novel framework for people with zero coding experience
+all you need is some very basic commands!
+:such as display a background command: (background, background.jpg)
+:play some music command: (bgm, demobgm.mp3)
+character: or show a character! (ignore my bad art skill) command: (character, democharacter.png)
+character:you can also display choice for player to select
+choice
+(choice1) choice1.txt
+(choice2) choice2.txt

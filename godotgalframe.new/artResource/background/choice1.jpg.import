@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7ryxkr8fwi8o"
-path="res://.godot/imported/story_tree_panel_hover.png-65fae1fcb3379624761b3c5d170a498a.ctex"
+uid="uid://phfpp43lxed"
+path="res://.godot/imported/choice1.jpg-09df1dafd612545b258bcaec1dbfb326.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://artResource/UI_gameplay/ui_hover/story_tree_panel_hover.png"
-dest_files=["res://.godot/imported/story_tree_panel_hover.png-65fae1fcb3379624761b3c5d170a498a.ctex"]
+source_file="res://artResource/background/choice1.jpg"
+dest_files=["res://.godot/imported/choice1.jpg-09df1dafd612545b258bcaec1dbfb326.ctex"]
 
 [params]
 

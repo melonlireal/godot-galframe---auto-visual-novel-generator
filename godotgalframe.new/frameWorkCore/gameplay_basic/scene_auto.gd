@@ -55,6 +55,7 @@ func _ready():
 	$review_dialogues.connect("close", quit_review)
 	$story_tree.connect("close", quit_story_tree)
 	$story_tree.connect("load_chap", load_chapter)
+	$story_tree.update_chapter("Start.txt")
 	set_bus()
 	load_setting()
 	var setting = preload("res://frameWorkCore/settings/setting_menu.tscn").instantiate()
@@ -240,6 +241,7 @@ func check_choice_condition(choices: Array):
 
 func travel(location: String):
 	# triggered when a choice is clicked
+	$story_tree.update_chapter(location)
 	script_tree.change_chapter(location)
 	# TODO need to update error checker, will update in error system overhaul
 	for child in %choice_box.get_children():
@@ -325,7 +327,7 @@ func load_setting():
 	print("load setting!")
 	$review_dialogues.visible = false
 	# hard code shit, fix later
-	var save = ResourceLoader.load(GlobalResources.setting_save_path)
+	var save:PlayerSetting = ResourceLoader.load(GlobalResources.setting_save_path)
 	$dialogue/dialogue_box.modulate.a = save.dialogue_box_transparency / 100
 	$dialogue/narration_box.modulate.a = save.dialogue_box_transparency / 100
 	$UI/Control/ColorRect.color = save.windows_color	
@@ -369,9 +371,10 @@ func _on_quickload_pressed():
 
 
 func _on_setting_pressed():
-	var setting = preload("res://frameWorkCore/settings/setting_menu.tscn").instantiate()
+	var setting:SettingMenu = preload("res://frameWorkCore/settings/setting_menu.tscn").instantiate()
 	self.add_child(setting, true)
 	setting.set_owner(self)
+	setting.reload_setting.connect(load_setting)
 	UI_switched = true
 	return
 

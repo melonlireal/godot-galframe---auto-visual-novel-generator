@@ -179,7 +179,6 @@ theme_override_constants/margin_left = 80
 theme_override_constants/margin_right = 40
 
 [node name="play_speed" type="HSlider" parent="settings/display_setting/play_speed/HBoxContainer/MarginContainer"]
-unique_name_in_owner = true
 layout_mode = 2
 theme_override_icons/grabber = ExtResource("11_rjxxa")
 theme_override_icons/grabber_highlight = ExtResource("11_rjxxa")
@@ -245,7 +244,6 @@ theme_override_constants/margin_left = 80
 theme_override_constants/margin_right = 40
 
 [node name="auto_play_speed" type="HSlider" parent="settings/display_setting/auto_play_speed/HBoxContainer/MarginContainer"]
-unique_name_in_owner = true
 layout_mode = 2
 theme_override_icons/grabber = ExtResource("11_rjxxa")
 theme_override_icons/grabber_highlight = ExtResource("11_rjxxa")
@@ -369,7 +367,6 @@ theme_override_constants/margin_left = 80
 theme_override_constants/margin_right = 40
 
 [node name="transparency" type="HSlider" parent="settings/display_setting/transparency/HBoxContainer/MarginContainer"]
-unique_name_in_owner = true
 layout_mode = 2
 theme_override_icons/grabber = ExtResource("11_rjxxa")
 theme_override_icons/grabber_highlight = ExtResource("11_rjxxa")
@@ -432,9 +429,6 @@ text = "这是一段文本播放速度预览效果"
 scroll_active = false
 script = ExtResource("20_yhwg8")
 repeat = true
-narrration = true
-narration_x = 70.0
-narration_y = 62.0
 
 [node name="auto_play_example" type="TextureRect" parent="settings/display_setting"]
 custom_minimum_size = Vector2(0, 140)
@@ -466,9 +460,6 @@ text = "这是一段文本自动播放速度预览效果"
 script = ExtResource("20_yhwg8")
 repeat = true
 on_auto = true
-narrration = true
-narration_x = 70.0
-narration_y = 62.0
 
 [node name="volumn_setting" type="GridContainer" parent="settings"]
 visible = false
@@ -518,7 +509,6 @@ theme_override_constants/margin_left = 80
 theme_override_constants/margin_right = 40
 
 [node name="total_volumn" type="HSlider" parent="settings/volumn_setting/total_volumn/HBoxContainer/MarginContainer"]
-unique_name_in_owner = true
 layout_mode = 2
 theme_override_icons/grabber = ExtResource("11_rjxxa")
 theme_override_icons/grabber_highlight = ExtResource("11_rjxxa")
@@ -586,7 +576,6 @@ theme_override_constants/margin_left = 80
 theme_override_constants/margin_right = 40
 
 [node name="bgm_volumn" type="HSlider" parent="settings/volumn_setting/bgm_volumn/HBoxContainer/MarginContainer"]
-unique_name_in_owner = true
 layout_mode = 2
 theme_override_icons/grabber = ExtResource("11_rjxxa")
 theme_override_icons/grabber_highlight = ExtResource("11_rjxxa")
@@ -654,7 +643,6 @@ theme_override_constants/margin_left = 80
 theme_override_constants/margin_right = 40
 
 [node name="voice_volumn" type="HSlider" parent="settings/volumn_setting/voice_volumn/HBoxContainer/MarginContainer"]
-unique_name_in_owner = true
 layout_mode = 2
 theme_override_icons/grabber = ExtResource("11_rjxxa")
 theme_override_icons/grabber_highlight = ExtResource("11_rjxxa")
@@ -722,7 +710,6 @@ theme_override_constants/margin_left = 80
 theme_override_constants/margin_right = 40
 
 [node name="sfx_volumn" type="HSlider" parent="settings/volumn_setting/sfx_volumn/HBoxContainer/MarginContainer"]
-unique_name_in_owner = true
 layout_mode = 2
 theme_override_icons/grabber = ExtResource("11_rjxxa")
 theme_override_icons/grabber_highlight = ExtResource("11_rjxxa")
@@ -805,7 +792,6 @@ theme_override_constants/margin_left = 80
 theme_override_constants/margin_right = 40
 
 [node name="red" type="HSlider" parent="settings/game_play_setting/red/HBoxContainer/MarginContainer"]
-unique_name_in_owner = true
 layout_mode = 2
 theme_override_icons/grabber = ExtResource("11_rjxxa")
 theme_override_icons/grabber_highlight = ExtResource("11_rjxxa")
@@ -874,7 +860,6 @@ theme_override_constants/margin_left = 80
 theme_override_constants/margin_right = 40
 
 [node name="green" type="HSlider" parent="settings/game_play_setting/green/HBoxContainer/MarginContainer"]
-unique_name_in_owner = true
 layout_mode = 2
 theme_override_icons/grabber = ExtResource("11_rjxxa")
 theme_override_icons/grabber_highlight = ExtResource("11_rjxxa")
@@ -941,7 +926,6 @@ theme_override_constants/margin_left = 80
 theme_override_constants/margin_right = 40
 
 [node name="blue" type="HSlider" parent="settings/game_play_setting/blue/HBoxContainer/MarginContainer"]
-unique_name_in_owner = true
 layout_mode = 2
 theme_override_icons/grabber = ExtResource("11_rjxxa")
 theme_override_icons/grabber_highlight = ExtResource("11_rjxxa")
@@ -1007,7 +991,6 @@ theme_override_constants/margin_left = 80
 theme_override_constants/margin_right = 40
 
 [node name="alpha" type="HSlider" parent="settings/game_play_setting/alpha/HBoxContainer/MarginContainer"]
-unique_name_in_owner = true
 layout_mode = 2
 theme_override_icons/grabber = ExtResource("11_rjxxa")
 theme_override_icons/grabber_highlight = ExtResource("11_rjxxa")

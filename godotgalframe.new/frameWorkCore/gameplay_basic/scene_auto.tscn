@@ -33,7 +33,7 @@ grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 3
 
-[node name="viedo_background" type="VideoStreamPlayer" parent="background"]
+[node name="video_background" type="VideoStreamPlayer" parent="background"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -275,7 +275,7 @@ script = ExtResource("13_ens8c")
 
 [node name="addons" type="Node2D" parent="."]
 
-[connection signal="finished" from="background/viedo_background" to="." method="_on_viedo_background_finished"]
+[connection signal="finished" from="background/video_background" to="." method="_on_viedo_background_finished"]
 [connection signal="pressed" from="UI/Control/VBoxContainer/save" to="." method="_on_save_pressed"]
 [connection signal="pressed" from="UI/Control/VBoxContainer/load" to="." method="_on_load_pressed"]
 [connection signal="pressed" from="UI/Control/VBoxContainer/quicksave" to="." method="_on_quicksave_pressed"]

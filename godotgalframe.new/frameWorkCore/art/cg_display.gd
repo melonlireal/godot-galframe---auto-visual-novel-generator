@@ -1,6 +1,7 @@
 extends CanvasLayer
 # 查看CG中所有需要载入的CG
 var cg_all:CGS = ResourceLoader.load(GlobalResources.cg_all_path)
+@onready var cg_slots: GridContainer = $main/CenterContainer/GridContainer
 var cg_list = cg_all.get_cg()
 var cg_cover_list = cg_all.get_cg_cover()
 # Called when the node enters the scene tree for the first time.
@@ -11,7 +12,7 @@ func _ready():
 	$present_vid.visible = false
 	get_cover()
 	load_unlock()
-	for slot in $main/CenterContainer/GridContainer.get_children():
+	for slot in cg_slots.get_children():
 		slot.connect("view", present)
 
 
@@ -28,7 +29,7 @@ func _process(_delta):
 	
 	
 func get_cover():
-	for slot:CGSlot in $main/CenterContainer/GridContainer.get_children():
+	for slot:CGSlot in cg_slots.get_children():
 		if cg_cover_list.is_empty():
 			return
 		if not slot.has_cover:
@@ -38,7 +39,7 @@ func get_cover():
 	
 	
 func unlock(cg_name: String):
-	for slot:CGSlot in $main/CenterContainer/GridContainer.get_children():
+	for slot:CGSlot in cg_slots.get_children():
 		if slot.cg == cg_name:
 			slot.open()
 	
@@ -52,23 +53,19 @@ func load_unlock():
 	
 	# used to present cg
 func present(CG_name: String):
-	print("presenting")
 	var asset_path_finder:AssetPath = ResourceLoader.load(GlobalResources.asset_map_path)
 	var file_at = asset_path_finder.search_path(CG_name)
 	if file_at == null:
-		print("not here!")
 		return
 	if CG_name.substr(len(CG_name)-4, -1) == ".ogv":
-		print("present vid")
-		$present_vid.visible = true
+		$present_vid.show()
 		$present_vid.stream = ResourceLoader.load(file_at)
 		$present_vid.play()
-		$main.visible = false
+		$main.hide()
 	else:
-		print("present pic")
-		$present_pic.visible = true
+		$present_pic.show()
 		$present_pic.texture = ResourceLoader.load(file_at)
-		$main.visible = false
+		$main.hide()
 
 		
 func _on_return_pressed():

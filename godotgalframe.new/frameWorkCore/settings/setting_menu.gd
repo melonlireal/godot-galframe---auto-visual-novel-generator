@@ -1,5 +1,6 @@
+class_name  SettingMenu
 extends CanvasLayer
-var save_path
+signal reload_setting
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,6 +19,7 @@ func set_default():
 	pass
 
 func _on_return_button_down():
+	reload_setting.emit()
 	self.queue_free()
 
 

@@ -1,71 +1,38 @@
 extends CanvasLayer
 var asset_map:AssetPath = ResourceLoader.load("res://save/mapper_total.tres")
 var cg_header:CGS = ResourceLoader.load("res://save/cg.tres") 
+@onready var background_display: TextureRect = $background
+@onready var video_background_display: VideoStreamPlayer = $video_background
+
 var videolist = []
-var on_transition = false
-
-
-
-func do_transition():
-	pass
 	
 func change_backgrounds(backgrounds: Array):
-	if backgrounds == []:
-		return
-	else:
-		var background:Array = backgrounds[0]
-		var background_name = background[0]
+	for background in backgrounds:
+		var background_name:String = background[0]
 		var loop = background[1]
 		var background_at = asset_map.search_path(background_name)
 		if background_at == null:
 			self.get_tree().call_group("errorlog", "background_error", background_name)
 			return
-		if background_name.substr(len(background)-4, -1) == ".ogv":
+		var global_progress:GlobalGameProgress = ResourceLoader.load(GlobalResources.global_progress_path)
+		global_progress.add_cg(background_name)
+		ResourceSaver.save(global_progress, GlobalResources.global_progress_path)
+		if background_name.ends_with( ".ogv"):
 			if background_name in videolist:
 				return
 			# 识别是否是ogv格式
 			videolist.append(background_name)
 			if loop == "false":
-				$viedo_background.loop = false
+				video_background_display.loop = false
 			else:
-				$viedo_background.loop = true
-			$viedo_background.stream = ResourceLoader.load(background_at)
-			$viedo_background.play()
+				video_background_display.loop = true
+			video_background_display.stream = ResourceLoader.load(background_at)
+			video_background_display.play()
 		else:
 			videolist = []
-			$background.texture = ResourceLoader.load(background_at)
-			$viedo_background.stream = null
+			background_display.texture = ResourceLoader.load(background_at)
+			video_background_display.stream = null
 		
-	pass
-
-func change_background(background: String, loop = "true"):
-	if self.has_method(background):
-		var transition = Callable(self, background)
-		transition.call()
-		return
-	print("changing background\n")
-	self.get_tree().call_group("CG", "unlock", background)
-	cg_header.check_unlock(background) 
-	var background_at = asset_map.search_path(background)
-	if background_at == null:
-		self.get_tree().call_group("errorlog", "background_error", background)
-		return
-	if background.substr(len(background)-4, -1) == ".ogv":
-		if background in videolist:
-			return
-		# 识别是否是ogv格式
-		videolist.append(background)
-		if loop == "false":
-			$viedo_background.loop = false
-		else:
-			$viedo_background.loop = true
-		$viedo_background.stream = ResourceLoader.load(background_at)
-		$viedo_background.play()
-	else:
-		videolist = []
-		$background.texture = ResourceLoader.load(background_at)
-		$viedo_background.stream = null
-
 
 # the following functions are hard coded transitions
 # WARNING a new background command must be placed after a transition command

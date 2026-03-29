@@ -1,2 +1,2 @@
-catear.jpg catearfront.jpg
-firefly.png fireflyfront.png
+choice1.jpg choice1.jpg
+choice2.jpg choice2.jpg

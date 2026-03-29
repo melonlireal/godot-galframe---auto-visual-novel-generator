@@ -1,0 +1,6 @@
+:you picked choice1! I will switch background for this choice command: (background, choice1.jpg)
+you can check story tree to see how your choice unlocks story tree
+the new background is marked as CG
+you can return to main menu and check CG gallery that it is unlocked
+feel free to play with other feature such as setting, save/load, etc
+thats it for the demo, thank you for using godot galframe!

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cj068ahfrq0v2"
-path="res://.godot/imported/story_tree_panel.png-68e1aea93328994ce4f7ba066ce8b42b.ctex"
+uid="uid://1a516p51ieu"
+path="res://.godot/imported/democharacter.png-6ec5a24569a90ab0ed98af3b829a1fb6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://artResource/UI_gameplay/ui_raw/story_tree_panel.png"
-dest_files=["res://.godot/imported/story_tree_panel.png-68e1aea93328994ce4f7ba066ce8b42b.ctex"]
+source_file="res://artResource/character/democharacter.png"
+dest_files=["res://.godot/imported/democharacter.png-6ec5a24569a90ab0ed98af3b829a1fb6.ctex"]
 
 [params]
 
