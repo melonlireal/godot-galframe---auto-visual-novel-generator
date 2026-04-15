@@ -10,7 +10,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("color/loading_progress:visible")
+tracks/0/path = NodePath("start_game_transition/loading_progress:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -22,7 +22,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("color/fade_in_out:visible")
+tracks/1/path = NodePath("start_game_transition/fade_in_out:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -34,7 +34,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("color/fade_in_out:modulate")
+tracks/2/path = NodePath("start_game_transition/fade_in_out:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -50,7 +50,7 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("color/fade_in_out:modulate")
+tracks/0/path = NodePath("start_game_transition/fade_in_out:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -62,7 +62,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("color/fade_in_out:visible")
+tracks/1/path = NodePath("start_game_transition/fade_in_out:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -78,7 +78,7 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("color/loading_progress:visible")
+tracks/0/path = NodePath("start_game_transition/loading_progress:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -90,7 +90,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("color/fade_in_out:modulate")
+tracks/1/path = NodePath("start_game_transition/fade_in_out:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -102,7 +102,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("color/fade_in_out:visible")
+tracks/2/path = NodePath("start_game_transition/fade_in_out:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -119,7 +119,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("color/loading_progress:rotation")
+tracks/0/path = NodePath("start_game_transition/loading_progress:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -131,7 +131,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("color/loading_progress:visible")
+tracks/1/path = NodePath("start_game_transition/loading_progress:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -143,7 +143,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("color/fade_in_out:modulate")
+tracks/2/path = NodePath("start_game_transition/fade_in_out:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -155,7 +155,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("color/fade_in_out:visible")
+tracks/3/path = NodePath("start_game_transition/fade_in_out:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -266,14 +266,10 @@ flat = true
 autoplay = true
 bus = &"bgm"
 
-[node name="transition_DONTTOUCH" type="Timer" parent="."]
-wait_time = 0.05
-one_shot = true
-
-[node name="color" type="CanvasLayer" parent="."]
+[node name="start_game_transition" type="CanvasLayer" parent="."]
 layer = 100
 
-[node name="ColorRect" type="ColorRect" parent="color"]
+[node name="input_blocker" type="ColorRect" parent="start_game_transition"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -282,20 +278,20 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(1, 1, 1, 0)
 
-[node name="fade_in_out" type="Sprite2D" parent="color"]
+[node name="fade_in_out" type="Sprite2D" parent="start_game_transition"]
 visible = false
 position = Vector2(958, 528.5)
 scale = Vector2(1, 1.025)
 texture = ExtResource("6_rjllh")
 
-[node name="loading_progress" type="Sprite2D" parent="color"]
+[node name="loading_progress" type="Sprite2D" parent="start_game_transition"]
 visible = false
 position = Vector2(1746, 918)
 rotation = 4.24214
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("6_q022t")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="color"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="start_game_transition"]
 root_node = NodePath("../..")
 libraries = {
 &"": SubResource("AnimationLibrary_y7c3j")
@@ -307,6 +303,4 @@ libraries = {
 [connection signal="pressed" from="menu_UI/HBoxContainer/CG" to="." method="_on_cg_pressed"]
 [connection signal="pressed" from="menu_UI/HBoxContainer/setting" to="." method="_on_setting_pressed"]
 [connection signal="pressed" from="menu_UI/HBoxContainer/quit" to="." method="_on_quit_pressed"]
-[connection signal="timeout" from="transition_DONTTOUCH" to="." method="_on_transition_timeout"]
-[connection signal="timeout" from="transition_DONTTOUCH" to="." method="_on_transition_donttouch_timeout"]
-[connection signal="animation_finished" from="color/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="animation_finished" from="start_game_transition/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

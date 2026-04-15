@@ -54,7 +54,7 @@ func fadeout():
 		transit.tween_property($"../effects/effect_assets/black", "color:a", 1, 0.5)
 		await transit.finished
 		%avatar.visible = true
-		$"..".proceed()
+		$"..".proceed_to_next_line()
 		var transit2 = get_tree().create_tween().bind_node($"../effects/effect_assets/black")
 		transit2.tween_property($"../effects/effect_assets/black", "color:a", 0, 1)
 		await transit2.finished
@@ -76,7 +76,7 @@ func flash():
 		var transit = get_tree().create_tween().bind_node($"../effects/effect_assets/white")
 		transit.tween_property($"../effects/effect_assets/white", "color:a", 1, 0.5)
 		await transit.finished
-		$"..".proceed()
+		$"..".proceed_to_next_line()
 		var transit2 = get_tree().create_tween().bind_node($"../effects/effect_assets/white")
 		transit2.tween_property($"../effects/effect_assets/white", "color:a", 0, 0.5)
 		await transit2.finished

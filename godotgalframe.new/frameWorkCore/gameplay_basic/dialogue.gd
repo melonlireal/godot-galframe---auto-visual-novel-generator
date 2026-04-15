@@ -1,6 +1,5 @@
 extends RichTextLabel
 @export var play_speed_factor = 20.0/50.0
-@export var on_transition = true
 # used to block dialogue from playing when setting up 
 @export var repeat = false
 # for play speed example in settings
@@ -15,9 +14,9 @@ extends RichTextLabel
 @export var autoplay_pause_time = 1.0
 
 func _ready():
+	GlobalSignals.start_game.connect(_on_start_game)
 	if repeat:
-		on_transition = false
-		_start_dialogue()
+		start_dialogue()
 	else:
 		self.set_process(false)
 		
@@ -32,8 +31,7 @@ func _process(delta):
 	if self.visible_ratio == 1.0:
 		if repeat:
 			self.visible_ratio = 0.0
-		else:
-			set_process(false)
+		return
 	if on_auto:
 		var progress_per_frame:float = ((data.auto_play_speed * delta * play_speed_factor)
 		/self.get_parsed_text().length())
@@ -55,16 +53,8 @@ func on_narration():
 func on_dialogue():
 	self.set_position(dialogue_pos)
 	
-
-func _start_dialogue():
-	if on_transition:
-		on_transition = false
-		return
-	self.visible_ratio = 0.0
+func _on_start_game():
 	self.set_process(true)
 
-func start_transition():
-	on_transition = true
-	
-func transition_done():
-	_start_dialogue()
+func start_dialogue():
+	self.visible_ratio = 0.0

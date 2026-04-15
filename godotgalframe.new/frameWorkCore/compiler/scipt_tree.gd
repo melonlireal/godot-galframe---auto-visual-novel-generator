@@ -3,7 +3,7 @@ class_name ScriptTree
 
 @export var all_script = {}
 @export var curr_chap = "Start.txt"
-@export var curr_line = 0
+@export var curr_line = 1
 
 func set_starting_point():
 	curr_chap = "Start.txt"
@@ -47,10 +47,9 @@ func get_game():
 	
 func change_chapter(chapter: String):
 	curr_chap = chapter
-	curr_line = 0
+	curr_line = 1
 
 func get_line(box: Dictionary):
-	curr_line += 1
 	print("get line ", curr_line, " from ", curr_chap, "\n")
 	# if the line is not a standard line but a choice or the end of chapter
 	# return
@@ -61,10 +60,12 @@ func get_line(box: Dictionary):
 			return "game"
 		else:
 			return "exit"
+		
 	print("line content is ", all_script[curr_chap][curr_line], "\n")
 	box["character"] = all_script[curr_chap][curr_line]["character"]
 	box["dialogue"] = all_script[curr_chap][curr_line]["dialogue"]
 	box["command"] = all_script[curr_chap][curr_line]["command"]
+	curr_line += 1
 	return "all good"
 	
 func get_chapter():
@@ -83,16 +84,3 @@ func load_progress(chapter: String, line: int):
 	curr_chap = chapter
 	curr_line = line
 	
-#func add_var(name: String, variable: String):
-	#all_script["variable"][name] = variable
-	#
-#func var_op(variable: String, operation: String, value: String):
-	#var op = Callable(self, operation)
-	#op.call(variable, value)
-	#
-#func add(variable: String, value: String):
-	#if all_script["variable"].haskey(value):
-		#all_script["variable"][variable] += all_script["variable"][value]
-	#else:
-		#all_script["variable"][variable] += int(value)
-	#return

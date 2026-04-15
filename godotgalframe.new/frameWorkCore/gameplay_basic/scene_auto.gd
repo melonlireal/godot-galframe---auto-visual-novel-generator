@@ -35,7 +35,6 @@ var script_tree:ScriptTree = ResourceLoader.load("res://save/processed_script.tr
 # store inital variable to temporary variables used for this game
 var variables: Variables = Variables.new()
 
-signal game_created
 signal back_to_menu
 
 
@@ -60,7 +59,7 @@ func _ready():
 	setting.queue_free()
 	#add setting once to load values
 	#TODO this is a temporary solution
-	game_created.emit()
+	GlobalSignals.game_created.emit()
 	# tell main scene game is created
 
 
@@ -103,7 +102,7 @@ func _input(event: InputEvent) -> void:
 		else:
 			%dialogue.visible_ratio = 0.0 
 			# other wise forward to next dialogue
-			proceed()
+			proceed_to_next_line()
 	if Input.is_action_just_pressed("auto") and check_in_game():
 		# autoplay switches game to autoplay mode
 		_on_start_auto_play()
@@ -132,7 +131,7 @@ func check_in_game() -> bool:
 	return !press_action_disabled
 
 
-func proceed():
+func proceed_to_next_line():
 	# inchagre of continue the dialogue to next line
 	if choice_reach:
 		return
@@ -189,7 +188,7 @@ func proceed():
 	$review_dialogues.add_line()
 	# add character and dialogue into review_dialogue
 	print("character ", text["character"], " is speaking script: ", text["dialogue"], "\n")
-	%dialogue._start_dialogue()
+	%dialogue.start_dialogue()
 
 
 func choice_jump():
@@ -250,7 +249,7 @@ func travel(location: String):
 		
 	%dialogue.visible_ratio = 0 
 	choice_reach = false
-	proceed()
+	proceed_to_next_line()
 	# reset dialogue and start line
 
 
@@ -298,7 +297,6 @@ func load_progress(data: ProgressData):
 	speed_up = false
 	auto_play = false
 	choice_reach = false
-	%dialogue.on_transition = true
 	for child in %choice_box.get_children():
 		%choice_box.remove_child(child)
 	# reset all ingame setting including removing choices
@@ -311,16 +309,13 @@ func load_progress(data: ProgressData):
 	%background.clear_background()
 	%avatar.clear_all_avatar()
 	$chubby_play.reset_chubby()
-	script_tree.load_progress(data.which_file, data.which_line - 1)
+	script_tree.load_progress(data.which_file, data.which_line)
 	variables.set_all_var(data.variables)
 	# script tree acc give the line after its current progress
-	proceed()
 	$UI.show()
 	$dialogue.show()
-	game_created.emit()
+	GlobalSignals.game_created.emit()
 	# tell main game has been created and play animation fade_out
-	# TODO change that part to tween
-	%dialogue.on_transition = false
 
 
 func load_setting():
@@ -414,7 +409,7 @@ func _on_start_auto_play():
 	speed_up = false
 	auto_play = true
 	%dialogue.on_auto = true
-	proceed()
+	proceed_to_next_line()
 
 
 func _on_start_fast_forward():
@@ -423,7 +418,7 @@ func _on_start_fast_forward():
 		return
 	auto_play = false
 	speed_up = true
-	proceed()
+	proceed_to_next_line()
 	$speed_up_timer.start()
 
 
@@ -438,7 +433,7 @@ func _on_start_fast_forward_to_next_choice():
 	%music.music_clear("sound_effect")
 	%avatar.clear_all_avatar()
 	script_tree.jump_choice()
-	proceed()
+	proceed_to_next_line()
 
 
 func _on_hide_UI():
@@ -468,12 +463,12 @@ func _on_auto_play_timer_timeout():
 	start_time = true
 	if auto_play:
 		# display next dialogue when time up
-		proceed()
+		proceed_to_next_line()
 
 
 func _on_speed_up_timer_timeout():
 	if speed_up:
-		proceed()
+		proceed_to_next_line()
 		$speed_up_timer.start()
 
 
@@ -486,4 +481,4 @@ func _on_viedo_background_finished():
 	$UI.show()
 	$dialogue.show()
 	press_action_disabled = false
-	proceed()
+	proceed_to_next_line()

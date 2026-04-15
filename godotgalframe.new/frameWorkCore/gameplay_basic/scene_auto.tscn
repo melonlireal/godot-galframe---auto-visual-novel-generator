@@ -123,7 +123,7 @@ bbcode_enabled = true
 text = "这是一个很长的名字"
 metadata/_edit_lock_ = true
 
-[node name="dialogue" type="RichTextLabel" parent="dialogue" groups=["dialogue"]]
+[node name="dialogue" type="RichTextLabel" parent="dialogue"]
 unique_name_in_owner = true
 offset_left = 332.0
 offset_top = 850.0
