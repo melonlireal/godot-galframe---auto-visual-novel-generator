@@ -91,15 +91,15 @@ theme_override_constants/separation = 80
 
 [node name="display" parent="options" instance=ExtResource("5_tcu2g")]
 layout_mode = 2
-text = "基本设置"
+text = "Basic"
 
 [node name="volumn" parent="options" instance=ExtResource("5_tcu2g")]
 layout_mode = 2
-text = "音量设置"
+text = "Music"
 
 [node name="play" parent="options" instance=ExtResource("5_tcu2g")]
 layout_mode = 2
-text = "界面设置"
+text = "   UI/UX  "
 
 [node name="return" type="TextureButton" parent="."]
 offset_top = 1.0
@@ -121,7 +121,7 @@ offset_bottom = 96.0
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 70
-text = "返回"
+text = "Return"
 
 [node name="settings" type="Control" parent="."]
 layout_mode = 3
@@ -167,7 +167,7 @@ offset_bottom = 56.0
 layout_mode = 2
 theme_override_fonts/font = ExtResource("10_t08vl")
 theme_override_font_sizes/font_size = 35
-text = "播放速度"
+text = "Play speed"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="settings/display_setting/play_speed"]
 layout_mode = 2
@@ -232,7 +232,7 @@ offset_bottom = 56.0
 layout_mode = 2
 theme_override_fonts/font = ExtResource("10_t08vl")
 theme_override_font_sizes/font_size = 35
-text = "自动播放速度"
+text = "Auto play speed"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="settings/display_setting/auto_play_speed"]
 layout_mode = 2
@@ -297,7 +297,7 @@ offset_bottom = 56.0
 layout_mode = 2
 theme_override_fonts/font = ExtResource("10_t08vl")
 theme_override_font_sizes/font_size = 35
-text = "显示设置"
+text = "Display"
 
 [node name="CenterContainer" type="CenterContainer" parent="settings/display_setting/display"]
 layout_mode = 2
@@ -310,7 +310,7 @@ theme_override_constants/separation = 40
 layout_mode = 2
 theme_override_fonts/font = ExtResource("10_t08vl")
 theme_override_font_sizes/font_size = 30
-text = "窗口模式"
+text = "Window"
 
 [node name="windows" type="TextureButton" parent="settings/display_setting/display/CenterContainer/HBoxContainer"]
 unique_name_in_owner = true
@@ -324,7 +324,7 @@ stretch_mode = 0
 layout_mode = 2
 theme_override_fonts/font = ExtResource("10_t08vl")
 theme_override_font_sizes/font_size = 30
-text = "全屏模式"
+text = "Fullscreen"
 
 [node name="fullscreen" type="TextureButton" parent="settings/display_setting/display/CenterContainer/HBoxContainer"]
 unique_name_in_owner = true
@@ -355,7 +355,7 @@ offset_bottom = 56.0
 layout_mode = 2
 theme_override_fonts/font = ExtResource("10_t08vl")
 theme_override_font_sizes/font_size = 35
-text = "对话框透明度"
+text = "Dialogue box transparency"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="settings/display_setting/transparency"]
 layout_mode = 2
@@ -425,7 +425,7 @@ theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("19_xnl5h")
 theme_override_font_sizes/normal_font_size = 35
-text = "这是一段文本播放速度预览效果"
+text = "preview for play speed"
 scroll_active = false
 script = ExtResource("20_yhwg8")
 repeat = true
@@ -456,7 +456,7 @@ theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("19_xnl5h")
 theme_override_font_sizes/normal_font_size = 35
-text = "这是一段文本自动播放速度预览效果"
+text = "preview for auto play speed"
 script = ExtResource("20_yhwg8")
 repeat = true
 on_auto = true
@@ -497,7 +497,7 @@ offset_bottom = 56.0
 layout_mode = 2
 theme_override_fonts/font = ExtResource("10_t08vl")
 theme_override_font_sizes/font_size = 35
-text = "全局音量"
+text = "Global volumn"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="settings/volumn_setting/total_volumn"]
 layout_mode = 2
@@ -564,7 +564,7 @@ offset_bottom = 56.0
 layout_mode = 2
 theme_override_fonts/font = ExtResource("10_t08vl")
 theme_override_font_sizes/font_size = 35
-text = "背景音量"
+text = "Background music"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="settings/volumn_setting/bgm_volumn"]
 layout_mode = 2
@@ -631,7 +631,7 @@ offset_bottom = 56.0
 layout_mode = 2
 theme_override_fonts/font = ExtResource("10_t08vl")
 theme_override_font_sizes/font_size = 35
-text = "配音音量"
+text = "Voice"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="settings/volumn_setting/voice_volumn"]
 layout_mode = 2
@@ -698,7 +698,7 @@ offset_bottom = 56.0
 layout_mode = 2
 theme_override_fonts/font = ExtResource("10_t08vl")
 theme_override_font_sizes/font_size = 35
-text = "音效音量"
+text = "Sound effect"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="settings/volumn_setting/sfx_volumn"]
 layout_mode = 2

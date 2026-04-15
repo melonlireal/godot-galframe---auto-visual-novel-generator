@@ -235,6 +235,5 @@ func get_choice(file: FileAccess):
 			if tokens.size() == 2:
 				tokens.append("false")
 			choice_list.append(tokens)
-	# 将所有的选项都放进一个列表里
 	return choice_list
 		

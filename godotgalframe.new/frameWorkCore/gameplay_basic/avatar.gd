@@ -21,7 +21,7 @@ func change_avatars(avatar_commands: Array):
 	for avatar_command in avatar_commands:
 		var avatar_name = avatar_command[0]
 		var avatar_location = avatar_command[1]
-		# 这个用来自动清理人物画像, 如果想做出某个台词下所有立绘消失的效果就用这个
+		# used to clear all avatar
 		if avatar_name == "clear":
 			print("clearing all avatar\n")
 			clear_all_avatar()

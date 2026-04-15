@@ -3,7 +3,7 @@ extends RichTextLabel
 @export var on_transition = true
 # used to block dialogue from playing when setting up 
 @export var repeat = false
-# 用来放设置里的播放演示
+# for play speed example in settings
 @export var on_auto = false
 @export var on_special_effect = false
 # used to check if there is currently special effect
@@ -13,12 +13,7 @@ extends RichTextLabel
 # the time for voice to fully play for current 
 # playng line, if no voicing the line is 0
 @export var autoplay_pause_time = 1.0
-@onready var narration_box: TextureRect = $"../narration_box"
-@onready var dialogue_box: TextureRect = $"../dialogue_box"
 
-# a factor set to check how long the current line should stay
-# after fully displayed to player
-# 切换到旁白位置
 func _ready():
 	if repeat:
 		on_transition = false
@@ -56,13 +51,10 @@ func _process(delta):
 
 func on_narration():
 	self.set_position(narrator_pos)
-	narration_box.show()
-	dialogue_box.hide()
 	
 func on_dialogue():
 	self.set_position(dialogue_pos)
-	narration_box.hide()
-	dialogue_box.show()	
+	
 
 func _start_dialogue():
 	if on_transition:

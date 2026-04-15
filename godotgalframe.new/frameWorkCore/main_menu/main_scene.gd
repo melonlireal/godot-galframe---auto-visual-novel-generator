@@ -3,11 +3,11 @@ var scene_auto = preload("res://frameWorkCore/gameplay_basic/scene_auto.tscn")
 var save_path = "user://save/"
 var global_progress_save_name = "global_game_progress_save.tres"
 var setting_save_name = "player_setting_save.tres"
-#var game_exists = false
+
 var progress:ProgressData = ProgressData.new()
-# 这两个变量用来保证scene_auto 一定会收到加载的指令
 
 func _ready():
+	GlobalSignals.load_game_progress.connect(_on_load_game_progress)
 	var saved_variables: Variables = ResourceLoader.load(GlobalResources.variables_path)
 	progress.variables = saved_variables.get_all_var()
 	print("main scene log start\n")
@@ -29,8 +29,8 @@ func _ready():
 	setting.queue_free()
 	
 		
-# 接受主界面UI和游戏界面UI输入
-# the code here are no longer a pile of shit
+# UI input for main scene
+# the code here are no longer awful
 # hopefully I think the same after a year
 
 func _on_start_pressed():
@@ -39,8 +39,6 @@ func _on_start_pressed():
 	$color/ColorRect.mouse_filter = 0
 	$menu_UI/menuBGM.playing = false
 	
-func game_created():
-	$color/AnimationPlayer.play("fade_out")
 #	
 # the below code are UI related code
 func _on_load_pressed():
@@ -72,29 +70,38 @@ func _on_animation_player_animation_finished(anim_name):
 		$menu_UI.visible = false
 		$color/AnimationPlayer.play("loading")
 		# when completely fade in make menu invisible and play loading animation
-		if not self.find_child("scene_auto", true, false):
-			var scene:SceneAuto = scene_auto.instantiate()
-			scene.set_process(false)
-			# 如果是在已经有游戏的情况下加载，不在创建游戏
-			add_child(scene)
-		self.get_tree().call_group("game_play", "load_progress", progress)
+		if self.find_child("scene_auto", true, false):
+			self.find_child("scene_auto", true, false).queue_free()
+		var scene:SceneAuto = scene_auto.instantiate()
+		scene.game_created.connect(game_created)
+		scene.back_to_menu.connect(back_to_menu)
+		scene.set_process(false)
+		# dont create new game if a game is already instantiated
+		add_child(scene)
+		scene.load_progress(progress)
+
+		
 	if anim_name == "loading":
 		print("loading")
 
-func back_menu():
+func game_created():
+	$color/AnimationPlayer.play("fade_out")
+
+func back_to_menu():
 	if self.find_child("scene_auto", true, false):
 		self.find_child("scene_auto", true, false).queue_free()
 	$menu_UI/menuBGM.playing = true
 	$menu_UI.visible = true
 	$color/AnimationPlayer.play("fade_out")
 
-func load_game(game_progress: ProgressData):
+func _on_load_game_progress(game_progress: ProgressData):
 	print("loading")
-	if self.find_child("scene_auto", true, false):
-		# 在正在游玩的状态下读档时， 切换读取菜单至游戏且加载游戏进度
+	var game_scene:SceneAuto = self.find_child("scene_auto", true, false)
+	if game_scene:
+		# when loading game progress whil playing, load game progress directly
 		$color/ColorRect.mouse_filter = 0
 		$color/AnimationPlayer.play("fade_in")
-		self.get_tree().call_group("game_play", "load_progress", game_progress)
+		game_scene.load_progress(game_progress)
 	else:
 		_on_start_pressed()
 		progress = game_progress

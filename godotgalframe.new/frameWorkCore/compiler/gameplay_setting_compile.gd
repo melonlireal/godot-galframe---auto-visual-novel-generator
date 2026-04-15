@@ -17,7 +17,7 @@ var asset_save = "internal_setting.tres"
 
 
 # TODO NOT COMPLETED YET
-#TODO SHIT CODE FIX LATER 
+#TODO BAD CODE FIX LATER 
 # WHEN FIGUREOUT HOW TO USE get_property_list() PREPERLY
 func _ready() -> void:
 	var settings = GameplaySetting.new()

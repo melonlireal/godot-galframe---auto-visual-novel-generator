@@ -18,9 +18,9 @@ func change_backgrounds(backgrounds: Array):
 		global_progress.add_cg(background_name)
 		ResourceSaver.save(global_progress, GlobalResources.global_progress_path)
 		if background_name.ends_with( ".ogv"):
+			# identyfy ogv format (dynami background)
 			if background_name in videolist:
 				return
-			# 识别是否是ogv格式
 			videolist.append(background_name)
 			if loop == "false":
 				video_background_display.loop = false
@@ -32,7 +32,11 @@ func change_backgrounds(backgrounds: Array):
 			videolist = []
 			background_display.texture = ResourceLoader.load(background_at)
 			video_background_display.stream = null
-		
+
+func clear_background():
+	background_display.texture = null
+	video_background_display.stream = null
+	videolist = []
 
 # the following functions are hard coded transitions
 # WARNING a new background command must be placed after a transition command

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="CGS" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://frameWorkCore/compiler/cgs.gd" id="1_25url"]
+
+[resource]
+script = ExtResource("1_25url")
+cg_list = ["choice1.jpg", "choice2.jpg"]
+cg_cover_list = ["choice1.jpg", "choice2.jpg"]

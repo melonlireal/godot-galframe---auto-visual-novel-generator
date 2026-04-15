@@ -27,7 +27,6 @@ func find_cg(cg: FileAccess):
 	while not cg.eof_reached():
 		var temp = cg.get_line()
 		if temp != "":
-			# 如果有可解锁CG再解锁CG
 			var line = Array(temp.rsplit(" "))
 			cgs.add_cg(line[0], line[1])
 			print("Cg{0}, with cover {1} has been added"\

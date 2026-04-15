@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="AssetPath" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://frameWorkCore/compiler/AssetPath.gd" id="1_hokb5"]
+
+[resource]
+script = ExtResource("1_hokb5")
+resource_dic = {
+"background.jpg": "res://artResource/background//background.jpg",
+"background.jpg.import": "res://artResource/background//background.jpg.import",
+"choice1.jpg": "res://artResource/background//choice1.jpg",
+"choice1.jpg.import": "res://artResource/background//choice1.jpg.import",
+"choice2.jpg": "res://artResource/background//choice2.jpg",
+"choice2.jpg.import": "res://artResource/background//choice2.jpg.import",
+"demobgm.mp3": "res://music//bgm/demobgm.mp3",
+"demobgm.mp3.import": "res://music//bgm/demobgm.mp3.import",
+"democharacter.png": "res://artResource/character//democharacter.png",
+"democharacter.png.import": "res://artResource/character//democharacter.png.import",
+"occupy.txt": "res://music//voice/occupy.txt"
+}

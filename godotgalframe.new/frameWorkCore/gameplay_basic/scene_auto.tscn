@@ -17,7 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://7wwctswnkwqj" path="res://frameWorkCore/story_tree_editor/story_tree.tscn" id="12_ob1rn"]
 [ext_resource type="Script" uid="uid://84pbbv15c8ww" path="res://frameWorkCore/gameplay_basic/minigame.gd" id="13_ens8c"]
 
-[node name="scene_auto" type="CanvasLayer" groups=["game_play"]]
+[node name="scene_auto" type="CanvasLayer"]
 script = ExtResource("1_2awyf")
 metadata/_edit_vertical_guides_ = [155.0]
 
@@ -174,9 +174,6 @@ color = Color(1, 1, 1, 0)
 
 [node name="UI" parent="." instance=ExtResource("6_0o83t")]
 
-[node name="ColorRect" parent="UI/Control" index="0"]
-color = Color(0.54902, 0.54902, 0.54902, 0.784314)
-
 [node name="choice" type="CanvasLayer" parent="."]
 
 [node name="choice_box" type="FlowContainer" parent="choice"]
@@ -276,20 +273,19 @@ script = ExtResource("13_ens8c")
 [node name="addons" type="Node2D" parent="."]
 
 [connection signal="finished" from="background/video_background" to="." method="_on_viedo_background_finished"]
-[connection signal="pressed" from="UI/Control/VBoxContainer/save" to="." method="_on_save_pressed"]
-[connection signal="pressed" from="UI/Control/VBoxContainer/load" to="." method="_on_load_pressed"]
-[connection signal="pressed" from="UI/Control/VBoxContainer/quicksave" to="." method="_on_quicksave_pressed"]
-[connection signal="pressed" from="UI/Control/VBoxContainer/quickload" to="." method="_on_quickload_pressed"]
-[connection signal="pressed" from="UI/Control/VBoxContainer/setting" to="." method="_on_setting_pressed"]
-[connection signal="pressed" from="UI/Control/VBoxContainer/volumn" to="." method="_on_volumn_pressed"]
-[connection signal="pressed" from="UI/Control/VBoxContainer/show_tree" to="." method="_on_show_tree_pressed"]
-[connection signal="pressed" from="UI/Control/VBoxContainer/review" to="." method="_on_review_pressed"]
-[connection signal="pressed" from="UI/Control/VBoxContainer/auto" to="." method="_on_auto_pressed"]
-[connection signal="pressed" from="UI/Control/VBoxContainer/forward_speed" to="." method="_on_forward_speed_pressed"]
-[connection signal="pressed" from="UI/Control/VBoxContainer/forwardToNextChoice" to="." method="_on_forward_to_next_choice_pressed"]
-[connection signal="pressed" from="UI/Control/VBoxContainer/visible" to="." method="_on_visible_pressed"]
-[connection signal="pressed" from="UI/Control/VBoxContainer/leave" to="." method="_on_leave_pressed"]
+[connection signal="hide_UI" from="UI" to="." method="_on_hide_UI"]
+[connection signal="leave_game" from="UI" to="." method="_on_leave_game"]
+[connection signal="on_button" from="UI" to="." method="_on_button"]
+[connection signal="out_button" from="UI" to="." method="_out_button"]
+[connection signal="quick_load" from="UI" to="." method="_on_quick_load"]
+[connection signal="quick_save" from="UI" to="." method="_on_quick_save"]
+[connection signal="show_load" from="UI" to="." method="_on_show_load"]
+[connection signal="show_review_dialogue" from="UI" to="." method="_on_show_review_dialogue"]
+[connection signal="show_save" from="UI" to="." method="_on_show_save"]
+[connection signal="show_setting" from="UI" to="." method="_on_show_setting"]
+[connection signal="show_story_tree" from="UI" to="." method="_on_show_story_tree"]
+[connection signal="start_auto_play" from="UI" to="." method="_on_start_auto_play"]
+[connection signal="start_fast_forward" from="UI" to="." method="_on_start_fast_forward"]
+[connection signal="start_fast_forward_to_next_choice" from="UI" to="." method="_on_start_fast_forward_to_next_choice"]
 [connection signal="timeout" from="auto_play_timer" to="." method="_on_auto_play_timer_timeout"]
 [connection signal="timeout" from="speed_up_timer" to="." method="_on_speed_up_timer_timeout"]
-
-[editable path="UI"]

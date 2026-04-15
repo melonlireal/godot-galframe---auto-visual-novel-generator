@@ -14,8 +14,6 @@ var loading
 @onready var auto_play_example: TextureRect = $auto_play_example/TextureRect
 
 # Called when the node enters the scene tree for the first time.
-
-# WARNING SHIT CODE MUST FIX
 	
 func load_value():
 	var saved_data:PlayerSetting = ResourceLoader.load(GlobalResources.setting_save_path)

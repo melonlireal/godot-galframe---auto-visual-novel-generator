@@ -1,0 +1,172 @@
+[gd_resource type="Resource" script_class="ScriptTree" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://frameWorkCore/compiler/scipt_tree.gd" id="1_avy3a"]
+
+[resource]
+script = ExtResource("1_avy3a")
+all_script = {
+"Start.txt": {
+1: {
+"character": "",
+"command": {},
+"dialogue": "[color=434444]Hi! welcome to demo for godot galframe![/color]"
+},
+2: {
+"character": "",
+"command": {},
+"dialogue": "[color=434444]godot galframe is a visual novel framework for people with zero coding experience[/color]"
+},
+3: {
+"character": "",
+"command": {},
+"dialogue": "[color=434444]all you need is some very basic commands![/color]"
+},
+4: {
+"character": "",
+"command": {
+"background": [["background.jpg", "true"]]
+},
+"dialogue": "[color=434444]such as display a background [/color]"
+},
+5: {
+"character": "",
+"command": {
+"background": [["background.jpg", "true"]],
+"bgm": [["demobgm.mp3"]]
+},
+"dialogue": "[color=434444]play some music [/color]"
+},
+6: {
+"character": "[color=787878]character[/color]",
+"command": {
+"background": [["background.jpg", "true"]],
+"bgm": [["demobgm.mp3"]],
+"character": [["democharacter.png", "mid"]]
+},
+"dialogue": "[color=434444] or show a character! (ignore my bad art skill) [/color]"
+},
+7: {
+"character": "[color=787878]character[/color]",
+"command": {
+"background": [["background.jpg", "true"]],
+"bgm": [["demobgm.mp3"]],
+"character": [["democharacter.png", "mid"]]
+},
+"dialogue": "[color=434444]you can also display choice for player to select[/color]"
+},
+"choice": [["choice1", "choice1.txt", "false"], ["choice2", "choice2.txt", "false"]],
+"lines": 6
+},
+"choice1.txt": {
+1: {
+"character": "",
+"command": {
+"background": [["choice1.jpg", "true"]],
+"bgm": [["demobgm.mp3"]],
+"character": [["democharacter.png", "mid"]]
+},
+"dialogue": "[color=434444]you picked choice1! I will switch background for this choice [/color]"
+},
+2: {
+"character": "",
+"command": {
+"background": [["choice1.jpg", "true"]],
+"bgm": [["demobgm.mp3"]],
+"character": [["democharacter.png", "mid"]]
+},
+"dialogue": "[color=434444]you can check story tree to see how your choice unlocks story tree[/color]"
+},
+3: {
+"character": "",
+"command": {
+"background": [["choice1.jpg", "true"]],
+"bgm": [["demobgm.mp3"]],
+"character": [["democharacter.png", "mid"]]
+},
+"dialogue": "[color=434444]the new background is marked as CG[/color]"
+},
+4: {
+"character": "",
+"command": {
+"background": [["choice1.jpg", "true"]],
+"bgm": [["demobgm.mp3"]],
+"character": [["democharacter.png", "mid"]]
+},
+"dialogue": "[color=434444]you can return to main menu and check CG gallery that it is unlocked[/color]"
+},
+5: {
+"character": "",
+"command": {
+"background": [["choice1.jpg", "true"]],
+"bgm": [["demobgm.mp3"]],
+"character": [["democharacter.png", "mid"]]
+},
+"dialogue": "[color=434444]feel free to play with other feature such as setting, save/load, etc[/color]"
+},
+6: {
+"character": "",
+"command": {
+"background": [["choice1.jpg", "true"]],
+"bgm": [["demobgm.mp3"]],
+"character": [["democharacter.png", "mid"]]
+},
+"dialogue": "[color=434444]thats it for the demo, thank you for using godot galframe![/color]"
+}
+},
+"choice2.txt": {
+1: {
+"character": "",
+"command": {
+"background": [["choice2.jpg", "true"]],
+"bgm": [["demobgm.mp3"]],
+"character": [["democharacter.png", "mid"]]
+},
+"dialogue": "[color=434444]you picked choice2! I will switch background for this choice [/color]"
+},
+2: {
+"character": "",
+"command": {
+"background": [["choice2.jpg", "true"]],
+"bgm": [["demobgm.mp3"]],
+"character": [["democharacter.png", "mid"]]
+},
+"dialogue": "[color=434444]you can check story tree to see how your choice unlocks story tree[/color]"
+},
+3: {
+"character": "",
+"command": {
+"background": [["choice2.jpg", "true"]],
+"bgm": [["demobgm.mp3"]],
+"character": [["democharacter.png", "mid"]]
+},
+"dialogue": "[color=434444]the new background is marked as CG[/color]"
+},
+4: {
+"character": "",
+"command": {
+"background": [["choice2.jpg", "true"]],
+"bgm": [["demobgm.mp3"]],
+"character": [["democharacter.png", "mid"]]
+},
+"dialogue": "[color=434444]you can return to main menu and check CG gallery that it is unlocked[/color]"
+},
+5: {
+"character": "",
+"command": {
+"background": [["choice2.jpg", "true"]],
+"bgm": [["demobgm.mp3"]],
+"character": [["democharacter.png", "mid"]]
+},
+"dialogue": "[color=434444]feel free to play with other feature such as setting, save/load, etc[/color]"
+},
+6: {
+"character": "",
+"command": {
+"background": [["choice2.jpg", "true"]],
+"bgm": [["demobgm.mp3"]],
+"character": [["democharacter.png", "mid"]]
+},
+"dialogue": "[color=434444]thats it for the demo, thank you for using godot galframe![/color]"
+}
+}
+}

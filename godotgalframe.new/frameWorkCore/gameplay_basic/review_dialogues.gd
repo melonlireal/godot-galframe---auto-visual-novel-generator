@@ -1,5 +1,5 @@
 extends CanvasLayer
-var gameplay_setting = ResourceLoader.load(GlobalResources.gameplay_setting_path)
+var gameplay_setting:GameplaySetting = ResourceLoader.load(GlobalResources.gameplay_setting_path)
 var limit = gameplay_setting.get_setting("limit")
 var narrator = gameplay_setting.get_setting("narrator")
 

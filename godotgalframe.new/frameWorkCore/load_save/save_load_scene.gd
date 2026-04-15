@@ -23,6 +23,7 @@ func _ready():
 		slot.saving.connect(save_in_slot)
 		slot.mouse_exited.connect(clear_display)
 		slot.mouse_in.connect(windows_display)
+	#self.get_parent().connect("load_game", load_game)
 	
 func clear_display():
 	$TextureRect/display.texture = null
@@ -37,13 +38,7 @@ func get_temp_save_data(image: Image, curr_chap: String, curr_line: int, vars: V
 	# 收到游戏界面截图
 
 func save_in_slot(slot: int):
-	# 先把图片放在对应的槽位上
 	$TextureRect/GridContainer.get_child(slot).display(temp_save["image"])
-	# 因为图片在打开界面时，已经准备好了，不会担心没有的问题
-	#self.get_tree().call_group("game_play", "get_progress", slot)
-	# 把槽位数据传过去，待会跟着行数和章节名传回来
-	# 我知道这很抽象， 但怎么优化我不道啊
-	# 我是傻逼⬆byd就不能一起传吗
 	var progress:ProgressData = ProgressData.new()
 	progress.which_file = temp_save["curr_chap"]
 	progress.which_line = temp_save["curr_line"]
@@ -51,7 +46,7 @@ func save_in_slot(slot: int):
 	ResourceSaver.save(progress, "user://save/" + str(slot) + ".tres")
 	
 func help_load(progress: ProgressData):
-	self.get_tree().call_group("main", "load_game", progress)
+	GlobalSignals.load_game_progress.emit(progress)
 	self.queue_free()
 	
 func _on_return_pressed():

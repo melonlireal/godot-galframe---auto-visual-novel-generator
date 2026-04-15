@@ -21,8 +21,7 @@ grow_vertical = 2
 layout_direction = 2
 layout_mode = 2
 theme_override_font_sizes/font_size = 100
-text = "素材定位完毕
-文案预处理完毕"
+text = "finished processing scripts"
 
 [node name="header_compile" type="Node" parent="."]
 script = ExtResource("4_pg34a")
@@ -35,4 +34,5 @@ script = ExtResource("3_g7ou4")
 
 [node name="gameplay_setting_compile" type="Node" parent="."]
 script = ExtResource("5_g7ou4")
+review_dialogue_narrator_name = "[color=434444]Narrator[/color]"
 auto_clear_voice = true

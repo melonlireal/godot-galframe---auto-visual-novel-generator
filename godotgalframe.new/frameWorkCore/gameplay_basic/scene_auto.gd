@@ -14,14 +14,12 @@ class_name SceneAuto
 # when UI including dialogue box is not visible
 # clicking will redisplay and will not play text
 
-@export var can_press = true
-# can press is used to pause player input press
-# when necessary
+@export var press_action_disabled = false
+# press action are actions that will proceed dialogue to next line
+# when true, player cannot proceed to next line with press action
 
-#TODO this shit I forgot its purpose
+#TODO I forgot purpose of this variable
 @onready var start_time = true 
-# 确保proceed只在需要的时候开始记时
-# 在选项出现的情况下停止 proceed继续读取txt文档
 
 @onready var narration_box: TextureRect = $dialogue/narration_box
 @onready var dialogue_box: TextureRect = $dialogue/dialogue_box
@@ -37,35 +35,33 @@ var script_tree:ScriptTree = ResourceLoader.load("res://save/processed_script.tr
 # store inital variable to temporary variables used for this game
 var variables: Variables = Variables.new()
 
-
+signal game_created
+signal back_to_menu
 
 
 
 func _ready():
 	var saved_variables:Variables = ResourceLoader.load(GlobalResources.variables_path)
 	variables.set_all_var(saved_variables.get_all_var())
-	$"DO NOT TOUCH/Panel".visible = false
-	$review_dialogues.visible = false
+	$"DO NOT TOUCH/Panel".hide()
+	$review_dialogues.hide()
 	%dialogue.text = ""
 	%character.text = ""
 	%dialogue.visible_ratio = 0.0
 	%errorlog.text = ""
-	$UI.connect("on_button", _on_button)
-	$UI.connect("out_button", _out_button)
-	$review_dialogues.connect("close", quit_review)
-	$story_tree.connect("close", quit_story_tree)
-	$story_tree.connect("load_chap", load_chapter)
+	$review_dialogues.connect("close", _on_quit_review_dialogue)
+	$story_tree.connect("close", _on_quit_story_tree)
+	$story_tree.connect("load_chap", load_chapter_from_story_tree)
 	$story_tree.update_chapter("Start.txt")
 	set_bus()
 	load_setting()
 	var setting = preload("res://frameWorkCore/settings/setting_menu.tscn").instantiate()
 	$".".add_child(setting, true)
 	setting.queue_free()
-	#add setting and dialogue review once to load values
+	#add setting once to load values
 	#TODO this is a temporary solution
-	
-	self.get_tree().call_group("main", "game_created")
-	# tell main game is created
+	game_created.emit()
+	# tell main scene game is created
 
 
 func set_bus():
@@ -110,7 +106,7 @@ func _input(event: InputEvent) -> void:
 			proceed()
 	if Input.is_action_just_pressed("auto") and check_in_game():
 		# autoplay switches game to autoplay mode
-		_on_auto_pressed()
+		_on_start_auto_play()
 
 
 func check_in_game() -> bool:
@@ -133,7 +129,7 @@ func check_in_game() -> bool:
 		return false
 	if  $minigame.get_children() != []:
 		return false
-	return can_press
+	return !press_action_disabled
 
 
 func proceed():
@@ -145,7 +141,7 @@ func proceed():
 	# then extract character, dialogue and command
 	var status = script_tree.get_line(text) # status check special condition
 	if status == "exit":
-		_on_leave_pressed()
+		_on_leave_game()
 		# if exit, exit
 		return
 	if status == "choice reach":
@@ -177,8 +173,12 @@ func proceed():
 		# creator may want to switch dialogue box style when its narration
 		# instead of character speaking
 		# this check by whether character has a name or not
+		narration_box.show()
+		dialogue_box.hide()
 		%dialogue.on_narration()
 	else:
+		narration_box.hide()
+		dialogue_box.show()
 		%dialogue.on_dialogue()
 	command_execute(text["command"]) 
 	# execute the command with dialogue
@@ -255,33 +255,33 @@ func travel(location: String):
 
 
 func command_execute(orders: Dictionary):
-	# TODO O(2n) complexity, need to try to fix in future
-	# iterate the command to find all avatar slot that will be overwrite
-	# these slot does not need to be cleared
-	# this feature helps with avatar transition and potentialy many feature
 	%avatar.update_art_list(orders.get("character", []))
-	
 	%avatar.change_avatars(orders.get("character", []))
 	%avatar.execute_avatar_effects(orders.get("effect", []))
+	
 	%background.change_backgrounds(orders.get("background", []))
+	
 	$chubby_play.process_chubby_commands(orders.get("chubby", []))
+	
 	%music.change_bgm(orders.get("bgm", []))
 	%music.change_sound_effect(orders.get("sound_effect", []))
 	%music.change_voice(orders.get("voice", []))
+	
 	variables.perform_var_ops(orders.get("update", []))
-	#TODO add func for chubby
+	
+	
 	if orders.has("CG"):
 		auto_play = false
 		speed_up = false
 		%avatar.clear_all_avatar()
 		$UI.visible = false
 		$dialogue.visible = false
-		can_press = false
+		press_action_disabled = true
 		%background.change_background(orders["CG"][0][0], "false")
 		print("displaying CG\n")
 	return
 
-func load_chapter(chapter_name: String, variable_of_chap: Dictionary):
+func load_chapter_from_story_tree(chapter_name: String, variable_of_chap: Dictionary):
 	$story_tree.hide()
 	var chap:ProgressData = ProgressData.new()
 	chap.which_file = chapter_name
@@ -291,6 +291,7 @@ func load_chapter(chapter_name: String, variable_of_chap: Dictionary):
 		chap.variables[key] = variable_of_chap[key]
 	load_progress(chap)
 	pass
+
 
 func load_progress(data: ProgressData):
 	# load game progress into the game
@@ -307,6 +308,7 @@ func load_progress(data: ProgressData):
 	%music.music_clear("bgm")
 	%music.music_clear("voice")
 	%music.music_clear("sound_effect")
+	%background.clear_background()
 	%avatar.clear_all_avatar()
 	$chubby_play.reset_chubby()
 	script_tree.load_progress(data.which_file, data.which_line - 1)
@@ -315,7 +317,7 @@ func load_progress(data: ProgressData):
 	proceed()
 	$UI.show()
 	$dialogue.show()
-	self.get_tree().call_group("main", "game_created")
+	game_created.emit()
 	# tell main game has been created and play animation fade_out
 	# TODO change that part to tween
 	%dialogue.on_transition = false
@@ -333,26 +335,24 @@ func load_setting():
 	$UI/Control/ColorRect.color = save.windows_color	
 # the code below are code related to buttons
 
-func _on_save_pressed():
+func _on_show_save():
 	var temp_screen = get_viewport().get_texture().get_image()
 	# take a screenshot of current scene
 	var saver:SaveLoad = preload("res://frameWorkCore/load_save/save_load_UI.tscn").instantiate()
 	saver.display_save = true
 	saver.get_temp_save_data(temp_screen, script_tree.get_chapter(), script_tree.get_line_num(), variables)
-	self.add_child(saver)
-	saver.set_owner(self)
+	add_sibling(saver)
 	UI_switched = true
 
 
-func _on_load_pressed():
-	var loader = preload("res://frameWorkCore/load_save/save_load_UI.tscn").instantiate()
+func _on_show_load():
+	var loader:SaveLoad = preload("res://frameWorkCore/load_save/save_load_UI.tscn").instantiate()
 	loader.display_save = false
-	self.add_child(loader)
-	loader.set_owner(self)
+	add_sibling(loader)
 	UI_switched = true
 
 
-func _on_quicksave_pressed():
+func _on_quick_save():
 	# TODO, maybe make first save slot for quick save only?
 	var progress:ProgressData = ProgressData.new()
 	progress.which_file = script_tree.get_chapter()
@@ -361,7 +361,7 @@ func _on_quicksave_pressed():
 	ResourceSaver.save(progress, "user://save/quick_save.tres")
 
 
-func _on_quickload_pressed():
+func _on_quick_load():
 	var quick_save = "user://save/quick_save.tres"
 	var find_save:ProgressData = ResourceLoader.load(quick_save)
 	if find_save == null:
@@ -370,7 +370,7 @@ func _on_quickload_pressed():
 	self.load_progress(find_save)
 
 
-func _on_setting_pressed():
+func _on_show_setting():
 	var setting:SettingMenu = preload("res://frameWorkCore/settings/setting_menu.tscn").instantiate()
 	self.add_child(setting, true)
 	setting.set_owner(self)
@@ -379,7 +379,7 @@ func _on_setting_pressed():
 	return
 
 
-func _on_review_pressed():
+func _on_show_review_dialogue():
 	$review_dialogues.jump_to_buttom()
 	$review_dialogues.show()
 	$dialogue.hide()
@@ -387,37 +387,37 @@ func _on_review_pressed():
 	return
 
 
-func quit_review():
+func _on_quit_review_dialogue():
 	$review_dialogues.hide()
-	can_press = true
+	press_action_disabled = false
 	$dialogue.show()
 	$UI.show()
 
-func _on_show_tree_pressed():
+func _on_show_story_tree():
 	$story_tree.show()
 	$dialogue.hide()
 	$UI.hide()
 	return
 
-func quit_story_tree():
+func _on_quit_story_tree():
 	$story_tree.hide()
-	can_press = true
+	press_action_disabled = false
 	$dialogue.show()
 	$UI.show()
 
-func _on_auto_pressed():
+func _on_start_auto_play():
 	if auto_play:
 		%dialogue.on_auto = false
 		auto_play = false
 		return
-		# 如果已经在自动播放则取消自动播放
+		# cancel auto play if already autoplaying
 	speed_up = false
 	auto_play = true
 	%dialogue.on_auto = true
 	proceed()
 
 
-func _on_forward_speed_pressed():
+func _on_start_fast_forward():
 	if speed_up:
 		speed_up = false
 		return
@@ -427,7 +427,7 @@ func _on_forward_speed_pressed():
 	$speed_up_timer.start()
 
 
-func _on_forward_to_next_choice_pressed():
+func _on_start_fast_forward_to_next_choice():
 	if choice_reach:
 		return
 	if !script_tree.has_nextchap():
@@ -441,7 +441,7 @@ func _on_forward_to_next_choice_pressed():
 	proceed()
 
 
-func _on_visible_pressed():
+func _on_hide_UI():
 	if $dialogue.visible and $UI.visible and $choice.visible:
 		$dialogue.hide()
 		$UI.hide()
@@ -450,31 +450,28 @@ func _on_visible_pressed():
 		auto_play = false
 
 
-func _on_leave_pressed():
-	get_tree().call_group("main", "back_menu")
+func _on_leave_game():
+	back_to_menu.emit()
 
 
 func _on_button():
-	print("on button\n")
-	can_press = false
+	press_action_disabled = true
+	
 
 func _out_button():
-	print("out button\n")
-	can_press = true
+	press_action_disabled = false
 
 # these 2 function prevents press action been triggered when pressing UI button
 
 
 func _on_auto_play_timer_timeout():
-	print("auto play timeout\n")
 	start_time = true
 	if auto_play:
-		# 倒计时结束开始展示下一条台词
+		# display next dialogue when time up
 		proceed()
 
 
 func _on_speed_up_timer_timeout():
-	print("speed up timeout\n")
 	if speed_up:
 		proceed()
 		$speed_up_timer.start()
@@ -488,5 +485,5 @@ func _on_viedo_background_finished():
 	# otherwise it means cg has ended and its time for next line
 	$UI.show()
 	$dialogue.show()
-	can_press = true
+	press_action_disabled = false
 	proceed()

@@ -45,7 +45,7 @@ func unlock(cg_name: String):
 	
 	
 func load_unlock():
-	# 从存档中解锁CG
+	# unlock cg from global game progress
 	print("unlocking cg")
 	var saved_data:GlobalGameProgress = ResourceLoader.load(GlobalResources.global_progress_path)
 	for cg in saved_data.unlocked_cg:

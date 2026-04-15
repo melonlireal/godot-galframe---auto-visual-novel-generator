@@ -8,6 +8,7 @@
 [ext_resource type="FontFile" uid="uid://byyq0wl5ikrfs" path="res://artResource/UI_gameplay/EB.ttf" id="6_munpa"]
 
 [node name="save_load" type="CanvasLayer" groups=["save"]]
+layer = 2
 script = ExtResource("1_4t6ql")
 
 [node name="TextureRect" type="TextureRect" parent="."]

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Colors" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://frameWorkCore/compiler/colors.gd" id="1_h8lwr"]
+
+[resource]
+script = ExtResource("1_h8lwr")
+colour_list = {
+"": {
+"character": "434444",
+"dialogue": "434444"
+},
+"character": {
+"character": "787878",
+"dialogue": "434444"
+}
+}

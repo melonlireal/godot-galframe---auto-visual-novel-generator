@@ -173,7 +173,7 @@ _data = {
 &"loading": SubResource("Animation_6uvci")
 }
 
-[node name="main_scene" type="Node2D" groups=["main"]]
+[node name="main_scene" type="Node2D"]
 script = ExtResource("1_ybmd4")
 
 [node name="menu_UI" type="CanvasLayer" parent="."]
@@ -227,7 +227,7 @@ layout_mode = 2
 theme_override_colors/font_hover_color = Color(0.917647, 0.701961, 0.0313726, 1)
 theme_override_fonts/font = ExtResource("2_oru6f")
 theme_override_font_sizes/font_size = 60
-text = "新的开始"
+text = "START"
 flat = true
 
 [node name="load" type="Button" parent="menu_UI/HBoxContainer"]
@@ -235,7 +235,7 @@ layout_mode = 2
 theme_override_colors/font_hover_color = Color(0.917647, 0.701961, 0.0313726, 1)
 theme_override_fonts/font = ExtResource("2_oru6f")
 theme_override_font_sizes/font_size = 60
-text = "加载游戏"
+text = "LOAD"
 flat = true
 
 [node name="CG" type="Button" parent="menu_UI/HBoxContainer"]
@@ -243,7 +243,7 @@ layout_mode = 2
 theme_override_colors/font_hover_color = Color(0.917647, 0.701961, 0.0313726, 1)
 theme_override_fonts/font = ExtResource("2_oru6f")
 theme_override_font_sizes/font_size = 60
-text = "回想大厅"
+text = "CG"
 flat = true
 
 [node name="setting" type="Button" parent="menu_UI/HBoxContainer"]
@@ -251,7 +251,7 @@ layout_mode = 2
 theme_override_colors/font_hover_color = Color(0.917647, 0.701961, 0.0313726, 1)
 theme_override_fonts/font = ExtResource("2_oru6f")
 theme_override_font_sizes/font_size = 60
-text = "游戏设置"
+text = "SETTING"
 flat = true
 
 [node name="quit" type="Button" parent="menu_UI/HBoxContainer"]
@@ -259,7 +259,7 @@ layout_mode = 2
 theme_override_colors/font_hover_color = Color(0.917647, 0.701961, 0.0313726, 1)
 theme_override_fonts/font = ExtResource("2_oru6f")
 theme_override_font_sizes/font_size = 60
-text = "退出游戏"
+text = "QUIT"
 flat = true
 
 [node name="menuBGM" type="AudioStreamPlayer" parent="menu_UI"]

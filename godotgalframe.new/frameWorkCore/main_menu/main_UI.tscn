@@ -125,43 +125,43 @@ texture_normal = ExtResource("16_qghik")
 texture_hover = ExtResource("17_4h48h")
 stretch_mode = 0
 
-[node name="show_tree" type="TextureButton" parent="Control/VBoxContainer"]
+[node name="story_tree" type="TextureButton" parent="Control/VBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("8_8ko0c")
 texture_hover = ExtResource("9_4uxna")
 stretch_mode = 0
 
-[node name="review" type="TextureButton" parent="Control/VBoxContainer"]
+[node name="review_dialogue" type="TextureButton" parent="Control/VBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("10_7nfbt")
 texture_hover = ExtResource("11_qu41y")
 stretch_mode = 0
 
-[node name="auto" type="TextureButton" parent="Control/VBoxContainer"]
+[node name="auto_play" type="TextureButton" parent="Control/VBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("1_hrq5x")
 texture_hover = ExtResource("2_7mrl3")
 stretch_mode = 0
 
-[node name="forward_speed" type="TextureButton" parent="Control/VBoxContainer"]
+[node name="fast_forward" type="TextureButton" parent="Control/VBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("12_q8tr2")
 texture_hover = ExtResource("13_pnvnb")
 stretch_mode = 0
 
-[node name="forwardToNextChoice" type="TextureButton" parent="Control/VBoxContainer"]
+[node name="fast_forward_to_next_choice" type="TextureButton" parent="Control/VBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("14_jh1xk")
 texture_hover = ExtResource("15_4lyn0")
 stretch_mode = 0
 
-[node name="visible" type="TextureButton" parent="Control/VBoxContainer"]
+[node name="hide_UI" type="TextureButton" parent="Control/VBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("18_aj6jp")
 texture_hover = ExtResource("19_8rmnb")
 stretch_mode = 0
 
-[node name="leave" type="TextureButton" parent="Control/VBoxContainer"]
+[node name="leave_game" type="TextureButton" parent="Control/VBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("20_35vsk")
 texture_hover = ExtResource("21_447ca")
@@ -186,17 +186,31 @@ step = 0.01
 value = 1.0
 
 [connection signal="mouse_entered" from="Control/VBoxContainer/save" to="." method="_on_save_mouse_entered"]
+[connection signal="pressed" from="Control/VBoxContainer/save" to="." method="_on_save_pressed"]
 [connection signal="mouse_entered" from="Control/VBoxContainer/load" to="." method="_on_load_mouse_entered"]
+[connection signal="pressed" from="Control/VBoxContainer/load" to="." method="_on_load_pressed"]
 [connection signal="mouse_entered" from="Control/VBoxContainer/quicksave" to="." method="_on_quicksave_mouse_entered"]
+[connection signal="pressed" from="Control/VBoxContainer/quicksave" to="." method="_on_quicksave_pressed"]
 [connection signal="mouse_entered" from="Control/VBoxContainer/quickload" to="." method="_on_quickload_mouse_entered"]
+[connection signal="pressed" from="Control/VBoxContainer/quickload" to="." method="_on_quickload_pressed"]
 [connection signal="mouse_entered" from="Control/VBoxContainer/setting" to="." method="_on_setting_mouse_entered"]
+[connection signal="pressed" from="Control/VBoxContainer/setting" to="." method="_on_setting_pressed"]
 [connection signal="mouse_entered" from="Control/VBoxContainer/volumn" to="." method="_on_volumn_mouse_entered"]
 [connection signal="pressed" from="Control/VBoxContainer/volumn" to="." method="_on_volumn_pressed"]
-[connection signal="mouse_entered" from="Control/VBoxContainer/show_tree" to="." method="_on_back_to_last_choice_mouse_entered"]
-[connection signal="mouse_entered" from="Control/VBoxContainer/review" to="." method="_on_back_by_one_script_mouse_entered"]
-[connection signal="mouse_entered" from="Control/VBoxContainer/auto" to="." method="_on_auto_mouse_entered"]
-[connection signal="mouse_entered" from="Control/VBoxContainer/forward_speed" to="." method="_on_forward_speed_mouse_entered"]
-[connection signal="mouse_entered" from="Control/VBoxContainer/forwardToNextChoice" to="." method="_on_forward_to_next_choice_mouse_entered"]
-[connection signal="mouse_entered" from="Control/VBoxContainer/visible" to="." method="_on_visible_mouse_entered"]
-[connection signal="mouse_entered" from="Control/VBoxContainer/leave" to="." method="_on_leave_mouse_entered"]
+[connection signal="mouse_entered" from="Control/VBoxContainer/story_tree" to="." method="_on_story_tree_mouse_entered"]
+[connection signal="pressed" from="Control/VBoxContainer/story_tree" to="." method="_on_show_tree_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/story_tree" to="." method="_on_story_tree_pressed"]
+[connection signal="mouse_entered" from="Control/VBoxContainer/review_dialogue" to="." method="_on_review_dialogue_mouse_entered"]
+[connection signal="pressed" from="Control/VBoxContainer/review_dialogue" to="." method="_on_review_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/review_dialogue" to="." method="_on_review_dialogue_pressed"]
+[connection signal="mouse_entered" from="Control/VBoxContainer/auto_play" to="." method="_on_auto_play_mouse_entered"]
+[connection signal="pressed" from="Control/VBoxContainer/auto_play" to="." method="_on_auto_play_pressed"]
+[connection signal="mouse_entered" from="Control/VBoxContainer/fast_forward" to="." method="_on_fast_forward_mouse_entered"]
+[connection signal="pressed" from="Control/VBoxContainer/fast_forward" to="." method="_on_fast_forward_pressed"]
+[connection signal="mouse_entered" from="Control/VBoxContainer/fast_forward_to_next_choice" to="." method="_on_fast_forward_to_next_choice_mouse_entered"]
+[connection signal="pressed" from="Control/VBoxContainer/fast_forward_to_next_choice" to="." method="_on_fast_forward_to_next_choice_pressed"]
+[connection signal="mouse_entered" from="Control/VBoxContainer/hide_UI" to="." method="_on_hide_ui_mouse_entered"]
+[connection signal="pressed" from="Control/VBoxContainer/hide_UI" to="." method="_on_hide_ui_pressed"]
+[connection signal="mouse_entered" from="Control/VBoxContainer/leave_game" to="." method="_on_leave_game_mouse_entered"]
+[connection signal="pressed" from="Control/VBoxContainer/leave_game" to="." method="_on_leave_game_pressed"]
 [connection signal="value_changed" from="Control/volumn_slider" to="." method="_on_volumn_slider_value_changed"]

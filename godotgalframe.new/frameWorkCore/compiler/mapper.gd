@@ -18,9 +18,7 @@ func _ready():
 	
 	
 func helper_search_file(directory: String, files: String):
-	# recursion helper that search the location of a file in directory based 
-	# on file name
-	# 智力巅峰, 然而崩了一次，BUG还复现不出来。
+	# recursion helper that search the location of a file in directory based on file name
 	var direction = DirAccess.open(directory)
 	if files not in direction.get_files() and direction.get_directories().is_empty():
 		return null
