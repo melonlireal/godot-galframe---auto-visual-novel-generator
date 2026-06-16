@@ -13,15 +13,12 @@ func get_var_val(name: String):
 
 func new_var(name: String, variable: String):
 	variables[name] = int(variable)
-
-func has_var(name: String):
-	return name in variables
 	
 func perform_var_ops(operations: Array):
 	for operation in operations:
 		var_op(operation[0], operation[1], operation[2])
 		
-func var_op(variable: String, operation: String, value: String):
+func var_op(variable: String, operation: String, value: String = "0"):
 	var op = Callable(self, operation)
 	op.call(variable, value)
 
@@ -88,3 +85,6 @@ func equal(variable: String, value: String):
 		return variables[variable] == variables[value]
 	else:
 		return variables[variable] == int(value)
+		
+func has(variable:String):
+	return variable in variables

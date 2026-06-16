@@ -24,7 +24,7 @@ func change_bgm(bgm_commands: Array):
 		var which_bgm = bgm_command[0]
 		if which_bgm == "clear":
 			music_clear("bgm")
-			return
+			continue
 		if which_bgm in bgmlist:
 			print("music already playing!\n")
 			return
@@ -50,7 +50,7 @@ func change_voice(voice_commands: Array):
 		var asset_path_finder:AssetPath = ResourceLoader.load(GlobalResources.asset_map_path)
 		var voice_at = asset_path_finder.search_path(which_voice) 
 		if not voice_at:
-			self.get_tree().call_group("errorlog", "music_error", which_voice)
+			GlobalSignals.music_error.emit(which_voice)
 			return
 		var voice:AudioStream = ResourceLoader.load(voice_at)
 		var voice_duration = voice.get_length()
@@ -67,9 +67,9 @@ func add_music_to_slot(type: String, which: String):
 				slot.stream = ResourceLoader.load(music_at)
 				slot.playing = true
 			else:
-				self.get_tree().call_group("errorlog", "music_error", which)
+				GlobalSignals.music_error.emit(which)
 			return
-	self.get_tree().call_group("errorlog", "music_error", which)
+	GlobalSignals.music_error.emit(which)
 	
 
 func music_clear(type: String):

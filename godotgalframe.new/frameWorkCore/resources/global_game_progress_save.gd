@@ -1,8 +1,12 @@
 extends Resource
 class_name GlobalGameProgress
+# global game progress is used to track progess that needs to exists around
+# multiple game save, for example, cg and story tree are not unlocked based
+# on current progress in save 
+
 @export var explored_chapters:Array[String] = []
 @export var unlocked_cg:Array[String] = []
-# Called when the node enters the scene tree for the first time.
+
 
 func add_chap(chap_name: String):
 	if chap_name not in explored_chapters:

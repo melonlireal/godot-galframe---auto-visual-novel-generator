@@ -85,20 +85,21 @@ func dialogue_proof_read(chapter: Array):
 						dialogue_proof_read(helper_find_chapter_from_choice(game[i]))
 			return
 		text = text.replace("：", ":")
-		var character = text.substr(0, text.find(":") + 1)
-		# this includes the ":"
-		if character == " command:" or character == ":":
-			character = ""
-			#清理特殊字符command和隔开角色和台词的：
-			#同时考虑到该行没有人物或对话的情况
-		var dialogue
-		if text.find(" command:") != -1:
-			dialogue = text.substr(text.find(":") + 1, text.find(" command:") - text.find(":"))
-		else:
-			dialogue = text.substr(text.find(":") + 1, text.find(" command:"))
-			#根据是否有command隔离开dialogue和角色
-		character = character.substr(0, len(character) - 1)
-		# remove the ":"
+		var command = ""
+		var command_start = text.find(" command:")
+		var main_text = text
+		if command_start != -1:
+			command = text.substr(command_start + len(" command:"))
+			main_text = text.substr(0, command_start)
+
+		var character = ""
+		var dialogue = main_text
+		var speaker_split = main_text.find(":")
+		if speaker_split != -1:
+			character = main_text.substr(0, speaker_split)
+			dialogue = main_text.substr(speaker_split + 1)
+		# treat lines without speaker splitter as narration/dialogue text
+
 		dialogue = dialogue.replace("\\command:", "command:")
 		if $"..".auto_color_text:
 			var text_colors:Colors = ResourceLoader.load(GlobalResources.color_all_path)
@@ -106,9 +107,6 @@ func dialogue_proof_read(chapter: Array):
 			if character != "":
 				character =  text_colors.process_color(character, "character", character)
 			# colours dialogue and character (including narrator)
-		var command = text.substr(text.find(" command:"))
-		if command.begins_with(" command:"):
-			command = command.substr(len(" command:"))
 		var command_list = process_commands(command)
 		script_tree.add_line(character, dialogue, command_list)
 		# make sure complete empty line are ignored
@@ -177,7 +175,11 @@ func extend_from_prev_command(order_list: Dictionary):
 		order_list["background"] = prev_command["background"]
 		
 	if not order_list.has("bgm") and prev_command.has("bgm"):
-		order_list["bgm"] = prev_command["bgm"]
+		var bgm_list = []
+		for bgm_command in prev_command["bgm"]:
+			if bgm_command[0] != "clear":
+				bgm_list.append(bgm_command)
+		order_list["bgm"] = bgm_list
 		
 	if not order_list.has("character") and prev_command.has("character"):
 		order_list["character"] = prev_command["character"]
@@ -189,7 +191,16 @@ func extend_from_prev_command(order_list: Dictionary):
 			var pos = effect[0]
 			if not grouped.has(pos):
 				grouped[pos] = [pos]
-			grouped[pos].append(effect.slice(1))
+			# normalize each effect instance: unwrap nested ["effect", pos, step]
+			var normalized_steps = []
+			for s in effect.slice(1):
+				if typeof(s) == TYPE_ARRAY and s.size() >= 1 and s[0] == "effect" and s.size() >= 3:
+					normalized_steps.append(s[2])
+				else:
+					normalized_steps.append(s)
+			# append each action as its own sequential step (singleton list)
+			for ns in normalized_steps:
+				grouped[pos].append([ns])
 		var final_effects = []
 		for pos in grouped:
 			final_effects.append(grouped[pos])
@@ -203,7 +214,7 @@ func set_prev_command(command: Dictionary):
 			var pos = effect_group[0]
 			for step_group in effect_group.slice(1):
 				for step in step_group:
-					if step[0] == "transit":
+					if step[0] == "transit" or step[0] == "appear":
 						var sprite = step[1]
 						if not new_prev.has("character"):
 							new_prev["character"] = []

@@ -6,6 +6,7 @@
 layout_mode = 3
 anchor_right = 0.55
 anchor_bottom = 1.6
+pivot_offset = Vector2(528, 864)
 script = ExtResource("1_xtmag")
 
 [node name="slot" type="CenterContainer" parent="."]

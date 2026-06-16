@@ -11,9 +11,9 @@ var save_path = "res://save/"
 func _ready():
 	if not DirAccess.dir_exists_absolute(save_path):
 		DirAccess.make_dir_absolute(save_path)
-	$header_compile.compile_headers()
-	$asset_compile.compile_asset()
-	$dialogue_compile.compile_dialogues()
+	await $header_compile.compile_headers()
+	await $asset_compile.compile_asset()
+	await $dialogue_compile.compile_dialogues()
 	print("COMPILE COMPLETE")
 	
 	

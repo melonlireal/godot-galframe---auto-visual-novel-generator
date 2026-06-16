@@ -21,10 +21,11 @@ class_name SceneAuto
 #TODO I forgot purpose of this variable
 @onready var start_time = true 
 
+@onready var dialogue_UI: CanvasLayer = $dialogue
 @onready var narration_box: TextureRect = $dialogue/narration_box
 @onready var dialogue_box: TextureRect = $dialogue/dialogue_box
+@onready var ui: CanvasLayer = $UI
 
-var save_path = "user://save/save_total.tres"
 var UI_switched = false
 # prevent the bug of "extra click" after switching UI
 # set as true when ever player opens another UI window during game
@@ -35,14 +36,12 @@ var script_tree:ScriptTree = ResourceLoader.load("res://save/processed_script.tr
 # store inital variable to temporary variables used for this game
 var variables: Variables = Variables.new()
 
-signal back_to_menu
-
 
 
 func _ready():
 	var saved_variables:Variables = ResourceLoader.load(GlobalResources.variables_path)
 	variables.set_all_var(saved_variables.get_all_var())
-	$"DO NOT TOUCH/Panel".hide()
+	$error_log.hide()
 	$review_dialogues.hide()
 	%dialogue.text = ""
 	%character.text = ""
@@ -52,6 +51,9 @@ func _ready():
 	$story_tree.connect("close", _on_quit_story_tree)
 	$story_tree.connect("load_chap", load_chapter_from_story_tree)
 	$story_tree.update_chapter("Start.txt")
+	GlobalSignals.close_ui.connect(_on_ui_closed)
+	GlobalSignals.pause_game_interaction.connect(_on_pause_game_interaction)
+	GlobalSignals.unpause_game_interaction.connect(_on_unpause_game_interaction)
 	set_bus()
 	load_setting()
 	var setting = preload("res://frameWorkCore/settings/setting_menu.tscn").instantiate()
@@ -71,6 +73,33 @@ func set_bus():
 		voice.set_bus("voice")
 	for sfx in self.find_child("music").find_child("sound_effect").get_children():
 		sfx.set_bus("sound_effect")
+
+
+func _on_ui_opened():
+	UI_switched = true
+
+	
+func _on_ui_closed():
+	UI_switched = false
+
+
+func _on_pause_game_interaction():
+	UI_switched = true
+	ui.hide()
+	dialogue_UI.hide()
+	%dialogue.set_process(false)
+	%avatar.visible = false;
+	speed_up = false
+	auto_play = false
+	pass
+
+	
+func _on_unpause_game_interaction():
+	UI_switched = false
+	%dialogue.set_process(true)
+	ui.show()
+	dialogue_UI.show()
+	%avatar.visible = true
 
 
 func _process(_delta):
@@ -114,7 +143,6 @@ func check_in_game() -> bool:
 	# is blocking the game window
 	if UI_switched:
 		# prevent the bug of "extra click" after switching UI
-		UI_switched = false
 		return false
 	if $review_dialogues.visible:
 		return false
@@ -133,8 +161,11 @@ func check_in_game() -> bool:
 
 func proceed_to_next_line():
 	# inchagre of continue the dialogue to next line
+	if press_action_disabled:
+		return
 	if choice_reach:
 		return
+	%avatar.finish_avatar_effects()
 	var text = {};
 	# text will be mutated each time 
 	# then extract character, dialogue and command
@@ -179,7 +210,9 @@ func proceed_to_next_line():
 		narration_box.hide()
 		dialogue_box.show()
 		%dialogue.on_dialogue()
+	press_action_disabled = true
 	command_execute(text["command"]) 
+	press_action_disabled = false
 	# execute the command with dialogue
 	%character.text = text["character"]
 	%dialogue.text = text["dialogue"]
@@ -267,8 +300,7 @@ func command_execute(orders: Dictionary):
 	%music.change_voice(orders.get("voice", []))
 	
 	variables.perform_var_ops(orders.get("update", []))
-	
-	
+		
 	if orders.has("CG"):
 		auto_play = false
 		speed_up = false
@@ -279,7 +311,8 @@ func command_execute(orders: Dictionary):
 		%background.change_background(orders["CG"][0][0], "false")
 		print("displaying CG\n")
 	return
-
+	
+	
 func load_chapter_from_story_tree(chapter_name: String, variable_of_chap: Dictionary):
 	$story_tree.hide()
 	var chap:ProgressData = ProgressData.new()
@@ -288,7 +321,7 @@ func load_chapter_from_story_tree(chapter_name: String, variable_of_chap: Dictio
 	chap.variables = saved_variables.get_all_var()
 	for key in variable_of_chap.keys():
 		chap.variables[key] = variable_of_chap[key]
-	load_progress(chap)
+	GlobalSignals.load_game_progress.emit(chap)
 	pass
 
 
@@ -315,6 +348,7 @@ func load_progress(data: ProgressData):
 	$UI.show()
 	$dialogue.show()
 	GlobalSignals.game_created.emit()
+	
 	# tell main game has been created and play animation fade_out
 
 
@@ -330,28 +364,28 @@ func load_setting():
 	$UI/Control/ColorRect.color = save.windows_color	
 # the code below are code related to buttons
 
+
 func _on_show_save():
+	_on_ui_opened()
 	var temp_screen = get_viewport().get_texture().get_image()
 	# take a screenshot of current scene
 	var saver:SaveLoad = preload("res://frameWorkCore/load_save/save_load_UI.tscn").instantiate()
 	saver.display_save = true
 	saver.get_temp_save_data(temp_screen, script_tree.get_chapter(), script_tree.get_line_num(), variables)
 	add_sibling(saver)
-	UI_switched = true
 
 
 func _on_show_load():
+	_on_ui_opened()
 	var loader:SaveLoad = preload("res://frameWorkCore/load_save/save_load_UI.tscn").instantiate()
 	loader.display_save = false
 	add_sibling(loader)
-	UI_switched = true
 
 
 func _on_quick_save():
-	# TODO, maybe make first save slot for quick save only?
 	var progress:ProgressData = ProgressData.new()
 	progress.which_file = script_tree.get_chapter()
-	progress.which_line = script_tree.get_line_num()
+	progress.which_line = script_tree.get_line_num() - 1
 	progress.variables = variables.get_all_var()
 	ResourceSaver.save(progress, "user://save/quick_save.tres")
 
@@ -361,8 +395,7 @@ func _on_quick_load():
 	var find_save:ProgressData = ResourceLoader.load(quick_save)
 	if find_save == null:
 		return
-	print(find_save)
-	self.load_progress(find_save)
+	GlobalSignals.load_game_progress.emit(find_save)
 
 
 func _on_show_setting():
@@ -370,7 +403,7 @@ func _on_show_setting():
 	self.add_child(setting, true)
 	setting.set_owner(self)
 	setting.reload_setting.connect(load_setting)
-	UI_switched = true
+	_on_ui_opened()
 	return
 
 
@@ -388,17 +421,20 @@ func _on_quit_review_dialogue():
 	$dialogue.show()
 	$UI.show()
 
+
 func _on_show_story_tree():
 	$story_tree.show()
 	$dialogue.hide()
 	$UI.hide()
 	return
 
+
 func _on_quit_story_tree():
 	$story_tree.hide()
 	press_action_disabled = false
 	$dialogue.show()
 	$UI.show()
+
 
 func _on_start_auto_play():
 	if auto_play:
@@ -446,7 +482,7 @@ func _on_hide_UI():
 
 
 func _on_leave_game():
-	back_to_menu.emit()
+	GlobalSignals.back_to_menu.emit()
 
 
 func _on_button():
@@ -472,7 +508,7 @@ func _on_speed_up_timer_timeout():
 		$speed_up_timer.start()
 
 
-func _on_viedo_background_finished():
+func _on_video_background_finished():
 	# this helps with dynamic background/CG
 	if $background/viedo_background.loop:
 		# only dynamic bacnground will loop, we dont care in this case

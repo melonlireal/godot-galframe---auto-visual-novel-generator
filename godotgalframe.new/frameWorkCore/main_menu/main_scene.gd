@@ -17,20 +17,19 @@ var progress:ProgressData = ProgressData.new()
 func _ready():
 	GlobalSignals.load_game_progress.connect(_on_load_game_progress)
 	GlobalSignals.game_created.connect(game_created)
+	GlobalSignals.back_to_menu.connect(_on_back_to_menu)
 	var saved_variables: Variables = ResourceLoader.load(GlobalResources.variables_path)
 	progress.variables = saved_variables.get_all_var()
 	print("main scene log start\n")
 	# when start game, create default setting if no setting file exists
 	if not DirAccess.dir_exists_absolute(save_path):
 		DirAccess.make_dir_absolute(save_path)
-	if global_progress_save_name in DirAccess.get_files_at(save_path)\
-		and setting_save_name in DirAccess.get_files_at(save_path):
-		pass
-	else:
-		var default_player_setting = PlayerSetting.new()
+	if not FileAccess.file_exists(GlobalResources.global_progress_path):
 		var default_progress = GlobalGameProgress.new()
+		ResourceSaver.save(default_progress, GlobalResources.global_progress_path)
+	if  !(setting_save_name in DirAccess.get_files_at(save_path)):
+		var default_player_setting = PlayerSetting.new()
 		ResourceSaver.save(default_player_setting, save_path + setting_save_name)
-		ResourceSaver.save(default_progress, save_path + global_progress_save_name)
 	#add setting and dialogue review once to load values
 	#this is a temporary solution
 	var setting = preload("res://frameWorkCore/settings/setting_menu.tscn").instantiate()
@@ -82,7 +81,6 @@ func _on_animation_player_animation_finished(anim_name):
 		if current_game:
 			current_game.queue_free()
 		var scene:SceneAuto = scene_auto.instantiate()
-		scene.back_to_menu.connect(back_to_menu)
 		scene.set_process(false)
 		# dont create new game if a game is already instantiated
 		add_child(scene)
@@ -96,7 +94,7 @@ func _on_animation_player_animation_finished(anim_name):
 func game_created():
 	start_game_animation_player.play("fade_out")
 
-func back_to_menu():
+func _on_back_to_menu():
 	var current_game:SceneAuto = find_scene_auto()
 	if current_game:
 		current_game.queue_free()

@@ -15,7 +15,11 @@ func execute_avatar_effects(effect_commands: Array):
 		var effects = effect_command.slice(1)
 		var which_slot:CharacterSlot = self.find_child(slot)
 		which_slot.play_character_effects(effects)
-	pass
+
+
+func finish_avatar_effects():
+	for child:CharacterSlot in self.get_children():
+		child.finish_running_effects()
 	
 func change_avatars(avatar_commands: Array):
 	for avatar_command in avatar_commands:
@@ -23,7 +27,6 @@ func change_avatars(avatar_commands: Array):
 		var avatar_location = avatar_command[1]
 		# used to clear all avatar
 		if avatar_name == "clear":
-			print("clearing all avatar\n")
 			clear_all_avatar()
 			return
 		avatar_clear()

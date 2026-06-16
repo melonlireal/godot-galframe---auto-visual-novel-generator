@@ -18,11 +18,15 @@ func _ready():
 		$TextureRect.texture = ResourceLoader.load(load_UI)
 		for slot in $TextureRect/GridContainer.get_children():
 			slot.for_load = true
-	for slot in $TextureRect/GridContainer.get_children():
+	for slot:SaveLoadSlot in $TextureRect/GridContainer.get_children():
 		#slot.for_load = false
 		slot.saving.connect(save_in_slot)
+		slot.loading.connect(load_from_slot)
 		slot.mouse_exited.connect(clear_display)
-		slot.mouse_in.connect(windows_display)
+		slot.mouse_entered.connect(windows_display)
+
+		
+		
 	#self.get_parent().connect("load_game", load_game)
 	
 func clear_display():
@@ -41,13 +45,15 @@ func save_in_slot(slot: int):
 	$TextureRect/GridContainer.get_child(slot).display(temp_save["image"])
 	var progress:ProgressData = ProgressData.new()
 	progress.which_file = temp_save["curr_chap"]
-	progress.which_line = temp_save["curr_line"]
+	progress.which_line = temp_save["curr_line"] - 1
 	progress.variables = temp_save["vars"].get_all_var()
 	ResourceSaver.save(progress, "user://save/" + str(slot) + ".tres")
 	
-func help_load(progress: ProgressData):
+func load_from_slot(progress: ProgressData):
+	GlobalSignals.close_ui.emit()
 	GlobalSignals.load_game_progress.emit(progress)
 	self.queue_free()
 	
 func _on_return_pressed():
+	GlobalSignals.close_ui.emit()
 	self.queue_free()

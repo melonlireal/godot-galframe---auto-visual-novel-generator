@@ -25,7 +25,7 @@ func swap(next_slide: String):
 	var asset_path_finder:AssetPath = ResourceLoader.load(GlobalResources.asset_map_path)
 	var next_slide_at = asset_path_finder.search_path(next_slide)
 	if next_slide_at == null:
-		self.get_tree().call_group("errorlog", "background_error", next_slide)
+		GlobalSignals.background_error.emit(next_slide)
 		return
 	$front.texture = ResourceLoader.load(next_slide_at)
 	# for some reason after this step back texture is set back to null again

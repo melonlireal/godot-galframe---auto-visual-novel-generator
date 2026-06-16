@@ -1,4 +1,5 @@
 @tool
+class_name Connector
 extends Node2D
 
 @export_group("Nodes")

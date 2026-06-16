@@ -21,3 +21,9 @@ var script_tree_path = "res://save/processed_script.tres"
 var asset_map_path = "res://save/mapper_total.tres"
 # gameplay setting stores all internal settings that are toggled in gameplay_setting_compile
 var gameplay_setting_path = "res://save/internal_setting.tres"
+
+var quick_save_path = "user://save/quick_save.tres"
+
+var setting_menu_UI_path = "res://frameWorkCore/settings/setting_menu.tscn"
+
+var save_load_UI_path = "res://frameWorkCore/load_save/save_load_UI.tscn"

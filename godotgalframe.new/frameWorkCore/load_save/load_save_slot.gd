@@ -1,3 +1,4 @@
+class_name SaveLoadSlot
 extends TextureRect
 @onready var has_save = false
 @export var for_load = true
@@ -5,8 +6,8 @@ var pic: Image
 signal ruSure # in memory of CSC108H5 2023 November 23rd incident
 # 如果要覆盖存档的话先确认一下
 signal saving
-#signal loading
-signal mouse_in
+signal loading
+
 
 func _ready():
 	var load_file = str(self.get_index()) + ".tres"
@@ -36,8 +37,8 @@ func _load():
 	if $save_display.texture != null:
 		# 只有在有存档的状态下才会加载
 		var save_path = "user://save/" + str(self.get_index()) + ".tres"
-		var find_save = ResourceLoader.load(save_path)
-		$"../../..".help_load(find_save)
+		var find_save:ProgressData = ResourceLoader.load(save_path)
+		loading.emit(find_save)
 	
 	
 func _confirm():
@@ -55,4 +56,8 @@ func _on_button_button_down():
 
 
 func _on_button_mouse_entered():
-	emit_signal("mouse_in", self.get_index())
+	mouse_entered.emit(self.get_index())
+
+
+func _on_button_mouse_exited() -> void:
+	mouse_exited.emit()

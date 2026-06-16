@@ -1,5 +1,5 @@
-extends TextureButton
 class_name  StoryNode
+extends TextureButton
 var script_tree:ScriptTree = ResourceLoader.load("res://save/processed_script.tres")
 ## name of this node shown in story tree after player reached first section
 @export var section_name: String = ""
@@ -28,6 +28,7 @@ func _ready() -> void:
 		self.hide()
 	else:
 		displayed_section_name.text = section_name
+
 
 func story_node_unlock(chapter_name: String):
 	if unlock_chap == chapter_name:

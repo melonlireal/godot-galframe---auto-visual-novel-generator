@@ -3,7 +3,6 @@ class_name Header
 @export var cg_list = []
 @export var cg_cover_list = []
 @export var colour_list = {}
-var save_path = "user://save/save_total.tres"
 
 func add_cg(cg: String, cg_cover: String):
 	cg_list.append(cg)
@@ -26,11 +25,11 @@ func get_cg_cover():
 	
 func check_unlock(cg_name: String):
 	if cg_name in cg_list:
-		var save_file = ResourceLoader.load(save_path)
+		var save_file = ResourceLoader.load(GlobalResources.global_progress_path)
 		if cg_name not in save_file.unlocked_cg:
 			print("add new cg")
 			save_file.unlocked_cg.append(cg_name)
-			ResourceSaver.save(save_file, save_path)
+			ResourceSaver.save(save_file, GlobalResources.global_progress_path)
 		
 		
 func process_color(name: String, which: String, script: String):

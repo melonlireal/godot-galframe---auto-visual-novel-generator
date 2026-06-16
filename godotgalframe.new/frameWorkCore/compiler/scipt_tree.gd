@@ -7,20 +7,20 @@ class_name ScriptTree
 
 func set_starting_point():
 	curr_chap = "Start.txt"
-	curr_line = 0
+	curr_line = 1
 
 func clear_script():
 	all_script = {}
 	
 	
 func add_line(character: String, dialogue: String, command: Dictionary):
-	curr_line += 1
 	if !all_script.has(curr_chap):
 		all_script[curr_chap] = {}
 	all_script[curr_chap][curr_line] = {"character": character, 
 	"dialogue": dialogue, "command":command}
 	print("add line ", character," ",
 	 dialogue," ", command, " in chapter ", curr_chap)
+	curr_line += 1
 	
 func add_choice(choices: Array):
 	print("choice added ", choices)

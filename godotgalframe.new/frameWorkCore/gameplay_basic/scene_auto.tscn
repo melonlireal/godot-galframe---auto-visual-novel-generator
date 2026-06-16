@@ -31,7 +31,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-expand_mode = 3
+expand_mode = 5
 
 [node name="video_background" type="VideoStreamPlayer" parent="background"]
 anchors_preset = 15
@@ -153,7 +153,6 @@ mouse_filter = 2
 metadata/_edit_lock_ = true
 
 [node name="black" type="ColorRect" parent="effects/effect_assets"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -163,7 +162,6 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0)
 
 [node name="white" type="ColorRect" parent="effects/effect_assets"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -196,17 +194,17 @@ visible = false
 [node name="story_tree" parent="." instance=ExtResource("12_ob1rn")]
 visible = false
 
-[node name="DO NOT TOUCH" type="CanvasLayer" parent="." groups=["errorlog"]]
+[node name="error_log" type="CanvasLayer" parent="." groups=["errorlog"]]
 visible = false
 script = ExtResource("7_kvtwn")
 
-[node name="Panel" type="ColorRect" parent="DO NOT TOUCH"]
+[node name="Panel" type="ColorRect" parent="error_log"]
 offset_top = 315.0
 offset_right = 1922.0
 offset_bottom = 759.0
 color = Color(1, 1, 0, 1)
 
-[node name="errorlog" type="Label" parent="DO NOT TOUCH/Panel"]
+[node name="errorlog" type="Label" parent="error_log/Panel"]
 unique_name_in_owner = true
 layout_mode = 0
 offset_top = -2.0
@@ -272,7 +270,7 @@ script = ExtResource("13_ens8c")
 
 [node name="addons" type="Node2D" parent="."]
 
-[connection signal="finished" from="background/video_background" to="." method="_on_viedo_background_finished"]
+[connection signal="finished" from="background/video_background" to="." method="_on_video_background_finished"]
 [connection signal="hide_UI" from="UI" to="." method="_on_hide_UI"]
 [connection signal="leave_game" from="UI" to="." method="_on_leave_game"]
 [connection signal="on_button" from="UI" to="." method="_on_button"]

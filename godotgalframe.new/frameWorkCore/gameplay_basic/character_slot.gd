@@ -24,13 +24,6 @@ func clear_avatar():
 
 
 func play_character_effects(steps):
-	for tween:Tween in tween_list:
-		tween.custom_step(9999)
-		tween.kill()
-	await _run_steps(steps)
-
-
-func _run_steps(steps):
 	for step in steps:
 		# sequential step
 		if step.size() == 1:
@@ -41,6 +34,13 @@ func _run_steps(steps):
 				call_deferred("_run_action", action)
 			# wait one frame so they start together
 			await get_tree().process_frame
+
+
+func finish_running_effects():
+	for tween:Tween in tween_list:
+		tween.custom_step(9999)
+		tween.kill()
+	tween_list.clear()
 
 
 func _run_action(action):
@@ -55,7 +55,7 @@ func _run_action(action):
 func shake(tween:Tween, args: Array = []):
 	var time = 0.2
 	if len(args) > 0:
-		time = int(args[0])
+		time = float(args[0])
 	tween.set_trans(Tween.TRANS_SINE)
 	tween.set_ease(Tween.EASE_IN_OUT)
 	var offset_default = offset_left
@@ -67,22 +67,53 @@ func shake(tween:Tween, args: Array = []):
 	
 	
 func jump(tween:Tween, args: Array = []):
-	print("jump is played")
 	var time = 0.2
 	if len(args) > 0:
-		time = int(args[0])
+		time = float(args[0])
 	tween.set_trans(Tween.TRANS_SINE)
 	tween.set_ease(Tween.EASE_IN_OUT)
 	var offset_default = offset_top
-	tween.tween_property(self, "offset_top", offset_default - 200, time/2)
+	tween.tween_property(self, "offset_top", offset_default - 20, time/2)
 	tween.tween_property(self, "offset_top", offset_default, time/2)
+	await tween.finished
+	
+
+func nod(tween:Tween, args: Array = []):
+	var time = 0.2
+	if len(args) > 0:
+		time = float(args[0])
+	tween.set_trans(Tween.TRANS_SINE)
+	tween.set_ease(Tween.EASE_IN_OUT)
+	var offset_default = offset_top
+	tween.tween_property(self, "offset_top", offset_default + 20, time/2)
+	tween.tween_property(self, "offset_top", offset_default, time/2)
+	await tween.finished
+	
+		
+func tiltleft(tween:Tween, args: Array = []):
+	var time = 0.5
+	if len(args) > 0:
+		time = float(args[0])
+	var offset_default = rotation_degrees
+	tween.tween_property(self, "rotation_degrees", offset_default + 1.0, time/2)
+	tween.tween_property(self, "rotation_degrees", offset_default, time/2)
+	await tween.finished
+	
+
+func tiltright(tween:Tween, args: Array = []):
+	var time = 0.5
+	if len(args) > 0:
+		time = float(args[0])
+	var offset_default = rotation_degrees
+	tween.tween_property(self, "rotation_degrees", offset_default - 1.0, time/2)
+	tween.tween_property(self, "rotation_degrees", offset_default, time/2)
 	await tween.finished
 	
 	
 func wait(tween:Tween, args: Array = []):
 	var time = 1.0
 	if len(args) > 0:
-		time = int(args[0])
+		time = float(args[0])
 	tween.tween_interval(time)
 	await tween.finished
 	
@@ -121,12 +152,14 @@ func appear(tween:Tween, args: Array):
 	tween.tween_property(character, "modulate:a", 1, 0.2)
 	await tween.finished
 
+
 #func _on_button_pressed() -> void:
-	#print("pressed")
+	##print("pressed")
 	#play_character_effects([
-		#[["transit", "catxilinidleblush.png"], ["jump", 0.2]],
+		#[["transit", "midieshouerweixiao.png"], ["jump", 0.2]],
 		#[["wait", 1.0]],
-		#[["transit", "catxilinidleganga.png"]],
+		#[["transit", "midieshouershengqi.png"]],
 		#[["wait", 1.0]],
+		#[["jump", 0.2]],
 		#[["dissappear"]]
 		#])

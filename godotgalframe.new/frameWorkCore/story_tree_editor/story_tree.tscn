@@ -16,62 +16,287 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0.745098)
 
-[node name="internal_UI_DONTTOUCH" type="Control" parent="."]
-layout_mode = 3
+[node name="close" type="TextureButton" parent="."]
+anchors_preset = -1
 anchor_left = 0.92
-anchor_top = 0.005
-anchor_right = 0.995
-anchor_bottom = 0.125
+anchor_right = 0.99100006
+anchor_bottom = 0.13000001
 offset_left = 0.079833984
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="close" type="TextureButton" parent="internal_UI_DONTTOUCH"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+offset_top = 5.4
+offset_right = -0.7200928
+offset_bottom = -0.40000916
 grow_horizontal = 2
 grow_vertical = 2
 texture_normal = ExtResource("3_vmav4")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="start" parent="." instance=ExtResource("2_1oiti")]
-offset_left = 539.0
-offset_top = 120.0
-offset_right = 539.32
-offset_bottom = 119.56
-section_name = "start"
+[node name="scroll_container" type="ScrollContainer" parent="."]
+anchors_preset = -1
+anchor_left = 0.1
+anchor_right = 0.9
+anchor_bottom = 1.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="place_nodes_under_here" type="Control" parent="scroll_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="start" parent="scroll_container/place_nodes_under_here" instance=ExtResource("2_1oiti")]
+layout_mode = 1
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 620.0
+offset_top = 200.0
+offset_right = 900.0
+offset_bottom = 288.0
+section_name = "开始"
 unlock_chap = "Start.txt"
 travel_chap = "Start.txt"
+locked = false
 
-[node name="choice1" parent="." instance=ExtResource("2_1oiti")]
-offset_left = 65.0
-offset_top = 376.0
-offset_right = 65.31998
-offset_bottom = 376.52
-section_name = "choice1"
-unlock_chap = "choice1.txt"
-travel_chap = "choice1.txt"
+[node name="choice1_1" parent="scroll_container/place_nodes_under_here" instance=ExtResource("2_1oiti")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 280.0
+offset_top = 500.0
+offset_right = 560.0
+offset_bottom = 588.0
+section_name = "抱歉...我睡糊涂了"
+unlock_chap = "choice1.1.txt"
+travel_chap = "choice1.1.txt"
+locked = false
 
-[node name="choice2" parent="." instance=ExtResource("2_1oiti")]
-offset_left = 887.0
-offset_top = 366.0
-offset_right = 887.31995
-offset_bottom = 366.52
-section_name = "choice2"
-unlock_chap = "choice2.txt"
-travel_chap = "choice2.txt"
+[node name="choice1_2" parent="scroll_container/place_nodes_under_here" instance=ExtResource("2_1oiti")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 620.0
+offset_top = 500.0
+offset_right = 900.0
+offset_bottom = 588.0
+section_name = "是我很重要的人"
+unlock_chap = "choice1.2.txt"
+travel_chap = "choice1.2.txt"
+locked = false
 
-[node name="choice_pointer" parent="." node_paths=PackedStringArray("start_box", "end_box") instance=ExtResource("4_mvw6d")]
-position = Vector2(393, 564)
+[node name="choice1_3" parent="scroll_container/place_nodes_under_here" instance=ExtResource("2_1oiti")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 960.0
+offset_top = 500.0
+offset_right = 1240.0
+offset_bottom = 588.0
+section_name = "别玩了，丽塔"
+unlock_chap = "choice1.3.txt"
+travel_chap = "choice1.3.txt"
+locked = false
+
+[node name="theater" parent="scroll_container/place_nodes_under_here" instance=ExtResource("2_1oiti")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 620.0
+offset_top = 800.0
+offset_right = 900.0
+offset_bottom = 888.0
+section_name = "前往剧院"
+unlock_chap = "theater.txt"
+travel_chap = "theater.txt"
+locked = false
+
+[node name="choice2_1" parent="scroll_container/place_nodes_under_here" instance=ExtResource("2_1oiti")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 280.0
+offset_top = 1100.0
+offset_right = 560.0
+offset_bottom = 1188.0
+section_name = "艾琳小姐也没好到哪去"
+unlock_chap = "choice2.1.txt"
+travel_chap = "choice2.1.txt"
+locked = false
+
+[node name="choice2_2" parent="scroll_container/place_nodes_under_here" instance=ExtResource("2_1oiti")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 620.0
+offset_top = 1100.0
+offset_right = 900.0
+offset_bottom = 1188.0
+section_name = "艾琳一直是我最喜欢的演员"
+unlock_chap = "choice2.2.txt"
+travel_chap = "choice2.2.txt"
+locked = false
+
+[node name="choice2_3" parent="scroll_container/place_nodes_under_here" instance=ExtResource("2_1oiti")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 960.0
+offset_top = 1100.0
+offset_right = 1240.0
+offset_bottom = 1188.0
+section_name = "能和艾琳相提并论的笨蛋"
+unlock_chap = "choice2.3.txt"
+travel_chap = "choice2.3.txt"
+locked = false
+
+[node name="dining" parent="scroll_container/place_nodes_under_here" instance=ExtResource("2_1oiti")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 620.0
+offset_top = 1400.0
+offset_right = 900.0
+offset_bottom = 1488.0
+section_name = "晚宴"
+unlock_chap = "dining.txt"
+travel_chap = "dining.txt"
+locked = false
+
+[node name="choice3_1" parent="scroll_container/place_nodes_under_here" instance=ExtResource("2_1oiti")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 280.0
+offset_top = 1700.0
+offset_right = 560.0
+offset_bottom = 1788.0
+section_name = "贝克街的日常我一直很怀念"
+unlock_chap = "choice3.1.txt"
+travel_chap = "choice3.1.txt"
+locked = false
+
+[node name="choice3_2" parent="scroll_container/place_nodes_under_here" instance=ExtResource("2_1oiti")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 620.0
+offset_top = 1700.0
+offset_right = 900.0
+offset_bottom = 1788.0
+section_name = "我是享受与艾琳居家同居"
+unlock_chap = "choice3.2.txt"
+travel_chap = "choice3.2.txt"
+locked = false
+
+[node name="choice3_3" parent="scroll_container/place_nodes_under_here" instance=ExtResource("2_1oiti")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 960.0
+offset_top = 1700.0
+offset_right = 1240.0
+offset_bottom = 1788.0
+section_name = "两者皆有"
+unlock_chap = "choice3.3.txt"
+travel_chap = "choice3.3.txt"
+locked = false
+
+[node name="end" parent="scroll_container/place_nodes_under_here" instance=ExtResource("2_1oiti")]
+layout_mode = 1
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 620.0
+offset_top = 2000.0
+offset_right = 900.0
+offset_bottom = 2088.0
+section_name = "尾声"
+unlock_chap = "end.txt"
+travel_chap = "end.txt"
+locked = false
+
+[node name="choice_pointer" parent="scroll_container/place_nodes_under_here" node_paths=PackedStringArray("start_box", "end_box") instance=ExtResource("4_mvw6d")]
 start_box = NodePath("../start")
-end_box = NodePath("../choice1")
+end_box = NodePath("../choice1_1")
 
-[node name="choice_pointer2" parent="." node_paths=PackedStringArray("start_box", "end_box") instance=ExtResource("4_mvw6d")]
-position = Vector2(1041, 740)
+[node name="choice_pointer2" parent="scroll_container/place_nodes_under_here" node_paths=PackedStringArray("start_box", "end_box") instance=ExtResource("4_mvw6d")]
 start_box = NodePath("../start")
-end_box = NodePath("../choice2")
+end_box = NodePath("../choice1_2")
 
-[connection signal="pressed" from="internal_UI_DONTTOUCH/close" to="." method="_on_close_pressed"]
+[node name="choice_pointer3" parent="scroll_container/place_nodes_under_here" node_paths=PackedStringArray("start_box", "end_box") instance=ExtResource("4_mvw6d")]
+start_box = NodePath("../start")
+end_box = NodePath("../choice1_3")
+
+[node name="choice_pointer4" parent="scroll_container/place_nodes_under_here" node_paths=PackedStringArray("start_box", "end_box") instance=ExtResource("4_mvw6d")]
+start_box = NodePath("../choice1_1")
+end_box = NodePath("../theater")
+
+[node name="choice_pointer5" parent="scroll_container/place_nodes_under_here" node_paths=PackedStringArray("start_box", "end_box") instance=ExtResource("4_mvw6d")]
+start_box = NodePath("../choice1_2")
+end_box = NodePath("../theater")
+
+[node name="choice_pointer6" parent="scroll_container/place_nodes_under_here" node_paths=PackedStringArray("start_box", "end_box") instance=ExtResource("4_mvw6d")]
+start_box = NodePath("../choice1_3")
+end_box = NodePath("../theater")
+
+[node name="choice_pointer7" parent="scroll_container/place_nodes_under_here" node_paths=PackedStringArray("start_box", "end_box") instance=ExtResource("4_mvw6d")]
+start_box = NodePath("../theater")
+end_box = NodePath("../choice2_1")
+
+[node name="choice_pointer8" parent="scroll_container/place_nodes_under_here" node_paths=PackedStringArray("start_box", "end_box") instance=ExtResource("4_mvw6d")]
+start_box = NodePath("../theater")
+end_box = NodePath("../choice2_2")
+
+[node name="choice_pointer9" parent="scroll_container/place_nodes_under_here" node_paths=PackedStringArray("start_box", "end_box") instance=ExtResource("4_mvw6d")]
+start_box = NodePath("../theater")
+end_box = NodePath("../choice2_3")
+
+[node name="choice_pointer10" parent="scroll_container/place_nodes_under_here" node_paths=PackedStringArray("start_box", "end_box") instance=ExtResource("4_mvw6d")]
+start_box = NodePath("../choice2_1")
+end_box = NodePath("../dining")
+
+[node name="choice_pointer11" parent="scroll_container/place_nodes_under_here" node_paths=PackedStringArray("start_box", "end_box") instance=ExtResource("4_mvw6d")]
+start_box = NodePath("../choice2_2")
+end_box = NodePath("../dining")
+
+[node name="choice_pointer12" parent="scroll_container/place_nodes_under_here" node_paths=PackedStringArray("start_box", "end_box") instance=ExtResource("4_mvw6d")]
+start_box = NodePath("../choice2_3")
+end_box = NodePath("../dining")
+
+[node name="choice_pointer13" parent="scroll_container/place_nodes_under_here" node_paths=PackedStringArray("start_box", "end_box") instance=ExtResource("4_mvw6d")]
+start_box = NodePath("../dining")
+end_box = NodePath("../choice3_1")
+
+[node name="choice_pointer14" parent="scroll_container/place_nodes_under_here" node_paths=PackedStringArray("start_box", "end_box") instance=ExtResource("4_mvw6d")]
+start_box = NodePath("../dining")
+end_box = NodePath("../choice3_2")
+
+[node name="choice_pointer15" parent="scroll_container/place_nodes_under_here" node_paths=PackedStringArray("start_box", "end_box") instance=ExtResource("4_mvw6d")]
+start_box = NodePath("../dining")
+end_box = NodePath("../choice3_3")
+
+[node name="choice_pointer16" parent="scroll_container/place_nodes_under_here" node_paths=PackedStringArray("start_box", "end_box") instance=ExtResource("4_mvw6d")]
+start_box = NodePath("../choice3_1")
+end_box = NodePath("../end")
+
+[node name="choice_pointer17" parent="scroll_container/place_nodes_under_here" node_paths=PackedStringArray("start_box", "end_box") instance=ExtResource("4_mvw6d")]
+start_box = NodePath("../choice3_2")
+end_box = NodePath("../end")
+
+[node name="choice_pointer18" parent="scroll_container/place_nodes_under_here" node_paths=PackedStringArray("start_box", "end_box") instance=ExtResource("4_mvw6d")]
+start_box = NodePath("../choice3_3")
+end_box = NodePath("../end")
+
+[connection signal="pressed" from="close" to="." method="_on_close_pressed"]

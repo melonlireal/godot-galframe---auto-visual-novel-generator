@@ -16,8 +16,7 @@ var asset_save = "internal_setting.tres"
 # The above section is background setting in gameplay
 
 
-# TODO NOT COMPLETED YET
-#TODO BAD CODE FIX LATER 
+# TODO NOT COMPLETED YET BAD CODE FIX LATER 
 # WHEN FIGUREOUT HOW TO USE get_property_list() PREPERLY
 func _ready() -> void:
 	var settings = GameplaySetting.new()

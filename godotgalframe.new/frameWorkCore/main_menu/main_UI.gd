@@ -95,8 +95,8 @@ func _on_volumn_pressed():
 	
 	
 func _on_volumn_slider_value_changed(value):
-	var saved_data = ResourceLoader.load(GlobalResources.setting_save_path)
-	saved_data.voice_volumn = value
+	var saved_data:PlayerSetting = ResourceLoader.load(GlobalResources.setting_save_path)
+	saved_data.total_volumn = value
 	var bus = AudioServer.get_bus_index("Master")
 	AudioServer.set_bus_volume_db(bus, linear_to_db(value))
 	ResourceSaver.save(saved_data, GlobalResources.setting_save_path)

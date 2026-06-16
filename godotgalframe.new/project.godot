@@ -16,8 +16,9 @@ config/features=PackedStringArray("4.5", "Forward Plus")
 
 [autoload]
 
-GlobalResources="*res://frameWorkCore/resources/global_resource_collection.gd"
+GlobalResources="*res://frameWorkCore/global_script/global_resource_collection.gd"
 GlobalSignals="*res://frameWorkCore/global_script/global_signals.gd"
+GlobalMinigameInteractior="*res://frameWorkCore/global_script/global_minigame_interactior.gd"
 
 [display]
 

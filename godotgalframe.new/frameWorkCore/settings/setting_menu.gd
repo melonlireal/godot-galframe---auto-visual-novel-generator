@@ -19,6 +19,7 @@ func set_default():
 	pass
 
 func _on_return_button_down():
+	GlobalSignals.close_ui.emit()
 	reload_setting.emit()
 	self.queue_free()
 
