@@ -43,13 +43,13 @@ func get_temp_save_data(image: Image, curr_chap: String, curr_line: int, vars: V
 
 func save_in_slot(slot: int):
 	$TextureRect/GridContainer.get_child(slot).display(temp_save["image"])
-	var progress:ProgressData = ProgressData.new()
+	var progress:CurrGameProgress = CurrGameProgress.new()
 	progress.which_file = temp_save["curr_chap"]
 	progress.which_line = temp_save["curr_line"] - 1
-	progress.variables = temp_save["vars"].get_all_var()
+	progress.variables = temp_save["vars"].duplicate(true)
 	ResourceSaver.save(progress, "user://save/" + str(slot) + ".tres")
 	
-func load_from_slot(progress: ProgressData):
+func load_from_slot(progress: CurrGameProgress):
 	GlobalSignals.close_ui.emit()
 	GlobalSignals.load_game_progress.emit(progress)
 	self.queue_free()

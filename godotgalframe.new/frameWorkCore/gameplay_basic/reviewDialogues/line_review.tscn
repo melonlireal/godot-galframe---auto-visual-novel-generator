@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://vppy44qn11g7"]
 
-[ext_resource type="Script" uid="uid://dfmgbfahnwlar" path="res://frameWorkCore/gameplay_basic/line_review.gd" id="1_eqe81"]
+[ext_resource type="Script" uid="uid://dfmgbfahnwlar" path="res://frameWorkCore/gameplay_basic/reviewDialogues/line_review.gd" id="1_eqe81"]
 [ext_resource type="FontFile" uid="uid://djaascw8mseps" path="res://artResource/UI_gameplay/honkaifont.ttf" id="2_h08e0"]
 
-[node name="review_dialogue" type="TextureButton"]
+[node name="line_review" type="TextureButton"]
 custom_minimum_size = Vector2(1200, 250)
 anchors_preset = -1
 anchor_right = 0.926

@@ -1,14 +1,5 @@
 extends CanvasLayer
 class_name SceneAuto
-@onready var choice_reach = false
-
-@export var auto_play = false
-# indicate that the game is in autoplay state
-# clicking will stop autoplay and will not display next line
-
-@export var speed_up = false
-# indicate that the game is in speed up state
-# clicking will stop autoplay and will not display next line
 
 @onready var UI_visible = true
 # when UI including dialogue box is not visible
@@ -18,17 +9,15 @@ class_name SceneAuto
 # press action are actions that will proceed dialogue to next line
 # when true, player cannot proceed to next line with press action
 
-#TODO I forgot purpose of this variable
-@onready var start_time = true 
+# anti-reentry lock for auto_play_timer: converts the per-frame
+# "visible_ratio == 1.0" level signal into a single edge trigger so
+# the timer is only started once per line during AUTOPLAY
+@onready var start_time = true
 
 @onready var dialogue_UI: CanvasLayer = $dialogue
 @onready var narration_box: TextureRect = $dialogue/narration_box
 @onready var dialogue_box: TextureRect = $dialogue/dialogue_box
 @onready var ui: CanvasLayer = $UI
-
-var UI_switched = false
-# prevent the bug of "extra click" after switching UI
-# set as true when ever player opens another UI window during game
 
 var script_tree:ScriptTree = ResourceLoader.load("res://save/processed_script.tres")
 # where dialogue and command are stored
@@ -36,11 +25,18 @@ var script_tree:ScriptTree = ResourceLoader.load("res://save/processed_script.tr
 # store inital variable to temporary variables used for this game
 var variables: Variables = Variables.new()
 
+enum GameState{
+	DEFAULT,
+	AUTOPLAY,
+	SPEEDUP,
+	PAUSED
+}
 
+var curr_state:GameState = GameState.DEFAULT
 
 func _ready():
 	var saved_variables:Variables = ResourceLoader.load(GlobalResources.variables_path)
-	variables.set_all_var(saved_variables.get_all_var())
+	variables = saved_variables.duplicate(true)
 	$error_log.hide()
 	$review_dialogues.hide()
 	%dialogue.text = ""
@@ -54,6 +50,7 @@ func _ready():
 	GlobalSignals.close_ui.connect(_on_ui_closed)
 	GlobalSignals.pause_game_interaction.connect(_on_pause_game_interaction)
 	GlobalSignals.unpause_game_interaction.connect(_on_unpause_game_interaction)
+	GlobalSignals.minigame_edit_var.connect(_on_var_edited)
 	set_bus()
 	load_setting()
 	var setting = preload("res://frameWorkCore/settings/setting_menu.tscn").instantiate()
@@ -64,6 +61,8 @@ func _ready():
 	GlobalSignals.game_created.emit()
 	# tell main scene game is created
 
+func _on_var_edited(new_variable: Variables):
+	variables = new_variable.duplicate(true)
 
 func set_bus():
 	# set all audio to respective bus
@@ -74,28 +73,29 @@ func set_bus():
 	for sfx in self.find_child("music").find_child("sound_effect").get_children():
 		sfx.set_bus("sound_effect")
 
-
-func _on_ui_opened():
-	UI_switched = true
-
 	
 func _on_ui_closed():
-	UI_switched = false
+	curr_state = GameState.DEFAULT
+
+
+func _on_ui_opened():
+	curr_state = GameState.PAUSED
 
 
 func _on_pause_game_interaction():
-	UI_switched = true
+	curr_state = GameState.PAUSED
+	$auto_play_timer.stop()
+	$speed_up_timer.stop()
+	start_time = true
+	%dialogue.on_auto = false
 	ui.hide()
 	dialogue_UI.hide()
 	%dialogue.set_process(false)
-	%avatar.visible = false;
-	speed_up = false
-	auto_play = false
-	pass
+	%avatar.visible = false
 
 	
 func _on_unpause_game_interaction():
-	UI_switched = false
+	curr_state = GameState.DEFAULT
 	%dialogue.set_process(true)
 	ui.show()
 	dialogue_UI.show()
@@ -103,7 +103,7 @@ func _on_unpause_game_interaction():
 
 
 func _process(_delta):
-	if auto_play and %dialogue.visible_ratio == 1.0 and start_time:
+	if curr_state == GameState.AUTOPLAY and %dialogue.visible_ratio == 1.0 and start_time:
 		start_time = false
 		$auto_play_timer.start()
 		# TODO surely logic in here can be moved else where
@@ -113,25 +113,37 @@ func _process(_delta):
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("press") and check_in_game():
-		# press advance dialogue to next line or stop the current state
-		$dialogue.visible = true
-		$UI.visible = true
-		$choice.visible = true
-		if auto_play or speed_up or not UI_visible or choice_reach:
-			# check if there is any state that blocks dialogue from playing
-			auto_play = false
-			speed_up = false
-			UI_visible = true
-			# if there is, shut down the state and dont advance
-			return
-		if %dialogue.visible_ratio != 1.0:
-			%dialogue.visible_ratio = 1.0
-			# show full dialogue if current dialogue isn't full
-			# this enable feature of double clicking to show full dialogue
-		else:
-			%dialogue.visible_ratio = 0.0 
-			# other wise forward to next dialogue
-			proceed_to_next_line()
+		match curr_state:
+			GameState.PAUSED:
+				# paused by background transition or similar; press does nothing
+				return
+			GameState.AUTOPLAY:
+				# press stops autoplay but does not advance to next line
+				curr_state = GameState.DEFAULT
+				%dialogue.on_auto = false
+				$auto_play_timer.stop()
+				start_time = true
+				return
+			GameState.SPEEDUP:
+				# press stops speedup but does not advance to next line
+				curr_state = GameState.DEFAULT
+				$speed_up_timer.stop()
+				return
+			GameState.DEFAULT:
+				$dialogue.visible = true
+				$UI.visible = true
+				$choice.visible = true
+				if not UI_visible:
+					# redisplay hidden UI
+					UI_visible = true
+					return
+				if %dialogue.visible_ratio != 1.0:
+					# show full dialogue if current dialogue isn't full
+					%dialogue.visible_ratio = 1.0
+				else:
+					# otherwise forward to next dialogue
+					%dialogue.visible_ratio = 0.0
+					proceed_to_next_line()
 	if Input.is_action_just_pressed("auto") and check_in_game():
 		# autoplay switches game to autoplay mode
 		_on_start_auto_play()
@@ -141,9 +153,6 @@ func check_in_game() -> bool:
 	# check if the current game should continue to next line when be clicked
 	# game should onlt proceed to next line when no UI component
 	# is blocking the game window
-	if UI_switched:
-		# prevent the bug of "extra click" after switching UI
-		return false
 	if $review_dialogues.visible:
 		return false
 	if $story_tree.visible:
@@ -163,7 +172,7 @@ func proceed_to_next_line():
 	# inchagre of continue the dialogue to next line
 	if press_action_disabled:
 		return
-	if choice_reach:
+	if curr_state == GameState.PAUSED:
 		return
 	%avatar.finish_avatar_effects()
 	var text = {};
@@ -178,22 +187,26 @@ func proceed_to_next_line():
 		$dialogue.show()
 		$UI.show()
 		%dialogue.visible_ratio = 1.0
-		choice_reach = true
+		curr_state = GameState.PAUSED
 		choice_jump()
 		# if choice reached, display choice
 		return
 	if status == "game":
 		# creator is responsible for whether to clear current music or not 
 		# during minigame. as some may want music to continue playing
-		speed_up = false
-		auto_play = false
+		curr_state = GameState.PAUSED
+		$auto_play_timer.stop()
+		$speed_up_timer.stop()
+		start_time = true
+		%dialogue.on_auto = false
+		GlobalMinigameInteractior.set_variable(variables)
 		$minigame.add_game(script_tree.get_game())	
 		return
 	# now all special condition has been considered
 	
 	$music.next_line() # clear respected music bus according to setting
 	
-	if speed_up:
+	if curr_state == GameState.SPEEDUP:
 		# when play in speed mode there shouldn't be typewritte effect
 		%dialogue.visible_ratio = 1.0
 	else:
@@ -232,26 +245,22 @@ func choice_jump():
 	# TODO what if creator wish to display choices but as locked?
 	if choice_list == []:
 		# error checking code that shouldn't be triggered
-		choice_reach = false
+		curr_state = GameState.DEFAULT
 		return "fail"
 	var option = preload("res://frameWorkCore/gameplay_basic/choice.tscn")
 	
 	for choice in choice_list:
 		# instantiate and add all choices in choice list to game
-		var ready_option = option.instantiate()
+		var ready_option:Choice = option.instantiate()
+		ready_option.choice_description = choice[0]
+		ready_option.travel_chapter = choice[1]
 		%choice_box.add_child(ready_option)
-		# TODO, these feels like shit code
-		var choice_text = ready_option.get_node("center").get_node("choice_text")
-		var going_to = ready_option.get_node("going_to")
-		choice_text.text = choice[0]
-		going_to.text = choice[1]
-		ready_option.connect("travel_to", travel)
-		# TODO, these feels like shit code
+		ready_option.travel_to_new_chap.connect(travel_to_new_chapter)
 		
 	if len(choice_list) == 1:
 		# if only one option and auto jump is true， jump
 		if choice_list[0][2] == "true":
-			travel(choice_list[0][1])
+			travel_to_new_chapter(choice_list[0][1])
 			return "fail"
 			# shit code, only purpose is to prevent jump to choice
 			# from ending the game
@@ -271,7 +280,7 @@ func check_choice_condition(choices: Array):
 	return new_choices
 
 
-func travel(location: String):
+func travel_to_new_chapter(location: String):
 	# triggered when a choice is clicked
 	$story_tree.update_chapter(location)
 	script_tree.change_chapter(location)
@@ -280,8 +289,8 @@ func travel(location: String):
 		# since choice is already made, remove all displayed choices
 		%choice_box.remove_child(child)
 		
-	%dialogue.visible_ratio = 0 
-	choice_reach = false
+	%dialogue.visible_ratio = 0
+	curr_state = GameState.DEFAULT
 	proceed_to_next_line()
 	# reset dialogue and start line
 
@@ -302,34 +311,39 @@ func command_execute(orders: Dictionary):
 	variables.perform_var_ops(orders.get("update", []))
 		
 	if orders.has("CG"):
-		auto_play = false
-		speed_up = false
+		curr_state = GameState.DEFAULT
+		$auto_play_timer.stop()
+		$speed_up_timer.stop()
+		start_time = true
+		%dialogue.on_auto = false
 		%avatar.clear_all_avatar()
 		$UI.visible = false
 		$dialogue.visible = false
 		press_action_disabled = true
-		%background.change_background(orders["CG"][0][0], "false")
+		%background.change_backgrounds(orders["CG"][0][0], "false")
 		print("displaying CG\n")
 	return
 	
 	
 func load_chapter_from_story_tree(chapter_name: String, variable_of_chap: Dictionary):
 	$story_tree.hide()
-	var chap:ProgressData = ProgressData.new()
+	var chap:CurrGameProgress = CurrGameProgress.new()
 	chap.which_file = chapter_name
 	var saved_variables:Variables = ResourceLoader.load(GlobalResources.variables_path)
-	chap.variables = saved_variables.get_all_var()
+	chap.variables = saved_variables.duplicate(true)
 	for key in variable_of_chap.keys():
-		chap.variables[key] = variable_of_chap[key]
+		chap.variables.variables[key] = variable_of_chap[key]
 	GlobalSignals.load_game_progress.emit(chap)
 	pass
 
 
-func load_progress(data: ProgressData):
+func load_progress(data: CurrGameProgress):
 	# load game progress into the game
-	speed_up = false
-	auto_play = false
-	choice_reach = false
+	curr_state = GameState.DEFAULT
+	$auto_play_timer.stop()
+	$speed_up_timer.stop()
+	start_time = true
+	%dialogue.on_auto = false
 	for child in %choice_box.get_children():
 		%choice_box.remove_child(child)
 	# reset all ingame setting including removing choices
@@ -343,7 +357,7 @@ func load_progress(data: ProgressData):
 	%avatar.clear_all_avatar()
 	$chubby_play.reset_chubby()
 	script_tree.load_progress(data.which_file, data.which_line)
-	variables.set_all_var(data.variables)
+	variables = data.variables.duplicate(true)
 	# script tree acc give the line after its current progress
 	$UI.show()
 	$dialogue.show()
@@ -364,9 +378,8 @@ func load_setting():
 	$UI/Control/ColorRect.color = save.windows_color	
 # the code below are code related to buttons
 
-
 func _on_show_save():
-	_on_ui_opened()
+	curr_state = GameState.PAUSED
 	var temp_screen = get_viewport().get_texture().get_image()
 	# take a screenshot of current scene
 	var saver:SaveLoad = preload("res://frameWorkCore/load_save/save_load_UI.tscn").instantiate()
@@ -376,14 +389,14 @@ func _on_show_save():
 
 
 func _on_show_load():
-	_on_ui_opened()
+	curr_state = GameState.PAUSED
 	var loader:SaveLoad = preload("res://frameWorkCore/load_save/save_load_UI.tscn").instantiate()
 	loader.display_save = false
 	add_sibling(loader)
 
 
 func _on_quick_save():
-	var progress:ProgressData = ProgressData.new()
+	var progress:CurrGameProgress = CurrGameProgress.new()
 	progress.which_file = script_tree.get_chapter()
 	progress.which_line = script_tree.get_line_num() - 1
 	progress.variables = variables.get_all_var()
@@ -392,22 +405,23 @@ func _on_quick_save():
 
 func _on_quick_load():
 	var quick_save = "user://save/quick_save.tres"
-	var find_save:ProgressData = ResourceLoader.load(quick_save)
+	var find_save:CurrGameProgress = ResourceLoader.load(quick_save)
 	if find_save == null:
 		return
 	GlobalSignals.load_game_progress.emit(find_save)
 
 
 func _on_show_setting():
+	curr_state = GameState.PAUSED
 	var setting:SettingMenu = preload("res://frameWorkCore/settings/setting_menu.tscn").instantiate()
 	self.add_child(setting, true)
 	setting.set_owner(self)
 	setting.reload_setting.connect(load_setting)
-	_on_ui_opened()
 	return
 
 
 func _on_show_review_dialogue():
+	curr_state = GameState.PAUSED
 	$review_dialogues.jump_to_buttom()
 	$review_dialogues.show()
 	$dialogue.hide()
@@ -418,11 +432,13 @@ func _on_show_review_dialogue():
 func _on_quit_review_dialogue():
 	$review_dialogues.hide()
 	press_action_disabled = false
+	curr_state = GameState.DEFAULT
 	$dialogue.show()
 	$UI.show()
 
 
 func _on_show_story_tree():
+	curr_state = GameState.PAUSED
 	$story_tree.show()
 	$dialogue.hide()
 	$UI.hide()
@@ -432,34 +448,33 @@ func _on_show_story_tree():
 func _on_quit_story_tree():
 	$story_tree.hide()
 	press_action_disabled = false
+	curr_state = GameState.DEFAULT
 	$dialogue.show()
 	$UI.show()
 
 
 func _on_start_auto_play():
-	if auto_play:
+	if curr_state == GameState.AUTOPLAY:
+		curr_state = GameState.DEFAULT
 		%dialogue.on_auto = false
-		auto_play = false
 		return
 		# cancel auto play if already autoplaying
-	speed_up = false
-	auto_play = true
+	curr_state = GameState.AUTOPLAY
 	%dialogue.on_auto = true
 	proceed_to_next_line()
 
 
 func _on_start_fast_forward():
-	if speed_up:
-		speed_up = false
+	if curr_state == GameState.SPEEDUP:
+		curr_state = GameState.DEFAULT
 		return
-	auto_play = false
-	speed_up = true
+	curr_state = GameState.SPEEDUP
 	proceed_to_next_line()
 	$speed_up_timer.start()
 
 
 func _on_start_fast_forward_to_next_choice():
-	if choice_reach:
+	if curr_state == GameState.PAUSED:
 		return
 	if !script_tree.has_nextchap():
 		print("no choice found")
@@ -478,7 +493,11 @@ func _on_hide_UI():
 		$UI.hide()
 		$choice.hide()
 		UI_visible = false
-		auto_play = false
+		curr_state = GameState.DEFAULT
+		$auto_play_timer.stop()
+		$speed_up_timer.stop()
+		start_time = true
+		%dialogue.on_auto = false
 
 
 func _on_leave_game():
@@ -493,27 +512,26 @@ func _out_button():
 	press_action_disabled = false
 
 # these 2 function prevents press action been triggered when pressing UI button
-
-
 func _on_auto_play_timer_timeout():
 	start_time = true
-	if auto_play:
+	if curr_state == GameState.AUTOPLAY:
 		# display next dialogue when time up
 		proceed_to_next_line()
 
 
 func _on_speed_up_timer_timeout():
-	if speed_up:
+	if curr_state == GameState.SPEEDUP:
 		proceed_to_next_line()
 		$speed_up_timer.start()
 
 
 func _on_video_background_finished():
 	# this helps with dynamic background/CG
-	if $background/viedo_background.loop:
-		# only dynamic bacnground will loop, we dont care in this case
+	if $background/video_background.loop:
+		# if the background is looping, we dont care in this case
 		return
-	# otherwise it means cg has ended and its time for next line
+	# otherwise it means cg or dynamic background has ended 
+	# and its time for next line
 	$UI.show()
 	$dialogue.show()
 	press_action_disabled = false

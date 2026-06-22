@@ -4,7 +4,7 @@ extends TextureButton
 @export var voice = ""
 var voice_at = ""
 signal play_voice
-var asset_map:AssetPath = ResourceLoader.load("res://save/mapper_total.tres")
+var asset_map:AssetPath = ResourceLoader.load(GlobalResources.asset_map_path)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

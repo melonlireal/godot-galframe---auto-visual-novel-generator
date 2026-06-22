@@ -11,7 +11,7 @@ func add_game(game_name: String):
 	$"../dialogue".visible = false
 	$"../UI".visible = false
 	%background.visible = false
-	$".".add_child(loaded_game)
+	get_parent().add_child(loaded_game)
 	loaded_game.end_game.connect(end_game)
 
 

@@ -57,7 +57,7 @@ func present(CG_name: String):
 	var file_at = asset_path_finder.search_path(CG_name)
 	if file_at == null:
 		return
-	if CG_name.substr(len(CG_name)-4, -1) == ".ogv":
+	if CG_name.ends_with(".ogv"):
 		$present_vid.show()
 		$present_vid.stream = ResourceLoader.load(file_at)
 		$present_vid.play()

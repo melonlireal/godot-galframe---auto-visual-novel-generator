@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c7urdigxq43m5"]
 
-[ext_resource type="Script" uid="uid://43lj04uagpfj" path="res://frameWorkCore/gameplay_basic/review_dialogues.gd" id="1_idpd4"]
+[ext_resource type="Script" uid="uid://43lj04uagpfj" path="res://frameWorkCore/gameplay_basic/reviewDialogues/review_dialogues.gd" id="1_idpd4"]
 [ext_resource type="Texture2D" uid="uid://ugo3pjkduqnm" path="res://artResource/UI_gameplay/ui_raw/close.png" id="2_idpd4"]
 
 [node name="review_dialogues" type="CanvasLayer"]

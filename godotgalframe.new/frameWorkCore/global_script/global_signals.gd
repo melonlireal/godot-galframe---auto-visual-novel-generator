@@ -1,7 +1,7 @@
 extends Node
 
 
-signal load_game_progress(game_progress:ProgressData)
+signal load_game_progress(game_progress:CurrGameProgress)
 signal game_created
 signal start_game
 
@@ -20,7 +20,9 @@ signal background_effect_error(type: String)
 signal variable_not_found_error(type: String)
 signal game_call_error(type: String)
 
-
+signal minigame_edit_var(variable:Variables)
+signal minigame_force_load_chap(which_chap: String, which_line: int, variables: Variables)
+signal minigame_force_save(which_chap: String, which_line: int, variables: Variables, which_save_slot: int)
 # Called when the node enters the scene tree for the first time.
 	
 	

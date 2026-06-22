@@ -5,22 +5,27 @@ class_name Variables
 func get_all_var():
 	return variables
 	
-func set_all_var(new_variables: Dictionary):
-	variables = new_variables
-	
 func get_var_val(name: String):
-	return variables[name]
+	return variables.get(name, 0)
 
-func new_var(name: String, variable: String):
-	variables[name] = int(variable)
+func set_new_var(name: String, value: int):
+	variables[name] = value
+	
+func update_var_val(name: String, value: int):
+	if variables.has(name):
+		variables[name] = value
+	
+func check_has_var(name:String):
+	return variables.has(name)
 	
 func perform_var_ops(operations: Array):
 	for operation in operations:
 		var_op(operation[0], operation[1], operation[2])
 		
 func var_op(variable: String, operation: String, value: String = "0"):
-	var op = Callable(self, operation)
-	op.call(variable, value)
+	if self.has_method(operation):
+		var op = Callable(self, operation)
+		op.call(variable, value)
 
 func add(variable: String, value: String):
 	if variables.has(value):
@@ -53,8 +58,9 @@ func assign(variable: String, value: String):
 	return
 	
 func var_con(variable: String, operation: String, value: String):
-	var op = Callable(self, operation)
-	return op.call(variable, value)
+	if self.has_method(operation):
+		var op = Callable(self, operation)
+		return op.call(variable, value)
 
 func great(variable: String, value: String):
 	if variables.has(value):
@@ -85,6 +91,3 @@ func equal(variable: String, value: String):
 		return variables[variable] == variables[value]
 	else:
 		return variables[variable] == int(value)
-		
-func has(variable:String):
-	return variable in variables

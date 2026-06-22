@@ -12,7 +12,7 @@
 [ext_resource type="Script" uid="uid://t0iofthpusr5" path="res://frameWorkCore/gameplay_basic/dialogue.gd" id="5_j30eb"]
 [ext_resource type="PackedScene" uid="uid://dnkvex8li8a4j" path="res://frameWorkCore/main_menu/main_UI.tscn" id="6_0o83t"]
 [ext_resource type="Script" uid="uid://d2q1ewu5nrkgn" path="res://frameWorkCore/errorlogDontTouch.gd" id="7_kvtwn"]
-[ext_resource type="PackedScene" uid="uid://c7urdigxq43m5" path="res://frameWorkCore/gameplay_basic/review_dialogues.tscn" id="9_88744"]
+[ext_resource type="PackedScene" uid="uid://c7urdigxq43m5" path="res://frameWorkCore/gameplay_basic/reviewDialogues/review_dialogues.tscn" id="9_88744"]
 [ext_resource type="Script" uid="uid://cci7q1xdvf15f" path="res://frameWorkCore/gameplay_basic/music.gd" id="12_00gnm"]
 [ext_resource type="PackedScene" uid="uid://7wwctswnkwqj" path="res://frameWorkCore/story_tree_editor/story_tree.tscn" id="12_ob1rn"]
 [ext_resource type="Script" uid="uid://84pbbv15c8ww" path="res://frameWorkCore/gameplay_basic/minigame.gd" id="13_ens8c"]

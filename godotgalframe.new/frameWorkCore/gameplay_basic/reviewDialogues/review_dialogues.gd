@@ -29,7 +29,7 @@ func add_line():
 	curr_limit += 1
 	if curr_limit > limit:
 		pop_line()
-	var compound = preload("res://frameWorkCore/gameplay_basic/line_review.tscn")
+	var compound = preload("res://frameWorkCore/gameplay_basic/reviewDialogues/line_review.tscn")
 	var script = compound.instantiate()
 	script.character = line["character"]
 	script.dialogue = line["dialogue"]

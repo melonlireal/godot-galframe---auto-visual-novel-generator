@@ -1,9 +1,17 @@
+class_name Choice
 extends TextureButton
 
-signal travel_to(loaction: String)
+signal travel_to_new_chap(loaction: String)
+
+@onready var choice_text_label: Label = $center/choice_text
+
+
+@export var choice_description:String
+@export var travel_chapter:String
 # Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+
+func _ready() -> void:
+	choice_text_label.text = choice_description
+
 func _on_pressed():
-	print("pressed")
-	emit_signal("travel_to", $going_to.text)
+	travel_to_new_chap.emit(travel_chapter)

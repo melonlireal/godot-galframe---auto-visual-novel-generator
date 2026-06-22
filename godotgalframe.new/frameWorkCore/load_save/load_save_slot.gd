@@ -37,7 +37,7 @@ func _load():
 	if $save_display.texture != null:
 		# 只有在有存档的状态下才会加载
 		var save_path = "user://save/" + str(self.get_index()) + ".tres"
-		var find_save:ProgressData = ResourceLoader.load(save_path)
+		var find_save:CurrGameProgress = ResourceLoader.load(save_path)
 		loading.emit(find_save)
 	
 	

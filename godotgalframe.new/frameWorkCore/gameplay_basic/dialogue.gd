@@ -23,9 +23,9 @@ func _ready():
 func _process(delta):
 	if on_special_effect:
 		return
-	if "speed_up" in $"../..":
-		if $"../..".speed_up:
-	# TODO shit code fix later
+	# skip typewriter effect entirely when the game is in SPEEDUP state
+	if "curr_state" in $"../..":
+		if $"../..".curr_state == SceneAuto.GameState.SPEEDUP:
 			self.visible_ratio = 1.0
 	var data = ResourceLoader.load(GlobalResources.setting_save_path)
 	if self.visible_ratio == 1.0:

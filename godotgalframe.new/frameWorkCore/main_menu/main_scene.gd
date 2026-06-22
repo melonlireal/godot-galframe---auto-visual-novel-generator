@@ -4,7 +4,7 @@ var save_path = "user://save/"
 var global_progress_save_name = "global_game_progress_save.tres"
 var setting_save_name = "player_setting_save.tres"
 
-var progress:ProgressData = ProgressData.new()
+var progress:CurrGameProgress = CurrGameProgress.new()
 
 @onready var start_game_transition: CanvasLayer = $start_game_transition
 @onready var start_game_animation_player: AnimationPlayer = $start_game_transition/AnimationPlayer
@@ -19,7 +19,7 @@ func _ready():
 	GlobalSignals.game_created.connect(game_created)
 	GlobalSignals.back_to_menu.connect(_on_back_to_menu)
 	var saved_variables: Variables = ResourceLoader.load(GlobalResources.variables_path)
-	progress.variables = saved_variables.get_all_var()
+	progress.variables = saved_variables.duplicate(true)
 	print("main scene log start\n")
 	# when start game, create default setting if no setting file exists
 	if not DirAccess.dir_exists_absolute(save_path):
@@ -98,7 +98,7 @@ func _on_back_to_menu():
 	var current_game:SceneAuto = find_scene_auto()
 	if current_game:
 		current_game.queue_free()
-	progress = ProgressData.new()
+	progress = CurrGameProgress.new()
 	menu_bgm.playing = true
 	menu_ui.visible = true
 	start_game_animation_player.play("fade_out")
@@ -108,7 +108,7 @@ func find_scene_auto():
 		if child is SceneAuto:
 			return child
 
-func _on_load_game_progress(game_progress: ProgressData):
+func _on_load_game_progress(game_progress: CurrGameProgress):
 	progress = game_progress
 	_on_start_pressed()
 

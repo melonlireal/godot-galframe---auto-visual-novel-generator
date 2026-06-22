@@ -135,7 +135,7 @@ func transit(tween: Tween, args: Array):
 	await tween.finished
 
 
-func dissappear(tween: Tween, args: Array):
+func disappear(tween: Tween, args: Array):
 	var time = 0.5
 	if len(args) > 0:
 		time = int(args[0])
