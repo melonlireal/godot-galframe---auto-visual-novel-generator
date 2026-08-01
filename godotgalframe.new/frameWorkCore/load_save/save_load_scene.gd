@@ -23,7 +23,7 @@ func _ready():
 		slot.saving.connect(save_in_slot)
 		slot.loading.connect(load_from_slot)
 		slot.mouse_exited.connect(clear_display)
-		slot.mouse_entered.connect(windows_display)
+		slot.hovered.connect(windows_display)
 
 		
 		

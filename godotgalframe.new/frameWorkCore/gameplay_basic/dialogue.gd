@@ -1,60 +1,46 @@
 extends RichTextLabel
-@export var play_speed_factor = 20.0/50.0
-# used to block dialogue from playing when setting up 
-@export var repeat = false
-# for play speed example in settings
-@export var on_auto = false
-@export var on_special_effect = false
-# used to check if there is currently special effect
-@export var narrator_pos:Vector2 = Vector2(332.0, 800.0)
-@export var dialogue_pos:Vector2 = Vector2(332.0, 850.0)
-@export var voicing_time = 0.0 
-# the time for voice to fully play for current 
-# playng line, if no voicing the line is 0
-@export var autoplay_pause_time = 1.0
+
+signal dialogue_play_finished
+
+var _duration: float = 0.0
+var _elapsed: float = 0.0
+var _playing: bool = false
+
 
 func _ready():
-	GlobalSignals.start_game.connect(_on_start_game)
-	if repeat:
-		start_dialogue()
-	else:
-		self.set_process(false)
-		
+	self.set_process(false)
+
+
 func _process(delta):
-	if on_special_effect:
+	if not _playing:
 		return
-	# skip typewriter effect entirely when the game is in SPEEDUP state
-	if "curr_state" in $"../..":
-		if $"../..".curr_state == SceneAuto.GameState.SPEEDUP:
-			self.visible_ratio = 1.0
-	var data = ResourceLoader.load(GlobalResources.setting_save_path)
-	if self.visible_ratio == 1.0:
-		if repeat:
-			self.visible_ratio = 0.0
-		return
-	if on_auto:
-		var progress_per_frame:float = ((data.auto_play_speed * delta * play_speed_factor)
-		/self.get_parsed_text().length())
-		var frame_per_second = 1.0/delta
-		var expected_time = (1.0/progress_per_frame)/frame_per_second
-		if voicing_time - expected_time > 0: 
-			#if it takes more time to play voice then time to display entire dialogue
-			$"../../auto_play_timer".wait_time = autoplay_pause_time + voicing_time - expected_time
-		elif has_node("../../auto_play_timer"):
-			$"../../auto_play_timer".wait_time = autoplay_pause_time
-		self.visible_ratio += progress_per_frame
+	_elapsed += delta
+	if _duration <= 0.0 or _elapsed >= _duration:
+		visible_ratio = 1.0
+		_playing = false
+		set_process(false)
+		dialogue_play_finished.emit()
 	else:
-		self.visible_ratio += ((data.play_speed * delta * play_speed_factor)
-		/self.get_parsed_text().length())
+		visible_ratio = _elapsed / _duration
 
-func on_narration():
-	self.set_position(narrator_pos)
-	
-func on_dialogue():
-	self.set_position(dialogue_pos)
-	
-func _on_start_game():
-	self.set_process(true)
 
-func start_dialogue():
-	self.visible_ratio = 0.0
+func play_dialogue(dialogue: String, duration: float):
+	self.text = dialogue
+	visible_ratio = 0.0
+	_elapsed = 0.0
+	_duration = duration
+	_playing = true
+	set_process(true)
+
+
+func show_full():
+	if not _playing:
+		return
+	visible_ratio = 1.0
+	_playing = false
+	set_process(false)
+	dialogue_play_finished.emit()
+
+
+func is_playing() -> bool:
+	return _playing

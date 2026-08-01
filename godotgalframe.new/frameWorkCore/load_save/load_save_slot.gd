@@ -7,6 +7,7 @@ signal ruSure # in memory of CSC108H5 2023 November 23rd incident
 # 如果要覆盖存档的话先确认一下
 signal saving
 signal loading
+signal hovered(slot: int)
 
 
 func _ready():
@@ -17,7 +18,6 @@ func _ready():
 func display(pics: Image):
 	pics.save_png("user://"+str(self.get_index()) + ".png")
 	$save_display.texture = ImageTexture.create_from_image(pics)
-	self.mouse_in.emit(self.get_index())
 	# 将截图保存且放置在小窗口上显示
 
 func load_pic():
@@ -56,7 +56,7 @@ func _on_button_button_down():
 
 
 func _on_button_mouse_entered():
-	mouse_entered.emit(self.get_index())
+	hovered.emit(self.get_index())
 
 
 func _on_button_mouse_exited() -> void:

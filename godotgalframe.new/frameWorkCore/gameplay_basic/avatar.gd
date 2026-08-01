@@ -36,14 +36,14 @@ func change_avatars(avatar_commands: Array):
 func clear_all_avatar():
 	print("clear all avatar")
 	avatar_list = []
-	for child:CharacterSlot in %avatar.get_children():
+	for child:CharacterSlot in self.get_children():
 		child.clear_avatar()
 	return
 				
 func avatar_clear():
 	# clear all avatar that are not going to be "replaced" by next line of commands
 	print("avatar list is ", avatar_list, "\n")
-	for child:CharacterSlot in %avatar.get_children():
+	for child:CharacterSlot in self.get_children():
 		if child.name not in avatar_list:
 			print(str(child.name), " not in avatar list\n")
 			child.clear_avatar()

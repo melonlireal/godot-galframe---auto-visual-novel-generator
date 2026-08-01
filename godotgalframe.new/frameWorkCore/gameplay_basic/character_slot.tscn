@@ -1,15 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://pgyucp4tuj4t"]
+[gd_scene format=3 uid="uid://pgyucp4tuj4t"]
 
 [ext_resource type="Script" uid="uid://b765or20vfnkd" path="res://frameWorkCore/gameplay_basic/character_slot.gd" id="1_xtmag"]
 
-[node name="character_slot" type="Control"]
+[node name="character_slot" type="Control" unique_id=742632305]
 layout_mode = 3
 anchor_right = 0.55
 anchor_bottom = 1.6
 pivot_offset = Vector2(528, 864)
 script = ExtResource("1_xtmag")
 
-[node name="slot" type="CenterContainer" parent="."]
+[node name="slot" type="CenterContainer" parent="." unique_id=783669454]
 layout_direction = 1
 layout_mode = 1
 anchors_preset = -1
@@ -18,7 +18,7 @@ anchor_bottom = 1.0
 offset_right = -0.031982422
 offset_bottom = 0.29187012
 
-[node name="character_back" type="TextureRect" parent="slot"]
+[node name="character_back" type="TextureRect" parent="slot" unique_id=1013483435]
 texture_filter = 2
 custom_minimum_size = Vector2(1000, 1750)
 layout_mode = 2
@@ -26,7 +26,7 @@ expand_mode = 1
 stretch_mode = 5
 metadata/_edit_lock_ = true
 
-[node name="character" type="TextureRect" parent="slot"]
+[node name="character" type="TextureRect" parent="slot" unique_id=621974423]
 texture_filter = 2
 custom_minimum_size = Vector2(1000, 1750)
 layout_mode = 2

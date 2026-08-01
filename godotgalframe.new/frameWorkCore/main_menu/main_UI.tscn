@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dnkvex8li8a4j"]
+[gd_scene format=3 uid="uid://dnkvex8li8a4j"]
 
 [ext_resource type="Script" uid="uid://cw1a0c841nr0o" path="res://frameWorkCore/main_menu/main_UI.gd" id="1_4xwuk"]
 [ext_resource type="Texture2D" uid="uid://sl4vw1608r8n" path="res://artResource/UI_gameplay/ui_raw/auto.png" id="1_hrq5x"]
@@ -23,10 +23,10 @@
 [ext_resource type="Texture2D" uid="uid://dov6fegc1mm3u" path="res://artResource/UI_gameplay/ui_hover/back_hover.png" id="21_447ca"]
 [ext_resource type="Texture2D" uid="uid://bhp6fyecrnt67" path="res://artResource/UI_gameplay/ui_raw/grabber.png" id="22_0i00j"]
 
-[node name="UI" type="CanvasLayer"]
+[node name="UI" type="CanvasLayer" unique_id=1540638639]
 script = ExtResource("1_4xwuk")
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=1919317008]
 layout_mode = 3
 anchor_left = 0.05
 anchor_top = 0.93
@@ -39,7 +39,7 @@ grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(0.75, 0.75)
 
-[node name="ColorRect" type="ColorRect" parent="Control"]
+[node name="ColorRect" type="ColorRect" parent="Control" unique_id=455086798]
 layout_mode = 0
 offset_left = -128.0
 offset_top = -9.0
@@ -47,7 +47,7 @@ offset_right = 2432.0
 offset_bottom = 101.0
 color = Color(1, 1, 1, 0.47451)
 
-[node name="VBoxContainer" type="HBoxContainer" parent="Control"]
+[node name="ButtonContainer" type="HBoxContainer" parent="Control" unique_id=234542999]
 layout_mode = 0
 offset_right = 3139.0
 offset_bottom = 128.0
@@ -55,24 +55,23 @@ scale = Vector2(0.7, 0.7)
 theme_override_constants/separation = 30
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="Control/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="Control/ButtonContainer" unique_id=1903549738]
 layout_mode = 2
 texture = ExtResource("1_v5r1b")
 expand_mode = 3
 
-[node name="CenterContainer" type="CenterContainer" parent="Control/VBoxContainer/TextureRect"]
+[node name="CenterContainer" type="CenterContainer" parent="Control/ButtonContainer/TextureRect" unique_id=648345363]
 layout_mode = 0
 offset_left = 105.0
 offset_right = 493.0
 offset_bottom = 128.0
 
-[node name="function_name" type="Label" parent="Control/VBoxContainer/TextureRect/CenterContainer"]
-unique_name_in_owner = true
+[node name="function_name" type="Label" parent="Control/ButtonContainer/TextureRect/CenterContainer" unique_id=1409280290]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_16gk4")
 theme_override_font_sizes/font_size = 57
 
-[node name="save" type="Button" parent="Control/VBoxContainer"]
+[node name="save" type="Button" parent="Control/ButtonContainer" unique_id=1393188081]
 layout_mode = 2
 theme_override_colors/font_hover_color = Color(0.917647, 0.701961, 0.0313726, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -83,7 +82,7 @@ text = "保存存档
 "
 flat = true
 
-[node name="load" type="Button" parent="Control/VBoxContainer"]
+[node name="load" type="Button" parent="Control/ButtonContainer" unique_id=373412978]
 layout_mode = 2
 theme_override_colors/font_hover_color = Color(0.917647, 0.701961, 0.0313726, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -93,7 +92,7 @@ theme_override_font_sizes/font_size = 64
 text = "读取存档"
 flat = true
 
-[node name="quicksave" type="Button" parent="Control/VBoxContainer"]
+[node name="quicksave" type="Button" parent="Control/ButtonContainer" unique_id=111201183]
 layout_mode = 2
 theme_override_colors/font_hover_color = Color(0.917647, 0.701961, 0.0313726, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -103,7 +102,7 @@ theme_override_font_sizes/font_size = 64
 text = "快速保存"
 flat = true
 
-[node name="quickload" type="Button" parent="Control/VBoxContainer"]
+[node name="quickload" type="Button" parent="Control/ButtonContainer" unique_id=736086466]
 layout_mode = 2
 theme_override_colors/font_hover_color = Color(0.917647, 0.701961, 0.0313726, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -113,61 +112,61 @@ theme_override_font_sizes/font_size = 64
 text = "快速读取"
 flat = true
 
-[node name="setting" type="TextureButton" parent="Control/VBoxContainer"]
+[node name="setting" type="TextureButton" parent="Control/ButtonContainer" unique_id=1860465163]
 layout_mode = 2
 texture_normal = ExtResource("2_jtpt6")
 texture_hover = ExtResource("3_jcku6")
 stretch_mode = 0
 
-[node name="volumn" type="TextureButton" parent="Control/VBoxContainer"]
+[node name="volumn" type="TextureButton" parent="Control/ButtonContainer" unique_id=1445170944]
 layout_mode = 2
 texture_normal = ExtResource("16_qghik")
 texture_hover = ExtResource("17_4h48h")
 stretch_mode = 0
 
-[node name="story_tree" type="TextureButton" parent="Control/VBoxContainer"]
+[node name="story_tree" type="TextureButton" parent="Control/ButtonContainer" unique_id=1395856924]
 layout_mode = 2
 texture_normal = ExtResource("8_8ko0c")
 texture_hover = ExtResource("9_4uxna")
 stretch_mode = 0
 
-[node name="review_dialogue" type="TextureButton" parent="Control/VBoxContainer"]
+[node name="review_dialogue" type="TextureButton" parent="Control/ButtonContainer" unique_id=1513436514]
 layout_mode = 2
 texture_normal = ExtResource("10_7nfbt")
 texture_hover = ExtResource("11_qu41y")
 stretch_mode = 0
 
-[node name="auto_play" type="TextureButton" parent="Control/VBoxContainer"]
+[node name="auto_play" type="TextureButton" parent="Control/ButtonContainer" unique_id=1888836033]
 layout_mode = 2
 texture_normal = ExtResource("1_hrq5x")
 texture_hover = ExtResource("2_7mrl3")
 stretch_mode = 0
 
-[node name="fast_forward" type="TextureButton" parent="Control/VBoxContainer"]
+[node name="fast_forward" type="TextureButton" parent="Control/ButtonContainer" unique_id=1041149316]
 layout_mode = 2
 texture_normal = ExtResource("12_q8tr2")
 texture_hover = ExtResource("13_pnvnb")
 stretch_mode = 0
 
-[node name="fast_forward_to_next_choice" type="TextureButton" parent="Control/VBoxContainer"]
+[node name="fast_forward_to_next_choice" type="TextureButton" parent="Control/ButtonContainer" unique_id=1605642038]
 layout_mode = 2
 texture_normal = ExtResource("14_jh1xk")
 texture_hover = ExtResource("15_4lyn0")
 stretch_mode = 0
 
-[node name="hide_UI" type="TextureButton" parent="Control/VBoxContainer"]
+[node name="hide_UI" type="TextureButton" parent="Control/ButtonContainer" unique_id=521102129]
 layout_mode = 2
 texture_normal = ExtResource("18_aj6jp")
 texture_hover = ExtResource("19_8rmnb")
 stretch_mode = 0
 
-[node name="leave_game" type="TextureButton" parent="Control/VBoxContainer"]
+[node name="leave_game" type="TextureButton" parent="Control/ButtonContainer" unique_id=2082367206]
 layout_mode = 2
 texture_normal = ExtResource("20_35vsk")
 texture_hover = ExtResource("21_447ca")
 stretch_mode = 0
 
-[node name="volumn_slider" type="VSlider" parent="Control"]
+[node name="volumn_slider" type="VSlider" parent="Control" unique_id=1501858242]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.577
@@ -185,32 +184,32 @@ max_value = 1.0
 step = 0.01
 value = 1.0
 
-[connection signal="mouse_entered" from="Control/VBoxContainer/save" to="." method="_on_save_mouse_entered"]
-[connection signal="pressed" from="Control/VBoxContainer/save" to="." method="_on_save_pressed"]
-[connection signal="mouse_entered" from="Control/VBoxContainer/load" to="." method="_on_load_mouse_entered"]
-[connection signal="pressed" from="Control/VBoxContainer/load" to="." method="_on_load_pressed"]
-[connection signal="mouse_entered" from="Control/VBoxContainer/quicksave" to="." method="_on_quicksave_mouse_entered"]
-[connection signal="pressed" from="Control/VBoxContainer/quicksave" to="." method="_on_quicksave_pressed"]
-[connection signal="mouse_entered" from="Control/VBoxContainer/quickload" to="." method="_on_quickload_mouse_entered"]
-[connection signal="pressed" from="Control/VBoxContainer/quickload" to="." method="_on_quickload_pressed"]
-[connection signal="mouse_entered" from="Control/VBoxContainer/setting" to="." method="_on_setting_mouse_entered"]
-[connection signal="pressed" from="Control/VBoxContainer/setting" to="." method="_on_setting_pressed"]
-[connection signal="mouse_entered" from="Control/VBoxContainer/volumn" to="." method="_on_volumn_mouse_entered"]
-[connection signal="pressed" from="Control/VBoxContainer/volumn" to="." method="_on_volumn_pressed"]
-[connection signal="mouse_entered" from="Control/VBoxContainer/story_tree" to="." method="_on_story_tree_mouse_entered"]
-[connection signal="pressed" from="Control/VBoxContainer/story_tree" to="." method="_on_show_tree_pressed"]
-[connection signal="pressed" from="Control/VBoxContainer/story_tree" to="." method="_on_story_tree_pressed"]
-[connection signal="mouse_entered" from="Control/VBoxContainer/review_dialogue" to="." method="_on_review_dialogue_mouse_entered"]
-[connection signal="pressed" from="Control/VBoxContainer/review_dialogue" to="." method="_on_review_pressed"]
-[connection signal="pressed" from="Control/VBoxContainer/review_dialogue" to="." method="_on_review_dialogue_pressed"]
-[connection signal="mouse_entered" from="Control/VBoxContainer/auto_play" to="." method="_on_auto_play_mouse_entered"]
-[connection signal="pressed" from="Control/VBoxContainer/auto_play" to="." method="_on_auto_play_pressed"]
-[connection signal="mouse_entered" from="Control/VBoxContainer/fast_forward" to="." method="_on_fast_forward_mouse_entered"]
-[connection signal="pressed" from="Control/VBoxContainer/fast_forward" to="." method="_on_fast_forward_pressed"]
-[connection signal="mouse_entered" from="Control/VBoxContainer/fast_forward_to_next_choice" to="." method="_on_fast_forward_to_next_choice_mouse_entered"]
-[connection signal="pressed" from="Control/VBoxContainer/fast_forward_to_next_choice" to="." method="_on_fast_forward_to_next_choice_pressed"]
-[connection signal="mouse_entered" from="Control/VBoxContainer/hide_UI" to="." method="_on_hide_ui_mouse_entered"]
-[connection signal="pressed" from="Control/VBoxContainer/hide_UI" to="." method="_on_hide_ui_pressed"]
-[connection signal="mouse_entered" from="Control/VBoxContainer/leave_game" to="." method="_on_leave_game_mouse_entered"]
-[connection signal="pressed" from="Control/VBoxContainer/leave_game" to="." method="_on_leave_game_pressed"]
+[connection signal="mouse_entered" from="Control/ButtonContainer/save" to="." method="_on_save_mouse_entered"]
+[connection signal="pressed" from="Control/ButtonContainer/save" to="." method="_on_save_pressed"]
+[connection signal="mouse_entered" from="Control/ButtonContainer/load" to="." method="_on_load_mouse_entered"]
+[connection signal="pressed" from="Control/ButtonContainer/load" to="." method="_on_load_pressed"]
+[connection signal="mouse_entered" from="Control/ButtonContainer/quicksave" to="." method="_on_quicksave_mouse_entered"]
+[connection signal="pressed" from="Control/ButtonContainer/quicksave" to="." method="_on_quicksave_pressed"]
+[connection signal="mouse_entered" from="Control/ButtonContainer/quickload" to="." method="_on_quickload_mouse_entered"]
+[connection signal="pressed" from="Control/ButtonContainer/quickload" to="." method="_on_quickload_pressed"]
+[connection signal="mouse_entered" from="Control/ButtonContainer/setting" to="." method="_on_setting_mouse_entered"]
+[connection signal="pressed" from="Control/ButtonContainer/setting" to="." method="_on_setting_pressed"]
+[connection signal="mouse_entered" from="Control/ButtonContainer/volumn" to="." method="_on_volumn_mouse_entered"]
+[connection signal="pressed" from="Control/ButtonContainer/volumn" to="." method="_on_volumn_pressed"]
+[connection signal="mouse_entered" from="Control/ButtonContainer/story_tree" to="." method="_on_story_tree_mouse_entered"]
+[connection signal="pressed" from="Control/ButtonContainer/story_tree" to="." method="_on_show_tree_pressed"]
+[connection signal="pressed" from="Control/ButtonContainer/story_tree" to="." method="_on_story_tree_pressed"]
+[connection signal="mouse_entered" from="Control/ButtonContainer/review_dialogue" to="." method="_on_review_dialogue_mouse_entered"]
+[connection signal="pressed" from="Control/ButtonContainer/review_dialogue" to="." method="_on_review_pressed"]
+[connection signal="pressed" from="Control/ButtonContainer/review_dialogue" to="." method="_on_review_dialogue_pressed"]
+[connection signal="mouse_entered" from="Control/ButtonContainer/auto_play" to="." method="_on_auto_play_mouse_entered"]
+[connection signal="pressed" from="Control/ButtonContainer/auto_play" to="." method="_on_auto_play_pressed"]
+[connection signal="mouse_entered" from="Control/ButtonContainer/fast_forward" to="." method="_on_fast_forward_mouse_entered"]
+[connection signal="pressed" from="Control/ButtonContainer/fast_forward" to="." method="_on_fast_forward_pressed"]
+[connection signal="mouse_entered" from="Control/ButtonContainer/fast_forward_to_next_choice" to="." method="_on_fast_forward_to_next_choice_mouse_entered"]
+[connection signal="pressed" from="Control/ButtonContainer/fast_forward_to_next_choice" to="." method="_on_fast_forward_to_next_choice_pressed"]
+[connection signal="mouse_entered" from="Control/ButtonContainer/hide_UI" to="." method="_on_hide_ui_mouse_entered"]
+[connection signal="pressed" from="Control/ButtonContainer/hide_UI" to="." method="_on_hide_ui_pressed"]
+[connection signal="mouse_entered" from="Control/ButtonContainer/leave_game" to="." method="_on_leave_game_mouse_entered"]
+[connection signal="pressed" from="Control/ButtonContainer/leave_game" to="." method="_on_leave_game_pressed"]
 [connection signal="value_changed" from="Control/volumn_slider" to="." method="_on_volumn_slider_value_changed"]

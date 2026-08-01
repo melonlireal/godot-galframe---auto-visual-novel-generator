@@ -53,12 +53,12 @@ func _on_blue_value_changed(value):
 	saved_data.change_blue(value)
 	play_example.color.b = value/255
 	ResourceSaver.save(saved_data, GlobalResources.setting_save_path)
-	green_label.text = str(saved_data.blue)
-	
-	
+	blue_label.text = str(saved_data.blue)
+
+
 func _on_alpha_value_changed(value):
 	var saved_data = ResourceLoader.load(GlobalResources.setting_save_path)
 	saved_data.change_alpha(value)
 	play_example.color.a = value/100
 	ResourceSaver.save(saved_data, GlobalResources.setting_save_path)
-	green_label.text = str(saved_data.alpha)
+	alpha_label.text = str(saved_data.alpha)

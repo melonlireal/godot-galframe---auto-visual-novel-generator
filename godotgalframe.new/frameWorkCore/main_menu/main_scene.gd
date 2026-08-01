@@ -30,12 +30,7 @@ func _ready():
 	if  !(setting_save_name in DirAccess.get_files_at(save_path)):
 		var default_player_setting = PlayerSetting.new()
 		ResourceSaver.save(default_player_setting, save_path + setting_save_name)
-	#add setting and dialogue review once to load values
-	#this is a temporary solution
-	var setting = preload("res://frameWorkCore/settings/setting_menu.tscn").instantiate()
-	add_child(setting, true)
-	setting.queue_free()
-	
+
 		
 # UI input for main scene
 # the code here are no longer awful
@@ -99,6 +94,8 @@ func _on_back_to_menu():
 	if current_game:
 		current_game.queue_free()
 	progress = CurrGameProgress.new()
+	var saved_variables: Variables = ResourceLoader.load(GlobalResources.variables_path)
+	progress.variables = saved_variables.duplicate(true)
 	menu_bgm.playing = true
 	menu_ui.visible = true
 	start_game_animation_player.play("fade_out")

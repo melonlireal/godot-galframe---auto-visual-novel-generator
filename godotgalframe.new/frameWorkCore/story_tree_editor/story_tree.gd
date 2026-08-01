@@ -1,5 +1,5 @@
 extends CanvasLayer
-
+class_name StoryTree
 signal load_chap
 signal close
 @onready var scroll_container: ScrollContainer = $scroll_container
