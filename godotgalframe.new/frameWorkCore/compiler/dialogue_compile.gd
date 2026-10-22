@@ -95,12 +95,13 @@ func dialogue_proof_read(chapter: Array):
 		var character = ""
 		var dialogue = main_text
 		var speaker_split = main_text.find(":")
-		if speaker_split != -1:
+		if speaker_split != -1 and (speaker_split == 0 or main_text[speaker_split - 1] != "\\"):
 			character = main_text.substr(0, speaker_split)
 			dialogue = main_text.substr(speaker_split + 1)
 		# treat lines without speaker splitter as narration/dialogue text
 
 		dialogue = dialogue.replace("\\command:", "command:")
+		dialogue = dialogue.replace("\\:", ":")
 		if $"..".auto_color_text:
 			var text_colors:Colors = ResourceLoader.load(GlobalResources.color_all_path)
 			dialogue = text_colors.process_color(character, "dialogue", dialogue)
@@ -159,11 +160,11 @@ func help_fix_commands(order_list: Array):
 		var order_type = order[0]
 		if not fixed_commands.has(order_type):
 			fixed_commands[order_type] = []
-		match order_type:				
-			"character":
+		match order_type:
+			GlobalType.COMMAND_CHARACTER:
 				if order.size() < 3:
 					order.append("mid")
-			"background":
+			GlobalType.COMMAND_BACKGROUND:
 				if order.size() < 3:
 					order.append("true")
 		fixed_commands[order_type].append(order.slice(1))
@@ -171,21 +172,25 @@ func help_fix_commands(order_list: Array):
 	return fixed_commands
 	
 func extend_from_prev_command(order_list: Dictionary):
-	if not order_list.has("background") and prev_command.has("background"):
-		order_list["background"] = prev_command["background"]
-		
-	if not order_list.has("bgm") and prev_command.has("bgm"):
+	if not order_list.has(GlobalType.COMMAND_BACKGROUND) and prev_command.has(GlobalType.COMMAND_BACKGROUND):
+		order_list[GlobalType.COMMAND_BACKGROUND] = prev_command[GlobalType.COMMAND_BACKGROUND]
+
+	if not order_list.has(GlobalType.COMMAND_BGM) and prev_command.has(GlobalType.COMMAND_BGM):
 		var bgm_list = []
-		for bgm_command in prev_command["bgm"]:
-			if bgm_command[0] != "clear":
+		for bgm_command in prev_command[GlobalType.COMMAND_BGM]:
+			if bgm_command[0] != GlobalType.COMMAND_CLEAR:
 				bgm_list.append(bgm_command)
-		order_list["bgm"] = bgm_list
-		
-	if not order_list.has("character") and prev_command.has("character"):
-		order_list["character"] = prev_command["character"]
-		
-	if order_list.has("effect"):
-		var effects = order_list["effect"]
+		order_list[GlobalType.COMMAND_BGM] = bgm_list
+
+	if not order_list.has(GlobalType.COMMAND_CHARACTER) and prev_command.has(GlobalType.COMMAND_CHARACTER):
+		var character_list = []
+		for character_command in prev_command[GlobalType.COMMAND_CHARACTER]:
+			if character_command[0] != GlobalType.COMMAND_CLEAR:
+				character_list.append(character_command)
+		order_list[GlobalType.COMMAND_CHARACTER] = character_list
+
+	if order_list.has(GlobalType.COMMAND_EFFECT):
+		var effects = order_list[GlobalType.COMMAND_EFFECT]
 		var grouped = {}
 		for effect in effects:
 			var pos = effect[0]
@@ -194,7 +199,7 @@ func extend_from_prev_command(order_list: Dictionary):
 			# normalize each effect instance: unwrap nested ["effect", pos, step]
 			var normalized_steps = []
 			for s in effect.slice(1):
-				if typeof(s) == TYPE_ARRAY and s.size() >= 1 and s[0] == "effect" and s.size() >= 3:
+				if typeof(s) == TYPE_ARRAY and s.size() >= 1 and s[0] == GlobalType.COMMAND_EFFECT and s.size() >= 3:
 					normalized_steps.append(s[2])
 				else:
 					normalized_steps.append(s)
@@ -204,27 +209,29 @@ func extend_from_prev_command(order_list: Dictionary):
 		var final_effects = []
 		for pos in grouped:
 			final_effects.append(grouped[pos])
-		order_list["effect"] = final_effects
+		order_list[GlobalType.COMMAND_EFFECT] = final_effects
 	return
 		
 func set_prev_command(command: Dictionary):
 	var new_prev = command.duplicate(true)
-	if new_prev.has("effect"):
-		for effect_group in new_prev["effect"]:
-			var pos = effect_group[0]
-			for step_group in effect_group.slice(1):
-				for step in step_group:
-					if step[0] == "transit" or step[0] == "appear":
-						var sprite = step[1]
-						if not new_prev.has("character"):
-							new_prev["character"] = []
-						var updated = false
-						for character in new_prev["character"]:
-							if character[1] == pos:
-								character[0] = sprite
-								updated = true
-						if not updated:
-							new_prev["character"].append([sprite, pos])
+	if !new_prev.has(GlobalType.COMMAND_EFFECT):
+		return new_prev
+	for effect_group in new_prev[GlobalType.COMMAND_EFFECT]:
+		var pos = effect_group[0]
+		for step_group in effect_group.slice(1):
+			for step in step_group:
+				if not (step[0] == GlobalType.EFFECT_TRANSIT or step[0] == GlobalType.EFFECT_APPEAR):
+					continue
+				var sprite = step[1]
+				if not new_prev.has(GlobalType.COMMAND_CHARACTER):
+					new_prev[GlobalType.COMMAND_CHARACTER] = []
+				var updated = false
+				for character in new_prev[GlobalType.COMMAND_CHARACTER]:
+					if character[1] == pos:
+						character[0] = sprite
+						updated = true
+				if not updated:
+					new_prev[GlobalType.COMMAND_CHARACTER].append([sprite, pos])
 	return new_prev
 	
 #return the list of choices and respected new chapter	

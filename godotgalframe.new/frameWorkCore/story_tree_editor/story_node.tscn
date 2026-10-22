@@ -31,4 +31,3 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_lock_ = true
 
-[connection signal="pressed" from="." to="." method="_on_pressed"]

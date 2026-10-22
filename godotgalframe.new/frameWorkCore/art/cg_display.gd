@@ -2,14 +2,19 @@ extends CanvasLayer
 # 查看CG中所有需要载入的CG
 var cg_all:CGS = ResourceLoader.load(GlobalResources.cg_all_path)
 @onready var cg_slots: GridContainer = $main/CenterContainer/GridContainer
-var cg_list = cg_all.get_cg()
-var cg_cover_list = cg_all.get_cg_cover()
+@onready var main: TextureRect = $main
+@onready var present_pic: TextureRect = $present_pic
+@onready var present_vid: VideoStreamPlayer = $present_vid
+@onready var return_button: TextureButton = $main/return
+var cg_list = cg_all.get_cg().duplicate()
+var cg_cover_list = cg_all.get_cg_cover().duplicate()
 # Called when the node enters the scene tree for the first time.
 
 
 func _ready():
-	$present_pic.visible = false
-	$present_vid.visible = false
+	return_button.pressed.connect(_on_return_pressed)
+	present_pic.visible = false
+	present_vid.visible = false
 	get_cover()
 	load_unlock()
 	for slot in cg_slots.get_children():
@@ -20,12 +25,12 @@ func _ready():
 
 
 func _process(_delta):
-	if (Input.is_action_just_pressed("return") or Input.is_action_just_pressed("press")) and ($present_pic.visible or $present_vid.visible):
-		$present_pic.texture = null
-		$present_vid.stream = null
-		$main.visible = true
-		$present_pic.visible = false
-		$present_vid.visible = false
+	if (Input.is_action_just_pressed("return") or Input.is_action_just_pressed("press")) and (present_pic.visible or present_vid.visible):
+		present_pic.texture = null
+		present_vid.stream = null
+		main.visible = true
+		present_pic.visible = false
+		present_vid.visible = false
 	
 	
 func get_cover():
@@ -58,14 +63,14 @@ func present(CG_name: String):
 	if file_at == null:
 		return
 	if CG_name.ends_with(".ogv"):
-		$present_vid.show()
-		$present_vid.stream = ResourceLoader.load(file_at)
-		$present_vid.play()
-		$main.hide()
+		present_vid.show()
+		present_vid.stream = ResourceLoader.load(file_at)
+		present_vid.play()
+		main.hide()
 	else:
-		$present_pic.show()
-		$present_pic.texture = ResourceLoader.load(file_at)
-		$main.hide()
+		present_pic.show()
+		present_pic.texture = ResourceLoader.load(file_at)
+		main.hide()
 
 		
 func _on_return_pressed():

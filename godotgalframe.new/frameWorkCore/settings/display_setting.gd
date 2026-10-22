@@ -12,8 +12,17 @@ var loading
 
 @onready var play_example: TextureRect = $play_example/TextureRect
 @onready var auto_play_example: TextureRect = $auto_play_example/TextureRect
+@onready var windows_button: TextureButton = $display/CenterContainer/HBoxContainer/windows
+@onready var fullscreen_button: TextureButton = $display/CenterContainer/HBoxContainer/fullscreen
 
 # Called when the node enters the scene tree for the first time.
+
+func _ready():
+	play_speed_slider.value_changed.connect(_on_play_speed_value_changed)
+	auto_play_speed_slider.value_changed.connect(_on_auto_play_speed_value_changed)
+	transparency_slider.value_changed.connect(_on_transparency_value_changed)
+	windows_button.button_down.connect(_on_windows_button_down)
+	fullscreen_button.button_down.connect(_on_fullscreen_button_down)
 	
 func load_value():
 	var saved_data:PlayerSetting = ResourceLoader.load(GlobalResources.setting_save_path)

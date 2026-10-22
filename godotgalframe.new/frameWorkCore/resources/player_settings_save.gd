@@ -14,8 +14,8 @@ class_name PlayerSetting
 @export var dialogue_box_transparency = 100.0
 # Called when the node enters the scene tree for the first time.
 func reset_all():
-	play_speed = 20
-	auto_play_speed = 20
+	play_speed = 50
+	auto_play_speed = 50
 	red = 140
 	green = 140
 	blue = 140
@@ -29,7 +29,7 @@ func reset_all():
 	
 	
 func reset_setting_display():
-	windows_color = Color(140.0,140.0,140.0,200)
+	windows_color = Color(float(red)/255.0,float(green)/255.0,float(blue)/255.0,alpha/100.0)
 	
 func save_play_speed(speed: float):
 	play_speed = speed

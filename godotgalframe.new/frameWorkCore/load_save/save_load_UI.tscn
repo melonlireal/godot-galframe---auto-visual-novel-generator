@@ -133,4 +133,3 @@ offset_right = 0.959961
 offset_bottom = 2.0
 expand_mode = 1
 
-[connection signal="pressed" from="TextureRect/return" to="." method="_on_return_pressed"]

@@ -5,7 +5,7 @@ var avatar_list = []
 func update_art_list(orders: Array):
 	avatar_list = []
 	for order in orders:
-		if order[0] != "clear":
+		if order[0] != GlobalType.COMMAND_CLEAR:
 			avatar_list.append(str(order[1]))
 	return
 	
@@ -26,7 +26,7 @@ func change_avatars(avatar_commands: Array):
 		var avatar_name = avatar_command[0]
 		var avatar_location = avatar_command[1]
 		# used to clear all avatar
-		if avatar_name == "clear":
+		if avatar_name == GlobalType.COMMAND_CLEAR:
 			clear_all_avatar()
 			return
 		avatar_clear()

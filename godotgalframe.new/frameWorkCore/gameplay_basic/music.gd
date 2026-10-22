@@ -35,12 +35,12 @@ func next_line():
 func change_bgm(bgm_commands: Array):
 	for bgm_command in bgm_commands:
 		var which_bgm = bgm_command[0]
-		if which_bgm == "clear":
+		if which_bgm == GlobalType.COMMAND_CLEAR:
 			music_clear("bgm")
 			continue
 		if which_bgm in bgmlist:
 			print("music already playing!\n")
-			return
+			continue
 		bgmlist.append(which_bgm)
 		add_music_to_slot("bgm", which_bgm)
 	
@@ -48,7 +48,7 @@ func change_bgm(bgm_commands: Array):
 func change_sound_effect(sound_effect_commands: Array):
 	for sound_effect_command in sound_effect_commands:
 		var which_sound_effect = sound_effect_command[0]
-		if which_sound_effect == "clear":
+		if which_sound_effect == GlobalType.COMMAND_CLEAR:
 			music_clear("sound_effect")
 			continue
 		add_music_to_slot("sound_effect", which_sound_effect)
@@ -57,7 +57,7 @@ func change_sound_effect(sound_effect_commands: Array):
 func change_voice(voice_commands: Array):
 	for voice_command in voice_commands:
 		var which_voice = voice_command[0]
-		if which_voice == "clear":
+		if which_voice == GlobalType.COMMAND_CLEAR:
 			last_voice_duration = 0.0
 			music_clear("voice")
 			continue

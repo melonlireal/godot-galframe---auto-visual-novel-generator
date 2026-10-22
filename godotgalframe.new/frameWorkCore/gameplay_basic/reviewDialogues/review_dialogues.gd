@@ -8,7 +8,17 @@ var line = {"character":"", "dialogue":"", "voice":""}
 # Called when the node enters the scene tree for the first time.
 signal close
 
+@onready var line_container: VBoxContainer = $ScrollContainer/VBoxContainer
+@onready var voice_player: AudioStreamPlayer = $voice
+@onready var scroll_container: ScrollContainer = $ScrollContainer
+@onready var close_button: TextureButton = $close
+
+func _ready():
+	close_button.pressed.connect(_on_close_pressed)
+
 func _input(event: InputEvent) -> void:
+	if not visible:
+		return
 	if event.is_action_pressed("return"):
 		close.emit()
 
@@ -26,7 +36,7 @@ func get_voice(voice: String):
 func add_line():
 	if line["character"] == narrator and line["dialogue"] == "" and line["voice"] == "":
 		return
-	var container = $ScrollContainer/VBoxContainer
+	var container = line_container
 	if container.get_child_count() >= limit:
 		container.get_child(0).queue_free()
 	var compound = preload("res://frameWorkCore/gameplay_basic/reviewDialogues/line_review.tscn")
@@ -39,17 +49,14 @@ func add_line():
 	line = {"character":"", "dialogue":"", "voice":""}
 
 	
-func pop_line():
-	$ScrollContainer/VBoxContainer.get_child(0).queue_free()
-	
 func play_voice(voice_at: String):
-	$voice.stream = ResourceLoader.load(voice_at)
-	$voice.playing = true
+	voice_player.stream = ResourceLoader.load(voice_at)
+	voice_player.playing = true
 	pass
-	
+
 func jump_to_buttom():
 	await get_tree().process_frame
-	$ScrollContainer.scroll_vertical = $ScrollContainer.get_v_scroll_bar().max_value
+	scroll_container.scroll_vertical = scroll_container.get_v_scroll_bar().max_value
 	
 
 func _on_close_pressed() -> void:

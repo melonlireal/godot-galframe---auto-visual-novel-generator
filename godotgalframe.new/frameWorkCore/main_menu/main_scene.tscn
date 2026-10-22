@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dgvwnhgxg8jhj"]
+[gd_scene format=3 uid="uid://dgvwnhgxg8jhj"]
 
 [ext_resource type="Script" uid="uid://0a8m4i4ic6qg" path="res://frameWorkCore/main_menu/main_scene.gd" id="1_ybmd4"]
 [ext_resource type="FontFile" uid="uid://byyq0wl5ikrfs" path="res://artResource/UI_gameplay/EB.ttf" id="2_oru6f"]
@@ -173,17 +173,17 @@ _data = {
 &"loading": SubResource("Animation_6uvci")
 }
 
-[node name="main_scene" type="Node2D"]
+[node name="main_scene" type="Node2D" unique_id=449030520]
 script = ExtResource("1_ybmd4")
 
-[node name="menu_UI" type="CanvasLayer" parent="."]
+[node name="menu_UI" type="CanvasLayer" parent="." unique_id=1544085929]
 
-[node name="ColorRect" type="ColorRect" parent="menu_UI"]
+[node name="ColorRect" type="ColorRect" parent="menu_UI" unique_id=459838016]
 offset_right = 1916.0
 offset_bottom = 936.0
 color = Color(1, 1, 1, 0.341176)
 
-[node name="TextureRect" type="TextureRect" parent="menu_UI"]
+[node name="TextureRect" type="TextureRect" parent="menu_UI" unique_id=846985931]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -191,7 +191,7 @@ grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
 
-[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="menu_UI"]
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="menu_UI" unique_id=766633526]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -201,7 +201,7 @@ autoplay = true
 expand = true
 loop = true
 
-[node name="UI_background" type="ColorRect" parent="menu_UI"]
+[node name="UI_background" type="ColorRect" parent="menu_UI" unique_id=1235081421]
 anchors_preset = -1
 anchor_top = 0.9
 anchor_right = 1.0
@@ -209,7 +209,7 @@ anchor_bottom = 1.0
 offset_bottom = 2.0
 color = Color(0, 0, 0, 0.498039)
 
-[node name="HBoxContainer" type="HBoxContainer" parent="menu_UI"]
+[node name="HBoxContainer" type="HBoxContainer" parent="menu_UI" unique_id=1963581244]
 anchors_preset = -1
 anchor_top = 0.9
 anchor_right = 1.0
@@ -222,7 +222,7 @@ grow_vertical = 2
 theme_override_constants/separation = 160
 alignment = 1
 
-[node name="start" type="Button" parent="menu_UI/HBoxContainer"]
+[node name="start" type="Button" parent="menu_UI/HBoxContainer" unique_id=1247988447]
 layout_mode = 2
 theme_override_colors/font_hover_color = Color(0.917647, 0.701961, 0.0313726, 1)
 theme_override_fonts/font = ExtResource("2_oru6f")
@@ -230,7 +230,7 @@ theme_override_font_sizes/font_size = 60
 text = "START"
 flat = true
 
-[node name="load" type="Button" parent="menu_UI/HBoxContainer"]
+[node name="load" type="Button" parent="menu_UI/HBoxContainer" unique_id=1443649172]
 layout_mode = 2
 theme_override_colors/font_hover_color = Color(0.917647, 0.701961, 0.0313726, 1)
 theme_override_fonts/font = ExtResource("2_oru6f")
@@ -238,7 +238,7 @@ theme_override_font_sizes/font_size = 60
 text = "LOAD"
 flat = true
 
-[node name="CG" type="Button" parent="menu_UI/HBoxContainer"]
+[node name="CG" type="Button" parent="menu_UI/HBoxContainer" unique_id=111019854]
 layout_mode = 2
 theme_override_colors/font_hover_color = Color(0.917647, 0.701961, 0.0313726, 1)
 theme_override_fonts/font = ExtResource("2_oru6f")
@@ -246,7 +246,7 @@ theme_override_font_sizes/font_size = 60
 text = "CG"
 flat = true
 
-[node name="setting" type="Button" parent="menu_UI/HBoxContainer"]
+[node name="setting" type="Button" parent="menu_UI/HBoxContainer" unique_id=1144436513]
 layout_mode = 2
 theme_override_colors/font_hover_color = Color(0.917647, 0.701961, 0.0313726, 1)
 theme_override_fonts/font = ExtResource("2_oru6f")
@@ -254,7 +254,7 @@ theme_override_font_sizes/font_size = 60
 text = "SETTING"
 flat = true
 
-[node name="quit" type="Button" parent="menu_UI/HBoxContainer"]
+[node name="quit" type="Button" parent="menu_UI/HBoxContainer" unique_id=751943541]
 layout_mode = 2
 theme_override_colors/font_hover_color = Color(0.917647, 0.701961, 0.0313726, 1)
 theme_override_fonts/font = ExtResource("2_oru6f")
@@ -262,14 +262,14 @@ theme_override_font_sizes/font_size = 60
 text = "QUIT"
 flat = true
 
-[node name="menuBGM" type="AudioStreamPlayer" parent="menu_UI"]
+[node name="menuBGM" type="AudioStreamPlayer" parent="menu_UI" unique_id=2105715856]
 autoplay = true
 bus = &"bgm"
 
-[node name="start_game_transition" type="CanvasLayer" parent="."]
+[node name="start_game_transition" type="CanvasLayer" parent="." unique_id=2120020175]
 layer = 100
 
-[node name="input_blocker" type="ColorRect" parent="start_game_transition"]
+[node name="input_blocker" type="ColorRect" parent="start_game_transition" unique_id=1374859100]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -278,29 +278,19 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(1, 1, 1, 0)
 
-[node name="fade_in_out" type="Sprite2D" parent="start_game_transition"]
+[node name="fade_in_out" type="Sprite2D" parent="start_game_transition" unique_id=413323572]
 visible = false
 position = Vector2(958, 528.5)
 scale = Vector2(1, 1.025)
 texture = ExtResource("6_rjllh")
 
-[node name="loading_progress" type="Sprite2D" parent="start_game_transition"]
+[node name="loading_progress" type="Sprite2D" parent="start_game_transition" unique_id=1202301613]
 visible = false
 position = Vector2(1746, 918)
 rotation = 4.24214
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("6_q022t")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="start_game_transition"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="start_game_transition" unique_id=1868560331]
 root_node = NodePath("../..")
-libraries = {
-&"": SubResource("AnimationLibrary_y7c3j")
-}
-
-[connection signal="finished" from="menu_UI/VideoStreamPlayer" to="." method="_on_video_stream_player_finished"]
-[connection signal="pressed" from="menu_UI/HBoxContainer/start" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="menu_UI/HBoxContainer/load" to="." method="_on_load_pressed"]
-[connection signal="pressed" from="menu_UI/HBoxContainer/CG" to="." method="_on_cg_pressed"]
-[connection signal="pressed" from="menu_UI/HBoxContainer/setting" to="." method="_on_setting_pressed"]
-[connection signal="pressed" from="menu_UI/HBoxContainer/quit" to="." method="_on_quit_pressed"]
-[connection signal="animation_finished" from="start_game_transition/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+libraries/ = SubResource("AnimationLibrary_y7c3j")

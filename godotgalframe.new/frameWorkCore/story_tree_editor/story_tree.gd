@@ -1,14 +1,16 @@
 extends CanvasLayer
 class_name StoryTree
-signal load_chap
+signal load_chap(chapter_name: String, variable_of_chapter: Dictionary)
 signal close
 @onready var scroll_container: ScrollContainer = $scroll_container
 @onready var place_nodes_under_here: Control = $scroll_container/place_nodes_under_here
+@onready var close_button: TextureButton = $close
 
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	close_button.pressed.connect(_on_close_pressed)
 	for child in place_nodes_under_here.get_children():
 		if child.has_signal("load_chapter"):
 			child.load_chapter.connect(_on_load_chapter_received)

@@ -11,10 +11,21 @@ var progress:CurrGameProgress = CurrGameProgress.new()
 @onready var input_blocker: ColorRect = $start_game_transition/input_blocker
 @onready var menu_ui: CanvasLayer = $menu_UI
 @onready var menu_bgm: AudioStreamPlayer = $menu_UI/menuBGM
+@onready var start_button: Button = $menu_UI/HBoxContainer/start
+@onready var load_button: Button = $menu_UI/HBoxContainer/load
+@onready var cg_button: Button = $menu_UI/HBoxContainer/CG
+@onready var setting_button: Button = $menu_UI/HBoxContainer/setting
+@onready var quit_button: Button = $menu_UI/HBoxContainer/quit
 
 
 
 func _ready():
+	start_button.pressed.connect(_on_start_pressed)
+	load_button.pressed.connect(_on_load_pressed)
+	cg_button.pressed.connect(_on_cg_pressed)
+	setting_button.pressed.connect(_on_setting_pressed)
+	quit_button.pressed.connect(_on_quit_pressed)
+	start_game_animation_player.animation_finished.connect(_on_animation_player_animation_finished)
 	GlobalSignals.load_game_progress.connect(_on_load_game_progress)
 	GlobalSignals.game_created.connect(game_created)
 	GlobalSignals.back_to_menu.connect(_on_back_to_menu)
@@ -67,7 +78,6 @@ func _on_quit_pressed():
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "fade_out":
 		input_blocker.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		GlobalSignals.start_game.emit()
 	if anim_name == "fade_in":
 		menu_ui.visible = false
 		start_game_animation_player.play("loading")

@@ -3,7 +3,6 @@ extends Node
 
 signal load_game_progress(game_progress:CurrGameProgress)
 signal game_created
-signal start_game
 
 signal close_ui #called when any UI is closed
 signal pause_game_interaction

@@ -11,6 +11,7 @@ signal travel_to_new_chap(loaction: String)
 # Called when the node enters the scene tree for the first time.
 
 func _ready() -> void:
+	pressed.connect(_on_pressed)
 	choice_text_label.text = choice_description
 
 func _on_pressed():

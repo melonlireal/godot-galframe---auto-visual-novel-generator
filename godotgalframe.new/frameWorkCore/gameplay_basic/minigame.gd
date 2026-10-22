@@ -14,7 +14,7 @@ func add_game(game_name: String):
 	dialogue_controller.visible = false
 	ui.visible = false
 	background.visible = false
-	get_parent().add_child(loaded_game)
+	add_child(loaded_game)
 	loaded_game.end_game.connect(end_game)
 
 

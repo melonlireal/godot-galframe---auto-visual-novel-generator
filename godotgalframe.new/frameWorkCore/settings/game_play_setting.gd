@@ -9,6 +9,12 @@ extends GridContainer
 @onready var alpha_label: Label = $alpha/HBoxContainer/data_display_box/CenterContainer/data_display
 @onready var play_example: ColorRect = $play_example/example
 
+func _ready():
+	red_slider.value_changed.connect(_on_red_value_changed)
+	green_slider.value_changed.connect(_on_green_value_changed)
+	blue_slider.value_changed.connect(_on_blue_value_changed)
+	alpha_slider.value_changed.connect(_on_alpha_value_changed)
+
 
 func load_value():
 	var saved_data:PlayerSetting = ResourceLoader.load(GlobalResources.setting_save_path)

@@ -18,6 +18,19 @@ signal leave_game
 @onready var button_container: HBoxContainer = $Control/ButtonContainer
 @onready var volumn_slider: VSlider = $Control/volumn_slider
 @onready var windows_color_rect: ColorRect = $Control/ColorRect
+@onready var save_button: Button = $Control/ButtonContainer/save
+@onready var load_button: Button = $Control/ButtonContainer/load
+@onready var quicksave_button: Button = $Control/ButtonContainer/quicksave
+@onready var quickload_button: Button = $Control/ButtonContainer/quickload
+@onready var setting_button: TextureButton = $Control/ButtonContainer/setting
+@onready var volumn_button: TextureButton = $Control/ButtonContainer/volumn
+@onready var story_tree_button: TextureButton = $Control/ButtonContainer/story_tree
+@onready var review_dialogue_button: TextureButton = $Control/ButtonContainer/review_dialogue
+@onready var auto_play_button: TextureButton = $Control/ButtonContainer/auto_play
+@onready var fast_forward_button: TextureButton = $Control/ButtonContainer/fast_forward
+@onready var fast_forward_to_next_choice_button: TextureButton = $Control/ButtonContainer/fast_forward_to_next_choice
+@onready var hide_ui_button: TextureButton = $Control/ButtonContainer/hide_UI
+@onready var leave_game_button: TextureButton = $Control/ButtonContainer/leave_game
 
 var ui_visible: bool = true
 # when UI including dialogue box is not visible
@@ -31,6 +44,33 @@ var press_action_disabled: bool = false
 
 
 func _ready():
+	save_button.pressed.connect(_on_save_pressed)
+	save_button.mouse_entered.connect(_on_save_mouse_entered)
+	load_button.pressed.connect(_on_load_pressed)
+	load_button.mouse_entered.connect(_on_load_mouse_entered)
+	quicksave_button.pressed.connect(_on_quicksave_pressed)
+	quicksave_button.mouse_entered.connect(_on_quicksave_mouse_entered)
+	quickload_button.pressed.connect(_on_quickload_pressed)
+	quickload_button.mouse_entered.connect(_on_quickload_mouse_entered)
+	setting_button.pressed.connect(_on_setting_pressed)
+	setting_button.mouse_entered.connect(_on_setting_mouse_entered)
+	volumn_button.pressed.connect(_on_volumn_pressed)
+	volumn_button.mouse_entered.connect(_on_volumn_mouse_entered)
+	story_tree_button.pressed.connect(_on_story_tree_pressed)
+	story_tree_button.mouse_entered.connect(_on_story_tree_mouse_entered)
+	review_dialogue_button.pressed.connect(_on_review_dialogue_pressed)
+	review_dialogue_button.mouse_entered.connect(_on_review_dialogue_mouse_entered)
+	auto_play_button.pressed.connect(_on_auto_play_pressed)
+	auto_play_button.mouse_entered.connect(_on_auto_play_mouse_entered)
+	fast_forward_button.pressed.connect(_on_fast_forward_pressed)
+	fast_forward_button.mouse_entered.connect(_on_fast_forward_mouse_entered)
+	fast_forward_to_next_choice_button.pressed.connect(_on_fast_forward_to_next_choice_pressed)
+	fast_forward_to_next_choice_button.mouse_entered.connect(_on_fast_forward_to_next_choice_mouse_entered)
+	hide_ui_button.pressed.connect(_on_hide_ui_pressed)
+	hide_ui_button.mouse_entered.connect(_on_hide_ui_mouse_entered)
+	leave_game_button.pressed.connect(_on_leave_game_pressed)
+	leave_game_button.mouse_entered.connect(_on_leave_game_mouse_entered)
+	volumn_slider.value_changed.connect(_on_volumn_slider_value_changed)
 	function_name.text = ""
 	for nodes in button_container.get_children():
 		nodes.mouse_exited.connect(_mouse_leave_button)
@@ -54,7 +94,7 @@ func _mouse_reach_button():
 
 	
 func _on_save_mouse_entered():
-	function_name.text = "Save"
+	function_name.text = "保存"
 
 
 func _on_save_pressed() -> void:
@@ -62,7 +102,7 @@ func _on_save_pressed() -> void:
 
 
 func _on_load_mouse_entered():
-	function_name.text = "Load"
+	function_name.text = "加载"
 
 
 func _on_load_pressed() -> void:
@@ -70,7 +110,7 @@ func _on_load_pressed() -> void:
 
 
 func _on_quicksave_mouse_entered():
-	function_name.text = "Qsave"
+	function_name.text = "快速保存"
 	
 	
 func _on_quicksave_pressed() -> void:
@@ -79,7 +119,7 @@ func _on_quicksave_pressed() -> void:
 	
 	
 func _on_quickload_mouse_entered():
-	function_name.text = "Qload"
+	function_name.text = "快速加载"
 	
 	
 func _on_quickload_pressed() -> void:
@@ -88,7 +128,7 @@ func _on_quickload_pressed() -> void:
 	
 	
 func _on_setting_mouse_entered():
-	function_name.text = "Setting"
+	function_name.text = "设置"
 	
 	
 func _on_setting_pressed() -> void:
@@ -96,7 +136,7 @@ func _on_setting_pressed() -> void:
 	
 	
 func _on_volumn_mouse_entered():
-	function_name.text = "Volumn"
+	function_name.text = "音量"
 	
 	
 func _on_volumn_pressed():
@@ -117,7 +157,7 @@ func _on_volumn_slider_value_changed(value):
 	
 	
 func _on_story_tree_mouse_entered():
-	function_name.text = "Story Tree"
+	function_name.text = "剧情树"
 	
 	
 func _on_story_tree_pressed() -> void:
@@ -125,7 +165,7 @@ func _on_story_tree_pressed() -> void:
 
 
 func _on_review_dialogue_mouse_entered():
-	function_name.text = "Review Dialogue"
+	function_name.text = "台词回顾"
 	
 	
 func _on_review_dialogue_pressed() -> void:
@@ -133,7 +173,7 @@ func _on_review_dialogue_pressed() -> void:
 	
 	
 func _on_auto_play_mouse_entered():
-	function_name.text = "Auto Play"
+	function_name.text = "自动播放"
 	
 	
 func _on_auto_play_pressed() -> void:
@@ -142,7 +182,7 @@ func _on_auto_play_pressed() -> void:
 
 
 func _on_fast_forward_mouse_entered():
-	function_name.text = "Fast Forward"
+	function_name.text = "快进"
 
 
 func _on_fast_forward_pressed() -> void:
@@ -151,7 +191,7 @@ func _on_fast_forward_pressed() -> void:
 	
 	
 func _on_fast_forward_to_next_choice_mouse_entered():
-	function_name.text = "Skip"
+	function_name.text = "快进到下一选项"
 
 	
 func _on_fast_forward_to_next_choice_pressed() -> void:
@@ -160,7 +200,7 @@ func _on_fast_forward_to_next_choice_pressed() -> void:
 	
 	
 func _on_hide_ui_mouse_entered():
-	function_name.text = "Hide UI"
+	function_name.text = "隐藏UI"
 
 	
 func _on_hide_ui_pressed() -> void:
@@ -168,7 +208,7 @@ func _on_hide_ui_pressed() -> void:
 
 
 func _on_leave_game_mouse_entered():
-	function_name.text = "Exit"
+	function_name.text = "退出"
 
 
 func _on_leave_game_pressed() -> void:

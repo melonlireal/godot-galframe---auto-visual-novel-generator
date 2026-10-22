@@ -71,16 +71,39 @@ unique_name_in_owner = true
 script = ExtResource("3_ens8c")
 
 [node name="left" parent="avatar" unique_id=2052843436 instance=ExtResource("5_00gnm")]
-anchor_left = 0.05
+anchor_left = 0.025
+anchor_top = 0.2
 anchor_right = 0.6
+anchor_bottom = 1.7
+offset_left = 1.0
+offset_top = -166.0
+offset_right = -99.16016
+offset_bottom = -286.0
+scale = Vector2(1.1, 1.1)
+metadata/_edit_lock_ = true
 
 [node name="mid" parent="avatar" unique_id=1311123072 instance=ExtResource("5_00gnm")]
-anchor_left = 0.2
-anchor_right = 0.75
+anchor_left = 0.171
+anchor_top = 0.2
+anchor_right = 0.79700005
+anchor_bottom = 1.7
+offset_left = -53.320007
+offset_top = -166.0
+offset_right = -151.56006
+offset_bottom = -286.0
+scale = Vector2(1.1, 1.1)
 
 [node name="right" parent="avatar" unique_id=120063515 instance=ExtResource("5_00gnm")]
-anchor_left = 0.35
-anchor_right = 0.9
+anchor_left = 0.4
+anchor_top = 0.2
+anchor_right = 0.975
+anchor_bottom = 1.7
+offset_left = 52.159973
+offset_top = -166.0
+offset_right = -51.840088
+offset_bottom = -286.0
+scale = Vector2(1.1, 1.1)
+metadata/_edit_lock_ = true
 
 [node name="dialogue_controller" type="CanvasLayer" parent="." unique_id=1728486472]
 script = ExtResource("6_dwb8m")
@@ -161,6 +184,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0)
+metadata/_edit_lock_ = true
 
 [node name="white" type="ColorRect" parent="effects/effect_assets" unique_id=841596227]
 layout_mode = 1
@@ -170,6 +194,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
+metadata/_edit_lock_ = true
 
 [node name="UI" parent="." unique_id=1474304200 node_paths=PackedStringArray("dialogue_controller", "review_dialogues", "story_tree", "choice_controller") instance=ExtResource("6_0o83t")]
 dialogue_controller = NodePath("../dialogue_controller")
@@ -275,13 +300,3 @@ script = ExtResource("12_00gnm")
 script = ExtResource("13_ens8c")
 
 [node name="addons" type="Node2D" parent="." unique_id=1797698533]
-
-[connection signal="finished" from="background/video_background" to="." method="_on_video_background_finished"]
-[connection signal="leave_game" from="UI" to="." method="_on_leave_game"]
-[connection signal="quick_load" from="UI" to="." method="_on_quick_load"]
-[connection signal="quick_save" from="UI" to="." method="_on_quick_save"]
-[connection signal="start_auto_play" from="UI" to="." method="_on_start_auto_play"]
-[connection signal="start_fast_forward" from="UI" to="." method="_on_start_fast_forward"]
-[connection signal="start_fast_forward_to_next_choice" from="UI" to="." method="_on_start_fast_forward_to_next_choice"]
-[connection signal="timeout" from="auto_play_timer" to="." method="_on_auto_play_timer_timeout"]
-[connection signal="timeout" from="speed_up_timer" to="." method="_on_speed_up_timer_timeout"]

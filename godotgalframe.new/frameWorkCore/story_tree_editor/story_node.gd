@@ -1,6 +1,5 @@
 class_name  StoryNode
 extends TextureButton
-var script_tree:ScriptTree = ResourceLoader.load("res://save/processed_script.tres")
 ## name of this node shown in story tree after player reached first section
 @export var section_name: String = ""
 ## section name when player havn't reached this section default as ???????
@@ -17,12 +16,13 @@ var script_tree:ScriptTree = ResourceLoader.load("res://save/processed_script.tr
 @export var variable_when_travel = {}
 @onready var displayed_section_name: RichTextLabel = $displayed_section_name
 
-signal load_chapter
+signal load_chapter(travel_chap: String, variable_when_travel: Dictionary)
 @export var locked = true
 # you do not need to edit any code here
 # Called when the node enters the scene tree for the first time.
 
 func _ready() -> void:
+	pressed.connect(_on_pressed)
 	if locked:
 		displayed_section_name.text = section_name_locked
 		self.hide()

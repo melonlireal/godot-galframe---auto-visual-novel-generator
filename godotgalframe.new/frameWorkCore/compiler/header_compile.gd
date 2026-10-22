@@ -55,5 +55,5 @@ func find_variable(val: FileAccess):
 		if temp != "":
 			var line = Array(temp.rsplit(" "))
 			print(line)
-			variables.new_var(line[0], line[1])
+			variables.set_new_var(line[0], int(line[1]))
 	ResourceSaver.save(variables,save_path + var_save)

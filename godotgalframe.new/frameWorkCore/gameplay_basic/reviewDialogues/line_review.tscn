@@ -57,4 +57,3 @@ bbcode_enabled = true
 text = "一二三四五六七八九十十一十二十三十四十五十六十七十八十九二十二十一二十二二十三二十四二十五二十六二十七二十八二十九三十三十一"
 scroll_active = false
 
-[connection signal="pressed" from="." to="." method="_on_pressed"]

@@ -38,8 +38,8 @@ func play_character_effects(steps):
 
 func finish_running_effects():
 	for tween:Tween in tween_list:
-		tween.custom_step(9999)
-		tween.kill()
+		if tween.is_valid():
+			tween.custom_step(9999)
 	tween_list.clear()
 
 
@@ -50,6 +50,7 @@ func _run_action(action):
 	tween_list.append(tween)
 	var op = Callable(self, method)
 	await op.call(tween, args)
+	tween_list.erase(tween)
 	
 	
 func shake(tween:Tween, args: Array = []):
@@ -59,9 +60,9 @@ func shake(tween:Tween, args: Array = []):
 	tween.set_trans(Tween.TRANS_SINE)
 	tween.set_ease(Tween.EASE_IN_OUT)
 	var offset_default = offset_left
-	tween.tween_property(self, "offset_left", offset_default + 100, time/4)
+	tween.tween_property(self, "offset_left", offset_default + 30, time/4)
 	tween.tween_property(self, "offset_left", offset_default, time/4)
-	tween.tween_property(self, "offset_left", offset_default - 100, time/4)
+	tween.tween_property(self, "offset_left", offset_default - 30, time/4)
 	tween.tween_property(self, "offset_left", offset_default, time/4)
 	await tween.finished
 	
@@ -73,7 +74,7 @@ func jump(tween:Tween, args: Array = []):
 	tween.set_trans(Tween.TRANS_SINE)
 	tween.set_ease(Tween.EASE_IN_OUT)
 	var offset_default = offset_top
-	tween.tween_property(self, "offset_top", offset_default - 20, time/2)
+	tween.tween_property(self, "offset_top", offset_default - 10, time/2)
 	tween.tween_property(self, "offset_top", offset_default, time/2)
 	await tween.finished
 	
@@ -85,7 +86,7 @@ func nod(tween:Tween, args: Array = []):
 	tween.set_trans(Tween.TRANS_SINE)
 	tween.set_ease(Tween.EASE_IN_OUT)
 	var offset_default = offset_top
-	tween.tween_property(self, "offset_top", offset_default + 20, time/2)
+	tween.tween_property(self, "offset_top", offset_default + 10, time/2)
 	tween.tween_property(self, "offset_top", offset_default, time/2)
 	await tween.finished
 	
@@ -138,7 +139,7 @@ func transit(tween: Tween, args: Array):
 func disappear(tween: Tween, args: Array):
 	var time = 0.5
 	if len(args) > 0:
-		time = int(args[0])
+		time = float(args[0])
 	tween.tween_property(character, "modulate:a", 0, time)
 	await tween.finished
 	character.texture = null

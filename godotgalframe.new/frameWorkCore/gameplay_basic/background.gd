@@ -27,12 +27,12 @@ func change_backgrounds(backgrounds: Array):
 		ResourceSaver.save(global_progress, GlobalResources.global_progress_path)
 		if background_name.ends_with( ".ogv"):
 			# identyfy ogv format (dynami background)
-			if background_name in videolist:
-				return
-			videolist.append(background_name)
 			if loop == "false":
 				video_background_display.loop = false
 			else:
+				if background_name in videolist:
+					return
+				videolist.append(background_name)
 				video_background_display.loop = true
 			video_background_display.stream = ResourceLoader.load(background_at)
 			video_background_display.play()

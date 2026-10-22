@@ -50,4 +50,3 @@ texture_normal = ExtResource("2_idpd4")
 ignore_texture_size = true
 stretch_mode = 5
 
-[connection signal="pressed" from="close" to="." method="_on_close_pressed"]

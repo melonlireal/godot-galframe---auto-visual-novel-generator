@@ -11,8 +11,11 @@ extends GridContainer
 @onready var sfx_volumn_slider: HSlider = $sfx_volumn/HBoxContainer/MarginContainer/sfx_volumn
 @onready var sfx_volumn_label: Label = $sfx_volumn/HBoxContainer/data_display_box/CenterContainer/data_display
 
-
-
+func _ready():
+	total_volumn_slider.value_changed.connect(_on_total_volumn_value_changed)
+	bgm_volumn_slider.value_changed.connect(_on_bgm_volumn_value_changed)
+	voice_volumn_slider.value_changed.connect(_on_voice_volumn_value_changed)
+	sfx_volumn_slider.value_changed.connect(_on_sfx_volumn_value_changed)
 
 func load_value():
 	var saved_data = ResourceLoader.load(GlobalResources.setting_save_path)

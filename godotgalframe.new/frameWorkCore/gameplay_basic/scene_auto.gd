@@ -16,6 +16,8 @@ class_name SceneAuto
 @onready var error_log: CanvasLayer = $error_log
 @onready var errorlog: Label = %errorlog
 @onready var video_background: VideoStreamPlayer = $background/video_background
+@onready var auto_play_timer: Timer = $auto_play_timer
+@onready var speed_up_timer: Timer = $speed_up_timer
 
 
 var script_tree:ScriptTree = ResourceLoader.load("res://save/processed_script.tres")
@@ -31,6 +33,15 @@ var curr_state: GlobalType.GameState:
 		dialogue_controller.set_state(value)
 
 func _ready():
+	video_background.finished.connect(_on_video_background_finished)
+	ui.leave_game.connect(_on_leave_game)
+	ui.quick_load.connect(_on_quick_load)
+	ui.quick_save.connect(_on_quick_save)
+	ui.start_auto_play.connect(_on_start_auto_play)
+	ui.start_fast_forward.connect(_on_start_fast_forward)
+	ui.start_fast_forward_to_next_choice.connect(_on_start_fast_forward_to_next_choice)
+	auto_play_timer.timeout.connect(_on_auto_play_timer_timeout)
+	speed_up_timer.timeout.connect(_on_speed_up_timer_timeout)
 	var saved_variables:Variables = ResourceLoader.load(GlobalResources.variables_path)
 	variables = saved_variables.duplicate(true)
 	error_log.hide()
@@ -45,8 +56,6 @@ func _ready():
 	choice_controller.chapter_changed.connect(_on_chapter_changed)
 	choice_controller.script_tree = script_tree
 	load_setting()
-	GlobalSignals.game_created.emit()
-	# tell main scene game is created
 
 func _on_var_edited(new_variable: Variables):
 	variables = new_variable.duplicate(true)
@@ -56,8 +65,15 @@ func _on_ui_closed():
 	curr_state = GlobalType.GameState.DEFAULT
 
 
+var prev_state: GlobalType.GameState = GlobalType.GameState.DEFAULT
+var pending_voice: Array = []
+var pending_line: Array = []
+
+
 func _on_pause_game_interaction():
-	curr_state = GlobalType.GameState.PAUSED
+	if curr_state != GlobalType.GameState.TRANSITION:
+		prev_state = curr_state
+	curr_state = GlobalType.GameState.TRANSITION
 	dialogue_controller.pause_interaction()
 	ui.hide()
 	dialogue_controller.hide()
@@ -65,45 +81,62 @@ func _on_pause_game_interaction():
 
 
 func _on_unpause_game_interaction():
-	curr_state = GlobalType.GameState.DEFAULT
+	curr_state = prev_state
 	dialogue_controller.resume_interaction()
 	ui.show()
 	dialogue_controller.show()
 	avatar.visible = true
+	if not pending_line.is_empty():
+		music.change_voice(pending_voice)
+		var line: Array = pending_line
+		pending_voice = []
+		pending_line = []
+		dialogue_controller.play_line(line[0], line[1], _get_voicing_time())
 
 
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("press") and check_in_game():
-		match curr_state:
-			GlobalType.GameState.PAUSED:
-				# paused by background transition or similar; press does nothing
-				return
-			GlobalType.GameState.AUTOPLAY:
-				# press stops autoplay but does not advance to next line
-				curr_state = GlobalType.GameState.DEFAULT
-				dialogue_controller.cancel_autoplay()
-				return
-			GlobalType.GameState.SPEEDUP:
-				# press stops speedup but does not advance to next line
-				curr_state = GlobalType.GameState.DEFAULT
-				dialogue_controller.stop_speedup()
-				return
-			GlobalType.GameState.DEFAULT:
-				dialogue_controller.show()
-				ui.visible = true
-				choice_controller.visible = true
-				if not ui.is_ui_visible():
-					# redisplay hidden UI
-					ui.set_ui_visible(true)
+	if event.is_action_pressed("press"):
+		if curr_state == GlobalType.GameState.SHOWING_CG:
+			curr_state = prev_state
+			ui.show()
+			dialogue_controller.show()
+			ui.set_press_disabled(false)
+			proceed_to_next_line()
+			return
+		if check_in_game():
+			match curr_state:
+				GlobalType.GameState.PAUSED:
+					# paused by choice/minigame; press does nothing
 					return
-				if dialogue_controller.is_playing():
-					# show full dialogue if current dialogue isn't full
-					dialogue_controller.show_full()
-				else:
-					# otherwise forward to next dialogue
-					proceed_to_next_line()
+				GlobalType.GameState.TRANSITION:
+					# background transition in progress; press does nothing
+					return
+				GlobalType.GameState.AUTOPLAY:
+					# press stops autoplay but does not advance to next line
+					curr_state = GlobalType.GameState.DEFAULT
+					dialogue_controller.cancel_autoplay()
+					return
+				GlobalType.GameState.SPEEDUP:
+					# press stops speedup but does not advance to next line
+					curr_state = GlobalType.GameState.DEFAULT
+					dialogue_controller.stop_speedup()
+					return
+				GlobalType.GameState.DEFAULT:
+					dialogue_controller.show()
+					ui.visible = true
+					choice_controller.visible = true
+					if not ui.is_ui_visible():
+						# redisplay hidden UI
+						ui.set_ui_visible(true)
+						return
+					if dialogue_controller.is_playing():
+						# show full dialogue if current dialogue isn't full
+						dialogue_controller.show_full()
+					else:
+						# otherwise forward to next dialogue
+						proceed_to_next_line()
 	if Input.is_action_just_pressed("auto") and check_in_game():
 		# autoplay switches game to autoplay mode
 		_on_start_auto_play()
@@ -157,15 +190,27 @@ func proceed_to_next_line():
 
 	music.next_line() # clear respected music bus according to setting
 
+	# 转场中：背景/立绘/bgm 照常在黑屏下执行，voice 和台词延后到淡入结束再播
+	var in_transition: bool = curr_state == GlobalType.GameState.TRANSITION
+	var voice_orders: Array = text["command"].get(GlobalType.COMMAND_VOICE, [])
+	if in_transition and not voice_orders.is_empty():
+		text["command"].erase(GlobalType.COMMAND_VOICE)
+
 	ui.set_press_disabled(true)
 	command_execute(text["command"])
 	ui.set_press_disabled(false)
-	# execute the command with dialogue
+	# execute the command with the dialogue
 	#change text on dialogue box to respected character and dialogue
 	review_dialogues.get_words(text["character"], text["dialogue"])
+	if not voice_orders.is_empty():
+		review_dialogues.get_voice(voice_orders[0][0])
 	review_dialogues.add_line()
 	# add character and dialogue into review_dialogue
 	print("character ", text["character"], " is speaking script: ", text["dialogue"], "\n")
+	if in_transition:
+		pending_voice = voice_orders
+		pending_line = [text["character"], text["dialogue"]]
+		return
 	# 启动打字机播放（时长由 controller 根据状态和设置计算）
 	dialogue_controller.play_line(text["character"], text["dialogue"], _get_voicing_time())
 
@@ -187,28 +232,30 @@ func travel_to_chapter(location: String):
 
 
 func command_execute(orders: Dictionary):
-	avatar.update_art_list(orders.get("character", []))
-	avatar.change_avatars(orders.get("character", []))
-	avatar.execute_avatar_effects(orders.get("effect", []))
-	
-	background.change_backgrounds(orders.get("background", []))
+	avatar.update_art_list(orders.get(GlobalType.COMMAND_CHARACTER, []))
+	avatar.change_avatars(orders.get(GlobalType.COMMAND_CHARACTER, []))
+	avatar.execute_avatar_effects(orders.get(GlobalType.COMMAND_EFFECT, []))
 
-	chubby_play.process_chubby_commands(orders.get("chubby", []))
+	background.change_backgrounds(orders.get(GlobalType.COMMAND_BACKGROUND, []))
 
-	music.change_bgm(orders.get("bgm", []))
-	music.change_sound_effect(orders.get("sound_effect", []))
-	music.change_voice(orders.get("voice", []))
-	
-	variables.perform_var_ops(orders.get("update", []))
-		
-	if orders.has("CG"):
-		curr_state = GlobalType.GameState.DEFAULT
+	chubby_play.process_chubby_commands(orders.get(GlobalType.COMMAND_CHUBBY, []))
+
+	music.change_bgm(orders.get(GlobalType.COMMAND_BGM, []))
+	music.change_sound_effect(orders.get(GlobalType.COMMAND_SOUND_EFFECT, []))
+	music.change_voice(orders.get(GlobalType.COMMAND_VOICE, []))
+
+	variables.perform_var_ops(orders.get(GlobalType.COMMAND_UPDATE, []))
+
+	if orders.has(GlobalType.COMMAND_CG):
+		if curr_state != GlobalType.GameState.TRANSITION and curr_state != GlobalType.GameState.SHOWING_CG:
+			prev_state = curr_state
+		curr_state = GlobalType.GameState.SHOWING_CG
 		dialogue_controller.pause_interaction()
 		avatar.clear_all_avatar()
 		ui.visible = false
 		dialogue_controller.visible = false
 		ui.set_press_disabled(true)
-		background.change_backgrounds(orders["CG"][0][0], "false")
+		background.change_backgrounds([[orders[GlobalType.COMMAND_CG][0][0], "false"]])
 		print("displaying CG\n")
 	return
 
@@ -287,6 +334,8 @@ func _on_quick_load():
 
 
 func _on_start_auto_play():
+	if curr_state == GlobalType.GameState.PAUSED or curr_state == GlobalType.GameState.TRANSITION:
+		return
 	if curr_state == GlobalType.GameState.AUTOPLAY:
 		curr_state = GlobalType.GameState.DEFAULT
 		dialogue_controller.cancel_autoplay()
@@ -297,6 +346,8 @@ func _on_start_auto_play():
 
 
 func _on_start_fast_forward():
+	if curr_state == GlobalType.GameState.PAUSED or curr_state == GlobalType.GameState.TRANSITION:
+		return
 	if curr_state == GlobalType.GameState.SPEEDUP:
 		curr_state = GlobalType.GameState.DEFAULT
 		return
@@ -306,7 +357,7 @@ func _on_start_fast_forward():
 
 
 func _on_start_fast_forward_to_next_choice():
-	if curr_state == GlobalType.GameState.PAUSED:
+	if curr_state == GlobalType.GameState.PAUSED or curr_state == GlobalType.GameState.TRANSITION:
 		return
 	if !script_tree.has_nextchap():
 		print("no choice found")
@@ -340,8 +391,10 @@ func _on_video_background_finished():
 	if video_background.loop:
 		# if the background is looping, we dont care in this case
 		return
-	# otherwise it means cg or dynamic background has ended 
+	# otherwise it means cg or dynamic background has ended
 	# and its time for next line
+	if curr_state == GlobalType.GameState.SHOWING_CG:
+		curr_state = prev_state
 	ui.show()
 	dialogue_controller.show()
 	ui.set_press_disabled(false)

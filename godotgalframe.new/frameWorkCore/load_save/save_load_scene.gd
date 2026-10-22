@@ -8,33 +8,39 @@ var load_UI = "res://artResource/UI_gameplay/setting_UI/load_background.png"
 
 var temp_save = {}
 
+@onready var texture_rect: TextureRect = $TextureRect
+@onready var grid_container: GridContainer = $TextureRect/GridContainer
+@onready var display: TextureRect = $TextureRect/display
+@onready var return_button: TextureButton = $TextureRect/return
+
 
 func _ready():
+	return_button.pressed.connect(_on_return_pressed)
 	if display_save:
-		$TextureRect.texture = ResourceLoader.load(save_UI)
-		for slot in $TextureRect/GridContainer.get_children():
+		texture_rect.texture = ResourceLoader.load(save_UI)
+		for slot in grid_container.get_children():
 			slot.for_load = false
 	else :
-		$TextureRect.texture = ResourceLoader.load(load_UI)
-		for slot in $TextureRect/GridContainer.get_children():
+		texture_rect.texture = ResourceLoader.load(load_UI)
+		for slot in grid_container.get_children():
 			slot.for_load = true
-	for slot:SaveLoadSlot in $TextureRect/GridContainer.get_children():
+	for slot:SaveLoadSlot in grid_container.get_children():
 		#slot.for_load = false
 		slot.saving.connect(save_in_slot)
 		slot.loading.connect(load_from_slot)
 		slot.mouse_exited.connect(clear_display)
 		slot.hovered.connect(windows_display)
 
-		
-		
+
+
 	#self.get_parent().connect("load_game", load_game)
-	
+
 func clear_display():
-	$TextureRect/display.texture = null
+	display.texture = null
 	# 在鼠标离开保存槽位时清除放大窗口的图片
-	
+
 func windows_display(slot: int):
-	$TextureRect/display.texture = $TextureRect/GridContainer.get_child(slot).get_image()
+	display.texture = grid_container.get_child(slot).get_image()
 	# 在大窗口上展示保存截图
 	
 func get_temp_save_data(image: Image, curr_chap: String, curr_line: int, vars: Variables):
@@ -42,7 +48,7 @@ func get_temp_save_data(image: Image, curr_chap: String, curr_line: int, vars: V
 	# 收到游戏界面截图
 
 func save_in_slot(slot: int):
-	$TextureRect/GridContainer.get_child(slot).display(temp_save["image"])
+	grid_container.get_child(slot).display(temp_save["image"])
 	var progress:CurrGameProgress = CurrGameProgress.new()
 	progress.which_file = temp_save["curr_chap"]
 	progress.which_line = temp_save["curr_line"] - 1

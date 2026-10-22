@@ -72,8 +72,6 @@ func get_chapter():
 	return curr_chap
 
 func get_line_num():
-	if not all_script[curr_chap].has(curr_line):
-		return all_script[curr_chap]["lines"] + 1
 	return curr_line
 	
 func jump_choice():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dnik78jetiirv"]
+[gd_scene format=3 uid="uid://dnik78jetiirv"]
 
 [ext_resource type="Script" uid="uid://bieokddk5aiv5" path="res://frameWorkCore/compiler/mapper.gd" id="1_vymcs"]
 [ext_resource type="Script" uid="uid://bw52yl12eb564" path="res://frameWorkCore/compiler/asset_compile.gd" id="2_v71ac"]
@@ -6,33 +6,32 @@
 [ext_resource type="Script" uid="uid://dvtnlyrv6h4qb" path="res://frameWorkCore/compiler/header_compile.gd" id="4_pg34a"]
 [ext_resource type="Script" uid="uid://p3u4dneuyvic" path="res://frameWorkCore/compiler/gameplay_setting_compile.gd" id="5_g7ou4"]
 
-[node name="compiler" type="Node"]
+[node name="compiler" type="Node" unique_id=1162494660]
 script = ExtResource("1_vymcs")
 auto_color_text = true
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1327655011]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="CenterContainer"]
+[node name="Label" type="Label" parent="CenterContainer" unique_id=51509218]
 layout_direction = 2
 layout_mode = 2
 theme_override_font_sizes/font_size = 100
 text = "finished processing scripts"
 
-[node name="header_compile" type="Node" parent="."]
+[node name="header_compile" type="Node" parent="." unique_id=1888585288]
 script = ExtResource("4_pg34a")
 
-[node name="asset_compile" type="Node" parent="."]
+[node name="asset_compile" type="Node" parent="." unique_id=1583514621]
 script = ExtResource("2_v71ac")
 
-[node name="dialogue_compile" type="Node" parent="."]
+[node name="dialogue_compile" type="Node" parent="." unique_id=1971805885]
 script = ExtResource("3_g7ou4")
 
-[node name="gameplay_setting_compile" type="Node" parent="."]
+[node name="gameplay_setting_compile" type="Node" parent="." unique_id=363812769]
 script = ExtResource("5_g7ou4")
-review_dialogue_narrator_name = "[color=434444]Narrator[/color]"
 auto_clear_voice = true
