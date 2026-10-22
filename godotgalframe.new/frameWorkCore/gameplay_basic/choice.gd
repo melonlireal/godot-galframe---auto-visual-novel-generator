@@ -14,5 +14,5 @@ func _ready() -> void:
 	pressed.connect(_on_pressed)
 	choice_text_label.text = choice_description
 
-func _on_pressed():
+func _on_pressed() -> void:
 	travel_to_new_chap.emit(travel_chapter)

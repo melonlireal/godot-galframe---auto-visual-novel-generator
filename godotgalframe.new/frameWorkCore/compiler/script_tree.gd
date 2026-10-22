@@ -49,24 +49,22 @@ func change_chapter(chapter: String):
 	curr_chap = chapter
 	curr_line = 1
 
-func get_line(box: Dictionary):
+func get_line(box: Dictionary) -> GlobalType.LineStatus:
 	print("get line ", curr_line, " from ", curr_chap, "\n")
-	# if the line is not a standard line but a choice or the end of chapter
-	# return
 	if !all_script[curr_chap].has(curr_line):
 		if all_script[curr_chap].has("choice"):
-			return "choice reach"
+			return GlobalType.LineStatus.CHOICE
 		elif all_script[curr_chap].has("game"):
-			return "game"
+			return GlobalType.LineStatus.GAME
 		else:
-			return "exit"
+			return GlobalType.LineStatus.EXIT
 		
 	print("line content is ", all_script[curr_chap][curr_line], "\n")
 	box["character"] = all_script[curr_chap][curr_line]["character"]
 	box["dialogue"] = all_script[curr_chap][curr_line]["dialogue"]
 	box["command"] = all_script[curr_chap][curr_line]["command"]
 	curr_line += 1
-	return "all good"
+	return GlobalType.LineStatus.OK
 	
 func get_chapter():
 	return curr_chap

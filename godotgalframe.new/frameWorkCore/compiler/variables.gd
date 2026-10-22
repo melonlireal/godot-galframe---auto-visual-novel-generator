@@ -26,6 +26,8 @@ func var_op(variable: String, operation: String, value: String = "0"):
 	if self.has_method(operation):
 		var op = Callable(self, operation)
 		op.call(variable, value)
+	else:
+		GlobalSignals.unknown_command_error.emit(operation)
 
 func add(variable: String, value: String):
 	if variables.has(value):
@@ -61,6 +63,9 @@ func var_con(variable: String, operation: String, value: String):
 	if self.has_method(operation):
 		var op = Callable(self, operation)
 		return op.call(variable, value)
+	else:
+		GlobalSignals.unknown_command_error.emit(operation)
+		return false
 
 func great(variable: String, value: String):
 	if variables.has(value):

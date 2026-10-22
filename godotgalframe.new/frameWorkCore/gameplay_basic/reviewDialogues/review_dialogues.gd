@@ -1,10 +1,10 @@
 extends CanvasLayer
 class_name ReviewDialogues
-var gameplay_setting:GameplaySetting = ResourceLoader.load(GlobalResources.gameplay_setting_path)
-var limit = gameplay_setting.get_setting("limit")
-var narrator = gameplay_setting.get_setting("narrator")
+var gameplay_setting: GameplaySetting
+var limit: int
+var narrator: String
 
-var line = {"character":"", "dialogue":"", "voice":""}
+var line: Dictionary = {"character":"", "dialogue":"", "voice":""}
 # Called when the node enters the scene tree for the first time.
 signal close
 
@@ -13,7 +13,10 @@ signal close
 @onready var scroll_container: ScrollContainer = $ScrollContainer
 @onready var close_button: TextureButton = $close
 
-func _ready():
+func _ready() -> void:
+	gameplay_setting = ResourceLoader.load(GlobalResources.gameplay_setting_path)
+	limit = gameplay_setting.get_setting("limit")
+	narrator = gameplay_setting.get_setting("narrator")
 	close_button.pressed.connect(_on_close_pressed)
 
 func _input(event: InputEvent) -> void:
@@ -22,18 +25,18 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("return"):
 		close.emit()
 
-func get_words(character: String, dialogue: String):
+func get_words(character: String, dialogue: String) -> void:
 	if character == "":
 		line["character"] = narrator
 	else:
 		line["character"] = character
 	line["dialogue"] = dialogue
 
-func get_voice(voice: String):
+func get_voice(voice: String) -> void:
 	line["voice"] = voice
 	# this is because voice and dialogue gets processed seperately in initial design
 
-func add_line():
+func add_line() -> void:
 	if line["character"] == narrator and line["dialogue"] == "" and line["voice"] == "":
 		return
 	var container = line_container
@@ -49,12 +52,11 @@ func add_line():
 	line = {"character":"", "dialogue":"", "voice":""}
 
 	
-func play_voice(voice_at: String):
+func play_voice(voice_at: String) -> void:
 	voice_player.stream = ResourceLoader.load(voice_at)
 	voice_player.playing = true
-	pass
 
-func jump_to_buttom():
+func jump_to_buttom() -> void:
 	await get_tree().process_frame
 	scroll_container.scroll_vertical = scroll_container.get_v_scroll_bar().max_value
 	

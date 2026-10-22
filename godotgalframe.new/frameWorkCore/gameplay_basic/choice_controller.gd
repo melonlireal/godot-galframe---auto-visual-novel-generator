@@ -9,7 +9,7 @@ var script_tree: ScriptTree
 
 
 func choice_jump(variables: Variables) -> bool:
-	var choice_list = _check_choice_condition(script_tree.get_choices(), variables)
+	var choice_list: Array = _check_choice_condition(script_tree.get_choices(), variables)
 	# TODO what if creator wish to display choices but as locked?
 	if choice_list.is_empty():
 		# error checking code that shouldn't be triggered
@@ -29,7 +29,7 @@ func choice_jump(variables: Variables) -> bool:
 
 
 func _check_choice_condition(choices: Array, variables: Variables) -> Array:
-	var new_choices = []
+	var new_choices: Array = []
 	for choice_option in choices:
 		if choice_option.size() <= 3:
 			# 选项没有条件
@@ -40,12 +40,12 @@ func _check_choice_condition(choices: Array, variables: Variables) -> Array:
 	return new_choices
 
 
-func travel_to_new_chapter(location: String):
+func travel_to_new_chapter(location: String) -> void:
 	script_tree.change_chapter(location)
 	clear_choices()
 	chapter_changed.emit(location)
 
 
-func clear_choices():
+func clear_choices() -> void:
 	for child in choice_box.get_children():
 		child.queue_free()

@@ -6,7 +6,7 @@ extends CanvasLayer
 @onready var background: CanvasLayer = %background
 
 
-func add_game(game_name: String):
+func add_game(game_name: String) -> void:
 	var path = "res://frameWorkCore/mini_games/" + game_name + ".tscn"
 	var game = load(path)
 	var loaded_game = game.instantiate()
@@ -18,7 +18,7 @@ func add_game(game_name: String):
 	loaded_game.end_game.connect(end_game)
 
 
-func end_game(next_chap: String):
+func end_game(next_chap: String) -> void:
 	# will remove ALL mini_game
 	# and continue dialogue from the given chapter
 	# this is NOT INCHARGE of saving mini game progress
@@ -28,4 +28,3 @@ func end_game(next_chap: String):
 	for child in self.get_children():
 		child.queue_free()
 	get_parent().travel_to_chapter(next_chap)
-	pass

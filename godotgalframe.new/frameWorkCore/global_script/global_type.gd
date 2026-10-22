@@ -1,6 +1,7 @@
 extends Node
 
 enum GameState { DEFAULT, AUTOPLAY, SPEEDUP, PAUSED, TRANSITION, SHOWING_CG }
+enum LineStatus { OK, CHOICE, GAME, EXIT }
 
 const COMMAND_CHARACTER := "character"
 const COMMAND_BACKGROUND := "background"

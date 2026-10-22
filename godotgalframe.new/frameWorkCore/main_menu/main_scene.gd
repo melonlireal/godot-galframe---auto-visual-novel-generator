@@ -1,8 +1,8 @@
 extends Node2D
 var scene_auto = preload("res://frameWorkCore/gameplay_basic/scene_auto.tscn")
-var save_path = "user://save/"
-var global_progress_save_name = "global_game_progress_save.tres"
-var setting_save_name = "player_setting_save.tres"
+var save_path: String = "user://save/"
+var global_progress_save_name: String = "global_game_progress_save.tres"
+var setting_save_name: String = "player_setting_save.tres"
 
 var progress:CurrGameProgress = CurrGameProgress.new()
 
@@ -47,7 +47,7 @@ func _ready():
 # the code here are no longer awful
 # hopefully I think the same after a year
 
-func _on_start_pressed():
+func _on_start_pressed() -> void:
 	start_game_animation_player.play("fade_in")
 	# when start game screen will fade and load game before fading out
 	input_blocker.mouse_filter = Control.MOUSE_FILTER_STOP
@@ -55,27 +55,27 @@ func _on_start_pressed():
 	
 #	
 # the below code are UI related code
-func _on_load_pressed():
+func _on_load_pressed() -> void:
 	var loader = preload("res://frameWorkCore/load_save/save_load_UI.tscn").instantiate()
 	loader.display_save = false
 	add_child(loader)
 
-func _on_cg_pressed():
+func _on_cg_pressed() -> void:
 	var CG = preload("res://frameWorkCore/art/cg_display.tscn").instantiate()
 	add_child(CG)
 
-func _on_setting_pressed():
+func _on_setting_pressed() -> void:
 	var setting = preload("res://frameWorkCore/settings/setting_menu.tscn").instantiate()
 	add_child(setting)
 
 	
-func _on_quit_pressed():
+func _on_quit_pressed() -> void:
 	get_tree().quit()
 
 # the above code are UI related code
 
 # the below code are menu transition code
-func _on_animation_player_animation_finished(anim_name):
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "fade_out":
 		input_blocker.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	if anim_name == "fade_in":
@@ -87,19 +87,18 @@ func _on_animation_player_animation_finished(anim_name):
 			current_game.queue_free()
 		var scene:SceneAuto = scene_auto.instantiate()
 		scene.set_process(false)
-		# dont create new game if a game is already instantiated
 		add_child(scene)
 		scene.load_progress(progress)
+		scene.set_process(true)
 		scene.proceed_to_next_line()
-
-		
 	if anim_name == "loading":
-		print("loading")
+		pass
 
-func game_created():
-	start_game_animation_player.play("fade_out")
+func game_created() -> void:
+	if start_game_animation_player.is_playing():
+		start_game_animation_player.play("fade_out")
 
-func _on_back_to_menu():
+func _on_back_to_menu() -> void:
 	var current_game:SceneAuto = find_scene_auto()
 	if current_game:
 		current_game.queue_free()
@@ -109,13 +108,13 @@ func _on_back_to_menu():
 	menu_bgm.playing = true
 	menu_ui.visible = true
 	start_game_animation_player.play("fade_out")
-	
+
 func find_scene_auto():
 	for child in self.get_children():
 		if child is SceneAuto:
 			return child
 
-func _on_load_game_progress(game_progress: CurrGameProgress):
+func _on_load_game_progress(game_progress: CurrGameProgress) -> void:
 	progress = game_progress
 	_on_start_pressed()
 

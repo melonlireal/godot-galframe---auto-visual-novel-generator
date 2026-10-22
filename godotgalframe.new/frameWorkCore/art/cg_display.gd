@@ -1,17 +1,20 @@
 extends CanvasLayer
 # 查看CG中所有需要载入的CG
-var cg_all:CGS = ResourceLoader.load(GlobalResources.cg_all_path)
+var cg_all: CGS
 @onready var cg_slots: GridContainer = $main/CenterContainer/GridContainer
 @onready var main: TextureRect = $main
 @onready var present_pic: TextureRect = $present_pic
 @onready var present_vid: VideoStreamPlayer = $present_vid
 @onready var return_button: TextureButton = $main/return
-var cg_list = cg_all.get_cg().duplicate()
-var cg_cover_list = cg_all.get_cg_cover().duplicate()
+var cg_list: Array
+var cg_cover_list: Array
 # Called when the node enters the scene tree for the first time.
 
 
 func _ready():
+	cg_all = ResourceLoader.load(GlobalResources.cg_all_path)
+	cg_list = cg_all.get_cg().duplicate()
+	cg_cover_list = cg_all.get_cg_cover().duplicate()
 	return_button.pressed.connect(_on_return_pressed)
 	present_pic.visible = false
 	present_vid.visible = false
@@ -24,8 +27,8 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
 
-func _process(_delta):
-	if (Input.is_action_just_pressed("return") or Input.is_action_just_pressed("press")) and (present_pic.visible or present_vid.visible):
+func _input(event: InputEvent) -> void:
+	if (event.is_action_pressed("return") or event.is_action_pressed("press")) and (present_pic.visible or present_vid.visible):
 		present_pic.texture = null
 		present_vid.stream = null
 		main.visible = true
@@ -33,7 +36,7 @@ func _process(_delta):
 		present_vid.visible = false
 	
 	
-func get_cover():
+func get_cover() -> void:
 	for slot:CGSlot in cg_slots.get_children():
 		if cg_cover_list.is_empty():
 			return
@@ -43,13 +46,13 @@ func get_cover():
 			slot.cg = cg_list.pop_front()
 	
 	
-func unlock(cg_name: String):
+func unlock(cg_name: String) -> void:
 	for slot:CGSlot in cg_slots.get_children():
 		if slot.cg == cg_name:
 			slot.open()
 	
 	
-func load_unlock():
+func load_unlock() -> void:
 	# unlock cg from global game progress
 	print("unlocking cg")
 	var saved_data:GlobalGameProgress = ResourceLoader.load(GlobalResources.global_progress_path)
@@ -57,7 +60,7 @@ func load_unlock():
 		unlock(cg)
 	
 	# used to present cg
-func present(CG_name: String):
+func present(CG_name: String) -> void:
 	var asset_path_finder:AssetPath = ResourceLoader.load(GlobalResources.asset_map_path)
 	var file_at = asset_path_finder.search_path(CG_name)
 	if file_at == null:
@@ -73,5 +76,5 @@ func present(CG_name: String):
 		main.hide()
 
 		
-func _on_return_pressed():
+func _on_return_pressed() -> void:
 	self.queue_free()

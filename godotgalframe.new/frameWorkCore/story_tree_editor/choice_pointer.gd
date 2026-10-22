@@ -20,14 +20,12 @@ var gap: float = 2.0
 @onready var line: Line2D = $Line2D
 @onready var head: Sprite2D = $Sprite2D
 
-func _process(_delta):
+func _process(_delta: float) -> void:
 	# update once assigned start and end
 	if start_box and end_box:
 		update_arrow()
-	else:
-		pass
 		
-func choice_pointer_unlock():
+func choice_pointer_unlock() -> void:
 	if not (start_box and end_box):
 		queue_free()
 	if start_box.locked or end_box.locked:
@@ -36,29 +34,29 @@ func choice_pointer_unlock():
 		self.show()
 		
 
-func update_arrow():
-	var arrowhead_half_height = (head.texture.get_size().y * head.scale.y) / 2
+func update_arrow() -> void:
+	var arrowhead_half_height: float = (head.texture.get_size().y * head.scale.y) / 2
 	# start point: midpoint at bottom of start node
-	var p0 = start_box.global_position + Vector2(start_box.size.x / 2, start_box.size.y)
+	var p0: Vector2 = start_box.global_position + Vector2(start_box.size.x / 2, start_box.size.y)
 	
 	# end point: midpoint at top of end node - radius of arrow
-	var p3 = end_box.global_position + Vector2(end_box.size.x / 2, -arrowhead_half_height - gap)
+	var p3: Vector2 = end_box.global_position + Vector2(end_box.size.x / 2, -arrowhead_half_height - gap)
 	
 	# P1, P2:control point
-	var p1 = p0 + Vector2(0, vertical_offset)
-	var p2 = p3 + Vector2(0, -vertical_offset)
+	var p1: Vector2 = p0 + Vector2(0, vertical_offset)
+	var p2: Vector2 = p3 + Vector2(0, -vertical_offset)
 	
 	# generate bell curve
-	var points = PackedVector2Array()
+	var points: PackedVector2Array = PackedVector2Array()
 	for i in range(segments + 1):
-		var t = i / float(segments)
+		var t: float = i / float(segments)
 		# 三次贝塞尔公式插值
-		var q0 = p0.lerp(p1, t)
-		var q1 = p1.lerp(p2, t)
-		var q2 = p2.lerp(p3, t)
-		var r0 = q0.lerp(q1, t)
-		var r1 = q1.lerp(q2, t)
-		var pos = r0.lerp(r1, t)
+		var q0: Vector2 = p0.lerp(p1, t)
+		var q1: Vector2 = p1.lerp(p2, t)
+		var q2: Vector2 = p2.lerp(p3, t)
+		var r0: Vector2 = q0.lerp(q1, t)
+		var r1: Vector2 = q1.lerp(q2, t)
+		var pos: Vector2 = r0.lerp(r1, t)
 		points.append(to_local(pos))
 	line.points = points
 	# place the arrow at last point

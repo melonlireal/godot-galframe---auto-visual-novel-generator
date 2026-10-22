@@ -133,7 +133,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="display_setting" type="GridContainer" parent="settings" unique_id=547311542]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.028
@@ -742,6 +741,7 @@ theme_override_font_sizes/font_size = 24
 text = "100"
 
 [node name="game_play_setting" type="GridContainer" parent="settings" unique_id=557050882]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.028

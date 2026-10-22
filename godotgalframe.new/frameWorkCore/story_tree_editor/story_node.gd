@@ -10,14 +10,14 @@ extends TextureButton
 ## the chapter this story node will load when it is cliecked
 @export var travel_chap: String = ""
 ## it is advised to turn off this section when the chapter has variable requirements
-@export var enable_travel = true
+@export var enable_travel: bool = true
 ## if you want player to be able to travel to variable related chapter
 ## fill the variables at the start of chapter in here
-@export var variable_when_travel = {}
+@export var variable_when_travel: Dictionary = {}
 @onready var displayed_section_name: RichTextLabel = $displayed_section_name
 
 signal load_chapter(travel_chap: String, variable_when_travel: Dictionary)
-@export var locked = true
+@export var locked: bool = true
 # you do not need to edit any code here
 # Called when the node enters the scene tree for the first time.
 
@@ -30,7 +30,7 @@ func _ready() -> void:
 		displayed_section_name.text = section_name
 
 
-func story_node_unlock(chapter_name: String):
+func story_node_unlock(chapter_name: String) -> void:
 	if unlock_chap == chapter_name:
 		self.show()
 		displayed_section_name.text = section_name

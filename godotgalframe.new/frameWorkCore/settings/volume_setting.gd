@@ -11,61 +11,59 @@ extends GridContainer
 @onready var sfx_volumn_slider: HSlider = $sfx_volumn/HBoxContainer/MarginContainer/sfx_volumn
 @onready var sfx_volumn_label: Label = $sfx_volumn/HBoxContainer/data_display_box/CenterContainer/data_display
 
+var _saved_data: PlayerSetting
+
 func _ready():
+	_saved_data = ResourceLoader.load(GlobalResources.setting_save_path)
 	total_volumn_slider.value_changed.connect(_on_total_volumn_value_changed)
 	bgm_volumn_slider.value_changed.connect(_on_bgm_volumn_value_changed)
 	voice_volumn_slider.value_changed.connect(_on_voice_volumn_value_changed)
 	sfx_volumn_slider.value_changed.connect(_on_sfx_volumn_value_changed)
+	total_volumn_slider.drag_ended.connect(func(_c): ResourceSaver.save(_saved_data, GlobalResources.setting_save_path))
+	bgm_volumn_slider.drag_ended.connect(func(_c): ResourceSaver.save(_saved_data, GlobalResources.setting_save_path))
+	voice_volumn_slider.drag_ended.connect(func(_c): ResourceSaver.save(_saved_data, GlobalResources.setting_save_path))
+	sfx_volumn_slider.drag_ended.connect(func(_c): ResourceSaver.save(_saved_data, GlobalResources.setting_save_path))
 
-func load_value():
-	var saved_data = ResourceLoader.load(GlobalResources.setting_save_path)
-	
-	var total_volumn = saved_data.total_volumn
+func load_value() -> void:
+	_saved_data = ResourceLoader.load(GlobalResources.setting_save_path)
+
+	var total_volumn: float = _saved_data.total_volumn
 	total_volumn_slider.value = total_volumn
 	total_volumn_label.text = str(total_volumn * 100)
-	
-	var bgm_volumn = saved_data.bgm_volumn
+
+	var bgm_volumn: float = _saved_data.bgm_volumn
 	bgm_volumn_slider.value = bgm_volumn
 	bgm_volumn_label.text = str(bgm_volumn * 100)
-	
-	var voice_volumn = saved_data.voice_volumn
+
+	var voice_volumn: float = _saved_data.voice_volumn
 	voice_volumn_slider.value = voice_volumn
 	voice_volumn_label.text = str(voice_volumn * 100)
-	
-	var sfx_volumn = saved_data.sfx_volumn
+
+	var sfx_volumn: float = _saved_data.sfx_volumn
 	sfx_volumn_slider.value = sfx_volumn
 	sfx_volumn_label.text = str(sfx_volumn * 100)
 
 
-
-func _on_total_volumn_value_changed(value):
-	var saved_data = ResourceLoader.load(GlobalResources.setting_save_path)
-	saved_data.total_volumn = value
+func _on_total_volumn_value_changed(value: float) -> void:
+	_saved_data.total_volumn = value
 	var bus = AudioServer.get_bus_index("Master")
 	AudioServer.set_bus_volume_db(bus, linear_to_db(value))
-	ResourceSaver.save(saved_data, GlobalResources.setting_save_path)
 	total_volumn_label.text = str(value * 100)
-	
-func _on_bgm_volumn_value_changed(value):
-	var saved_data = ResourceLoader.load(GlobalResources.setting_save_path)
-	saved_data.bgm_volumn = value
+
+func _on_bgm_volumn_value_changed(value: float) -> void:
+	_saved_data.bgm_volumn = value
 	var bus = AudioServer.get_bus_index("bgm")
 	AudioServer.set_bus_volume_db(bus, linear_to_db(value))
-	ResourceSaver.save(saved_data, GlobalResources.setting_save_path)
 	bgm_volumn_label.text = str(value * 100)
 
-func _on_voice_volumn_value_changed(value):
-	var saved_data = ResourceLoader.load(GlobalResources.setting_save_path)
-	saved_data.voice_volumn = value
+func _on_voice_volumn_value_changed(value: float) -> void:
+	_saved_data.voice_volumn = value
 	var bus = AudioServer.get_bus_index("voice")
 	AudioServer.set_bus_volume_db(bus, linear_to_db(value))
-	ResourceSaver.save(saved_data, GlobalResources.setting_save_path)
 	voice_volumn_label.text = str(value * 100)
 
-func _on_sfx_volumn_value_changed(value):
-	var saved_data = ResourceLoader.load(GlobalResources.setting_save_path)
-	saved_data.sfx_volumn = value
+func _on_sfx_volumn_value_changed(value: float) -> void:
+	_saved_data.sfx_volumn = value
 	var bus = AudioServer.get_bus_index("sfx")
 	AudioServer.set_bus_volume_db(bus, linear_to_db(value))
-	ResourceSaver.save(saved_data, GlobalResources.setting_save_path)
 	sfx_volumn_label.text = str(value * 100)

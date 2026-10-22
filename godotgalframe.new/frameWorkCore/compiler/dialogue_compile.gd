@@ -12,14 +12,10 @@ var processed_dialogue = []
 
 func compile_dialogues():
 	var script_tree = ScriptTree.new()
-	ResourceSaver.save(script_tree, save_path + scripts_file)
-	# 先创建对应的保存文件
 	dialogue_list = find_all_dialogue(res_dialogue)
-	# compile dialogues
-	dialogue_proof_read(["Start.txt", dialogue_start])
-	var scripts: ScriptTree = ResourceLoader.load(save_path + scripts_file)
-	scripts.set_starting_point() # reset the starting point 
-	ResourceSaver.save(scripts, save_path + scripts_file)
+	dialogue_proof_read(["Start.txt", dialogue_start], script_tree)
+	script_tree.set_starting_point()
+	ResourceSaver.save(script_tree, save_path + scripts_file)
 
 func find_all_dialogue(dir: String):
 	# find all txt file and their respected link
@@ -41,12 +37,11 @@ func helper_find_chapter_from_choice(which_chap: String):
 		if chapters[0] == which_chap:
 			return chapters
 
-func dialogue_proof_read(chapter: Array):
+func dialogue_proof_read(chapter: Array, script_tree: ScriptTree):
 	var temp_command
 	var chap_name = chapter[0]
 	var chap_dir = chapter[1]
 	var file = FileAccess.open(chap_dir, FileAccess.READ)
-	var script_tree: ScriptTree = ResourceLoader.load(save_path + scripts_file)
 	script_tree.change_chapter(chap_name)
 	while !file.eof_reached():
 		var text = file.get_line()
@@ -54,8 +49,8 @@ func dialogue_proof_read(chapter: Array):
 		# incase a blank line is left, once a blank line is detected
 		# skip until a none blank line is reached
 			if file.eof_reached():
+				file.close()
 				script_tree.set_starting_point()
-				ResourceSaver.save(script_tree, save_path + scripts_file)
 				return
 			text = file.get_line()
 		if text == "choice":
@@ -64,12 +59,11 @@ func dialogue_proof_read(chapter: Array):
 			# the art and text at choice block MUST be from previous line
 			file.close()
 			processed_dialogue.append(chap_name)
-			ResourceSaver.save(script_tree, save_path + scripts_file)
 			temp_command = prev_command
 			for choice in choices:
 				prev_command = temp_command
 				if choice[1] not in processed_dialogue:
-					dialogue_proof_read(helper_find_chapter_from_choice(choice[1]))
+					dialogue_proof_read(helper_find_chapter_from_choice(choice[1]), script_tree)
 			return
 		elif text == "game":
 			var game = file.get_line()
@@ -82,7 +76,7 @@ func dialogue_proof_read(chapter: Array):
 				for i in range(1, len(game)):
 					prev_command = temp_command
 					if game[i] not in processed_dialogue:
-						dialogue_proof_read(helper_find_chapter_from_choice(game[i]))
+						dialogue_proof_read(helper_find_chapter_from_choice(game[i]), script_tree)
 			return
 		text = text.replace("：", ":")
 		var command = ""
@@ -111,6 +105,7 @@ func dialogue_proof_read(chapter: Array):
 		var command_list = process_commands(command)
 		script_tree.add_line(character, dialogue, command_list)
 		# make sure complete empty line are ignored
+	file.close()
 	ResourceSaver.save(script_tree, save_path + scripts_file)
 	return
 	

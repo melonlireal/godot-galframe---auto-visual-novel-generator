@@ -1,6 +1,6 @@
 extends CanvasLayer
-var asset_map:AssetPath = ResourceLoader.load("res://save/mapper_total.tres")
-var cg_header:CGS = ResourceLoader.load("res://save/cg.tres") 
+var asset_map: AssetPath
+var cg_header: CGS
 @onready var background_display: TextureRect = $background
 @onready var video_background_display: VideoStreamPlayer = $video_background
 @onready var effect_black: ColorRect = $"../effects/effect_assets/black"
@@ -8,16 +8,20 @@ var cg_header:CGS = ResourceLoader.load("res://save/cg.tres")
 
 
 
-var videolist = []
+var videolist: Array[String] = []
 	
-func change_backgrounds(backgrounds: Array):
+func _ready() -> void:
+	asset_map = ResourceLoader.load(GlobalResources.asset_map_path)
+	cg_header = ResourceLoader.load(GlobalResources.cg_all_path)
+
+func change_backgrounds(backgrounds: Array) -> void:
 	for background in backgrounds:
 		var background_name:String = background[0]
 		if self.has_method(background_name):
 			var op = Callable(self, background_name)
 			op.call()
 			return
-		var loop = background[1]
+		var loop: String = background[1]
 		var background_at = asset_map.search_path(background_name)
 		if background_at == null:
 			GlobalSignals.background_error.emit(background_name)
@@ -41,7 +45,7 @@ func change_backgrounds(backgrounds: Array):
 			background_display.texture = ResourceLoader.load(background_at)
 			video_background_display.stream = null
 
-func clear_background():
+func clear_background() -> void:
 	background_display.texture = null
 	video_background_display.stream = null
 	videolist = []
@@ -49,7 +53,7 @@ func clear_background():
 # the following functions are hard coded transitions
 # WARNING a new background command must be placed after a transition command
 #
-func fadeout():
+func fadeout() -> void:
 		GlobalSignals.pause_game_interaction.emit()
 		var transit = create_tween()
 		transit.tween_property(effect_black, "color:a", 1, 0.5)
@@ -60,7 +64,7 @@ func fadeout():
 		await transit2.finished
 		GlobalSignals.unpause_game_interaction.emit()
 
-func flash():
+func flash() -> void:
 		GlobalSignals.pause_game_interaction.emit()
 		var transit = get_tree().create_tween().bind_node(effect_white)
 		transit.tween_property(effect_white, "color:a", 1, 0.5)
@@ -71,5 +75,5 @@ func flash():
 		await transit2.finished
 		GlobalSignals.unpause_game_interaction.emit()
 
-func shake():
+func shake() -> void:
 	pass

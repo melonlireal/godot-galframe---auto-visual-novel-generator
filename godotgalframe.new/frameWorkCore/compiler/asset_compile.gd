@@ -18,13 +18,13 @@ func compile_asset():
 func find_all_asset(dir: String):
 	# find all file and location under the respected folder
 	# and save them in mapper_total
+	var mapper: AssetPath = ResourceLoader.load(save_path + asset_save)
 	var files = DirAccess.open(dir)
 	for file in files.get_files():
 		var location = $"..".helper_search_file(dir, file)
-		var mapper = ResourceLoader.load(save_path + asset_save)
 		mapper.add_path(file, location)
 		print("mapped ", file, " to location ", location)
-		ResourceSaver.save(mapper, save_path + asset_save)
+	ResourceSaver.save(mapper, save_path + asset_save)
 	for directories in files.get_directories():
 		find_all_asset(dir + "/" + directories)
 		

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Variables" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="Variables" format=3]
 
 [ext_resource type="Script" path="res://frameWorkCore/compiler/variables.gd" id="1_ay0hx"]
 

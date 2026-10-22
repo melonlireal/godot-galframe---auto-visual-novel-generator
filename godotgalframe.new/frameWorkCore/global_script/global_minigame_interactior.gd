@@ -6,10 +6,10 @@ var curr_variable:Variables =  null
 func set_variable(variable: Variables):
 	curr_variable = variable
 # read method
-func get_game_var(varname: String): # get one game variable 
+func get_game_var(varname: String) -> Variant: # get one game variable 
 	return curr_variable.get_var_val(varname)
 
-func get_all_var(): # get all variable and return as dictionary
+func get_all_var() -> Dictionary: # get all variable and return as dictionary
 	return curr_variable.get_all_var()
 
 # write method

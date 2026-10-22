@@ -3,19 +3,22 @@ extends CanvasLayer
 @onready var back: TextureRect = $back
 @onready var front: TextureRect = $front
 
-# Called when the node enters the scene tree for the first time.
+var _asset_path_finder: AssetPath
 
-func reset_chubby():
+func _ready():
+	_asset_path_finder = ResourceLoader.load(GlobalResources.asset_map_path)
+
+func reset_chubby() -> void:
 	back.texture = null
 	front.texture = null
 	back.modulate.a = 1.0
 	front.modulate.a = 0.0
 	
-func process_chubby_commands(chubby_commands:Array):
+func process_chubby_commands(chubby_commands:Array) -> void:
 	for chubby_command in chubby_commands:
 		await swap(chubby_command[0])
 
-func swap(next_slide: String):
+func swap(next_slide: String) -> void:
 	var transit_front = get_tree().create_tween().bind_node(front)
 	var transit_back = get_tree().create_tween().bind_node(back)
 	front.modulate.a = 0.0
@@ -26,8 +29,7 @@ func swap(next_slide: String):
 		back.texture = null
 		back.modulate.a = 1.0
 		return
-	var asset_path_finder:AssetPath = ResourceLoader.load(GlobalResources.asset_map_path)
-	var next_slide_at = asset_path_finder.search_path(next_slide)
+	var next_slide_at: String = _asset_path_finder.search_path(next_slide)
 	if next_slide_at == null:
 		GlobalSignals.background_error.emit(next_slide)
 		return

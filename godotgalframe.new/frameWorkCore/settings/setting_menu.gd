@@ -23,32 +23,32 @@ func _ready():
 	options_display._on_pressed()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
-func load_setting():
+func load_setting() -> void:
 	for node in settings.get_children():
 		node.load_value()
 
 
-func set_default():
+func set_default() -> void:
 	pass
 
-func _on_return_button_down():
+func _on_return_button_down() -> void:
 	GlobalSignals.close_ui.emit()
 	reload_setting.emit()
 	self.queue_free()
 
 
-func _on_display_pressed():
+func _on_display_pressed() -> void:
 	volumn_setting.visible = false
 	game_play_setting.visible = false
 	display_setting.visible = true
 
-func _on_volumn_pressed():
+func _on_volumn_pressed() -> void:
 	display_setting.visible = false
 	game_play_setting.visible = false
 	volumn_setting.visible = true
 
 
-func _on_play_pressed():
+func _on_play_pressed() -> void:
 	volumn_setting.visible = false
 	display_setting.visible = false
 	game_play_setting.visible = true

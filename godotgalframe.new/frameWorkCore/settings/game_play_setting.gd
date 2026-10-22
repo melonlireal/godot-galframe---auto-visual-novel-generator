@@ -9,62 +9,60 @@ extends GridContainer
 @onready var alpha_label: Label = $alpha/HBoxContainer/data_display_box/CenterContainer/data_display
 @onready var play_example: ColorRect = $play_example/example
 
+var _saved_data: PlayerSetting
+
 func _ready():
+	_saved_data = ResourceLoader.load(GlobalResources.setting_save_path)
 	red_slider.value_changed.connect(_on_red_value_changed)
 	green_slider.value_changed.connect(_on_green_value_changed)
 	blue_slider.value_changed.connect(_on_blue_value_changed)
 	alpha_slider.value_changed.connect(_on_alpha_value_changed)
+	red_slider.drag_ended.connect(func(_c): ResourceSaver.save(_saved_data, GlobalResources.setting_save_path))
+	green_slider.drag_ended.connect(func(_c): ResourceSaver.save(_saved_data, GlobalResources.setting_save_path))
+	blue_slider.drag_ended.connect(func(_c): ResourceSaver.save(_saved_data, GlobalResources.setting_save_path))
+	alpha_slider.drag_ended.connect(func(_c): ResourceSaver.save(_saved_data, GlobalResources.setting_save_path))
 
 
-func load_value():
-	var saved_data:PlayerSetting = ResourceLoader.load(GlobalResources.setting_save_path)
-	play_example.color = saved_data.windows_color
-	
-	var red = saved_data.red
+func load_value() -> void:
+	_saved_data = ResourceLoader.load(GlobalResources.setting_save_path)
+	play_example.color = _saved_data.windows_color
+
+	var red: float = _saved_data.red
 	red_slider.value = red
 	red_label.text = str(red)
-	
-	var green = saved_data.green
+
+	var green: float = _saved_data.green
 	green_slider.value = green
 	green_label.text = str(green)
-	
-	var blue = saved_data.blue
+
+	var blue: float = _saved_data.blue
 	blue_slider.value = blue
 	blue_label.text = str(blue)
-	
-	var alpha = saved_data.alpha
+
+	var alpha: float = _saved_data.alpha
 	alpha_slider.value = alpha
 	alpha_label.text = str(alpha)
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 
 
-func _on_red_value_changed(value):
-	var saved_data = ResourceLoader.load(GlobalResources.setting_save_path)
-	saved_data.change_red(value)
+func _on_red_value_changed(value: float) -> void:
+	_saved_data.change_red(value)
 	play_example.color.r = value/255
-	ResourceSaver.save(saved_data, GlobalResources.setting_save_path)
-	red_label.text = str(saved_data.red)
+	red_label.text = str(_saved_data.red)
 
 
-func _on_green_value_changed(value):
-	var saved_data = ResourceLoader.load(GlobalResources.setting_save_path)
-	saved_data.change_green(value)
+func _on_green_value_changed(value: float) -> void:
+	_saved_data.change_green(value)
 	play_example.color.g = value/255
-	ResourceSaver.save(saved_data, GlobalResources.setting_save_path)
-	green_label.text = str(saved_data.green)
-	
-	
-func _on_blue_value_changed(value):
-	var saved_data = ResourceLoader.load(GlobalResources.setting_save_path)
-	saved_data.change_blue(value)
+	green_label.text = str(_saved_data.green)
+
+
+func _on_blue_value_changed(value: float) -> void:
+	_saved_data.change_blue(value)
 	play_example.color.b = value/255
-	ResourceSaver.save(saved_data, GlobalResources.setting_save_path)
-	blue_label.text = str(saved_data.blue)
+	blue_label.text = str(_saved_data.blue)
 
 
-func _on_alpha_value_changed(value):
-	var saved_data = ResourceLoader.load(GlobalResources.setting_save_path)
-	saved_data.change_alpha(value)
+func _on_alpha_value_changed(value: float) -> void:
+	_saved_data.change_alpha(value)
 	play_example.color.a = value/100
-	ResourceSaver.save(saved_data, GlobalResources.setting_save_path)
-	alpha_label.text = str(saved_data.alpha)
+	alpha_label.text = str(_saved_data.alpha)

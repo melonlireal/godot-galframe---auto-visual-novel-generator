@@ -77,7 +77,7 @@ func _ready():
 		nodes.mouse_entered.connect(_mouse_reach_button)
 	volumn_slider.visible = false
 	volumn_slider.editable = false
-	var saved_data = ResourceLoader.load(GlobalResources.setting_save_path)
+	var saved_data: PlayerSetting = ResourceLoader.load(GlobalResources.setting_save_path)
 	volumn_slider.value = saved_data.total_volumn
 	windows_color_rect.color = saved_data.windows_color
 	# 监听 review_dialogues / story_tree 的 close 信号，内化退出逻辑
@@ -85,15 +85,15 @@ func _ready():
 	story_tree.connect("close", _on_quit_story_tree)
 		
 		
-func _mouse_leave_button():
+func _mouse_leave_button() -> void:
 	function_name.text = ""
 	press_action_disabled = false
 
-func _mouse_reach_button():
+func _mouse_reach_button() -> void:
 	press_action_disabled = true
 
 	
-func _on_save_mouse_entered():
+func _on_save_mouse_entered() -> void:
 	function_name.text = "保存"
 
 
@@ -101,7 +101,7 @@ func _on_save_pressed() -> void:
 	_open_save_session()
 
 
-func _on_load_mouse_entered():
+func _on_load_mouse_entered() -> void:
 	function_name.text = "加载"
 
 
@@ -109,25 +109,23 @@ func _on_load_pressed() -> void:
 	_open_load_session()
 
 
-func _on_quicksave_mouse_entered():
+func _on_quicksave_mouse_entered() -> void:
 	function_name.text = "快速保存"
 	
 	
 func _on_quicksave_pressed() -> void:
 	quick_save.emit()
-	pass # Replace with function body.
 	
 	
-func _on_quickload_mouse_entered():
+func _on_quickload_mouse_entered() -> void:
 	function_name.text = "快速加载"
 	
 	
 func _on_quickload_pressed() -> void:
 	quick_load.emit()
-	pass # Replace with function body.
 	
 	
-func _on_setting_mouse_entered():
+func _on_setting_mouse_entered() -> void:
 	function_name.text = "设置"
 	
 	
@@ -135,11 +133,11 @@ func _on_setting_pressed() -> void:
 	_open_setting_session()
 	
 	
-func _on_volumn_mouse_entered():
+func _on_volumn_mouse_entered() -> void:
 	function_name.text = "音量"
 	
 	
-func _on_volumn_pressed():
+func _on_volumn_pressed() -> void:
 	if volumn_slider.visible:
 		volumn_slider.visible = false
 		volumn_slider.editable = false
@@ -148,7 +146,7 @@ func _on_volumn_pressed():
 	volumn_slider.editable = true
 	
 	
-func _on_volumn_slider_value_changed(value):
+func _on_volumn_slider_value_changed(value: float) -> void:
 	var saved_data:PlayerSetting = ResourceLoader.load(GlobalResources.setting_save_path)
 	saved_data.total_volumn = value
 	var bus = AudioServer.get_bus_index("Master")
@@ -156,7 +154,7 @@ func _on_volumn_slider_value_changed(value):
 	ResourceSaver.save(saved_data, GlobalResources.setting_save_path)
 	
 	
-func _on_story_tree_mouse_entered():
+func _on_story_tree_mouse_entered() -> void:
 	function_name.text = "剧情树"
 	
 	
@@ -164,7 +162,7 @@ func _on_story_tree_pressed() -> void:
 	_open_story_tree_session()
 
 
-func _on_review_dialogue_mouse_entered():
+func _on_review_dialogue_mouse_entered() -> void:
 	function_name.text = "台词回顾"
 	
 	
@@ -172,34 +170,31 @@ func _on_review_dialogue_pressed() -> void:
 	_open_review_dialogue_session()
 	
 	
-func _on_auto_play_mouse_entered():
+func _on_auto_play_mouse_entered() -> void:
 	function_name.text = "自动播放"
 	
 	
 func _on_auto_play_pressed() -> void:
 	start_auto_play.emit()
-	pass # Replace with function body.
 
 
-func _on_fast_forward_mouse_entered():
+func _on_fast_forward_mouse_entered() -> void:
 	function_name.text = "快进"
 
 
 func _on_fast_forward_pressed() -> void:
 	start_fast_forward.emit()
-	pass # Replace with function body.
 	
 	
-func _on_fast_forward_to_next_choice_mouse_entered():
+func _on_fast_forward_to_next_choice_mouse_entered() -> void:
 	function_name.text = "快进到下一选项"
 
 	
 func _on_fast_forward_to_next_choice_pressed() -> void:
 	start_fast_forward_to_next_choice.emit()
-	pass # Replace with function body.
 	
 	
-func _on_hide_ui_mouse_entered():
+func _on_hide_ui_mouse_entered() -> void:
 	function_name.text = "隐藏UI"
 
 	
@@ -207,7 +202,7 @@ func _on_hide_ui_pressed() -> void:
 	_hide_ui()
 
 
-func _on_leave_game_mouse_entered():
+func _on_leave_game_mouse_entered() -> void:
 	function_name.text = "退出"
 
 
@@ -217,7 +212,7 @@ func _on_leave_game_pressed() -> void:
 
 # ======== session 管理（从 scene_auto 搬过来）========
 
-func _open_save_session():
+func _open_save_session() -> void:
 	dialogue_controller.set_state(GlobalType.GameState.PAUSED)
 	var temp_screen = get_viewport().get_texture().get_image()
 	var saver:SaveLoad = preload("res://frameWorkCore/load_save/save_load_UI.tscn").instantiate()
@@ -226,14 +221,14 @@ func _open_save_session():
 	add_sibling(saver)
 
 
-func _open_load_session():
+func _open_load_session() -> void:
 	dialogue_controller.set_state(GlobalType.GameState.PAUSED)
 	var loader:SaveLoad = preload("res://frameWorkCore/load_save/save_load_UI.tscn").instantiate()
 	loader.display_save = false
 	add_sibling(loader)
 
 
-func _open_setting_session():
+func _open_setting_session() -> void:
 	dialogue_controller.set_state(GlobalType.GameState.PAUSED)
 	var setting:SettingMenu = preload("res://frameWorkCore/settings/setting_menu.tscn").instantiate()
 	owner.add_child(setting, true)
@@ -241,7 +236,7 @@ func _open_setting_session():
 	setting.reload_setting.connect(owner.load_setting)
 
 
-func _open_review_dialogue_session():
+func _open_review_dialogue_session() -> void:
 	dialogue_controller.set_state(GlobalType.GameState.PAUSED)
 	review_dialogues.jump_to_buttom()
 	review_dialogues.show()
@@ -249,28 +244,28 @@ func _open_review_dialogue_session():
 	self.hide()
 
 
-func _on_quit_review_dialogue():
+func _on_quit_review_dialogue() -> void:
 	review_dialogues.hide()
 	dialogue_controller.set_state(GlobalType.GameState.DEFAULT)
 	dialogue_controller.show()
 	self.show()
 
 
-func _open_story_tree_session():
+func _open_story_tree_session() -> void:
 	dialogue_controller.set_state(GlobalType.GameState.PAUSED)
 	story_tree.show()
 	dialogue_controller.hide()
 	self.hide()
 
 
-func _on_quit_story_tree():
+func _on_quit_story_tree() -> void:
 	story_tree.hide()
 	dialogue_controller.set_state(GlobalType.GameState.DEFAULT)
 	dialogue_controller.show()
 	self.show()
 
 
-func _hide_ui():
+func _hide_ui() -> void:
 	if dialogue_controller.visible and self.visible and choice_controller.visible:
 		dialogue_controller.hide()
 		self.hide()
@@ -285,12 +280,12 @@ func is_ui_visible() -> bool:
 	return ui_visible
 
 
-func set_ui_visible(v: bool):
+func set_ui_visible(v: bool) -> void:
 	ui_visible = v
 
 
 # 由 scene_auto.load_setting 调用，应用 windows_color 到 UI 顶部色条
-func apply_windows_color(color: Color):
+func apply_windows_color(color: Color) -> void:
 	windows_color_rect.color = color
 
 
@@ -298,5 +293,5 @@ func is_press_disabled() -> bool:
 	return press_action_disabled
 
 
-func set_press_disabled(v: bool):
+func set_press_disabled(v: bool) -> void:
 	press_action_disabled = v

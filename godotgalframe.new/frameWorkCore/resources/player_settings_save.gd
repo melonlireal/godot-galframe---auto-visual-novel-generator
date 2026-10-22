@@ -1,17 +1,17 @@
 extends Resource
 class_name PlayerSetting
-@export var play_speed = 50
-@export var auto_play_speed = 50
-@export var red = 140
-@export var green = 140
-@export var blue = 140
-@export var alpha = 70
-@export var windows_color = Color(float(red)/255.0,float(green)/255.0,float(blue)/255.0,alpha/100.0)
-@export var total_volumn = 1.0
-@export var bgm_volumn = 1.0
-@export var voice_volumn = 1.0
-@export var sfx_volumn = 1.0
-@export var dialogue_box_transparency = 100.0
+@export var play_speed: float = 50
+@export var auto_play_speed: float = 50
+@export var red: float = 140
+@export var green: float = 140
+@export var blue: float = 140
+@export var alpha: float = 70
+@export var windows_color: Color = Color(float(red)/255.0,float(green)/255.0,float(blue)/255.0,alpha/100.0)
+@export var total_volumn: float = 1.0
+@export var bgm_volumn: float = 1.0
+@export var voice_volumn: float = 1.0
+@export var sfx_volumn: float = 1.0
+@export var dialogue_box_transparency: float = 100.0
 # Called when the node enters the scene tree for the first time.
 func reset_all():
 	play_speed = 50

@@ -11,7 +11,6 @@ class_name DialogueController
 @onready var character: RichTextLabel = $character_name
 @onready var dialogue_diaplayer: RichTextLabel = $dialogue_diaplayer
 
-@onready var _setting = ResourceLoader.load(GlobalResources.setting_save_path)
 @onready var auto_play_timer: Timer = $"../auto_play_timer"
 @onready var speed_up_timer: Timer = $"../speed_up_timer"
 
@@ -23,7 +22,7 @@ func _ready():
 	dialogue_diaplayer.dialogue_play_finished.connect(_on_dialogue_playback_finished)
 
 
-func set_state(state: GlobalType.GameState):
+func set_state(state: GlobalType.GameState) -> void:
 	curr_state = state
 
 
@@ -31,11 +30,11 @@ func get_state() -> GlobalType.GameState:
 	return curr_state
 
 
-func set_voicing_time(time: float):
+func set_voicing_time(time: float) -> void:
 	_voicing_time = time
 
 
-func play_line(character_name: String, text: String, voicing_time: float):
+func play_line(character_name: String, text: String, voicing_time: float) -> void:
 	_voicing_time = voicing_time
 	self.character.text = character_name
 	# 切换对话框样式和位置
@@ -52,7 +51,7 @@ func play_line(character_name: String, text: String, voicing_time: float):
 
 
 # 立即完整显示当前文本（点击补全）
-func show_full():
+func show_full() -> void:
 	dialogue_diaplayer.show_full()
 
 
@@ -61,48 +60,49 @@ func is_playing() -> bool:
 
 
 # 设置对话框/旁白框透明度（0~1）
-func set_box_opacity(opacity: float):
+func set_box_opacity(opacity: float) -> void:
 	narration_box.modulate.a = opacity
 	dialogue_box.modulate.a = opacity
 
 
-func cancel_autoplay():
+func cancel_autoplay() -> void:
 	auto_play_timer.stop()
 
 
-func pause_interaction():
+func pause_interaction() -> void:
 	auto_play_timer.stop()
 	speed_up_timer.stop()
 
 
-func resume_interaction():
+func resume_interaction() -> void:
 	if curr_state == GlobalType.GameState.AUTOPLAY and not dialogue_diaplayer.is_playing():
 		auto_play_timer.start()
 
 
-func start_speedup():
+func start_speedup() -> void:
 	speed_up_timer.start()
 
 
-func stop_speedup():
+func stop_speedup() -> void:
 	speed_up_timer.stop()
 
 
 func _calculate_duration(text: String) -> float:
-	var text_len = text.length()
+	var text_len: int = text.length()
 	if text_len == 0:
 		return 0.0
+	var setting: PlayerSetting = ResourceLoader.load(GlobalResources.setting_save_path)
 	match curr_state:
 		GlobalType.GameState.SPEEDUP:
 			return 0.0
 		GlobalType.GameState.AUTOPLAY:
-			var text_dur = text_len / (_setting.auto_play_speed * play_speed_factor)
+			var text_dur = text_len / (setting.auto_play_speed * play_speed_factor)
 			return max(text_dur, _voicing_time)
 		_:
-			return text_len / (_setting.play_speed * play_speed_factor)
+			return text_len / (setting.play_speed * play_speed_factor)
 
 
-func _on_dialogue_playback_finished():
+func _on_dialogue_playback_finished() -> void:
 	if curr_state == GlobalType.GameState.AUTOPLAY:
 		# 句间等待 = 固定 pause + 配音比文本多出的时间（已包含在 duration 里）
 		# duration = max(text_dur, voicing_time)，所以 pause 就是固定值

@@ -8,17 +8,17 @@ class_name GlobalGameProgress
 @export var unlocked_cg:Array[String] = []
 
 
-func add_chap(chap_name: String):
+func add_chap(chap_name: String) -> void:
 	if chap_name not in explored_chapters:
 		explored_chapters.append(chap_name)
 	
-func has_chap(chap_name: String):
+func has_chap(chap_name: String) -> bool:
 	return chap_name in explored_chapters
 
-func add_cg(cg_name: String):
+func add_cg(cg_name: String) -> void:
 	if cg_name not in unlocked_cg:
 		unlocked_cg.append(cg_name)
 
-func has_cg(cg_name: String):
+func has_cg(cg_name: String) -> bool:
 	return cg_name in unlocked_cg
 	

@@ -57,20 +57,20 @@ func _ready():
 	choice_controller.script_tree = script_tree
 	load_setting()
 
-func _on_var_edited(new_variable: Variables):
+func _on_var_edited(new_variable: Variables) -> void:
 	variables = new_variable.duplicate(true)
 
 
-func _on_ui_closed():
+func _on_ui_closed() -> void:
 	curr_state = GlobalType.GameState.DEFAULT
 
 
 var prev_state: GlobalType.GameState = GlobalType.GameState.DEFAULT
-var pending_voice: Array = []
+var pending_voice: Array[Array] = []
 var pending_line: Array = []
 
 
-func _on_pause_game_interaction():
+func _on_pause_game_interaction() -> void:
 	if curr_state != GlobalType.GameState.TRANSITION:
 		prev_state = curr_state
 	curr_state = GlobalType.GameState.TRANSITION
@@ -80,7 +80,7 @@ func _on_pause_game_interaction():
 	avatar.visible = false
 
 
-func _on_unpause_game_interaction():
+func _on_unpause_game_interaction() -> void:
 	curr_state = prev_state
 	dialogue_controller.resume_interaction()
 	ui.show()
@@ -155,30 +155,28 @@ func check_in_game() -> bool:
 	return !ui.is_press_disabled()
 
 
-func proceed_to_next_line():
+func proceed_to_next_line() -> void:
 	# inchagre of continue the dialogue to next line
 	if ui.is_press_disabled():
 		return
 	if curr_state == GlobalType.GameState.PAUSED:
 		return
 	avatar.finish_avatar_effects()
-	var text = {};
+	var text: Dictionary = {};
 	# text will be mutated each time
 	# then extract character, dialogue and command
-	var status = script_tree.get_line(text) # status check special condition
-	if status == "exit":
+	var status: GlobalType.LineStatus = script_tree.get_line(text)
+	if status == GlobalType.LineStatus.EXIT:
 		_on_leave_game()
-		# if exit, exit
 		return
-	if status == "choice reach":
+	if status == GlobalType.LineStatus.CHOICE:
 		dialogue_controller.show()
 		ui.show()
 		curr_state = GlobalType.GameState.PAUSED
 		if not choice_controller.choice_jump(variables):
 			curr_state = GlobalType.GameState.DEFAULT
-		# if choice reached, display choice
 		return
-	if status == "game":
+	if status == GlobalType.LineStatus.GAME:
 		# creator is responsible for whether to clear current music or not
 		# during minigame. as some may want music to continue playing
 		curr_state = GlobalType.GameState.PAUSED
@@ -215,7 +213,7 @@ func proceed_to_next_line():
 	dialogue_controller.play_line(text["character"], text["dialogue"], _get_voicing_time())
 
 
-func _on_chapter_changed(location: String):
+func _on_chapter_changed(location: String) -> void:
 	# ChoiceController 切章后的副作用：更新 story_tree 并推进下一行
 	# choice_controller 已做 script_tree.change_chapter，这里只更新 story_tree
 	story_tree.update_chapter(location)
@@ -224,14 +222,14 @@ func _on_chapter_changed(location: String):
 
 
 # minigame 结束后切章：完整切章流程（script_tree + story_tree + 推进）
-func travel_to_chapter(location: String):
+func travel_to_chapter(location: String) -> void:
 	story_tree.update_chapter(location)
 	script_tree.change_chapter(location)
 	curr_state = GlobalType.GameState.DEFAULT
 	proceed_to_next_line()
 
 
-func command_execute(orders: Dictionary):
+func command_execute(orders: Dictionary) -> void:
 	avatar.update_art_list(orders.get(GlobalType.COMMAND_CHARACTER, []))
 	avatar.change_avatars(orders.get(GlobalType.COMMAND_CHARACTER, []))
 	avatar.execute_avatar_effects(orders.get(GlobalType.COMMAND_EFFECT, []))
@@ -265,7 +263,7 @@ func _get_voicing_time() -> float:
 	return music.last_voice_duration
 
 
-func load_chapter_from_story_tree(chapter_name: String, variable_of_chap: Dictionary):
+func load_chapter_from_story_tree(chapter_name: String, variable_of_chap: Dictionary) -> void:
 	story_tree.hide()
 	var chap:CurrGameProgress = CurrGameProgress.new()
 	chap.which_file = chapter_name
@@ -274,15 +272,12 @@ func load_chapter_from_story_tree(chapter_name: String, variable_of_chap: Dictio
 	for key in variable_of_chap.keys():
 		chap.variables.variables[key] = variable_of_chap[key]
 	GlobalSignals.load_game_progress.emit(chap)
-	pass
 
 
-func load_progress(data: CurrGameProgress):
-	# load game progress into the game
+func load_progress(data: CurrGameProgress) -> void:
 	curr_state = GlobalType.GameState.DEFAULT
 	dialogue_controller.pause_interaction()
 	choice_controller.clear_choices()
-	# reset all ingame setting including removing choices
 	print("loading progress\n")
 	print("file is ", data.which_file, "\n")
 	print("line is ", data.which_line, "\n")
@@ -291,19 +286,16 @@ func load_progress(data: CurrGameProgress):
 	music.music_clear("sound_effect")
 	background.clear_background()
 	avatar.clear_all_avatar()
-	choice_controller.clear_choices()
 	chubby_play.reset_chubby()
 	script_tree.load_progress(data.which_file, data.which_line)
 	variables = data.variables.duplicate(true)
-	# script tree acc give the line after its current progress
 	ui.show()
 	dialogue_controller.show()
+	ui.set_press_disabled(false)
 	GlobalSignals.game_created.emit()
 
-	# tell main game has been created and play animation fade_out
 
-
-func load_setting():
+func load_setting() -> void:
 	# load game setting
 	print("load setting!")
 	review_dialogues.visible = false
@@ -317,7 +309,7 @@ func load_setting():
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("sfx"), linear_to_db(save.sfx_volumn))
 # the code below are code related to buttons
 
-func _on_quick_save():
+func _on_quick_save() -> void:
 	var progress:CurrGameProgress = CurrGameProgress.new()
 	progress.which_file = script_tree.get_chapter()
 	progress.which_line = script_tree.get_line_num() - 1
@@ -325,15 +317,15 @@ func _on_quick_save():
 	ResourceSaver.save(progress, "user://save/quick_save.tres")
 
 
-func _on_quick_load():
-	var quick_save = "user://save/quick_save.tres"
+func _on_quick_load() -> void:
+	var quick_save: String = "user://save/quick_save.tres"
 	var find_save:CurrGameProgress = ResourceLoader.load(quick_save)
 	if find_save == null:
 		return
 	GlobalSignals.load_game_progress.emit(find_save)
 
 
-func _on_start_auto_play():
+func _on_start_auto_play() -> void:
 	if curr_state == GlobalType.GameState.PAUSED or curr_state == GlobalType.GameState.TRANSITION:
 		return
 	if curr_state == GlobalType.GameState.AUTOPLAY:
@@ -345,7 +337,7 @@ func _on_start_auto_play():
 	proceed_to_next_line()
 
 
-func _on_start_fast_forward():
+func _on_start_fast_forward() -> void:
 	if curr_state == GlobalType.GameState.PAUSED or curr_state == GlobalType.GameState.TRANSITION:
 		return
 	if curr_state == GlobalType.GameState.SPEEDUP:
@@ -356,12 +348,13 @@ func _on_start_fast_forward():
 	dialogue_controller.start_speedup()
 
 
-func _on_start_fast_forward_to_next_choice():
+func _on_start_fast_forward_to_next_choice() -> void:
 	if curr_state == GlobalType.GameState.PAUSED or curr_state == GlobalType.GameState.TRANSITION:
 		return
 	if !script_tree.has_nextchap():
 		print("no choice found")
 		return
+	curr_state = GlobalType.GameState.DEFAULT
 	music.music_clear("bgm")
 	music.music_clear("voice")
 	music.music_clear("sound_effect")
@@ -370,23 +363,23 @@ func _on_start_fast_forward_to_next_choice():
 	proceed_to_next_line()
 
 
-func _on_leave_game():
+func _on_leave_game() -> void:
 	GlobalSignals.back_to_menu.emit()
 
 
-func _on_auto_play_timer_timeout():
+func _on_auto_play_timer_timeout() -> void:
 	if curr_state == GlobalType.GameState.AUTOPLAY:
 		# display next dialogue when time up
 		proceed_to_next_line()
 
 
-func _on_speed_up_timer_timeout():
+func _on_speed_up_timer_timeout() -> void:
 	if curr_state == GlobalType.GameState.SPEEDUP:
 		proceed_to_next_line()
 		dialogue_controller.start_speedup()
 
 
-func _on_video_background_finished():
+func _on_video_background_finished() -> void:
 	# this helps with dynamic background/CG
 	if video_background.loop:
 		# if the background is looping, we dont care in this case
