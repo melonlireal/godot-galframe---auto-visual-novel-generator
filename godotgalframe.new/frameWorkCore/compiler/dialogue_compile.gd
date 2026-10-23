@@ -3,7 +3,6 @@ var save_path = "res://save/"
 var scripts_file = "processed_script.tres"
 var res_dialogue = "res://dialogue/"
 var dialogue_start = "res://dialogue/Start.txt"
-var prev_command = {}
 # dialogue_list is a list instead of dictionary to prevent overide duplicate files.
 var dialogue_list = []
 var processed_dialogue = []
@@ -13,7 +12,7 @@ var processed_dialogue = []
 func compile_dialogues():
 	var script_tree = ScriptTree.new()
 	dialogue_list = find_all_dialogue(res_dialogue)
-	dialogue_proof_read(["Start.txt", dialogue_start], script_tree)
+	dialogue_proof_read(["Start.txt", dialogue_start], script_tree, {})
 	script_tree.set_starting_point()
 	ResourceSaver.save(script_tree, save_path + scripts_file)
 
@@ -37,8 +36,7 @@ func helper_find_chapter_from_choice(which_chap: String):
 		if chapters[0] == which_chap:
 			return chapters
 
-func dialogue_proof_read(chapter: Array, script_tree: ScriptTree):
-	var temp_command
+func dialogue_proof_read(chapter: Array, script_tree: ScriptTree, prev_command: Dictionary):
 	var chap_name = chapter[0]
 	var chap_dir = chapter[1]
 	var file = FileAccess.open(chap_dir, FileAccess.READ)
@@ -57,13 +55,14 @@ func dialogue_proof_read(chapter: Array, script_tree: ScriptTree):
 			var choices = get_choice(file)
 			script_tree.add_choice(choices)
 			# the art and text at choice block MUST be from previous line
+			# prev_command is captured here and passed separately to each branch
+			# so branches don't inherit each other's compiled state
 			file.close()
 			processed_dialogue.append(chap_name)
-			temp_command = prev_command
+			var branch_start_command = prev_command.duplicate(true)
 			for choice in choices:
-				prev_command = temp_command
 				if choice[1] not in processed_dialogue:
-					dialogue_proof_read(helper_find_chapter_from_choice(choice[1]), script_tree)
+					dialogue_proof_read(helper_find_chapter_from_choice(choice[1]), script_tree, branch_start_command.duplicate(true))
 			return
 		elif text == "game":
 			var game = file.get_line()
@@ -72,11 +71,10 @@ func dialogue_proof_read(chapter: Array, script_tree: ScriptTree):
 			if game != "":
 				game = Array(game.rsplit(" "))
 				script_tree.add_game(game[0])
-				temp_command = prev_command
+				var branch_start_command = prev_command.duplicate(true)
 				for i in range(1, len(game)):
-					prev_command = temp_command
 					if game[i] not in processed_dialogue:
-						dialogue_proof_read(helper_find_chapter_from_choice(game[i]), script_tree)
+						dialogue_proof_read(helper_find_chapter_from_choice(game[i]), script_tree, branch_start_command.duplicate(true))
 			return
 		text = text.replace("：", ":")
 		var command = ""
@@ -102,21 +100,21 @@ func dialogue_proof_read(chapter: Array, script_tree: ScriptTree):
 			if character != "":
 				character =  text_colors.process_color(character, "character", character)
 			# colours dialogue and character (including narrator)
-		var command_list = process_commands(command)
+		var command_list = process_commands(command, prev_command)
+		prev_command = command_list["_prev"]
+		command_list.erase("_prev")
 		script_tree.add_line(character, dialogue, command_list)
 		# make sure complete empty line are ignored
 	file.close()
 	ResourceSaver.save(script_tree, save_path + scripts_file)
 	return
 	
-func process_commands(commands: String):
-	#return the list of commands
-	print(commands)
+func process_commands(commands: String, prev_command: Dictionary) -> Dictionary:
+	#return the list of commands, with "_prev" key holding the updated prev state
 	var order_list = help_parse_nested_commands(commands)
-	print("processed commands are", order_list, "\n")
 	var fixed_commands = help_fix_commands(order_list)
-	extend_from_prev_command(fixed_commands)
-	prev_command = set_prev_command(fixed_commands)
+	extend_from_prev_command(fixed_commands, prev_command)
+	fixed_commands["_prev"] = set_prev_command(fixed_commands)
 	return fixed_commands
 
 func help_parse_nested_commands(text: String):
@@ -166,7 +164,7 @@ func help_fix_commands(order_list: Array):
 		print("current order is ", order, "\n")
 	return fixed_commands
 	
-func extend_from_prev_command(order_list: Dictionary):
+func extend_from_prev_command(order_list: Dictionary, prev_command: Dictionary):
 	if not order_list.has(GlobalType.COMMAND_BACKGROUND) and prev_command.has(GlobalType.COMMAND_BACKGROUND):
 		order_list[GlobalType.COMMAND_BACKGROUND] = prev_command[GlobalType.COMMAND_BACKGROUND]
 

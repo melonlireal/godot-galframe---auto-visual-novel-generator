@@ -15,6 +15,7 @@ func _ready():
 	await $asset_compile.compile_asset()
 	await $dialogue_compile.compile_dialogues()
 	print("COMPILE COMPLETE")
+	$compile_validator.validate()
 	
 	
 func helper_search_file(directory: String, files: String):

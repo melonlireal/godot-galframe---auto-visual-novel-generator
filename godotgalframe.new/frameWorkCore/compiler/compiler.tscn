@@ -5,23 +5,46 @@
 [ext_resource type="Script" uid="uid://byb8idxoswt4e" path="res://frameWorkCore/compiler/dialogue_compile.gd" id="3_g7ou4"]
 [ext_resource type="Script" uid="uid://dvtnlyrv6h4qb" path="res://frameWorkCore/compiler/header_compile.gd" id="4_pg34a"]
 [ext_resource type="Script" uid="uid://p3u4dneuyvic" path="res://frameWorkCore/compiler/gameplay_setting_compile.gd" id="5_g7ou4"]
+[ext_resource type="Script" uid="uid://54alnffwqs6l" path="res://frameWorkCore/compiler/compile_validator.gd" id="6_validator"]
 
 [node name="compiler" type="Node" unique_id=1162494660]
 script = ExtResource("1_vymcs")
 auto_color_text = true
 
-[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1327655011]
-anchors_preset = 15
-anchor_right = 1.0
+[node name="summary_label" type="Label" parent="." unique_id=1002]
+layout_direction = 2
+offset_left = 377.0
+offset_right = 1578.0
+offset_bottom = 134.0
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 60
+text = "compiling..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="error_list" type="VBoxContainer" parent="." unique_id=1001]
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.1
+anchor_right = 0.8
 anchor_bottom = 1.0
+offset_left = -0.9200134
+offset_top = 0.0799942
+offset_right = -0.52001953
+offset_bottom = 27.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="CenterContainer" unique_id=51509218]
-layout_direction = 2
+[node name="ScrollContainer" type="ScrollContainer" parent="error_list" unique_id=1004]
+custom_minimum_size = Vector2(0, 1000)
 layout_mode = 2
-theme_override_font_sizes/font_size = 100
-text = "finished processing scripts"
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="error_list/ScrollContainer" unique_id=1005]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 4
 
 [node name="header_compile" type="Node" parent="." unique_id=1888585288]
 script = ExtResource("4_pg34a")
@@ -35,3 +58,6 @@ script = ExtResource("3_g7ou4")
 [node name="gameplay_setting_compile" type="Node" parent="." unique_id=363812769]
 script = ExtResource("5_g7ou4")
 auto_clear_voice = true
+
+[node name="compile_validator" type="Node" parent="." unique_id=1006]
+script = ExtResource("6_validator")

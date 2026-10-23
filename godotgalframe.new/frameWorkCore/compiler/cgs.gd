@@ -14,6 +14,9 @@ func get_cg():
 func get_cg_cover():
 	return cg_cover_list
 
+func has_cg(cg_name: String) -> bool:
+	return cg_name in cg_list
+
 func check_unlock(cg_name: String):
 	if cg_name in cg_list:
 		var game_progress:GlobalGameProgress = ResourceLoader.load(GlobalResources.global_progress_path)

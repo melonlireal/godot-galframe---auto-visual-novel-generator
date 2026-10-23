@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://lnrkrg3bh5sr"]
+
+[ext_resource type="Script" uid="uid://dsmpruew33q4g" path="res://frameWorkCore/compiler/compile_error_entry.gd" id="1_entry"]
+
+[node name="compile_error_entry" type="PanelContainer" unique_id=2096386117]
+custom_minimum_size = Vector2(0, 60)
+offset_right = 510.0
+offset_bottom = 60.0
+script = ExtResource("1_entry")
+
+[node name="message_label" type="Label" parent="." unique_id=2063151634]
+layout_mode = 2
+autowrap_mode = 3
