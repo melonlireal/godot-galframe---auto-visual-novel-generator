@@ -1,5 +1,8 @@
-extends CanvasLayer
+extends PopupUI
 # 查看CG中所有需要载入的CG
+
+func ui_key() -> UIManager.UI:
+	return UIManager.UI.CG_DISPLAY
 var cg_all: CGS
 @onready var cg_slots: GridContainer = $main/CenterContainer/GridContainer
 @onready var main: TextureRect = $main
@@ -77,4 +80,4 @@ func present(CG_name: String) -> void:
 
 		
 func _on_return_pressed() -> void:
-	self.queue_free()
+	UIManager.close(UIManager.UI.CG_DISPLAY)

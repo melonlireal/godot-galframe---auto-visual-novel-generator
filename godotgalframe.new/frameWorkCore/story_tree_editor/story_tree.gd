@@ -1,5 +1,9 @@
-extends CanvasLayer
+extends FullscreenUI
 class_name StoryTree
+
+func ui_key() -> UIManager.UI:
+	return UIManager.UI.STORY_TREE
+
 signal load_chap(chapter_name: String, variable_of_chapter: Dictionary)
 signal close
 @onready var scroll_container: ScrollContainer = $scroll_container

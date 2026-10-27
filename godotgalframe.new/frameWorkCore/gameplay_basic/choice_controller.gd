@@ -1,5 +1,8 @@
-extends CanvasLayer
+extends GameplayUI
 class_name ChoiceController
+
+func ui_key() -> UIManager.UI:
+	return UIManager.UI.CHOICE
 
 signal chapter_changed(location: String)
 

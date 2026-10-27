@@ -1,5 +1,8 @@
-extends CanvasLayer
+extends GameplayUI
 class_name MainUI
+
+func ui_key() -> UIManager.UI:
+	return UIManager.UI.MAIN_UI
 
 signal quick_save
 signal quick_load
@@ -8,11 +11,6 @@ signal start_fast_forward
 signal start_fast_forward_to_next_choice
 signal leave_game
 
-# 兄弟节点引用（owner 是 scene_auto）
-@export  var dialogue_controller: DialogueController
-@export  var review_dialogues:ReviewDialogues
-@export  var story_tree:StoryTree
-@export var choice_controller: ChoiceController
 # 自身子节点引用
 @onready var function_name: Label = $Control/ButtonContainer/TextureRect/CenterContainer/function_name
 @onready var button_container: HBoxContainer = $Control/ButtonContainer
@@ -80,9 +78,7 @@ func _ready():
 	var saved_data: PlayerSetting = ResourceLoader.load(GlobalResources.setting_save_path)
 	volumn_slider.value = saved_data.total_volumn
 	windows_color_rect.color = saved_data.windows_color
-	# 监听 review_dialogues / story_tree 的 close 信号，内化退出逻辑
-	review_dialogues.connect("close", _on_quit_review_dialogue)
-	story_tree.connect("close", _on_quit_story_tree)
+
 		
 		
 func _mouse_leave_button() -> void:
@@ -210,70 +206,41 @@ func _on_leave_game_pressed() -> void:
 	leave_game.emit()
 
 
-# ======== session 管理（从 scene_auto 搬过来）========
+# ======== session 管理 ========
 
 func _open_save_session() -> void:
-	dialogue_controller.set_state(GlobalType.GameState.PAUSED)
 	var temp_screen = get_viewport().get_texture().get_image()
-	var saver:SaveLoad = preload("res://frameWorkCore/load_save/save_load_UI.tscn").instantiate()
-	saver.display_save = true
-	saver.get_temp_save_data(temp_screen, owner.script_tree.get_chapter(), owner.script_tree.get_line_num(), owner.variables)
-	add_sibling(saver)
+	var scene_auto: SceneAuto = get_parent() as SceneAuto
+	UIManager.open(UIManager.UI.SAVE_LOAD, {
+		"display_save": true,
+		"temp_save": {
+			"image": temp_screen,
+			"curr_chap": scene_auto.script_tree.get_chapter(),
+			"curr_line": scene_auto.script_tree.get_line_num(),
+			"vars": scene_auto.variables
+		}
+	})
 
 
 func _open_load_session() -> void:
-	dialogue_controller.set_state(GlobalType.GameState.PAUSED)
-	var loader:SaveLoad = preload("res://frameWorkCore/load_save/save_load_UI.tscn").instantiate()
-	loader.display_save = false
-	add_sibling(loader)
+	UIManager.open(UIManager.UI.SAVE_LOAD, {"display_save": false})
 
 
 func _open_setting_session() -> void:
-	dialogue_controller.set_state(GlobalType.GameState.PAUSED)
-	var setting:SettingMenu = preload("res://frameWorkCore/settings/setting_menu.tscn").instantiate()
-	owner.add_child(setting, true)
-	setting.set_owner(owner)
-	setting.reload_setting.connect(owner.load_setting)
+	UIManager.open(UIManager.UI.SETTING)
 
 
 func _open_review_dialogue_session() -> void:
-	dialogue_controller.set_state(GlobalType.GameState.PAUSED)
-	review_dialogues.jump_to_buttom()
-	review_dialogues.show()
-	dialogue_controller.hide()
-	self.hide()
-
-
-func _on_quit_review_dialogue() -> void:
-	review_dialogues.hide()
-	dialogue_controller.set_state(GlobalType.GameState.DEFAULT)
-	dialogue_controller.show()
-	self.show()
+	UIManager.open(UIManager.UI.REVIEW_DIALOGUE)
 
 
 func _open_story_tree_session() -> void:
-	dialogue_controller.set_state(GlobalType.GameState.PAUSED)
-	story_tree.show()
-	dialogue_controller.hide()
-	self.hide()
-
-
-func _on_quit_story_tree() -> void:
-	story_tree.hide()
-	dialogue_controller.set_state(GlobalType.GameState.DEFAULT)
-	dialogue_controller.show()
-	self.show()
+	UIManager.open(UIManager.UI.STORY_TREE)
 
 
 func _hide_ui() -> void:
-	if dialogue_controller.visible and self.visible and choice_controller.visible:
-		dialogue_controller.hide()
-		self.hide()
-		choice_controller.hide()
-		ui_visible = false
-		dialogue_controller.set_state(GlobalType.GameState.DEFAULT)
-		dialogue_controller.stop_speedup()
-		dialogue_controller.pause_interaction()
+	UIManager.hide_gameplay()
+	ui_visible = false
 
 
 func is_ui_visible() -> bool:

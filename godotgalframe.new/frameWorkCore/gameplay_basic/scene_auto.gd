@@ -12,6 +12,7 @@ class_name SceneAuto
 @onready var minigame: CanvasLayer = $minigame
 @onready var music: Node = %music
 @onready var background: CanvasLayer = %background
+@onready var scene_transition: CanvasLayer = %scene_transition
 @onready var chubby_play: CanvasLayer = $chubby_play
 @onready var error_log: CanvasLayer = $error_log
 @onready var errorlog: Label = %errorlog
@@ -49,9 +50,12 @@ func _ready():
 	errorlog.text = ""
 	story_tree.connect("load_chap", load_chapter_from_story_tree)
 	story_tree.update_chapter("Start.txt")
-	GlobalSignals.close_ui.connect(_on_ui_closed)
 	GlobalSignals.pause_game_interaction.connect(_on_pause_game_interaction)
 	GlobalSignals.unpause_game_interaction.connect(_on_unpause_game_interaction)
+	GlobalSignals.ui_opened.connect(_on_ui_opened)
+	GlobalSignals.ui_closed.connect(_on_ui_closed)
+	GlobalSignals.play_next_line.connect(proceed_to_next_line)
+	GlobalSignals.reload_setting.connect(load_setting)
 	GlobalSignals.minigame_edit_var.connect(_on_var_edited)
 	choice_controller.chapter_changed.connect(_on_chapter_changed)
 	choice_controller.script_tree = script_tree
@@ -59,10 +63,6 @@ func _ready():
 
 func _on_var_edited(new_variable: Variables) -> void:
 	variables = new_variable.duplicate(true)
-
-
-func _on_ui_closed() -> void:
-	curr_state = GlobalType.GameState.DEFAULT
 
 
 var prev_state: GlobalType.GameState = GlobalType.GameState.DEFAULT
@@ -75,16 +75,12 @@ func _on_pause_game_interaction() -> void:
 		prev_state = curr_state
 	curr_state = GlobalType.GameState.TRANSITION
 	dialogue_controller.pause_interaction()
-	ui.hide()
-	dialogue_controller.hide()
 	avatar.visible = false
 
 
 func _on_unpause_game_interaction() -> void:
 	curr_state = prev_state
 	dialogue_controller.resume_interaction()
-	ui.show()
-	dialogue_controller.show()
 	avatar.visible = true
 	if not pending_line.is_empty():
 		music.change_voice(pending_voice)
@@ -92,6 +88,15 @@ func _on_unpause_game_interaction() -> void:
 		pending_voice = []
 		pending_line = []
 		dialogue_controller.play_line(line[0], line[1], _get_voicing_time())
+
+
+func _on_ui_opened() -> void:
+	prev_state = curr_state
+	curr_state = GlobalType.GameState.UI_OPEN
+
+
+func _on_ui_closed() -> void:
+	curr_state = prev_state
 
 
 
@@ -105,7 +110,7 @@ func _input(event: InputEvent) -> void:
 			ui.set_press_disabled(false)
 			proceed_to_next_line()
 			return
-		if check_in_game():
+		if curr_state != GlobalType.GameState.UI_OPEN:
 			match curr_state:
 				GlobalType.GameState.PAUSED:
 					# paused by choice/minigame; press does nothing
@@ -137,22 +142,9 @@ func _input(event: InputEvent) -> void:
 					else:
 						# otherwise forward to next dialogue
 						proceed_to_next_line()
-	if Input.is_action_just_pressed("auto") and check_in_game():
+	if Input.is_action_just_pressed("auto") and curr_state != GlobalType.GameState.UI_OPEN:
 		# autoplay switches game to autoplay mode
 		_on_start_auto_play()
-
-
-func check_in_game() -> bool:
-	# check if the current game should continue to next line when be clicked
-	# game should onlt proceed to next line when no UI component
-	# is blocking the game window
-	if review_dialogues.visible:
-		return false
-	if story_tree.visible:
-		return false
-	if minigame.get_children() != []:
-		return false
-	return !ui.is_press_disabled()
 
 
 func proceed_to_next_line() -> void:
@@ -235,6 +227,7 @@ func command_execute(orders: Dictionary) -> void:
 	avatar.execute_avatar_effects(orders.get(GlobalType.COMMAND_EFFECT, []))
 
 	background.change_backgrounds(orders.get(GlobalType.COMMAND_BACKGROUND, []))
+	scene_transition.execute_transition(orders.get(GlobalType.COMMAND_SCENE_TRANSITION, []))
 
 	chubby_play.process_chubby_commands(orders.get(GlobalType.COMMAND_CHUBBY, []))
 
@@ -264,7 +257,7 @@ func _get_voicing_time() -> float:
 
 
 func load_chapter_from_story_tree(chapter_name: String, variable_of_chap: Dictionary) -> void:
-	story_tree.hide()
+	UIManager.close(UIManager.UI.STORY_TREE)
 	var chap:CurrGameProgress = CurrGameProgress.new()
 	chap.which_file = chapter_name
 	var saved_variables:Variables = ResourceLoader.load(GlobalResources.variables_path)

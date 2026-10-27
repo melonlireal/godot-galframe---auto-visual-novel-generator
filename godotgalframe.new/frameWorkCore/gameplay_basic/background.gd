@@ -3,8 +3,6 @@ var asset_map: AssetPath
 var cg_header: CGS
 @onready var background_display: TextureRect = $background
 @onready var video_background_display: VideoStreamPlayer = $video_background
-@onready var effect_black: ColorRect = $"../effects/effect_assets/black"
-@onready var effect_white: ColorRect = $"../effects/effect_assets/white"
 
 
 
@@ -17,10 +15,6 @@ func _ready() -> void:
 func change_backgrounds(backgrounds: Array) -> void:
 	for background in backgrounds:
 		var background_name:String = background[0]
-		if self.has_method(background_name):
-			var op = Callable(self, background_name)
-			op.call()
-			return
 		var loop: String = background[1]
 		var background_at = asset_map.search_path(background_name)
 		if background_at == null:
@@ -49,31 +43,3 @@ func clear_background() -> void:
 	background_display.texture = null
 	video_background_display.stream = null
 	videolist = []
-
-# the following functions are hard coded transitions
-# WARNING a new background command must be placed after a transition command
-#
-func fadeout() -> void:
-		GlobalSignals.pause_game_interaction.emit()
-		var transit = create_tween()
-		transit.tween_property(effect_black, "color:a", 1, 0.5)
-		await transit.finished
-		$"..".proceed_to_next_line()
-		var transit2 = create_tween()
-		transit2.tween_property(effect_black, "color:a", 0, 1)
-		await transit2.finished
-		GlobalSignals.unpause_game_interaction.emit()
-
-func flash() -> void:
-		GlobalSignals.pause_game_interaction.emit()
-		var transit = get_tree().create_tween().bind_node(effect_white)
-		transit.tween_property(effect_white, "color:a", 1, 0.5)
-		await transit.finished
-		$"..".proceed_to_next_line()
-		var transit2 = get_tree().create_tween().bind_node(effect_white)
-		transit2.tween_property(effect_white, "color:a", 0, 0.5)
-		await transit2.finished
-		GlobalSignals.unpause_game_interaction.emit()
-
-func shake() -> void:
-	pass

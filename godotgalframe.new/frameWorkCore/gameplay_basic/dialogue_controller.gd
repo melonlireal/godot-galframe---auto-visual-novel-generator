@@ -1,5 +1,8 @@
-extends CanvasLayer
+extends GameplayUI
 class_name DialogueController
+
+func ui_key() -> UIManager.UI:
+	return UIManager.UI.DIALOGUE
 
 @export var narration_pos: Vector2 = Vector2(332.0, 800.0)
 @export var dialogue_pos: Vector2 = Vector2(332.0, 850.0)

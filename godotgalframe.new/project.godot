@@ -24,6 +24,7 @@ GlobalResources="*res://frameWorkCore/global_script/global_resource_collection.g
 GlobalSignals="*res://frameWorkCore/global_script/global_signals.gd"
 GlobalMinigameInteractior="*res://frameWorkCore/global_script/global_minigame_interactior.gd"
 GlobalType="*uid://bet26t0c5qkae"
+UIManager="*uid://tiocuihrgjd1"
 
 [display]
 

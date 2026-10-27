@@ -16,10 +16,13 @@ var progress:CurrGameProgress = CurrGameProgress.new()
 @onready var cg_button: Button = $menu_UI/HBoxContainer/CG
 @onready var setting_button: Button = $menu_UI/HBoxContainer/setting
 @onready var quit_button: Button = $menu_UI/HBoxContainer/quit
+# TODO: popup 临时挂载点，等待更合理的方案
+@onready var popup_root: Node = $UI
 
 
 
 func _ready():
+	UIManager.set_popup_root(popup_root)
 	start_button.pressed.connect(_on_start_pressed)
 	load_button.pressed.connect(_on_load_pressed)
 	cg_button.pressed.connect(_on_cg_pressed)
@@ -56,17 +59,13 @@ func _on_start_pressed() -> void:
 #	
 # the below code are UI related code
 func _on_load_pressed() -> void:
-	var loader = preload("res://frameWorkCore/load_save/save_load_UI.tscn").instantiate()
-	loader.display_save = false
-	add_child(loader)
+	UIManager.open(UIManager.UI.SAVE_LOAD, {"display_save": false})
 
 func _on_cg_pressed() -> void:
-	var CG = preload("res://frameWorkCore/art/cg_display.tscn").instantiate()
-	add_child(CG)
+	UIManager.open(UIManager.UI.CG_DISPLAY)
 
 func _on_setting_pressed() -> void:
-	var setting = preload("res://frameWorkCore/settings/setting_menu.tscn").instantiate()
-	add_child(setting)
+	UIManager.open(UIManager.UI.SETTING)
 
 	
 func _on_quit_pressed() -> void:

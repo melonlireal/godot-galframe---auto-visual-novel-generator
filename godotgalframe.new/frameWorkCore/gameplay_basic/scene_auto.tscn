@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://dfib8nlfhdwrd" path="res://frameWorkCore/gameplay_basic/dialogue_controller.gd" id="6_dwb8m"]
 [ext_resource type="Script" uid="uid://d2q1ewu5nrkgn" path="res://frameWorkCore/errorlogDontTouch.gd" id="7_kvtwn"]
 [ext_resource type="PackedScene" uid="uid://c7urdigxq43m5" path="res://frameWorkCore/gameplay_basic/reviewDialogues/review_dialogues.tscn" id="9_88744"]
+[ext_resource type="Script" uid="uid://bligd1cjtpfv6" path="res://frameWorkCore/gameplay_basic/scene_transition.gd" id="11_olq35"]
 [ext_resource type="Script" uid="uid://cci7q1xdvf15f" path="res://frameWorkCore/gameplay_basic/music.gd" id="12_00gnm"]
 [ext_resource type="Script" uid="uid://dw41otoq6vnt" path="res://frameWorkCore/gameplay_basic/choice_controller.gd" id="12_kwgkn"]
 [ext_resource type="PackedScene" uid="uid://7wwctswnkwqj" path="res://frameWorkCore/story_tree_editor/story_tree.tscn" id="12_ob1rn"]
@@ -92,6 +93,7 @@ offset_top = -166.0
 offset_right = -151.56006
 offset_bottom = -286.0
 scale = Vector2(1.1, 1.1)
+metadata/_edit_lock_ = true
 
 [node name="right" parent="avatar" unique_id=120063515 instance=ExtResource("5_00gnm")]
 anchor_left = 0.4
@@ -107,6 +109,10 @@ metadata/_edit_lock_ = true
 
 [node name="dialogue_controller" type="CanvasLayer" parent="." unique_id=1728486472]
 script = ExtResource("6_dwb8m")
+narration_pos = null
+dialogue_pos = null
+play_speed_factor = null
+autoplay_pause_time = null
 
 [node name="narration_box" type="TextureRect" parent="dialogue_controller" unique_id=1025222767]
 modulate = Color(1, 1, 1, 0.78431374)
@@ -163,10 +169,11 @@ autowrap_mode = 1
 script = ExtResource("5_j30eb")
 metadata/_edit_lock_ = true
 
-[node name="effects" type="CanvasLayer" parent="." unique_id=776596458]
+[node name="scene_transition" type="CanvasLayer" parent="." unique_id=776596458]
 unique_name_in_owner = true
+script = ExtResource("11_olq35")
 
-[node name="effect_assets" type="Control" parent="effects" unique_id=1187635468]
+[node name="effect_assets" type="Control" parent="scene_transition" unique_id=1187635468]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -176,7 +183,7 @@ grow_vertical = 2
 mouse_filter = 2
 metadata/_edit_lock_ = true
 
-[node name="black" type="ColorRect" parent="effects/effect_assets" unique_id=2081434133]
+[node name="black" type="ColorRect" parent="scene_transition/effect_assets" unique_id=2081434133]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -186,7 +193,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0)
 metadata/_edit_lock_ = true
 
-[node name="white" type="ColorRect" parent="effects/effect_assets" unique_id=841596227]
+[node name="white" type="ColorRect" parent="scene_transition/effect_assets" unique_id=841596227]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

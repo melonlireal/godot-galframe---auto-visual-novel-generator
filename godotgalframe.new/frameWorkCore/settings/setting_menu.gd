@@ -1,6 +1,10 @@
-class_name  SettingMenu
-extends CanvasLayer
+class_name SettingMenu
+extends PopupUI
 signal reload_setting
+
+
+func ui_key() -> UIManager.UI:
+	return UIManager.UI.SETTING
 
 @onready var settings: Control = $settings
 @onready var display_setting: GridContainer = $settings/display_setting
@@ -32,9 +36,8 @@ func set_default() -> void:
 	pass
 
 func _on_return_button_down() -> void:
-	GlobalSignals.close_ui.emit()
-	reload_setting.emit()
-	self.queue_free()
+	UIManager.close(UIManager.UI.SETTING)
+	GlobalSignals.reload_setting.emit()
 
 
 func _on_display_pressed() -> void:

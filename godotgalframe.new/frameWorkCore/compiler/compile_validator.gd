@@ -22,7 +22,7 @@ const KNOWN_EFFECTS = [
 	GlobalType.EFFECT_WAIT,
 ]
 
-const KNOWN_BACKGROUND_EFFECTS = ["fadeout", "flash"]
+const KNOWN_TRANSITIONS = ["fadeout", "flash"]
 
 func validate() -> void:
 	var script_tree: ScriptTree = ResourceLoader.load(save_path + "processed_script.tres")
@@ -159,8 +159,6 @@ func _validate_command(command: Dictionary, chap: String, line_num: int, asset_m
 	if command.has(GlobalType.COMMAND_BACKGROUND):
 		for entry in command[GlobalType.COMMAND_BACKGROUND]:
 			var bg_name = entry[0]
-			if bg_name in KNOWN_BACKGROUND_EFFECTS:
-				continue
 			if bg_name != GlobalType.COMMAND_CLEAR and asset_map.search_path(bg_name) == null:
 				var dedup_key = "%s|background|%s" % [chap, bg_name]
 				if not inherited_seen.has(dedup_key):
@@ -221,5 +219,12 @@ func _validate_command(command: Dictionary, chap: String, line_num: int, asset_m
 			var var_name = entry[0]
 			if not variables.check_has_var(var_name):
 				errors.append("ERROR %s: unknown variable %s check your spelling" % [loc, var_name])
+
+	# sceneTransition
+	if command.has(GlobalType.COMMAND_SCENE_TRANSITION):
+		for entry in command[GlobalType.COMMAND_SCENE_TRANSITION]:
+			var transition_name = entry[0]
+			if transition_name not in KNOWN_TRANSITIONS:
+				errors.append("ERROR %s: unknown scene transition %s check your spelling" % [loc, transition_name])
 
 	return errors

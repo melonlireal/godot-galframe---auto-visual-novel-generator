@@ -4,9 +4,12 @@ extends Node
 signal load_game_progress(game_progress:CurrGameProgress)
 signal game_created
 
-signal close_ui #called when any UI is closed
 signal pause_game_interaction
 signal unpause_game_interaction
+signal ui_opened
+signal ui_closed
+signal play_next_line
+signal reload_setting
 signal back_to_menu
 
 signal unknown_command_error(type: String)

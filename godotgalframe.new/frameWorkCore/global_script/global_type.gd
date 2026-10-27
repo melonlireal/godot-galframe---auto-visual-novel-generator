@@ -1,6 +1,6 @@
 extends Node
 
-enum GameState { DEFAULT, AUTOPLAY, SPEEDUP, PAUSED, TRANSITION, SHOWING_CG }
+enum GameState { DEFAULT, AUTOPLAY, SPEEDUP, PAUSED, TRANSITION, SHOWING_CG, UI_OPEN }
 enum LineStatus { OK, CHOICE, GAME, EXIT }
 
 const COMMAND_CHARACTER := "character"
@@ -12,6 +12,7 @@ const COMMAND_CG := "CG"
 const COMMAND_SOUND_EFFECT := "sound_effect"
 const COMMAND_VOICE := "voice"
 const COMMAND_UPDATE := "update"
+const COMMAND_SCENE_TRANSITION := "sceneTransition"
 const COMMAND_CLEAR := "clear"
 const EFFECT_TRANSIT := "transit"
 const EFFECT_APPEAR := "appear"

@@ -1,5 +1,9 @@
-extends CanvasLayer
+extends FullscreenUI
 class_name ReviewDialogues
+
+func ui_key() -> UIManager.UI:
+	return UIManager.UI.REVIEW_DIALOGUE
+
 var gameplay_setting: GameplaySetting
 var limit: int
 var narrator: String
@@ -18,6 +22,11 @@ func _ready() -> void:
 	limit = gameplay_setting.get_setting("limit")
 	narrator = gameplay_setting.get_setting("narrator")
 	close_button.pressed.connect(_on_close_pressed)
+	visibility_changed.connect(_on_visibility_changed)
+
+func _on_visibility_changed() -> void:
+	if visible:
+		jump_to_buttom()
 
 func _input(event: InputEvent) -> void:
 	if not visible:

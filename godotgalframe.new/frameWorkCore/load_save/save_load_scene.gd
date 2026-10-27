@@ -1,5 +1,9 @@
-extends CanvasLayer
+extends PopupUI
 class_name SaveLoad
+
+
+func ui_key() -> UIManager.UI:
+	return UIManager.UI.SAVE_LOAD
 
 @export var display_save: bool = true
 # 创建时根据这个切换贴图和效果
@@ -54,10 +58,8 @@ func save_in_slot(slot: int) -> void:
 	ResourceSaver.save(progress, "user://save/" + str(slot) + ".tres")
 	
 func load_from_slot(progress: CurrGameProgress) -> void:
-	GlobalSignals.close_ui.emit()
+	UIManager.close(UIManager.UI.SAVE_LOAD)
 	GlobalSignals.load_game_progress.emit(progress)
-	self.queue_free()
 	
 func _on_return_pressed() -> void:
-	GlobalSignals.close_ui.emit()
-	self.queue_free()
+	UIManager.close(UIManager.UI.SAVE_LOAD)
