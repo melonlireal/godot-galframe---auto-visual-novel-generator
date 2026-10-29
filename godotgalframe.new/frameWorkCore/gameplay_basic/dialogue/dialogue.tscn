@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://uk77posrbt33"]
+[gd_scene format=3 uid="uid://uk77posrbt33"]
 
 [ext_resource type="Texture2D" uid="uid://ck0fpeackkskw" path="res://artResource/UI_gameplay/dialoguebox.png" id="1_s8pq8"]
 [ext_resource type="FontFile" uid="uid://dcrep5362jnq1" path="res://artResource/UI_gameplay/ALFYSB.otf" id="2_nbym5"]
-[ext_resource type="Script" uid="uid://t0iofthpusr5" path="res://frameWorkCore/gameplay_basic/dialogue.gd" id="3_fqhj6"]
+[ext_resource type="Script" uid="uid://t0iofthpusr5" path="res://frameWorkCore/gameplay_basic/dialogue/dialogue.gd" id="3_fqhj6"]
 
 [node name="dialogue" type="CanvasLayer"]
 

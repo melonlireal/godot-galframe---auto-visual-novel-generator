@@ -5,7 +5,7 @@ var header_cg_doc = "res://header/cg.txt"
 var header_color_doc = "res://header/color.txt"
 var header_variable_doc = "res://header/variable.txt"
 
-var error_entry_scene = preload("res://frameWorkCore/compiler/compile_error_entry.tscn")
+var error_entry_scene = preload("res://frameWorkCore/compiler/validation/compile_error_entry.tscn")
 
 @onready var error_container: VBoxContainer = $"../error_list/ScrollContainer/VBoxContainer"
 @onready var summary_label: Label = $"../summary_label"

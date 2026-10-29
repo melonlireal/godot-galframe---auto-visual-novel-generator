@@ -51,7 +51,7 @@ func add_line() -> void:
 	var container = line_container
 	if container.get_child_count() >= limit:
 		container.get_child(0).queue_free()
-	var compound = preload("res://frameWorkCore/gameplay_basic/reviewDialogues/line_review.tscn")
+	var compound = preload("res://frameWorkCore/gameplay_basic/review_dialogues/line_review.tscn")
 	var script = compound.instantiate()
 	script.character = line["character"]
 	script.dialogue = line["dialogue"]

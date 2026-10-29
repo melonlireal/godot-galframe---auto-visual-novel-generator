@@ -16,13 +16,10 @@ var progress:CurrGameProgress = CurrGameProgress.new()
 @onready var cg_button: Button = $menu_UI/HBoxContainer/CG
 @onready var setting_button: Button = $menu_UI/HBoxContainer/setting
 @onready var quit_button: Button = $menu_UI/HBoxContainer/quit
-# TODO: popup 临时挂载点，等待更合理的方案
-@onready var popup_root: Node = $UI
 
 
 
 func _ready():
-	UIManager.set_popup_root(popup_root)
 	start_button.pressed.connect(_on_start_pressed)
 	load_button.pressed.connect(_on_load_pressed)
 	cg_button.pressed.connect(_on_cg_pressed)

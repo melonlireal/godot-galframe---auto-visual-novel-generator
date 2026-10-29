@@ -53,12 +53,12 @@ func load_value() -> void:
 
 func _replay_play_example() -> void:
 	var preview_text: String = play_example_label.text
-	play_example_label.play_dialogue(preview_text, preview_text.length() / (_saved_data.play_speed * 0.4))
+	play_example_label.play_dialogue(preview_text, preview_text.length() / (maxf(_saved_data.play_speed, 0.001) * 0.4))
 
 
 func _replay_auto_play_example() -> void:
 	var preview_text: String = auto_play_example_label.text
-	auto_play_example_label.play_dialogue(preview_text, preview_text.length() / (_saved_data.auto_play_speed * 0.4))
+	auto_play_example_label.play_dialogue(preview_text, preview_text.length() / (maxf(_saved_data.auto_play_speed, 0.001) * 0.4))
 
 func _on_play_speed_value_changed(value: float) -> void:
 	_saved_data.save_play_speed(value)

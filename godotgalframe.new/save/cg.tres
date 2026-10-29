@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CGS" format=3]
 
-[ext_resource type="Script" path="res://frameWorkCore/compiler/cgs.gd" id="1_25url"]
+[ext_resource type="Script" path="res://frameWorkCore/compiler/compiled_resource_script/cgs.gd" id="1_25url"]
 
 [resource]
 script = ExtResource("1_25url")

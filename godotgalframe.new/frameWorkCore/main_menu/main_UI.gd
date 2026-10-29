@@ -14,14 +14,14 @@ signal leave_game
 # 自身子节点引用
 @onready var function_name: Label = $Control/ButtonContainer/TextureRect/CenterContainer/function_name
 @onready var button_container: HBoxContainer = $Control/ButtonContainer
-@onready var volumn_slider: VSlider = $Control/volumn_slider
+@onready var volume_slider: VSlider = $Control/volume_slider
 @onready var windows_color_rect: ColorRect = $Control/ColorRect
 @onready var save_button: Button = $Control/ButtonContainer/save
 @onready var load_button: Button = $Control/ButtonContainer/load
 @onready var quicksave_button: Button = $Control/ButtonContainer/quicksave
 @onready var quickload_button: Button = $Control/ButtonContainer/quickload
 @onready var setting_button: TextureButton = $Control/ButtonContainer/setting
-@onready var volumn_button: TextureButton = $Control/ButtonContainer/volumn
+@onready var volume_button: TextureButton = $Control/ButtonContainer/volume
 @onready var story_tree_button: TextureButton = $Control/ButtonContainer/story_tree
 @onready var review_dialogue_button: TextureButton = $Control/ButtonContainer/review_dialogue
 @onready var auto_play_button: TextureButton = $Control/ButtonContainer/auto_play
@@ -52,8 +52,8 @@ func _ready():
 	quickload_button.mouse_entered.connect(_on_quickload_mouse_entered)
 	setting_button.pressed.connect(_on_setting_pressed)
 	setting_button.mouse_entered.connect(_on_setting_mouse_entered)
-	volumn_button.pressed.connect(_on_volumn_pressed)
-	volumn_button.mouse_entered.connect(_on_volumn_mouse_entered)
+	volume_button.pressed.connect(_on_volume_pressed)
+	volume_button.mouse_entered.connect(_on_volume_mouse_entered)
 	story_tree_button.pressed.connect(_on_story_tree_pressed)
 	story_tree_button.mouse_entered.connect(_on_story_tree_mouse_entered)
 	review_dialogue_button.pressed.connect(_on_review_dialogue_pressed)
@@ -68,15 +68,15 @@ func _ready():
 	hide_ui_button.mouse_entered.connect(_on_hide_ui_mouse_entered)
 	leave_game_button.pressed.connect(_on_leave_game_pressed)
 	leave_game_button.mouse_entered.connect(_on_leave_game_mouse_entered)
-	volumn_slider.value_changed.connect(_on_volumn_slider_value_changed)
+	volume_slider.value_changed.connect(_on_volume_slider_value_changed)
 	function_name.text = ""
 	for nodes in button_container.get_children():
 		nodes.mouse_exited.connect(_mouse_leave_button)
 		nodes.mouse_entered.connect(_mouse_reach_button)
-	volumn_slider.visible = false
-	volumn_slider.editable = false
+	volume_slider.visible = false
+	volume_slider.editable = false
 	var saved_data: PlayerSetting = ResourceLoader.load(GlobalResources.setting_save_path)
-	volumn_slider.value = saved_data.total_volumn
+	volume_slider.value = saved_data.total_volume
 	windows_color_rect.color = saved_data.windows_color
 
 		
@@ -129,22 +129,22 @@ func _on_setting_pressed() -> void:
 	_open_setting_session()
 	
 	
-func _on_volumn_mouse_entered() -> void:
+func _on_volume_mouse_entered() -> void:
 	function_name.text = "音量"
 	
 	
-func _on_volumn_pressed() -> void:
-	if volumn_slider.visible:
-		volumn_slider.visible = false
-		volumn_slider.editable = false
+func _on_volume_pressed() -> void:
+	if volume_slider.visible:
+		volume_slider.visible = false
+		volume_slider.editable = false
 		return
-	volumn_slider.visible = true
-	volumn_slider.editable = true
+	volume_slider.visible = true
+	volume_slider.editable = true
 	
 	
-func _on_volumn_slider_value_changed(value: float) -> void:
+func _on_volume_slider_value_changed(value: float) -> void:
 	var saved_data:PlayerSetting = ResourceLoader.load(GlobalResources.setting_save_path)
-	saved_data.total_volumn = value
+	saved_data.total_volume = value
 	var bus = AudioServer.get_bus_index("Master")
 	AudioServer.set_bus_volume_db(bus, linear_to_db(value))
 	ResourceSaver.save(saved_data, GlobalResources.setting_save_path)

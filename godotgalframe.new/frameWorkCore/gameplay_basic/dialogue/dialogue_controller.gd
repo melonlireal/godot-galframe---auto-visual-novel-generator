@@ -99,10 +99,10 @@ func _calculate_duration(text: String) -> float:
 		GlobalType.GameState.SPEEDUP:
 			return 0.0
 		GlobalType.GameState.AUTOPLAY:
-			var text_dur = text_len / (setting.auto_play_speed * play_speed_factor)
+			var text_dur = text_len / (maxf(setting.auto_play_speed, 0.001) * play_speed_factor)
 			return max(text_dur, _voicing_time)
 		_:
-			return text_len / (setting.play_speed * play_speed_factor)
+			return text_len / (maxf(setting.play_speed, 0.001) * play_speed_factor)
 
 
 func _on_dialogue_playback_finished() -> void:

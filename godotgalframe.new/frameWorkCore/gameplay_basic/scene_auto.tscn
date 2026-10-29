@@ -2,23 +2,23 @@
 
 [ext_resource type="Script" uid="uid://8kk62ybanlp5" path="res://frameWorkCore/gameplay_basic/scene_auto.gd" id="1_2awyf"]
 [ext_resource type="Texture2D" uid="uid://xqy3a8rw8472" path="res://artResource/UI_gameplay/narrationbox.png" id="2_0460k"]
-[ext_resource type="Script" uid="uid://br7abfh42k0op" path="res://frameWorkCore/gameplay_basic/background.gd" id="2_88744"]
-[ext_resource type="Script" uid="uid://b0ltmjjvv2owj" path="res://frameWorkCore/gameplay_basic/avatar.gd" id="3_ens8c"]
+[ext_resource type="Script" uid="uid://br7abfh42k0op" path="res://frameWorkCore/gameplay_basic/background/background.gd" id="2_88744"]
+[ext_resource type="Script" uid="uid://b0ltmjjvv2owj" path="res://frameWorkCore/gameplay_basic/character/avatar.gd" id="3_ens8c"]
 [ext_resource type="Texture2D" uid="uid://ck0fpeackkskw" path="res://artResource/UI_gameplay/dialoguebox.png" id="3_s4tsg"]
-[ext_resource type="Script" uid="uid://bqbravily6x14" path="res://frameWorkCore/gameplay_basic/chubby_play.gd" id="3_ufw8m"]
+[ext_resource type="Script" uid="uid://bqbravily6x14" path="res://frameWorkCore/gameplay_basic/background/chubby_play.gd" id="3_ufw8m"]
 [ext_resource type="FontFile" uid="uid://djaascw8mseps" path="res://artResource/UI_gameplay/honkaifont.ttf" id="4_oh8xj"]
 [ext_resource type="FontFile" uid="uid://dcrep5362jnq1" path="res://artResource/UI_gameplay/ALFYSB.otf" id="4_u0mpm"]
-[ext_resource type="PackedScene" uid="uid://pgyucp4tuj4t" path="res://frameWorkCore/gameplay_basic/character_slot.tscn" id="5_00gnm"]
-[ext_resource type="Script" uid="uid://t0iofthpusr5" path="res://frameWorkCore/gameplay_basic/dialogue.gd" id="5_j30eb"]
+[ext_resource type="PackedScene" uid="uid://pgyucp4tuj4t" path="res://frameWorkCore/gameplay_basic/character/character_slot.tscn" id="5_00gnm"]
+[ext_resource type="Script" uid="uid://t0iofthpusr5" path="res://frameWorkCore/gameplay_basic/dialogue/dialogue.gd" id="5_j30eb"]
 [ext_resource type="PackedScene" uid="uid://dnkvex8li8a4j" path="res://frameWorkCore/main_menu/main_UI.tscn" id="6_0o83t"]
-[ext_resource type="Script" uid="uid://dfib8nlfhdwrd" path="res://frameWorkCore/gameplay_basic/dialogue_controller.gd" id="6_dwb8m"]
+[ext_resource type="Script" uid="uid://dfib8nlfhdwrd" path="res://frameWorkCore/gameplay_basic/dialogue/dialogue_controller.gd" id="6_dwb8m"]
 [ext_resource type="Script" uid="uid://d2q1ewu5nrkgn" path="res://frameWorkCore/errorlogDontTouch.gd" id="7_kvtwn"]
-[ext_resource type="PackedScene" uid="uid://c7urdigxq43m5" path="res://frameWorkCore/gameplay_basic/reviewDialogues/review_dialogues.tscn" id="9_88744"]
-[ext_resource type="Script" uid="uid://bligd1cjtpfv6" path="res://frameWorkCore/gameplay_basic/scene_transition.gd" id="11_olq35"]
-[ext_resource type="Script" uid="uid://cci7q1xdvf15f" path="res://frameWorkCore/gameplay_basic/music.gd" id="12_00gnm"]
-[ext_resource type="Script" uid="uid://dw41otoq6vnt" path="res://frameWorkCore/gameplay_basic/choice_controller.gd" id="12_kwgkn"]
+[ext_resource type="PackedScene" uid="uid://c7urdigxq43m5" path="res://frameWorkCore/gameplay_basic/review_dialogues/review_dialogues.tscn" id="9_88744"]
+[ext_resource type="Script" uid="uid://bligd1cjtpfv6" path="res://frameWorkCore/gameplay_basic/background/scene_transition.gd" id="11_olq35"]
+[ext_resource type="Script" uid="uid://cci7q1xdvf15f" path="res://frameWorkCore/gameplay_basic/music/music.gd" id="12_00gnm"]
+[ext_resource type="Script" uid="uid://dw41otoq6vnt" path="res://frameWorkCore/gameplay_basic/choice/choice_controller.gd" id="12_kwgkn"]
 [ext_resource type="PackedScene" uid="uid://7wwctswnkwqj" path="res://frameWorkCore/story_tree_editor/story_tree.tscn" id="12_ob1rn"]
-[ext_resource type="Script" uid="uid://84pbbv15c8ww" path="res://frameWorkCore/gameplay_basic/minigame.gd" id="13_ens8c"]
+[ext_resource type="Script" uid="uid://84pbbv15c8ww" path="res://frameWorkCore/gameplay_basic/minigame/minigame.gd" id="13_ens8c"]
 
 [node name="scene_auto" type="CanvasLayer" unique_id=772571927]
 script = ExtResource("1_2awyf")
@@ -109,10 +109,10 @@ metadata/_edit_lock_ = true
 
 [node name="dialogue_controller" type="CanvasLayer" parent="." unique_id=1728486472]
 script = ExtResource("6_dwb8m")
-narration_pos = null
-dialogue_pos = null
-play_speed_factor = null
-autoplay_pause_time = null
+narration_pos = Vector2(332, 800)
+dialogue_pos = Vector2(332, 850)
+play_speed_factor = 0.4
+autoplay_pause_time = 1.0
 
 [node name="narration_box" type="TextureRect" parent="dialogue_controller" unique_id=1025222767]
 modulate = Color(1, 1, 1, 0.78431374)
@@ -203,11 +203,7 @@ grow_vertical = 2
 color = Color(1, 1, 1, 0)
 metadata/_edit_lock_ = true
 
-[node name="UI" parent="." unique_id=1474304200 node_paths=PackedStringArray("dialogue_controller", "review_dialogues", "story_tree", "choice_controller") instance=ExtResource("6_0o83t")]
-dialogue_controller = NodePath("../dialogue_controller")
-review_dialogues = NodePath("../review_dialogues")
-story_tree = NodePath("../story_tree")
-choice_controller = NodePath("../ChoiceController")
+[node name="UI" parent="." unique_id=1474304200 instance=ExtResource("6_0o83t")]
 
 [node name="ChoiceController" type="CanvasLayer" parent="." unique_id=352681050]
 script = ExtResource("12_kwgkn")

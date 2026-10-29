@@ -1,8 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cb46i7kfkxwf7"]
+[gd_scene format=3 uid="uid://cb46i7kfkxwf7"]
 
 [ext_resource type="Texture2D" uid="uid://dna43v46jrik3" path="res://artResource/UI_gameplay/ui_raw/choice_box.png" id="1_p6mfj"]
 [ext_resource type="Texture2D" uid="uid://u6i01s8k81af" path="res://artResource/UI_gameplay/ui_hover/choice_box_hover.png" id="2_d6tvi"]
-[ext_resource type="Script" uid="uid://bg7dqsp7ga8np" path="res://frameWorkCore/gameplay_basic/choice.gd" id="3_bus57"]
+[ext_resource type="Script" uid="uid://bg7dqsp7ga8np" path="res://frameWorkCore/gameplay_basic/choice/choice.gd" id="3_bus57"]
 [ext_resource type="FontFile" uid="uid://djaascw8mseps" path="res://artResource/UI_gameplay/honkaifont.ttf" id="4_2crrq"]
 
 [node name="choice" type="TextureButton"]

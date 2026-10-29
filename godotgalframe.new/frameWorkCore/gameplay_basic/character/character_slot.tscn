@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://pgyucp4tuj4t"]
 
-[ext_resource type="Script" uid="uid://b765or20vfnkd" path="res://frameWorkCore/gameplay_basic/character_slot.gd" id="1_xtmag"]
+[ext_resource type="Script" uid="uid://b765or20vfnkd" path="res://frameWorkCore/gameplay_basic/character/character_slot.gd" id="1_6c6so"]
 
 [node name="character_slot" type="Control" unique_id=742632305]
 custom_minimum_size = Vector2(1000, 1500)
@@ -9,7 +9,7 @@ anchor_right = 0.55
 anchor_bottom = 2.0
 offset_bottom = -432.0
 pivot_offset_ratio = Vector2(0.5, 0.5)
-script = ExtResource("1_xtmag")
+script = ExtResource("1_6c6so")
 
 [node name="slot" type="CenterContainer" parent="." unique_id=783669454]
 layout_direction = 1

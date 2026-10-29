@@ -295,4 +295,3 @@ texture = ExtResource("6_q022t")
 root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_y7c3j")
 
-[node name="UI" type="Node2D" parent="." unique_id=682803021]

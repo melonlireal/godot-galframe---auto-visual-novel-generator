@@ -1,69 +1,69 @@
 extends GridContainer
-@onready var total_volumn_slider: HSlider = $total_volumn/HBoxContainer/MarginContainer/total_volumn
-@onready var total_volumn_label: Label = $total_volumn/HBoxContainer/data_display_box/CenterContainer/data_display
+@onready var total_volume_slider: HSlider = $total_volume/HBoxContainer/MarginContainer/total_volume
+@onready var total_volume_label: Label = $total_volume/HBoxContainer/data_display_box/CenterContainer/data_display
 
-@onready var bgm_volumn_slider: HSlider = $bgm_volumn/HBoxContainer/MarginContainer/bgm_volumn
-@onready var bgm_volumn_label: Label = $bgm_volumn/HBoxContainer/data_display_box/CenterContainer/data_display
+@onready var bgm_volume_slider: HSlider = $bgm_volume/HBoxContainer/MarginContainer/bgm_volume
+@onready var bgm_volume_label: Label = $bgm_volume/HBoxContainer/data_display_box/CenterContainer/data_display
 
-@onready var voice_volumn_slider: HSlider = $voice_volumn/HBoxContainer/MarginContainer/voice_volumn
-@onready var voice_volumn_label: Label = $voice_volumn/HBoxContainer/data_display_box/CenterContainer/data_display
+@onready var voice_volume_slider: HSlider = $voice_volume/HBoxContainer/MarginContainer/voice_volume
+@onready var voice_volume_label: Label = $voice_volume/HBoxContainer/data_display_box/CenterContainer/data_display
 
-@onready var sfx_volumn_slider: HSlider = $sfx_volumn/HBoxContainer/MarginContainer/sfx_volumn
-@onready var sfx_volumn_label: Label = $sfx_volumn/HBoxContainer/data_display_box/CenterContainer/data_display
+@onready var sfx_volume_slider: HSlider = $sfx_volume/HBoxContainer/MarginContainer/sfx_volume
+@onready var sfx_volume_label: Label = $sfx_volume/HBoxContainer/data_display_box/CenterContainer/data_display
 
 var _saved_data: PlayerSetting
 
-func _ready():
+func _ready() -> void:
 	_saved_data = ResourceLoader.load(GlobalResources.setting_save_path)
-	total_volumn_slider.value_changed.connect(_on_total_volumn_value_changed)
-	bgm_volumn_slider.value_changed.connect(_on_bgm_volumn_value_changed)
-	voice_volumn_slider.value_changed.connect(_on_voice_volumn_value_changed)
-	sfx_volumn_slider.value_changed.connect(_on_sfx_volumn_value_changed)
-	total_volumn_slider.drag_ended.connect(func(_c): ResourceSaver.save(_saved_data, GlobalResources.setting_save_path))
-	bgm_volumn_slider.drag_ended.connect(func(_c): ResourceSaver.save(_saved_data, GlobalResources.setting_save_path))
-	voice_volumn_slider.drag_ended.connect(func(_c): ResourceSaver.save(_saved_data, GlobalResources.setting_save_path))
-	sfx_volumn_slider.drag_ended.connect(func(_c): ResourceSaver.save(_saved_data, GlobalResources.setting_save_path))
+	total_volume_slider.value_changed.connect(_on_total_volume_value_changed)
+	bgm_volume_slider.value_changed.connect(_on_bgm_volume_value_changed)
+	voice_volume_slider.value_changed.connect(_on_voice_volume_value_changed)
+	sfx_volume_slider.value_changed.connect(_on_sfx_volume_value_changed)
+	total_volume_slider.drag_ended.connect(func(_c): ResourceSaver.save(_saved_data, GlobalResources.setting_save_path))
+	bgm_volume_slider.drag_ended.connect(func(_c): ResourceSaver.save(_saved_data, GlobalResources.setting_save_path))
+	voice_volume_slider.drag_ended.connect(func(_c): ResourceSaver.save(_saved_data, GlobalResources.setting_save_path))
+	sfx_volume_slider.drag_ended.connect(func(_c): ResourceSaver.save(_saved_data, GlobalResources.setting_save_path))
 
 func load_value() -> void:
 	_saved_data = ResourceLoader.load(GlobalResources.setting_save_path)
 
-	var total_volumn: float = _saved_data.total_volumn
-	total_volumn_slider.value = total_volumn
-	total_volumn_label.text = str(total_volumn * 100)
+	var total_volume: float = _saved_data.total_volume
+	total_volume_slider.value = total_volume
+	total_volume_label.text = str(total_volume * 100)
 
-	var bgm_volumn: float = _saved_data.bgm_volumn
-	bgm_volumn_slider.value = bgm_volumn
-	bgm_volumn_label.text = str(bgm_volumn * 100)
+	var bgm_volume: float = _saved_data.bgm_volume
+	bgm_volume_slider.value = bgm_volume
+	bgm_volume_label.text = str(bgm_volume * 100)
 
-	var voice_volumn: float = _saved_data.voice_volumn
-	voice_volumn_slider.value = voice_volumn
-	voice_volumn_label.text = str(voice_volumn * 100)
+	var voice_volume: float = _saved_data.voice_volume
+	voice_volume_slider.value = voice_volume
+	voice_volume_label.text = str(voice_volume * 100)
 
-	var sfx_volumn: float = _saved_data.sfx_volumn
-	sfx_volumn_slider.value = sfx_volumn
-	sfx_volumn_label.text = str(sfx_volumn * 100)
+	var sfx_volume: float = _saved_data.sfx_volume
+	sfx_volume_slider.value = sfx_volume
+	sfx_volume_label.text = str(sfx_volume * 100)
 
 
-func _on_total_volumn_value_changed(value: float) -> void:
-	_saved_data.total_volumn = value
+func _on_total_volume_value_changed(value: float) -> void:
+	_saved_data.total_volume = value
 	var bus = AudioServer.get_bus_index("Master")
 	AudioServer.set_bus_volume_db(bus, linear_to_db(value))
-	total_volumn_label.text = str(value * 100)
+	total_volume_label.text = str(value * 100)
 
-func _on_bgm_volumn_value_changed(value: float) -> void:
-	_saved_data.bgm_volumn = value
+func _on_bgm_volume_value_changed(value: float) -> void:
+	_saved_data.bgm_volume = value
 	var bus = AudioServer.get_bus_index("bgm")
 	AudioServer.set_bus_volume_db(bus, linear_to_db(value))
-	bgm_volumn_label.text = str(value * 100)
+	bgm_volume_label.text = str(value * 100)
 
-func _on_voice_volumn_value_changed(value: float) -> void:
-	_saved_data.voice_volumn = value
+func _on_voice_volume_value_changed(value: float) -> void:
+	_saved_data.voice_volume = value
 	var bus = AudioServer.get_bus_index("voice")
 	AudioServer.set_bus_volume_db(bus, linear_to_db(value))
-	voice_volumn_label.text = str(value * 100)
+	voice_volume_label.text = str(value * 100)
 
-func _on_sfx_volumn_value_changed(value: float) -> void:
-	_saved_data.sfx_volumn = value
+func _on_sfx_volume_value_changed(value: float) -> void:
+	_saved_data.sfx_volume = value
 	var bus = AudioServer.get_bus_index("sfx")
 	AudioServer.set_bus_volume_db(bus, linear_to_db(value))
-	sfx_volumn_label.text = str(value * 100)
+	sfx_volume_label.text = str(value * 100)

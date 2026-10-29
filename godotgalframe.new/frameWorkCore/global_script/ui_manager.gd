@@ -27,16 +27,11 @@ var _registry: Dictionary = {}
 
 var _popup_stack: Array[PopupUI] = []
 var _hidden_gameplay: Array[GameplayUI] = []
-# TODO: popup 临时挂载在 main_scene/UI 节点下，需要更合理的方案
-var _popup_root: Node = null
 
 
-func set_popup_root(node: Node) -> void:
-	_popup_root = node
+func _get_popup_root() -> Node:
+	return get_tree().current_scene
 
-
-# ── 注册 / 注销 ───────────────────────────────────────────────
-# 常驻 UI 节点在 _enter_tree() 里调用，传入对应的枚举 key
 
 func register(key: UI, node: CanvasLayer) -> void:
 	_registry[key] = node
@@ -46,16 +41,15 @@ func unregister(key: UI) -> void:
 	_registry.erase(key)
 
 
-# ── 统一开关 API ──────────────────────────────────────────────
+
 
 func open(key: UI, params: Dictionary = {}) -> void:
 	# POPUP 层：动态实例化
 	if UI_SCENE.has(key):
-		assert(_popup_root != null, "UIManager: popup_root is not set")
 		var instance: PopupUI = load(UI_SCENE[key]).instantiate()
 		for k in params:
 			instance.set(k, params[k])
-		_popup_root.add_child(instance)
+		_get_popup_root().add_child(instance)
 		_popup_stack.push_back(instance)
 		GlobalSignals.ui_opened.emit()
 		return
@@ -78,7 +72,6 @@ func open(key: UI, params: Dictionary = {}) -> void:
 
 
 func close(key: UI) -> void:
-	# POPUP 层：从栈里找到对应 key 的节点关闭
 	if UI_SCENE.has(key):
 		for i in range(_popup_stack.size() - 1, -1, -1):
 			var node: PopupUI = _popup_stack[i]
@@ -89,7 +82,7 @@ func close(key: UI) -> void:
 		if _popup_stack.is_empty():
 			GlobalSignals.ui_closed.emit()
 		return
-	# GAMEPLAY / FULLSCREEN 层：常驻节点
+
 	var node: CanvasLayer = _registry.get(key)
 	if node == null:
 		push_error("UIManager.close: key %s not registered" % UI.keys()[key])

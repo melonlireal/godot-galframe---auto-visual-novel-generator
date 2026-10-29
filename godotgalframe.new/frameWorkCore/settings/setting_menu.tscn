@@ -19,7 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://b40q413pnovfy" path="res://artResource/UI_gameplay/backgrounddemo.jpg" id="17_28h4q"]
 [ext_resource type="Texture2D" uid="uid://de8q65xwoyo8b" path="res://artResource/UI_gameplay/dialogueboxslice.png" id="18_1qsv6"]
 [ext_resource type="FontFile" uid="uid://dcrep5362jnq1" path="res://artResource/UI_gameplay/ALFYSB.otf" id="19_xnl5h"]
-[ext_resource type="Script" uid="uid://t0iofthpusr5" path="res://frameWorkCore/gameplay_basic/dialogue.gd" id="20_yhwg8"]
+[ext_resource type="Script" uid="uid://t0iofthpusr5" path="res://frameWorkCore/gameplay_basic/dialogue/dialogue.gd" id="20_yhwg8"]
 [ext_resource type="Script" uid="uid://dhi5w20lng83c" path="res://frameWorkCore/settings/volume_setting.gd" id="21_0ys35"]
 [ext_resource type="Script" uid="uid://4fsa5ewwuc04" path="res://frameWorkCore/settings/game_play_setting.gd" id="22_lnpoo"]
 [ext_resource type="Texture2D" uid="uid://welyujfq2267" path="res://artResource/UI_gameplay/ui_raw/setting.png" id="23_e4028"]
@@ -42,6 +42,7 @@ expand_margin_bottom = 10.0
 
 [node name="setting_menu" type="CanvasLayer" unique_id=2135145650]
 editor_description = "这个场景是整个项目里最史的史山，没有之一。没事别乱碰。"
+layer = 2
 script = ExtResource("1_w5y0x")
 
 [node name="background" type="TextureRect" parent="." unique_id=693195241]
@@ -93,7 +94,7 @@ theme_override_constants/separation = 80
 layout_mode = 2
 text = "基础设置"
 
-[node name="volumn" parent="options" unique_id=1257076561 instance=ExtResource("5_tcu2g")]
+[node name="volume" parent="options" unique_id=1257076561 instance=ExtResource("5_tcu2g")]
 layout_mode = 2
 text = "音量设置"
 
@@ -458,7 +459,7 @@ theme_override_font_sizes/normal_font_size = 35
 text = "这是自动播放速度预览"
 script = ExtResource("20_yhwg8")
 
-[node name="volumn_setting" type="GridContainer" parent="settings" unique_id=438570555]
+[node name="volume_setting" type="GridContainer" parent="settings" unique_id=438570555]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -473,39 +474,39 @@ theme_override_constants/v_separation = 100
 columns = 2
 script = ExtResource("21_0ys35")
 
-[node name="total_volumn" type="VBoxContainer" parent="settings/volumn_setting" unique_id=2135608277]
+[node name="total_volume" type="VBoxContainer" parent="settings/volume_setting" unique_id=2135608277]
 custom_minimum_size = Vector2(650, 100)
 layout_mode = 2
 theme_override_constants/separation = 35
 
-[node name="TextureRect" type="TextureRect" parent="settings/volumn_setting/total_volumn" unique_id=284918827]
+[node name="TextureRect" type="TextureRect" parent="settings/volume_setting/total_volume" unique_id=284918827]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 texture = ExtResource("9_ofjja")
 
-[node name="CenterContainer" type="CenterContainer" parent="settings/volumn_setting/total_volumn/TextureRect" unique_id=1990351624]
+[node name="CenterContainer" type="CenterContainer" parent="settings/volume_setting/total_volume/TextureRect" unique_id=1990351624]
 layout_mode = 0
 offset_left = 76.0
 offset_top = 4.0
 offset_right = 216.0
 offset_bottom = 56.0
 
-[node name="data_type" type="Label" parent="settings/volumn_setting/total_volumn/TextureRect/CenterContainer" unique_id=1170191610]
+[node name="data_type" type="Label" parent="settings/volume_setting/total_volume/TextureRect/CenterContainer" unique_id=1170191610]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("10_t08vl")
 theme_override_font_sizes/font_size = 35
 text = "全局音量"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="settings/volumn_setting/total_volumn" unique_id=1532815047]
+[node name="HBoxContainer" type="HBoxContainer" parent="settings/volume_setting/total_volume" unique_id=1532815047]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="settings/volumn_setting/total_volumn/HBoxContainer" unique_id=1475990205]
+[node name="MarginContainer" type="MarginContainer" parent="settings/volume_setting/total_volume/HBoxContainer" unique_id=1475990205]
 custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
 theme_override_constants/margin_left = 80
 theme_override_constants/margin_right = 40
 
-[node name="total_volumn" type="HSlider" parent="settings/volumn_setting/total_volumn/HBoxContainer/MarginContainer" unique_id=496174297]
+[node name="total_volume" type="HSlider" parent="settings/volume_setting/total_volume/HBoxContainer/MarginContainer" unique_id=496174297]
 layout_mode = 2
 theme_override_icons/grabber = ExtResource("11_rjxxa")
 theme_override_icons/grabber_highlight = ExtResource("11_rjxxa")
@@ -517,13 +518,13 @@ max_value = 1.0
 step = 0.01
 value = 0.6
 
-[node name="data_display_box" type="TextureRect" parent="settings/volumn_setting/total_volumn/HBoxContainer" unique_id=437045308]
+[node name="data_display_box" type="TextureRect" parent="settings/volume_setting/total_volume/HBoxContainer" unique_id=437045308]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 texture = ExtResource("14_vutv5")
 expand_mode = 3
 
-[node name="CenterContainer" type="CenterContainer" parent="settings/volumn_setting/total_volumn/HBoxContainer/data_display_box" unique_id=1802358596]
+[node name="CenterContainer" type="CenterContainer" parent="settings/volume_setting/total_volume/HBoxContainer/data_display_box" unique_id=1802358596]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.048
@@ -535,44 +536,44 @@ offset_top = 0.00499964
 offset_right = 0.0239983
 offset_bottom = 0.00499725
 
-[node name="data_display" type="Label" parent="settings/volumn_setting/total_volumn/HBoxContainer/data_display_box/CenterContainer" unique_id=292403023]
+[node name="data_display" type="Label" parent="settings/volume_setting/total_volume/HBoxContainer/data_display_box/CenterContainer" unique_id=292403023]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "100"
 
-[node name="bgm_volumn" type="VBoxContainer" parent="settings/volumn_setting" unique_id=804274814]
+[node name="bgm_volume" type="VBoxContainer" parent="settings/volume_setting" unique_id=804274814]
 custom_minimum_size = Vector2(650, 100)
 layout_mode = 2
 theme_override_constants/separation = 35
 
-[node name="TextureRect" type="TextureRect" parent="settings/volumn_setting/bgm_volumn" unique_id=1735114357]
+[node name="TextureRect" type="TextureRect" parent="settings/volume_setting/bgm_volume" unique_id=1735114357]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 texture = ExtResource("9_ofjja")
 
-[node name="CenterContainer" type="CenterContainer" parent="settings/volumn_setting/bgm_volumn/TextureRect" unique_id=700232809]
+[node name="CenterContainer" type="CenterContainer" parent="settings/volume_setting/bgm_volume/TextureRect" unique_id=700232809]
 layout_mode = 0
 offset_left = 76.0
 offset_top = 4.0
 offset_right = 216.0
 offset_bottom = 56.0
 
-[node name="data_type" type="Label" parent="settings/volumn_setting/bgm_volumn/TextureRect/CenterContainer" unique_id=1907080531]
+[node name="data_type" type="Label" parent="settings/volume_setting/bgm_volume/TextureRect/CenterContainer" unique_id=1907080531]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("10_t08vl")
 theme_override_font_sizes/font_size = 35
 text = "背景音量"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="settings/volumn_setting/bgm_volumn" unique_id=789918908]
+[node name="HBoxContainer" type="HBoxContainer" parent="settings/volume_setting/bgm_volume" unique_id=789918908]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="settings/volumn_setting/bgm_volumn/HBoxContainer" unique_id=1640008049]
+[node name="MarginContainer" type="MarginContainer" parent="settings/volume_setting/bgm_volume/HBoxContainer" unique_id=1640008049]
 custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
 theme_override_constants/margin_left = 80
 theme_override_constants/margin_right = 40
 
-[node name="bgm_volumn" type="HSlider" parent="settings/volumn_setting/bgm_volumn/HBoxContainer/MarginContainer" unique_id=250615489]
+[node name="bgm_volume" type="HSlider" parent="settings/volume_setting/bgm_volume/HBoxContainer/MarginContainer" unique_id=250615489]
 layout_mode = 2
 theme_override_icons/grabber = ExtResource("11_rjxxa")
 theme_override_icons/grabber_highlight = ExtResource("11_rjxxa")
@@ -584,13 +585,13 @@ max_value = 1.0
 step = 0.01
 value = 0.6
 
-[node name="data_display_box" type="TextureRect" parent="settings/volumn_setting/bgm_volumn/HBoxContainer" unique_id=406163998]
+[node name="data_display_box" type="TextureRect" parent="settings/volume_setting/bgm_volume/HBoxContainer" unique_id=406163998]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 texture = ExtResource("14_vutv5")
 expand_mode = 3
 
-[node name="CenterContainer" type="CenterContainer" parent="settings/volumn_setting/bgm_volumn/HBoxContainer/data_display_box" unique_id=1769607963]
+[node name="CenterContainer" type="CenterContainer" parent="settings/volume_setting/bgm_volume/HBoxContainer/data_display_box" unique_id=1769607963]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.048
@@ -602,44 +603,44 @@ offset_top = 0.00499964
 offset_right = 0.0239983
 offset_bottom = 0.00499725
 
-[node name="data_display" type="Label" parent="settings/volumn_setting/bgm_volumn/HBoxContainer/data_display_box/CenterContainer" unique_id=881117082]
+[node name="data_display" type="Label" parent="settings/volume_setting/bgm_volume/HBoxContainer/data_display_box/CenterContainer" unique_id=881117082]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "100"
 
-[node name="voice_volumn" type="VBoxContainer" parent="settings/volumn_setting" unique_id=1453941996]
+[node name="voice_volume" type="VBoxContainer" parent="settings/volume_setting" unique_id=1453941996]
 custom_minimum_size = Vector2(650, 100)
 layout_mode = 2
 theme_override_constants/separation = 35
 
-[node name="TextureRect" type="TextureRect" parent="settings/volumn_setting/voice_volumn" unique_id=906730003]
+[node name="TextureRect" type="TextureRect" parent="settings/volume_setting/voice_volume" unique_id=906730003]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 texture = ExtResource("9_ofjja")
 
-[node name="CenterContainer" type="CenterContainer" parent="settings/volumn_setting/voice_volumn/TextureRect" unique_id=1031338160]
+[node name="CenterContainer" type="CenterContainer" parent="settings/volume_setting/voice_volume/TextureRect" unique_id=1031338160]
 layout_mode = 0
 offset_left = 76.0
 offset_top = 4.0
 offset_right = 216.0
 offset_bottom = 56.0
 
-[node name="data_type" type="Label" parent="settings/volumn_setting/voice_volumn/TextureRect/CenterContainer" unique_id=128459280]
+[node name="data_type" type="Label" parent="settings/volume_setting/voice_volume/TextureRect/CenterContainer" unique_id=128459280]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("10_t08vl")
 theme_override_font_sizes/font_size = 35
 text = "配音音量"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="settings/volumn_setting/voice_volumn" unique_id=1929398263]
+[node name="HBoxContainer" type="HBoxContainer" parent="settings/volume_setting/voice_volume" unique_id=1929398263]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="settings/volumn_setting/voice_volumn/HBoxContainer" unique_id=2014355233]
+[node name="MarginContainer" type="MarginContainer" parent="settings/volume_setting/voice_volume/HBoxContainer" unique_id=2014355233]
 custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
 theme_override_constants/margin_left = 80
 theme_override_constants/margin_right = 40
 
-[node name="voice_volumn" type="HSlider" parent="settings/volumn_setting/voice_volumn/HBoxContainer/MarginContainer" unique_id=390210690]
+[node name="voice_volume" type="HSlider" parent="settings/volume_setting/voice_volume/HBoxContainer/MarginContainer" unique_id=390210690]
 layout_mode = 2
 theme_override_icons/grabber = ExtResource("11_rjxxa")
 theme_override_icons/grabber_highlight = ExtResource("11_rjxxa")
@@ -651,13 +652,13 @@ max_value = 1.0
 step = 0.01
 value = 0.6
 
-[node name="data_display_box" type="TextureRect" parent="settings/volumn_setting/voice_volumn/HBoxContainer" unique_id=1214291439]
+[node name="data_display_box" type="TextureRect" parent="settings/volume_setting/voice_volume/HBoxContainer" unique_id=1214291439]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 texture = ExtResource("14_vutv5")
 expand_mode = 3
 
-[node name="CenterContainer" type="CenterContainer" parent="settings/volumn_setting/voice_volumn/HBoxContainer/data_display_box" unique_id=861315765]
+[node name="CenterContainer" type="CenterContainer" parent="settings/volume_setting/voice_volume/HBoxContainer/data_display_box" unique_id=861315765]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.048
@@ -669,44 +670,44 @@ offset_top = 0.00499964
 offset_right = 0.0239983
 offset_bottom = 0.00499725
 
-[node name="data_display" type="Label" parent="settings/volumn_setting/voice_volumn/HBoxContainer/data_display_box/CenterContainer" unique_id=419720521]
+[node name="data_display" type="Label" parent="settings/volume_setting/voice_volume/HBoxContainer/data_display_box/CenterContainer" unique_id=419720521]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "100"
 
-[node name="sfx_volumn" type="VBoxContainer" parent="settings/volumn_setting" unique_id=2084469594]
+[node name="sfx_volume" type="VBoxContainer" parent="settings/volume_setting" unique_id=2084469594]
 custom_minimum_size = Vector2(650, 100)
 layout_mode = 2
 theme_override_constants/separation = 35
 
-[node name="TextureRect" type="TextureRect" parent="settings/volumn_setting/sfx_volumn" unique_id=2128705797]
+[node name="TextureRect" type="TextureRect" parent="settings/volume_setting/sfx_volume" unique_id=2128705797]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 texture = ExtResource("9_ofjja")
 
-[node name="CenterContainer" type="CenterContainer" parent="settings/volumn_setting/sfx_volumn/TextureRect" unique_id=872951537]
+[node name="CenterContainer" type="CenterContainer" parent="settings/volume_setting/sfx_volume/TextureRect" unique_id=872951537]
 layout_mode = 0
 offset_left = 76.0
 offset_top = 4.0
 offset_right = 216.0
 offset_bottom = 56.0
 
-[node name="data_type" type="Label" parent="settings/volumn_setting/sfx_volumn/TextureRect/CenterContainer" unique_id=1244537922]
+[node name="data_type" type="Label" parent="settings/volume_setting/sfx_volume/TextureRect/CenterContainer" unique_id=1244537922]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("10_t08vl")
 theme_override_font_sizes/font_size = 35
 text = "音效音量"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="settings/volumn_setting/sfx_volumn" unique_id=750309067]
+[node name="HBoxContainer" type="HBoxContainer" parent="settings/volume_setting/sfx_volume" unique_id=750309067]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="settings/volumn_setting/sfx_volumn/HBoxContainer" unique_id=1863344489]
+[node name="MarginContainer" type="MarginContainer" parent="settings/volume_setting/sfx_volume/HBoxContainer" unique_id=1863344489]
 custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
 theme_override_constants/margin_left = 80
 theme_override_constants/margin_right = 40
 
-[node name="sfx_volumn" type="HSlider" parent="settings/volumn_setting/sfx_volumn/HBoxContainer/MarginContainer" unique_id=1012292776]
+[node name="sfx_volume" type="HSlider" parent="settings/volume_setting/sfx_volume/HBoxContainer/MarginContainer" unique_id=1012292776]
 layout_mode = 2
 theme_override_icons/grabber = ExtResource("11_rjxxa")
 theme_override_icons/grabber_highlight = ExtResource("11_rjxxa")
@@ -717,13 +718,13 @@ theme_override_styles/grabber_area_highlight = SubResource("StyleBoxTexture_5tll
 max_value = 1.0
 step = 0.01
 
-[node name="data_display_box" type="TextureRect" parent="settings/volumn_setting/sfx_volumn/HBoxContainer" unique_id=1501528188]
+[node name="data_display_box" type="TextureRect" parent="settings/volume_setting/sfx_volume/HBoxContainer" unique_id=1501528188]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 texture = ExtResource("14_vutv5")
 expand_mode = 3
 
-[node name="CenterContainer" type="CenterContainer" parent="settings/volumn_setting/sfx_volumn/HBoxContainer/data_display_box" unique_id=1686881593]
+[node name="CenterContainer" type="CenterContainer" parent="settings/volume_setting/sfx_volume/HBoxContainer/data_display_box" unique_id=1686881593]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.048
@@ -735,7 +736,7 @@ offset_top = 0.00499964
 offset_right = 0.0239983
 offset_bottom = 0.00499725
 
-[node name="data_display" type="Label" parent="settings/volumn_setting/sfx_volumn/HBoxContainer/data_display_box/CenterContainer" unique_id=759713593]
+[node name="data_display" type="Label" parent="settings/volume_setting/sfx_volume/HBoxContainer/data_display_box/CenterContainer" unique_id=759713593]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "100"

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="AssetPath" format=3]
 
-[ext_resource type="Script" path="res://frameWorkCore/compiler/AssetPath.gd" id="1_hokb5"]
+[ext_resource type="Script" path="res://frameWorkCore/compiler/compiled_resource_script/AssetPath.gd" id="1_hokb5"]
 
 [resource]
 script = ExtResource("1_hokb5")

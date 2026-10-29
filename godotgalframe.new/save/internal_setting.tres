@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="GameplaySetting" format=3]
 
-[ext_resource type="Script" path="res://frameWorkCore/compiler/gameplay_setting.gd" id="1_ouily"]
+[ext_resource type="Script" path="res://frameWorkCore/compiler/compiled_resource_script/gameplay_setting.gd" id="1_ouily"]
 
 [resource]
 script = ExtResource("1_ouily")

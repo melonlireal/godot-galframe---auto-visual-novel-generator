@@ -7,10 +7,10 @@ class_name PlayerSetting
 @export var blue: float = 140
 @export var alpha: float = 70
 @export var windows_color: Color = Color(float(red)/255.0,float(green)/255.0,float(blue)/255.0,alpha/100.0)
-@export var total_volumn: float = 1.0
-@export var bgm_volumn: float = 1.0
-@export var voice_volumn: float = 1.0
-@export var sfx_volumn: float = 1.0
+@export var total_volume: float = 1.0
+@export var bgm_volume: float = 1.0
+@export var voice_volume: float = 1.0
+@export var sfx_volume: float = 1.0
 @export var dialogue_box_transparency: float = 100.0
 # Called when the node enters the scene tree for the first time.
 func reset_all():
@@ -21,10 +21,10 @@ func reset_all():
 	blue = 140
 	alpha = 70
 	windows_color = Color(float(red)/255.0,float(green)/255.0,float(blue)/255.0,alpha/100.0)
-	total_volumn = 1.0
-	bgm_volumn = 1.0
-	voice_volumn = 1.0
-	sfx_volumn = 1.0
+	total_volume = 1.0
+	bgm_volume = 1.0
+	voice_volume = 1.0
+	sfx_volume = 1.0
 	dialogue_box_transparency = 100.0
 	
 	
@@ -60,8 +60,8 @@ func print_all():
 	print(green)
 	print(blue)
 	print(alpha)
-	print(total_volumn)
-	print(bgm_volumn)
-	print(voice_volumn)
-	print(sfx_volumn)
+	print(total_volume)
+	print(bgm_volume)
+	print(voice_volume)
+	print(sfx_volume)
 	print(dialogue_box_transparency)

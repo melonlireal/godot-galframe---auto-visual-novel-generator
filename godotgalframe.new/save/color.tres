@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Colors" format=3]
 
-[ext_resource type="Script" path="res://frameWorkCore/compiler/colors.gd" id="1_h8lwr"]
+[ext_resource type="Script" path="res://frameWorkCore/compiler/compiled_resource_script/colors.gd" id="1_h8lwr"]
 
 [resource]
 script = ExtResource("1_h8lwr")

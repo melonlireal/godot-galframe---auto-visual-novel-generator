@@ -118,7 +118,7 @@ texture_normal = ExtResource("2_jtpt6")
 texture_hover = ExtResource("3_jcku6")
 stretch_mode = 0
 
-[node name="volumn" type="TextureButton" parent="Control/ButtonContainer" unique_id=1445170944]
+[node name="volume" type="TextureButton" parent="Control/ButtonContainer" unique_id=1445170944]
 layout_mode = 2
 texture_normal = ExtResource("16_qghik")
 texture_hover = ExtResource("17_4h48h")
@@ -166,7 +166,7 @@ texture_normal = ExtResource("20_35vsk")
 texture_hover = ExtResource("21_447ca")
 stretch_mode = 0
 
-[node name="volumn_slider" type="VSlider" parent="Control" unique_id=1501858242]
+[node name="volume_slider" type="VSlider" parent="Control" unique_id=1501858242]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.577

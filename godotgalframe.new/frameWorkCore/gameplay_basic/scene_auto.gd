@@ -296,10 +296,10 @@ func load_setting() -> void:
 	dialogue_controller.set_box_opacity(save.dialogue_box_transparency / 100)
 	ui.apply_windows_color(save.windows_color)
 	# 应用音量到 AudioServer
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(save.total_volumn))
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("bgm"), linear_to_db(save.bgm_volumn))
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("voice"), linear_to_db(save.voice_volumn))
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("sfx"), linear_to_db(save.sfx_volumn))
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(save.total_volume))
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("bgm"), linear_to_db(save.bgm_volume))
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("voice"), linear_to_db(save.voice_volume))
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("sfx"), linear_to_db(save.sfx_volume))
 # the code below are code related to buttons
 
 func _on_quick_save() -> void:

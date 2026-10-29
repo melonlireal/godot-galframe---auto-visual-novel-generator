@@ -17,7 +17,7 @@ func choice_jump(variables: Variables) -> bool:
 	if choice_list.is_empty():
 		# error checking code that shouldn't be triggered
 		return false
-	var option_scene = preload("res://frameWorkCore/gameplay_basic/choice.tscn")
+	var option_scene = preload("res://frameWorkCore/gameplay_basic/choice/choice.tscn")
 	for choice_option in choice_list:
 		var ready_option: Choice = option_scene.instantiate()
 		ready_option.choice_description = choice_option[0]
